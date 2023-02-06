@@ -12,10 +12,25 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name'      => 'Hasudungan',
-                'email'     => 'hasudungan@gmail.com',
-                'password'  => bcrypt('password'),
-                'role_id'   => 1
+                'name'              => 'Hasudungan',
+                'email'             => 'hasudungan@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 1, // admin
+                'classroom_id'      => null,
+            ],
+            [
+                'name'              => 'Satrio Kuncoro',
+                'email'             => 'satrioKuncoro@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 2, // guru,
+                'classroom_id'      => 1,
+            ],
+            [
+                'name'              => 'Geraldy',
+                'email'             => 'geraldi@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'classroom_id'      => 1
             ]
         ];
 

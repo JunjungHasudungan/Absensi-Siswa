@@ -13,13 +13,30 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    {{-- Admin --}}
+                    @if (auth()->user()->role_id === 1)
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
 
-                    <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
+                        <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                            {{ __('Home') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.subjects.index')" :active="request()->routeIs('admin.subjects.index')">
+                            {{ __('Mata Pelajaran') }}
+                        </x-nav-link>
+
+                        <x-nav-link :href="route('admin.classrooms.index')" :active="request()->routeIs('admin.classrooms.index')">
+                            {{ __('Kelas') }}
+                        </x-nav-link>
+                    @endif
+
+                    @if (auth()->user()->role_id === 2)
+                    <x-nav-link :href="route('students.subjects.index')" :active="request()->routeIs('students.subjects.index')">
+                        {{ __('Mata Pelajaran') }}
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 
