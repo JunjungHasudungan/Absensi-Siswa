@@ -10,7 +10,9 @@ class ClassroomController extends Controller
 {
     public function index()
     {
-        return view('admin.classrooms.index');
+        $classrooms = Classroom::with('homeTeacher')->get();
+        // dd($classrooms);
+        return view('admin.classrooms.index', ['classrooms' => $classrooms]);
     }
 
     /**
