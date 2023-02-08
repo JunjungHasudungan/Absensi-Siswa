@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Classroom;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
-class ClassroomController extends Controller
+class PostController extends Controller
 {
     public function index()
     {
-        return view('admin.classrooms.index');
+        return view('admin.posts.index');
     }
 
     /**
@@ -37,10 +37,10 @@ class ClassroomController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Classroom  $classroom
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Classroom $classroom)
+    public function show(Post $post)
     {
         //
     }
@@ -48,10 +48,10 @@ class ClassroomController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Classroom  $classroom
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classroom $classroom)
+    public function edit(Post $post)
     {
         //
     }
@@ -60,10 +60,10 @@ class ClassroomController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Classroom  $classroom
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classroom $classroom)
+    public function update(Request $request, Post $post)
     {
         //
     }
@@ -71,10 +71,10 @@ class ClassroomController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Classroom  $classroom
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classroom $classroom)
+    public function destroy(Post $post)
     {
         //
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\{
 use App\Http\Controllers\Admin\{
     SubjectController,
     ClassroomController,
+    PostController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,7 @@ Route::group(['middleware'  => 'role:admin', 'prefix' => 'admin',  'as' => 'admi
     Route::resources([
         'subjects'  => SubjectController::class,
         'classrooms'    => ClassroomController::class,
+        'posts'         => PostController::class,
     ]);
 
 });
