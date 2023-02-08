@@ -1,6 +1,16 @@
 <div>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+{{-- button for add New data classroom --}}
+    <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md my-3 py-2 px-4">
+        Tambah Data
+    </button>
+{{-- create some check condition --}}
+    @if ($isModal)
+        {{-- include file subjectcreate --}}
+        @include('livewire.subjectcreate')
+    @endif
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -31,7 +41,13 @@
                             {{ $subject['name'] }}
                         </td>
                         <td class="px-6 py-4">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                            {{-- add button for edit and delete data classroom --}}
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Edit
+                            </button>
+                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                Hapus
+                            </button>
                         </td>
                     </tr>
                 @empty
