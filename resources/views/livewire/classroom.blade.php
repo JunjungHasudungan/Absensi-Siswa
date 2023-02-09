@@ -4,7 +4,7 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md my-3 py-2 px-4">Tambah Data</button>
             @if ($isModal)
-                @include('livewire.create')
+                @include('livewire.classrooms.create')
             @endif
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

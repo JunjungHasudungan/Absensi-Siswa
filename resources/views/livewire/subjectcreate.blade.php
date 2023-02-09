@@ -1,3 +1,0 @@
-<div>
-    Test Modal
-</div>

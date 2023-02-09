@@ -2,15 +2,34 @@
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
+        {{-- validate notification message success --}}
+        @if(session()->has('success'))
+            <div class="bg-green-500 text-white p-3 rounded shadow-sm mb-3">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+
+        @if(session()->has('error'))
+            <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-3">
+                {{ session()->get('error') }}
+            </div>
+        @endif
+
 {{-- button for add New data classroom --}}
-    <button wire:click="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md my-3 py-2 px-4">
+    <button wire:click.prevent="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md my-3 py-2 px-4">
         Tambah Data
     </button>
 {{-- create some check condition --}}
     @if ($isModal)
         {{-- include file subjectcreate --}}
-        @include('livewire.subjectcreate')
+        @include('livewire.subjects.create')
     @endif
+
+    @if ($isModal && $isUpdate)
+        @include('livewire.subjects.edit')
+    @endif
+
+
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -42,10 +61,10 @@
                         </td>
                         <td class="px-6 py-4">
                             {{-- add button for edit and delete data classroom --}}
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <button  wire:click="edit( {{ $subject->id }} )" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Edit
                             </button>
-                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            <button wire:click="deleteSubject( {{ $subject->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                 Hapus
                             </button>
                         </td>
@@ -59,6 +78,13 @@
         </table>
     </div>
 
+    {{-- add script for delete --}}
+    <script>
+        function deleteSubject(id){
+            if(confirm('Yakin untuk menghapus??'))
+            window.livewire.emit('deleteSubjectListener', id);
+        }
+    </script>
 
 
 </div>
