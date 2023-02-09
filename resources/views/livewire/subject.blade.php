@@ -64,7 +64,12 @@
                             <button  wire:click="edit( {{ $subject->id }} )" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Edit
                             </button>
-                            <button wire:click="deleteSubject( {{ $subject->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+
+                            <button  wire:click="detail( {{ $subject->id }} )" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                Detail
+                            </button>
+
+                            <button wire:click.prevent="deleteConfirmation( {{ $subject->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                 Hapus
                             </button>
                         </td>

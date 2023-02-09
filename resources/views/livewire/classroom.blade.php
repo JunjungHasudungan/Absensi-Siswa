@@ -34,7 +34,7 @@
                             </td>
                             @if ($classroom->teacher_id === 0)
                             <td class="px-6 py-4">
-                                <span class="bg-gray-500 w-full text-white p-2 rounded shadow">
+                                <span class="bg-yellow-500 w-full text-white p-2 rounded shadow">
                                    {{__('Wali Kelas Belum Tersedia..')}}
                                 </span>
                             </td>

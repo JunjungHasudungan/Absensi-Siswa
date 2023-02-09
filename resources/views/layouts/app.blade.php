@@ -10,6 +10,9 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
+        {{-- link toastr --}}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
@@ -35,8 +38,49 @@
             </main>
         </div>
 
-        {{-- @stack('modals') --}}
+        @stack('scripts')
 
         @livewireScripts
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+        {{-- confirm  --}}
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+
+        {{-- sweet alert deleting --}}
+        <script>
+
+            window.addEventListener('show-delete-confirmation', event => {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emit('deleteConfirmed');
+                    }
+                })
+            });
+
+
+
+
+            window.addEventListener('subjectDeleted', event => {
+                Swal.fire(
+                    'Deleted!',
+                    'Data Mata Pelajaran Berhasil Dihapus',
+                    'success'
+                )
+            });
+
+        </script>
+
     </body>
 </html>

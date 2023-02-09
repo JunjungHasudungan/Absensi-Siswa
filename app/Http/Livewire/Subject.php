@@ -23,7 +23,7 @@ class Subject extends Component
 
     // cretate emit listener
     protected $listener = [
-        'deleteSubjectListener' => 'deleteSubject'
+        'deleteConfirmed' => 'deleteSubject'
     ];
 
     // create properties rules
@@ -69,21 +69,15 @@ class Subject extends Component
     {
         // recall function validate and fill it with array with key and required
         $this->validate();
-        try{
-            Subjects::create([
-                'code_subject'  => $this->code_subject,
-                'name'          => $this->name
-            ]);
-            // give message
-            session()->flash('success', 'Data Berhasil ditambahkan..');
-        }catch(\Exception $e){
-            session()->flash('error', 'Sistem bermasalah..');
-        }
 
+        $subject = new Subjects();
+        $subject->code_subject = $this->code_subject;
+        $subject->name = $this->name;
 
-        // create notification message
-        session()->flash('message', $this->id_subject ? 'Data Mata Pelajaran Berhasil ditambahkan..' :
-        'Data Mata Pelajaran Berhasil diupdate..');
+        $subject->save();
+
+        $this->dispatchBrowserEvent('success', ['message' => 'Data Baru Berhasil ditambahkan..']);
+
 
         // recall function closeModal
         $this->closeModal();
@@ -108,13 +102,17 @@ class Subject extends Component
     }
 
     // create function delete for item of subject data
-    public function deleteSubject($id)
+
+    public function deleteConfirmation($id){
+        $this->id_subject = $id;
+
+        $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+    public function deleteSubject()
     {
-        try{
-            Subjects::where('id', $id)->delete();
-            session()->flash('success', 'Data berhasil dihapus..');
-        }catch(\Exception $e){
-            sesion()->flash('error', 'Sistem sedang bermasalah..');
-        }
+        $subject = Subjects::where('id', $this->id_subject)->first();
+        $subject->delete();
+        $this->dispatchBrowserEvent('subjectDeleted');
     }
 }

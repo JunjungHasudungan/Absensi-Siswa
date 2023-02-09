@@ -4,11 +4,12 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Classroom as Classrooms;
+use App\Models\User as Users;
 
 class Classroom extends Component
 {
     // properti
-    public $id_classroom, $name, $classrooms, $teacher_id;
+    public $id_classroom, $name, $classrooms, $teacher_id, $teachers;
     public $isModal = false;
 
     public function mount(Classroom $classroom)
@@ -18,6 +19,8 @@ class Classroom extends Component
 
     public function render()
     {
+        $this->teachers = Users::where('role_id', 2)->orderBy('name', 'asc')->pluck('name');
+
         $this->classrooms = Classrooms::with('homeTeacher')->get();
 
         return view('livewire.classroom');
