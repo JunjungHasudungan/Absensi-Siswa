@@ -11,6 +11,8 @@ class Classroom extends Component
     // properti
     public $id_classroom, $name, $classrooms, $teacher_id, $teachers;
     public $isModal = false;
+    public $isUpdate = false;
+    public $isDetail = false;
 
     public function mount(Classroom $classroom)
     {
@@ -29,6 +31,26 @@ class Classroom extends Component
     public function openModal()
     {
         return $this->isModal = true;
+    }
+
+    public function openModalUpdate()
+    {
+        return $this->isUpdate = true;
+    }
+
+    public function closeModalUpdate()
+    {
+        return $this->isUpdate = false;
+    }
+
+    public function openModalDetail()
+    {
+        return $this->isDetail = true;
+    }
+
+    public function closeModalDetail()
+    {
+
     }
 
     public function closeModal()
@@ -50,6 +72,13 @@ class Classroom extends Component
 
         // panggil function openModal
         $this->openModal();
+    }
+
+    public function editClassroom($id)
+    {
+        $this->resetInputField();
+
+        $this->openModalUpdate();
     }
 
     public function store()
