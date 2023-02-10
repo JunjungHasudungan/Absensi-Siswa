@@ -22,7 +22,7 @@ class Subject extends Component
 
     // cretate emit listener
     protected $listener = [
-        'deleteConfirmed' => 'deleteSubject'
+        'deleteConfirmed' => 'deleteSubject',
     ];
 
     // create properties rules
@@ -44,7 +44,7 @@ class Subject extends Component
         return $this->isModal = false;
     }
 
-    public function openDetailModal()
+    public function openDetailModal($id = null)
     {
         return $this->is_detail = true;
     }
@@ -123,10 +123,10 @@ class Subject extends Component
 
     public function detailSubject(Subjects $subject)
     {
-        $this->openDetailModal();
+        $this->openDetailModal($subject);
 
-        // dd($subject->name);
-        $subject->load('');
+
+        $subject->load('teacher');
     }
 
     public function deleteSubject()
