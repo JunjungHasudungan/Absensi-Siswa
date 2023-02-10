@@ -18,7 +18,7 @@
                   <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="overflow-hidden">
                       <table class="w-full ml-2 mr-2 p-2 m-2 my-2 justify-center py-4 px-4 text-center">
-                        <thead class="border-b bg-white">
+                        <thead class=" bg-white">
                           <tr>
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
                               Id
@@ -32,15 +32,18 @@
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
                               Jam
                             </th>
+                            <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
+                                Jam
+                              </th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-
+                                {{ $id_subject }}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                              {{-- {{ $name }} --}}
+                                {{ $teacher_name }}
                             </td>
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               Jumat
@@ -48,6 +51,9 @@
                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                               12:00
                             </td>
+                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                12:00
+                              </td>
                           </tr>
                         </tbody>
                       </table>

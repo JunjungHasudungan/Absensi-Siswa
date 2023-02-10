@@ -4,14 +4,19 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Subject as Subjects;
+use App\Models\User;
+use Livewire\WithPagination;
+
 
 class Subject extends Component
 {
-    public $id_subject, $subjects, $name, $code_subject;
+    use WithPagination;
+
+    public $id_subject, $subjects, $name, $code_subject, $id_teacher, $teacher_name;
 
     // public Subjects $subjects;
 
-    public $isModal = false, $isUpdate = false, $is_detail = false;
+    public $is_create = false, $is_edit = false, $is_detail = false;
 
     public function render()
     {
@@ -28,20 +33,20 @@ class Subject extends Component
     // create properties rules
     protected $rules = [
         'code_subject'     =>  'required|unique:subjects|string|max:25|min:3',
-        'name'             =>  'required|string|max:25|min:6'
+        'name'             =>  'required|string|max:25|min:4'
     ];
 
 
     // function for open modal
-    public function openModal()
+    public function openCreateModal()
     {
-        return $this->isModal = true;
+        return $this->is_create = true;
     }
 
     // function for clode modal
-    public function closeModal()
+    public function closeCreateModal()
     {
-        return $this->isModal = false;
+        return $this->is_create = false;
     }
 
     public function openDetailModal($id = null)
@@ -52,6 +57,16 @@ class Subject extends Component
     public function closeDetailModal()
     {
         return $this->is_detail = false;
+    }
+
+    public function openEditModal()
+    {
+        return $this->is_edit = true;
+    }
+
+    public function closeEditModal()
+    {
+        return $this->is_edit = false;
     }
 
 
@@ -65,50 +80,63 @@ class Subject extends Component
     }
 
     // function for create new data subject
-    public function create()
+    public function createSubject()
     {
-        // recall function resetFieldModal first
         $this->resetField();
 
-        // recall function openModal
-        $this->openModal();
+        $this->openCreateModal();
+
+        $subject = new Subjects();
+
+        $teacher_id = User::where('role_id', 2)->orderBy('name', 'asc')->get();
+
+        $this->id_subject = $subject->id;
+        $this->code_subject = $subject->code_subject;
+        $this->name = $this->name;
+        $this->id_teacher = $teacher_id;
+
+        // dd($teacher_id);
     }
 
     // function for store new data classroom
-    public function store()
+    public function storeSubject()
     {
-        // recall function validate and fill it with array with key and required
-        $this->validate();
-
         $subject = new Subjects();
-        $subject->code_subject = $this->code_subject;
-        $subject->name = $this->name;
+
+        $teacher_id = User::where('role_id', 2)->orderBy('name', 'asc')->get();
+
+        dd($subject->code_subject);
+        // dd($teacher_id);
+        $this->validate();
+        $this->id_subject = $subject->id;
+        $this->code_subject = $subject->code_subject;
+        $this->name = $subject->name;
+        $this->id_teacher = $teacher_id;
 
         $subject->save();
 
         $this->dispatchBrowserEvent('success', ['message' => 'Data Baru Berhasil ditambahkan..']);
 
 
-        // recall function closeModal
-        $this->closeModal();
+        // recall function closeCreateModal
+        $this->closeCreateModal();
 
         // recall function reset field
         $this->resetField();
     }
 
     // create function for edit data
-    public function edit($id)
+    public function editSubject(Subjects $subject)
     {
         // create object and get id from Subject class
-        $subject = Subjects::findOrFail($id);
 
-        // recall properties
-        $this->id_subject = $id;
+        $this->openEditModal();
+
+        $teacher_id = User::where('role_id', 2)->orderBy('name', 'asc')->get();
+
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
-
-        // recall function open Modal
-        $this->openModal();
+        $this->id_teacher = $teacher_id;
     }
 
     // create function delete for item of subject data
@@ -123,10 +151,12 @@ class Subject extends Component
 
     public function detailSubject(Subjects $subject)
     {
-        $this->openDetailModal($subject);
+        $this->openDetailModal();
+        $this->id_subject = $subject->id;
+        $this->name = $subject->name;
+        $this->teacher_name = $subject->teacher->name;
 
-
-        $subject->load('teacher');
+        // $subject->load('teacher');
     }
 
     public function deleteSubject()

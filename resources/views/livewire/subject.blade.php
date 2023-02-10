@@ -16,16 +16,16 @@
         @endif
 
 {{-- button for add New data classroom --}}
-    <button wire:click.prevent="create()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md my-3 py-2 px-4">
+    <button wire:click.prevent="createSubject()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md my-3 py-2 px-4">
         Tambah Data
     </button>
 {{-- create some check condition --}}
-    @if ($isModal)
+    @if ($is_create)
         {{-- include file subjectcreate --}}
         @include('livewire.subjects.create')
     @endif
 
-    @if ($isModal && $isUpdate)
+    @if ($is_edit)
         @include('livewire.subjects.edit')
     @endif
 
@@ -64,7 +64,7 @@
                         </td>
                         <td class="px-6 py-4">
                             {{-- add button for edit and delete data classroom --}}
-                            <button  wire:click="edit( {{ $subject->id }} )" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <button  wire:click="editSubject( {{ $subject->id }} )" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Edit
                             </button>
 
@@ -84,6 +84,9 @@
                 @endforelse
             </tbody>
         </table>
+        <div class="text-gray-600 bg-secondary-50 mt-2">
+            {{-- {{ $subjects->links() }} --}}
+          </div>
     </div>
 
     {{-- add script for delete --}}
