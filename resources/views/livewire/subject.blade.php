@@ -29,6 +29,9 @@
         @include('livewire.subjects.edit')
     @endif
 
+    @if ($is_detail)
+        @include('livewire.subjects.show')
+    @endif
 
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -65,7 +68,7 @@
                                 Edit
                             </button>
 
-                            <button  wire:click="detail( {{ $subject->id }} )" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                            <button  wire:click="detailSubject( {{ $subject->id }} )" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                 Detail
                             </button>
 

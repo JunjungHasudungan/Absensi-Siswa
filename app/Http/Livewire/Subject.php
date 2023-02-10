@@ -11,8 +11,7 @@ class Subject extends Component
 
     // public Subjects $subjects;
 
-    public $isModal = false;
-    public $isUpdate = false;
+    public $isModal = false, $isUpdate = false, $is_detail = false;
 
     public function render()
     {
@@ -44,6 +43,17 @@ class Subject extends Component
     {
         return $this->isModal = false;
     }
+
+    public function openDetailModal()
+    {
+        return $this->is_detail = true;
+    }
+
+    public function closeDetailModal()
+    {
+        return $this->is_detail = false;
+    }
+
 
     // function for clear all field
     public function resetField()
@@ -107,6 +117,16 @@ class Subject extends Component
         $this->id_subject = $id;
 
         $this->dispatchBrowserEvent('show-delete-confirmation');
+    }
+
+
+
+    public function detailSubject(Subjects $subject)
+    {
+        $this->openDetailModal();
+
+        // dd($subject->name);
+        $subject->load('');
     }
 
     public function deleteSubject()

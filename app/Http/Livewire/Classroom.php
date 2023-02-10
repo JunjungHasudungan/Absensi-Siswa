@@ -9,10 +9,10 @@ use App\Models\User as Users;
 class Classroom extends Component
 {
     // properti
-    public $id_classroom, $name, $classrooms, $teacher_id, $teachers;
+    public $id_classroom, $name, $classroom, $classrooms, $teacher_id, $teachers;
     public $isModal = false;
     public $isUpdate = false;
-    public $isDetail = false;
+    public $is_detail = false;
 
     public function mount(Classroom $classroom)
     {
@@ -33,7 +33,7 @@ class Classroom extends Component
         return $this->isModal = true;
     }
 
-    public function openModalUpdate()
+    public function openModalEdit()
     {
         return $this->isUpdate = true;
     }
@@ -45,12 +45,20 @@ class Classroom extends Component
 
     public function openModalDetail()
     {
-        return $this->isDetail = true;
+        return $this->is_detail = true;
     }
 
     public function closeModalDetail()
     {
+        return $this->is_detail = false;
+    }
 
+    public function detailClassroom(Classrooms $classroom)
+    {
+        // $classroom->load('homeTeacher');
+        $this->openModalDetail();
+
+        return view('livewire.classrooms.detail', ['classroom'  => $classroom]);
     }
 
     public function closeModal()
@@ -78,7 +86,7 @@ class Classroom extends Component
     {
         $this->resetInputField();
 
-        $this->openModalUpdate();
+        $this->openModalEdit();
     }
 
     public function store()

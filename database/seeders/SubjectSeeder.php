@@ -13,7 +13,8 @@ class SubjectSeeder extends Seeder
         $subjects = [
             [
                 'code_subject'      => 'PKN 01',
-                'name'              => 'PKN'
+                'name'              => 'PKN',
+                'teacher_id'        => 2
             ]
         ];
 

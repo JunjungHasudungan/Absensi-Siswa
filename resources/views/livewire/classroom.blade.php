@@ -11,6 +11,10 @@
                 @include('livewire.classrooms.update')
             @endif
 
+            @if ($is_detail)
+                @include('livewire.classrooms.detail')
+            @endif
+
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -37,7 +41,7 @@
                             <td class="px-6 text-center py-4">
                                 {{ $classroom->name }}
                             </td>
-                            @if ($classroom->teacher_id === 0)
+                            @if ($classroom->user_id === 0)
                             <td class="px-6 py-4 text-center">
                                 <span class="bg-yellow-500 text-center w-full text-white p-2 rounded shadow">
                                    {{__('Wali Kelas Belum Tersedia..')}}
@@ -45,14 +49,14 @@
                             </td>
                             @else
                             <td class="px-6 py-4 text-center">
-                                {{ $classroom->homeTeacher->name ?? ' Wali Kelas Belum ada.. '}}
+                                {{ $classroom->homeTeacher->name }}
                             </td>
                             @endif
                             <td class="px-6 py-4 justify-center text-center">
                                 <button wire:click="editClassroom( {{ $classroom->id }} )" class="text-center justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     Edit
                                 </button>
-                                 <button class="text-center justify-center bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                 <button wire:click="detailClassroom( {{ $classroom->id }} )" class="text-center justify-center bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                     Detail
                                 </button>
                                 <button class="text-center justify-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">

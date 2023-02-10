@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\BrandMotor;
 
 return new class extends Migration
 {
@@ -14,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('motorcycles', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignIdFor(BrandMotor::class);
-            $table->string('production_year');
-            $table->integer('type')->default(0);
-            $table->timestamps();
+        Schema::table('subjects', function (Blueprint $table) {
+            $table->unsignedBigInteger('teacher_id')->after('name');
+            $table->foreign('teacher_id')->references('id')->on('users')->onDeleteCascade();
         });
     }
 
@@ -31,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('motorcycles');
+        Schema::table('subjects', function (Blueprint $table) {
+            //
+        });
     }
 };

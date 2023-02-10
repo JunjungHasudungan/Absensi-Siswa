@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\Classroom;
 
 return new class extends Migration
 {
@@ -13,10 +14,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('brand_motor', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignIdFor(Classroom::class)->nullable()->after('role_id');
         });
     }
 
@@ -27,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brand_motor');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

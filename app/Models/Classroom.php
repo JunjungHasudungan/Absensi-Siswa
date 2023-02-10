@@ -14,7 +14,7 @@ class Classroom extends Model
 
     public function homeTeacher()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function users()

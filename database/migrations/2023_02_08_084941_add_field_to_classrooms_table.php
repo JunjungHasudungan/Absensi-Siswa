@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -14,8 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('classrooms', function (Blueprint $table) {
-            $table->unsignedBigInteger('teacher_id')->after('name');
-            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignIdFor(User::class)->after('name');
         });
     }
 
