@@ -25,7 +25,7 @@
                     {{-- input subject name --}}
                     <div class="mb-4">
                         <label for="exampleFormControlInput2" class="block text-gray-700 text-sm font-bold mb-2">Nama Mata Pelajaran :</label>
-                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput2" wire:model="name" placeholder="Nama Mata Pelajaran.."></input>
+                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput2" wire:model="name" placeholder="Nama Mata Pelajaran..">
                         @error('name') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
                     {{-- end input subject name --}}
@@ -33,9 +33,9 @@
                     {{-- select teacher --}}
                     <div class="mb-6">
                         <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">Select Nama Guru</label>
-                        <select id="teacher_id" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @forelse ($id_teacher as $id =>  $teacher)
-                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $id }}" {{ old('teacher_id') == $id ? 'selected' : ''}}> {{ $teacher->name }} </option>
+                        <select wire:model="teacher_id" id="teacher_id" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @forelse ($teachers as $teacher)
+                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $teacher->id }}"> {{ $teacher->name }} </option>
                             @empty
                                 <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
                             @endforelse

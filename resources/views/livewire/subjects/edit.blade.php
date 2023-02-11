@@ -27,11 +27,12 @@
 
                     <div class="mb-6">
                         <label for="teacher_id" class="block mb-2 text-sm font-medium text-gray-900">Select Nama Guru</label>
-                        <select id="teacher_id" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @forelse ($id_teacher as $id =>  $teacher)
+                        <select class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option value="">-- Pilih nama Guru --</option>
+                            @forelse ($teachers as $id =>  $teacher)
                                 <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $id }}" {{  old('teacher_id') == $id ? 'selected' : ''}} > {{ $teacher->name }} </option>
                             @empty
-                                <option class="font-normal hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
+                                <option class="bg-yellow-300 font-normal text-yellow-500 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
                             @endforelse
                         </select>
                     </div>
@@ -40,7 +41,7 @@
 
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                <button wire:click.prevent="storeSubject()" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                <button wire:click.prevent="updateUpdate( {{ $id }} )" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                   Update
                 </button>
               </span>

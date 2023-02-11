@@ -6,13 +6,14 @@ use Livewire\Component;
 use App\Models\Subject as Subjects;
 use App\Models\User;
 use Livewire\WithPagination;
+use App\Http\Requests\UpdateSubjectRequest;
 
 
 class Subject extends Component
 {
     use WithPagination;
 
-    public $id_subject, $subjects, $name, $code_subject, $id_teacher, $teacher_name;
+    public $id_subject, $subjects, $subject, $name, $code_subject, $teachers, $teacher_id, $teacher_name;
 
     // public Subjects $subjects;
 
@@ -21,6 +22,7 @@ class Subject extends Component
     public function render()
     {
         $this->subjects = Subjects::all();
+        $this->teachers = User::where('role_id', 2)->get();
 
         return view('livewire.subject');
     }
@@ -32,10 +34,16 @@ class Subject extends Component
 
     // create properties rules
     protected $rules = [
-        'code_subject'     =>  'required|unique:subjects|string|max:25|min:3',
-        'name'             =>  'required|string|max:25|min:4'
+        'code_subject'     =>  'required|string|max:30|min:3',
+        'name'             =>  'required|string|max:25|min:4',
+        'teacher_id'       =>   'required|integer'
     ];
 
+
+    public function mount()
+    {
+        $this->teachers = User::where('role_id', 2)->get();
+    }
 
     // function for open modal
     public function openCreateModal()
@@ -86,32 +94,27 @@ class Subject extends Component
 
         $this->openCreateModal();
 
-        $subject = new Subjects();
-
-        $teacher_id = User::where('role_id', 2)->orderBy('name', 'asc')->get();
-
-        $this->id_subject = $subject->id;
-        $this->code_subject = $subject->code_subject;
-        $this->name = $this->name;
-        $this->id_teacher = $teacher_id;
-
-        // dd($teacher_id);
     }
-
-    // function for store new data classroom
+    
     public function storeSubject()
     {
         $subject = new Subjects();
-
-        $teacher_id = User::where('role_id', 2)->orderBy('name', 'asc')->get();
-
-        dd($subject->code_subject);
-        // dd($teacher_id);
-        $this->validate();
-        $this->id_subject = $subject->id;
-        $this->code_subject = $subject->code_subject;
-        $this->name = $subject->name;
-        $this->id_teacher = $teacher_id;
+        
+        $this->validate([
+            'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
+            'name'              => 'required|string|max:25|min:3',
+            'teacher_id'        => 'required|integer'
+        ],[
+            'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
+            'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
+            'name.required'         => 'Nama Mata Pelajaran Wajib terisi..'
+        ]);
+        
+        $subject->create([
+            'code_subject'      => $this->code_subject,
+            'name'              => $this->name,
+            'teacher_id'        => $this->teacher_id
+        ]);
 
         $subject->save();
 
@@ -128,18 +131,27 @@ class Subject extends Component
     // create function for edit data
     public function editSubject(Subjects $subject)
     {
-        // create object and get id from Subject class
-
         $this->openEditModal();
 
-        $teacher_id = User::where('role_id', 2)->orderBy('name', 'asc')->get();
+        $teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get();
 
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
-        $this->id_teacher = $teacher_id;
+        $this->teachers = $teachers;
+
+        // dd($this->teachers);
     }
 
-    // create function delete for item of subject data
+    public function updateUpdate($id)
+    {
+        $this->subject = Subjects::where('id', $id)->update([
+            'code_subject'      => $this->code_subject,
+            'name'              => $this->name,
+            'teacher_id'        => $this->teacher_id,
+        ]);
+
+        $this->subject->save();
+    }
 
     public function deleteConfirmation($id){
         $this->id_subject = $id;

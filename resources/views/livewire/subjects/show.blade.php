@@ -39,19 +39,19 @@
                         </thead>
                         <tbody>
                           <tr class="border-b">
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                 {{ $id_subject }}
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                                 {{ $teacher_name }}
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                               Jumat
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                               12:00
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                                 12:00
                               </td>
                           </tr>
@@ -64,9 +64,9 @@
 
               {{-- button --}}
 
-              <div class=" px-4 py-3 item-center sm:px-6 sm:flex sm:flex-row-reverse">
-                <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
-                  <button wire:click="closeDetailModal()" type="button" class="inline-flex bg-green-400 justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gren-300 text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+              <div class=" px-4 py-3 item-center justify-center w-full sm:px-6 sm:flex sm:flex-row-reverse">
+                <span class="mt-3 flex w-full item-center rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                  <button wire:click="closeDetailModal()" type="button" class="item-center inline-flex bg-green-600 justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gren-300 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                     Kembali
                   </button>
                 </span>
