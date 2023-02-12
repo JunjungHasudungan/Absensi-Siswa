@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             SubjectSeeder::class,
             WeekdaySeeder::class,
+            SubjectWeekdaySeeder::class,
         ]);
     }
 }
