@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             ClassroomSeeder::class,
             UserSeeder::class,
             SubjectSeeder::class,
+            WeekdaySeeder::class,
         ]);
     }
 }
