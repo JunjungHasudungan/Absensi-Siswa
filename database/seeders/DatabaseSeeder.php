@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             SubjectSeeder::class,
             WeekdaySeeder::class,
             SubjectWeekdaySeeder::class,
+            ClassroomUserSeeder::class,
         ]);
     }
 }
