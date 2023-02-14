@@ -6,7 +6,6 @@ Aplikasi Ini berskala kecil serta ditujukan untuk latihan dalam pengembangan ski
 - Kelola Mata Pelajaran,
 - Kelola Adminstrasi Guru,
 - Kelola Absensi Siswa.
-- Keloa Nilai Tugas (tugas Harian, Tugas Bab, PTS, UAS)]
 
 
 ### Penulis Aplikasi
