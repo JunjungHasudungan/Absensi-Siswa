@@ -5,53 +5,64 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Classroom as Classrooms;
 use App\Models\User as Users;
+use Illuminate\Foundation\Auth\User;
 
 class Classroom extends Component
 {
-    // properti
-    public $id_classroom, $name, $classroom, $classrooms, $user_id, $teachers;
-    public $isModal = false;
-    public $isUpdate = false;
-    public $is_detail = false;
 
-    // create properties rules
-    protected $rules  = [
-        'name'      => 'required|string|max:10|min:5',
+    // create properthies
+    public  $is_create = false,
+            $is_detail = false,
+            $is_edit = false,
+            $id_classroom,
+            $user_id,
+            $classrooms,
+            $name,
+            $teachers;
+
+    // create rules
+    public $rules  =[
+        'name'      => 'required|unique|string|max:10|min:3',
         'user_id'   => 'required|integer'
     ];
-
-        // cretate emit listener
-        protected $listener = [
-            'deleteConfirmed' => 'deleteSubject',
-        ];
-
-    public function mount(Classroom $classroom)
+    public function openModalCreate()
     {
-        $this->classrooms = $classroom;
+        return $this->is_create  = true;
     }
 
-    public function render()
+    public function mount()
     {
-        $this->teachers = Users::where('role_id', 2)->orderBy('name', 'asc')->pluck('name');
-
-        $this->classrooms = Classrooms::with('homeTeacher')->get();
-
-        return view('livewire.classroom');
+        $this->teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get();
     }
 
-    public function openModal()
+    public function createClassroom()
     {
-        return $this->isModal = true;
+        $this->openModalCreate();
     }
 
-    public function openModalEdit()
+    public function storeClassroom()
     {
-        return $this->isUpdate = true;
+        $this->validate([
+            'name.required' => 'Nama Kelas Wajib di isi...',
+            'name.unique'   => 'Nama Kelas Sudah di gunakan...'
+        ],[
+            'name'      => 'required',
+            'user_id'   => 'required|integer'
+        ]);
+
+        $classroom = Classrooms::create([
+            'name'      => $this->name,
+            'user_id'   => $this->user_id,
+        ]);
+
+        // $this->resetFieldModal();
+
+        // $this->closeModalCreate();
     }
 
-    public function closeModalUpdate()
+    public function closeModalCreate()
     {
-        return $this->isUpdate = false;
+        return $this->is_create = false;
     }
 
     public function openModalDetail()
@@ -64,75 +75,34 @@ class Classroom extends Component
         return $this->is_detail = false;
     }
 
-    public function detailClassroom(Classrooms $classroom)
+    public function openModalEdit()
     {
-        // $classroom->load('homeTeacher');
-        $this->openModalDetail();
-
-        return view('livewire.classrooms.detail', ['classroom'  => $classroom]);
-    }
-
-    public function closeModal()
-    {
-        return $this->isModal = false;
-    }
-
-    public function resetInputField()
-    {
-        $this->name = '';
-        $this->user_id = '';
-    }
-
-    // function untuk create data classroom
-    public function create()
-    {
-        // panggil function resetFieldModal
-        $this->resetInputField();
-
-        // panggil function openModal
-        $this->openModal();
+        return $this->is_edit = true;
     }
 
     public function editClassroom($id)
     {
-        $this->resetInputField();
+        $this->id_classroom = $id;
 
         $this->openModalEdit();
     }
 
-    public function storeClassroom()
+    public function closeModalEdit()
     {
-        $this->validate([
-            'name'  => 'required|unique:classrooms|string|max:25',
-            'user_id'=> 'required|integer'
-        ], [
-            'name.required' => 'Nama Harus Disi..',
-            'name.unique'   => 'Nama Sudah digunakan...'
-        ]);
-
-        $classroom = Classrooms::insert([
-            'name'      => $this->name,
-            'user_id'   => $this->user_id
-        ]);
-
-        // create notification for message
-    //     session()->flash('message', $this->id_classroom ? 'Data Kelas Berhasil Ditambahkan' :
-    // 'Data Kelas Berhasil Diupdate');
-
-    // // tutup modal
-    // $this->resetInputField();
-    // $this->closeModal();
+        return $this->is_edit = false;
     }
 
-    public function deleteConfirmation($id)
+    public function resetFieldModal()
     {
-        $this->id_classroom = $id;
-
-        $this->dispatchBrowserEvent('show-delete-confirmation');
+        $this->name = '';
     }
 
-    public function deleteClassroom(Classrooms $classroom)
+    public function render()
     {
-        dd($classroom->name);
+        $this->classrooms = Classrooms::all();
+
+        $this->teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get();
+
+        return view('livewire.classroom');
     }
 }
