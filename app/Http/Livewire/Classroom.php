@@ -14,6 +14,12 @@ class Classroom extends Component
     public $isUpdate = false;
     public $is_detail = false;
 
+
+        // cretate emit listener
+        protected $listener = [
+            'deleteConfirmed' => 'deleteSubject',
+        ];
+
     public function mount(Classroom $classroom)
     {
         $this->classrooms = $classroom;
@@ -103,6 +109,13 @@ class Classroom extends Component
     // tutup modal
     $this->resetInputField();
     $this->closeModal();
+    }
+
+    public function deleteConfirmation($id)
+    {
+        $this->id_classroom = $id;
+
+        $this->dispatchBrowserEvent('show-delete-confirmation');
     }
 
     public function deleteClassroom(Classrooms $classroom)
