@@ -32,7 +32,7 @@
         @endif
 
         @if ($is_detail)
-            @include('livewire.classrooms.show')
+            @include('livewire.classrooms.detail')
         @endif
 
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -86,7 +86,7 @@
                                     Edit
                                 </button>
 
-                                <button  wire:click="detailSubject( {{ $classroom->id }} )" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                <button  wire:click="detailClassroom( {{ $classroom->id }} )" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                     Detail
                                 </button>
 
@@ -106,11 +106,25 @@
                 {{-- {{ $subjects->links() }} --}}
               </div>
         </div>
-
-        {{-- add script for delete --}}
-
-
     </div>
-
-
 </div>
+
+    @push('scripts')
+        <script>
+            window.addEventListener('show-delete-confirmation', event => {
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emit('deleteConfirmed');
+                    }
+                })
+            });
+        </script>
+    @endpush

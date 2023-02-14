@@ -15,15 +15,22 @@ class Classroom extends Component
             $is_detail = false,
             $is_edit = false,
             $id_classroom,
+            $code_classroom,
             $user_id,
             $classrooms,
             $name,
-            $teachers;
+            $teachers,
+            $teacher_name,
+            $students_name;
 
     // create rules
-    public $rules  =[
+    protected $rules  =[
         'name'      => 'required|unique|string|max:10|min:3',
         'user_id'   => 'required|integer'
+    ];
+
+    protected $listener = [
+        'deleteConfirmed'   => 'deleteClasroom'
     ];
     public function openModalCreate()
     {
@@ -70,6 +77,17 @@ class Classroom extends Component
         return $this->is_detail = true;
     }
 
+    public function detailClassroom(Classrooms $classroom)
+    {
+        $this->id_classroom = $classroom->id;
+
+        $this->openModalDetail();
+
+        $this->students_name = $classroom->students()->where('role_id', 3)->get();
+        $this->code_classroom = $classroom->code_classroom;
+        $this->teacher_name  = $classroom->homeTeacher->name;
+    }
+
     public function closeModalDetail()
     {
         return $this->is_detail = false;
@@ -80,16 +98,32 @@ class Classroom extends Component
         return $this->is_edit = true;
     }
 
-    public function editClassroom($id)
+    public function editClassroom(Classrooms $classroom)
     {
-        $this->id_classroom = $id;
+        $this->id_classroom = $classroom->id;
+        $this->code_classroom  = $classroom->code_classroom;
+        $this->name = $classroom->name;
+        $this->user_id = $classroom->user_id;
 
         $this->openModalEdit();
+    }
+
+    public function updateClassroom(Classrooms $classroom)
+    {
+        dd('Testing updating');
     }
 
     public function closeModalEdit()
     {
         return $this->is_edit = false;
+    }
+
+
+    public function deleteConfirmation($id)
+    {
+        $this->id_classroom = $id;
+
+        $this->dispatchBrowserEvent('show-delete-confirmation');
     }
 
     public function resetFieldModal()
