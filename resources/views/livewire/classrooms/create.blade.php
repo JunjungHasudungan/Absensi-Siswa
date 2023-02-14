@@ -15,18 +15,33 @@
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="">
 
-                    {{-- input subject name --}}
+                    {{-- input code classroom --}}
                     <div class="mb-4">
-                        <label for="exampleFormControlInput2" class="block text-gray-700 text-sm font-bold mb-2">Nama Mata Pelajaran :</label>
+                        <label for="code_classroom" class="block text-gray-700 text-sm font-bold mb-2">Kode Kelas :</label>
+                        <input type="text"
+                        wire:model="code_classroom"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="code_classroom"
+                        placeholder="Masukkan Nama Mata Pelajaran..">
+
+                        @error('code_classroom') <span class="text-red-500">{{ $message }}</span>@enderror
+                    </div>
+                    {{-- end input code classroom --}}
+
+                    {{-- input code classroom  --}}
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nama Kelas :</label>
                         <input type="text"
                         wire:model="name"
-                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="exampleFormControlInput2" placeholder="Nama Mata Pelajaran..">
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="name"
+                        placeholder="Masukkan Nama Kelas..">
                         @error('name') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
-                    {{-- end input subject name --}}
+                    {{-- / code_classroom --}}
 
                     {{-- select teacher --}}
-                    <div class="mb-6">
+                    {{-- <div class="mb-6">
                         <label for="user_id" class="block mb-2 text-sm font-bold text-gray-900">Select Nama Guru</label>
                         <select wire:model="user_id"
                                 id="user_id"
@@ -37,7 +52,7 @@
                                 <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
                             @endforelse
                         </select>
-                    </div>
+                    </div> --}}
                     {{-- end select teacher --}}
               </div>
             </div>

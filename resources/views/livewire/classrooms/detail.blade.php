@@ -24,17 +24,17 @@
                               Kode Kelas
                             </th>
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
-                              Guru Mata Pelajaran
+                              Wali Kelas
                             </th>
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
-                              Hari
+                              Nama Siswa
                             </th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                {{ $id_classroom }}
+                                {{ $code_classroom }}
                             </td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                                 {{ $teacher_name }}

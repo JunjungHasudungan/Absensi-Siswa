@@ -33,7 +33,7 @@
                     {{-- end input subject name --}}
 
                     {{-- select teacher --}}
-                    <div class="mb-6">
+                    {{-- <div class="mb-6">
                         <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">Select Nama Guru</label>
                         <select wire:model="teacher_id"
                                 id="teacher_id"
@@ -44,7 +44,7 @@
                                 <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
                             @endforelse
                         </select>
-                    </div>
+                    </div> --}}
                     {{-- end select teacher --}}
               </div>
             </div>

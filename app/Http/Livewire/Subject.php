@@ -21,10 +21,10 @@ class Subject extends Component
 
     public function render()
     {
-        $this->subjects = Subjects::all();
-        $this->teachers = User::where('role_id', 2)->get();
-
-        return view('livewire.subject');
+        return view('livewire.subject', [
+            $this->subjects = Subjects::all(),
+            $this->teachers = User::where('role_id', 2)->get(),
+        ]);
     }
 
     // cretate emit listener

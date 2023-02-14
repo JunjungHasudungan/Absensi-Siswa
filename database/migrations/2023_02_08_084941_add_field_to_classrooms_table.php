@@ -15,8 +15,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('classrooms', function (Blueprint $table) {
-            $table->foreignIdFor(User::class)->after('name');
-            $table->string('code_classroom')->after('user_id')->unique();
+            // $table->foreignIdFor(User::class)->after('name');
+            $table->string('code_classroom')->after('name')->unique();
         });
     }
 

@@ -14,37 +14,37 @@ class ClassroomSeeder extends Seeder
             [
                 'name'                  => '1 A',
                 'code_classroom'         => '1a',
-                'user_id'               => 1
+                // 'user_id'               => 1
             ],
             [
                 'name'                  => '1 B',
                 'code_classroom'         => '1b',
-                'user_id'               => 2
+                // 'user_id'               => 2
             ],
             [
                 'name'                  => '2 A',
                 'code_classroom'         => '2a',
-                'user_id'               => 1
+                // 'user_id'               => 1
             ],
             [
                 'name'                  => '2 B',
                 'code_classroom'         => '2b',
-                'user_id'               => 1
+                // 'user_id'               => 1
             ],
             [
                 'name'                  => '4',
                 'code_classroom'         => '4a',
-                'user_id'               => 1
+                // 'user_id'               => 1
             ],
             [
                 'name'                  => '5',
                 'code_classroom'         => '5a',
-                'user_id'               => 1
+                // 'user_id'               => 1
             ],
             [
                 'name'                  => '6',
                 'code_classroom'         => '6a',
-                'user_id'               => 1
+                // 'user_id'               => 1
             ],
         ];
 

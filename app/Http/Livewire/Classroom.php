@@ -3,12 +3,17 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Classroom as Classrooms;
-use App\Models\User as Users;
 use Illuminate\Foundation\Auth\User;
+use App\Models\{
+    Classroom as Classrooms,
+    User as Users,
+};
+use Livewire\WithPagination;
 
 class Classroom extends Component
 {
+
+    use WithPagination;
 
     // create properthies
     public  $is_create = false,
@@ -25,13 +30,15 @@ class Classroom extends Component
 
     // create rules
     protected $rules  =[
-        'name'      => 'required|unique|string|max:10|min:3',
-        'user_id'   => 'required|integer'
+        'name'              => 'required|unique|string|max:10|min:3',
+        'code_classroom'    => 'required|string|max:10|min:3',
+        // 'user_id'           => 'required|integer'
     ];
 
-    protected $listener = [
-        'deleteConfirmed'   => 'deleteClasroom'
+    protected $listeners = [
+        'deleteClassroom'
     ];
+
     public function openModalCreate()
     {
         return $this->is_create  = true;
@@ -50,21 +57,31 @@ class Classroom extends Component
     public function storeClassroom()
     {
         $this->validate([
-            'name.required' => 'Nama Kelas Wajib di isi...',
-            'name.unique'   => 'Nama Kelas Sudah di gunakan...'
+            'name'                          => 'required|string|unique:classrooms,name',
+            'code_classroom'                => 'required',
+            // 'user_id'                       => 'required|integer'
         ],[
-            'name'      => 'required',
-            'user_id'   => 'required|integer'
+            'name.required'                 => 'Nama Kelas Wajib di isi...',
+            'name.unique'                   => 'Nama Kelas Sudah di gunakan...',
+            'code_classroom.required'       => 'Kode Kelas Wajib di isi..',
+            'name'                          => 'required',
+            // 'user_id'                       => 'required|integer'
         ]);
 
         $classroom = Classrooms::create([
-            'name'      => $this->name,
-            'user_id'   => $this->user_id,
+            'code_classroom'    => $this->code_classroom,
+            'name'              => $this->name,
+            // 'user_id'           => $this->user_id,
         ]);
 
-        // $this->resetFieldModal();
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message'   => 'Data Berhasil ditambahkan...'
+        ]);
 
-        // $this->closeModalCreate();
+        $this->closeModalCreate();
+
+        $this->resetFieldModal();
+
     }
 
     public function closeModalCreate()
@@ -85,7 +102,7 @@ class Classroom extends Component
 
         $this->students_name = $classroom->students()->where('role_id', 3)->get();
         $this->code_classroom = $classroom->code_classroom;
-        $this->teacher_name  = $classroom->homeTeacher->name;
+        // $this->teacher_name  = $classroom->homeTeacher->name;
     }
 
     public function closeModalDetail()
@@ -118,25 +135,41 @@ class Classroom extends Component
         return $this->is_edit = false;
     }
 
-
     public function deleteConfirmation($id)
     {
         $this->id_classroom = $id;
 
-        $this->dispatchBrowserEvent('show-delete-confirmation');
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type'  => 'warning',
+            'title' => 'Yakin Menghapus?',
+            'text'  => '',
+            'id'    => $id
+        ]);
+    }
+
+    public function deleteClassroom($id)
+    {
+        Classrooms::where('id', $id)->delete();
+
+        $this->dispatchBrowserEvent('classroomDeleted');
+        // $this->dispatchBrowserEvent('toastr:info', [
+        //     'message'   => 'Data Berhasil dihapus...'
+        // ]);
     }
 
     public function resetFieldModal()
     {
         $this->name = '';
+        $this->code_classroom = '';
     }
 
     public function render()
     {
-        $this->classrooms = Classrooms::all();
 
-        $this->teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get();
+        return view('livewire.classroom', [
+            $this->classrooms = Classrooms::all(),
 
-        return view('livewire.classroom');
+            $this->teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get(),
+        ]);
     }
 }

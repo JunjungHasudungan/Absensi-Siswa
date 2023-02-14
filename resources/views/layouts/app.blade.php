@@ -12,7 +12,8 @@
 
         {{-- link toastr --}}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-
+        <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         @livewireStyles
@@ -41,17 +42,47 @@
         @stack('scripts')
 
         @livewireScripts
-
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         {{-- confirm  --}}
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 
-        {{-- sweet alert deleting --}}
         <script>
+            // sweet alert success
+            window.addEventListener('toastr:info', event => {
+                toastr.info(event.detail.message);
+            });
+
+            window.addEventListener('swal:modal', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type
+                });
+            });
+
+            // sweet alert delete
+            window.addEventListener('swal:confirm', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                    buttons: true,
+                    dangerMode: false,
+                })
+                .then( will_delete => {
+                    if(will_delete){
+                        window.livewire.emit('deleteClassroom', event.detail.id);
+                    }else{
+                        swal("Data masih ada..");
+                    }
+                })
+            });
 
             window.addEventListener('show-delete-confirmation', event => {
                 Swal.fire({
@@ -69,6 +100,14 @@
                 })
             });
 
+            window.addEventListener('classroomDeleted', event => {
+                swal(
+                    'Deleted!',
+                    'Data Berhasil Dihapus..',
+                    'success'
+                )
+            });
+
 
 
 
@@ -81,6 +120,7 @@
             });
 
         </script>
+
 
     </body>
 </html>
