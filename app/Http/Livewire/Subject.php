@@ -95,30 +95,30 @@ class Subject extends Component
         $this->openCreateModal();
 
     }
-    
+
     public function storeSubject()
     {
         $subject = new Subjects();
-        
+
         $this->validate([
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
             'teacher_id'        => 'required|integer'
         ],[
+            'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
             'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
             'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
             'name.required'         => 'Nama Mata Pelajaran Wajib terisi..'
         ]);
-        
-        $subject->create([
+
+        $subject->insert([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
             'teacher_id'        => $this->teacher_id
         ]);
 
-        $subject->save();
+        // $subject->save();
 
-        $this->dispatchBrowserEvent('success', ['message' => 'Data Baru Berhasil ditambahkan..']);
 
 
         // recall function closeCreateModal
@@ -126,6 +126,8 @@ class Subject extends Component
 
         // recall function reset field
         $this->resetField();
+
+        $this->dispatchBrowserEvent('success', ['message' => 'Data Baru Berhasil ditambahkan..']);
     }
 
     // create function for edit data

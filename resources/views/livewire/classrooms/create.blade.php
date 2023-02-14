@@ -11,12 +11,18 @@
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
           <div class="">
             <div class="mb-6">
-                <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Nama Kelas: </label>
-                <input type="text" wire-model="name" id="text" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Masukkan nama kelas.." required>
+                <label for="text" class="block mb-2 text-sm font-bold text-gray-900">Nama Kelas: </label>
+                <input  type="text"
+                        wire-model="name"
+                        id="text"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        placeholder="Masukkan nama kelas.." required>
             </div>
             <div class="mb-6">
-                <label for="teacher_id" class="block mb-2 text-sm font-medium text-gray-900">Select Nama Guru</label>
-                <select id="teacher_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">Select Nama Guru</label>
+                <select id="user_id"
+                        wire-model="user_id"
+                        class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     @forelse ($teachers as $id =>  $teacher)
                         <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{$id}}" {{  old('teacher_id') == $id ? 'selected' : ''}}> {{ $teacher }} </option>
                     @empty
@@ -29,8 +35,8 @@
 
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
           <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-            <button wire:click.prevent="store()" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-              Save
+            <button wire:click.prevent="storeClassroom()" type="button" class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+              Simpan
             </button>
           </span>
           <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">

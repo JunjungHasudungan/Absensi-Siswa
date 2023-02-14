@@ -9,11 +9,16 @@ use App\Models\User as Users;
 class Classroom extends Component
 {
     // properti
-    public $id_classroom, $name, $classroom, $classrooms, $teacher_id, $teachers;
+    public $id_classroom, $name, $classroom, $classrooms, $user_id, $teachers;
     public $isModal = false;
     public $isUpdate = false;
     public $is_detail = false;
 
+    // create properties rules
+    protected $rules  = [
+        'name'      => 'required|string|max:10|min:5',
+        'user_id'   => 'required|integer'
+    ];
 
         // cretate emit listener
         protected $listener = [
@@ -75,7 +80,7 @@ class Classroom extends Component
     public function resetInputField()
     {
         $this->name = '';
-        $this->teacher_id = '';
+        $this->user_id = '';
     }
 
     // function untuk create data classroom
@@ -95,20 +100,28 @@ class Classroom extends Component
         $this->openModalEdit();
     }
 
-    public function store()
+    public function storeClassroom()
     {
         $this->validate([
-            'name'  => 'required|string|max:25',
-            'teacher_id'=> 'required|integer'
+            'name'  => 'required|unique:classrooms|string|max:25',
+            'user_id'=> 'required|integer'
+        ], [
+            'name.required' => 'Nama Harus Disi..',
+            'name.unique'   => 'Nama Sudah digunakan...'
+        ]);
+
+        $classroom = Classrooms::insert([
+            'name'      => $this->name,
+            'user_id'   => $this->user_id
         ]);
 
         // create notification for message
-        session()->flash('message', $this->id_classroom ? 'Data Kelas Berhasil Ditambahkan' :
-    'Data Kelas Berhasil Diupdate');
+    //     session()->flash('message', $this->id_classroom ? 'Data Kelas Berhasil Ditambahkan' :
+    // 'Data Kelas Berhasil Diupdate');
 
-    // tutup modal
-    $this->resetInputField();
-    $this->closeModal();
+    // // tutup modal
+    // $this->resetInputField();
+    // $this->closeModal();
     }
 
     public function deleteConfirmation($id)
