@@ -104,4 +104,9 @@ class Classroom extends Component
     $this->resetInputField();
     $this->closeModal();
     }
+
+    public function deleteClassroom(Classrooms $classroom)
+    {
+        dd($classroom->name);
+    }
 }

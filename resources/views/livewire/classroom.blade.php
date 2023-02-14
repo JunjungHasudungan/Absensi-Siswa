@@ -59,7 +59,7 @@
                                  <button wire:click="detailClassroom( {{ $classroom->id }} )" class="text-center justify-center bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                     Detail
                                 </button>
-                                <button class="text-center justify-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                <button  wire:click="deleteClassroom( {{ $classroom->id }} )" class="text-center justify-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                     Hapus
                                 </button>
                             </td>
