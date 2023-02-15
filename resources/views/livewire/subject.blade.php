@@ -72,7 +72,7 @@
                                 Detail
                             </button>
 
-                            <button wire:click.prevent="deleteConfirmation( {{ $subject->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            <button wire:click.prevent="deleteConfirmationSubject( {{ $subject->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                 Hapus
                             </button>
                         </td>
@@ -90,12 +90,14 @@
     </div>
 
     {{-- add script for delete --}}
+    @push('scripts')
     <script>
         function deleteSubject(id){
             if(confirm('Yakin untuk menghapus??'))
             window.livewire.emit('deleteSubjectListener', id);
         }
     </script>
+    @endpush
 
 
 </div>

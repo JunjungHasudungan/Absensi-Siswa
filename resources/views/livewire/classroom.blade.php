@@ -44,9 +44,9 @@
                         <th scope="col" class="px-6 py-3">
                             Nama Kelas
                         </th>
-                        {{-- <th class="px-6 py-3">
+                        <th class="px-6 py-3">
                             Wali Kelas
-                        </th> --}}
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             Action
                         </th>
@@ -66,7 +66,7 @@
                                 {{ $classroom['name'] }}
                             </td>
 
-                            {{-- @if ($classroom->user_id == 0)
+                            @if ($classroom->user_id == 0)
                                 <td class="px-6 py-4">
                                     <p class="text-yellow-700 font-extrabold">
                                         Wali kelas Belum Tersedia..
@@ -76,7 +76,7 @@
                                 <td class="px-6 py-4">
                                     {{ $classroom->homeTeacher->name }}
                                 </td>
-                            @endif --}}
+                            @endif
                             <td class="px-6 py-4">
                                 {{-- add button for edit and delete data classroom --}}
                                 <button  wire:click="editClassroom( {{ $classroom->id }} )" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

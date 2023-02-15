@@ -29,10 +29,10 @@ class Classroom extends Component
             $students_name;
 
     // create rules
-    protected $rules  =[
+    protected $rules  = [
         'name'              => 'required|unique|string|max:10|min:3',
         'code_classroom'    => 'required|string|max:10|min:3',
-        // 'user_id'           => 'required|integer'
+        'user_id'           => 'required|integer'
     ];
 
     protected $listeners = [
@@ -59,29 +59,28 @@ class Classroom extends Component
         $this->validate([
             'name'                          => 'required|string|unique:classrooms,name',
             'code_classroom'                => 'required',
-            // 'user_id'                       => 'required|integer'
+            'user_id'                       => 'required|integer'
         ],[
             'name.required'                 => 'Nama Kelas Wajib di isi...',
             'name.unique'                   => 'Nama Kelas Sudah di gunakan...',
             'code_classroom.required'       => 'Kode Kelas Wajib di isi..',
             'name'                          => 'required',
-            // 'user_id'                       => 'required|integer'
+            'user_id'                       => 'required|integer'
         ]);
 
-        $classroom = Classrooms::create([
+        Classrooms::create([
             'code_classroom'    => $this->code_classroom,
             'name'              => $this->name,
-            // 'user_id'           => $this->user_id,
+            'user_id'           => $this->user_id,
         ]);
+
+        $this->resetFieldModal();
+
+        $this->closeModalCreate();
 
         $this->dispatchBrowserEvent('toastr:info', [
             'message'   => 'Data Berhasil ditambahkan...'
         ]);
-
-        $this->closeModalCreate();
-
-        $this->resetFieldModal();
-
     }
 
     public function closeModalCreate()
@@ -152,9 +151,6 @@ class Classroom extends Component
         Classrooms::where('id', $id)->delete();
 
         $this->dispatchBrowserEvent('classroomDeleted');
-        // $this->dispatchBrowserEvent('toastr:info', [
-        //     'message'   => 'Data Berhasil dihapus...'
-        // ]);
     }
 
     public function resetFieldModal()

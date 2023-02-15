@@ -30,6 +30,10 @@
                         <x-nav-link :href="route('admin.classrooms.index')" :active="request()->routeIs('admin.classrooms.index')">
                             {{ __('Kelas') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('admin.administrations.index')" :active="request()->routeIs('admin.administrations.index')">
+                            {{ __('Administrasi') }}
+                        </x-nav-link>
                     @endif
 
                     @if (auth()->user()->role_id === 2)

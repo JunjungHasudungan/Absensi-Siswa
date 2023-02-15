@@ -66,7 +66,7 @@
                 });
             });
 
-            // sweet alert delete
+            // sweet alert delete data classroom
             window.addEventListener('swal:confirm', event => {
                 swal({
                     title: event.detail.title,
@@ -84,37 +84,57 @@
                 })
             });
 
-            window.addEventListener('show-delete-confirmation', event => {
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                    }).then((result) => {
-                    if (result.isConfirmed) {
-                        Livewire.emit('deleteConfirmed');
+
+            // eventListener confirm delete mata pelajaran
+            window.addEventListener('swal:confirm', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                    buttons: true,
+                    dangerMode: false,
+                })
+                .then( will_delete => {
+                    if(will_delete){
+                        window.livewire.emit('deleteSubject', event.detail.id);
+                    }else{
+                        swal("Data masih ada..");
                     }
                 })
             });
 
-            window.addEventListener('classroomDeleted', event => {
-                swal(
-                    'Deleted!',
-                    'Data Berhasil Dihapus..',
-                    'success'
-                )
-            });
-
-
-
-
+            // event listener info delete subject
             window.addEventListener('subjectDeleted', event => {
                 Swal.fire(
                     'Deleted!',
                     'Data Mata Pelajaran Berhasil Dihapus',
+                    'success'
+                )
+            });
+
+            // event Listener delete classroom
+            window.addEventListener('swal:confirm', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                    buttons: true,
+                    dangerMode: false,
+                })
+                .then( will_delete => {
+                    if(will_delete){
+                        window.livewire.emit('deleteClassroom', event.detail.id);
+                    }else{
+                        swal("Data masih ada..");
+                    }
+                })
+            });
+
+            // event listener info delete classroom
+            window.addEventListener('classroomDeleted', event => {
+                swal(
+                    'Deleted!',
+                    'Data Berhasil Dihapus..',
                     'success'
                 )
             });

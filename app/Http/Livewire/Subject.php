@@ -3,21 +3,30 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Subject as Subjects;
-use App\Models\User;
 use Livewire\WithPagination;
 use App\Http\Requests\UpdateSubjectRequest;
+use App\Models\{
+            Subject as Subjects,
+            User,
+        };
 
 
 class Subject extends Component
 {
     use WithPagination;
 
-    public $id_subject, $subjects, $subject, $name, $code_subject, $teachers, $teacher_id, $teacher_name;
+    public $id_subject,
+            $subjects,
+            $subject,
+            $name,
+            $code_subject,
+            $teachers,
+            $teacher_id,
+            $teacher_name;
 
-    // public Subjects $subjects;
-
-    public $is_create = false, $is_edit = false, $is_detail = false;
+    public  $is_create = false,
+            $is_edit = false,
+            $is_detail = false;
 
     public function render()
     {
@@ -28,8 +37,8 @@ class Subject extends Component
     }
 
     // cretate emit listener
-    protected $listener = [
-        'deleteConfirmed' => 'deleteSubject',
+    protected $listeners = [
+        'deleteSubject',
     ];
 
     // create properties rules
@@ -42,7 +51,7 @@ class Subject extends Component
 
     public function mount()
     {
-        $this->teachers = User::where('role_id', 2)->get();
+        $this->teacher_id = User::where('role_id', 2)->get();
     }
 
     // function for open modal
@@ -85,6 +94,7 @@ class Subject extends Component
         $this->code_subject = '';
         $this->name = '';
         $this->id_subject = '';
+        $this->teacher_id = '';
     }
 
     // function for create new data subject
@@ -93,13 +103,10 @@ class Subject extends Component
         $this->resetField();
 
         $this->openCreateModal();
-
     }
 
     public function storeSubject()
     {
-        $subject = new Subjects();
-
         $this->validate([
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
@@ -111,26 +118,21 @@ class Subject extends Component
             'name.required'         => 'Nama Mata Pelajaran Wajib terisi..'
         ]);
 
-        $subject->insert([
+        Subjects::create([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
             'teacher_id'        => $this->teacher_id
         ]);
 
-        // $subject->save();
-
-
-
-        // recall function closeCreateModal
         $this->closeCreateModal();
 
-        // recall function reset field
         $this->resetField();
 
-        $this->dispatchBrowserEvent('success', ['message' => 'Data Baru Berhasil ditambahkan..']);
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message'   => 'Data Berhasil ditambahkan...'
+        ]);
     }
 
-    // create function for edit data
     public function editSubject(Subjects $subject)
     {
         $this->openEditModal();
@@ -141,7 +143,7 @@ class Subject extends Component
         $this->name = $subject->name;
         $this->teachers = $teachers;
 
-        // dd($this->teachers);
+        $this->dispatchBrowserEvent('successStoredSubject');
     }
 
     public function updateUpdate($id)
@@ -155,10 +157,15 @@ class Subject extends Component
         $this->subject->save();
     }
 
-    public function deleteConfirmation($id){
+    public function deleteConfirmationSubject($id){
         $this->id_subject = $id;
 
-        $this->dispatchBrowserEvent('show-delete-confirmation');
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type'  => 'warning',
+            'title' => 'Yakin Menghapus?',
+            'text'  => '',
+            'id'    => $id
+        ]);
     }
 
 
@@ -173,10 +180,10 @@ class Subject extends Component
         // $subject->load('teacher');
     }
 
-    public function deleteSubject()
+    public function deleteSubject($id)
     {
-        $subject = Subjects::where('id', $this->id_subject)->first();
-        $subject->delete();
+        Subjects::where('id', $id)->delete();
+
         $this->dispatchBrowserEvent('subjectDeleted');
     }
 }
