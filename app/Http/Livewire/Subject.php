@@ -38,7 +38,7 @@ class Subject extends Component
 
     // cretate emit listener
     protected $listeners = [
-        'deleteSubject',
+        'deleteClassroom',
     ];
 
     // create properties rules
@@ -115,7 +115,8 @@ class Subject extends Component
             'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
             'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
             'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
-            'name.required'         => 'Nama Mata Pelajaran Wajib terisi..'
+            'name.required'         => 'Nama Mata Pelajaran Wajib terisi..',
+            'teacher_id'            => 'Guru Mata Pelajaran Wajib dipilih..'
         ]);
 
         Subjects::create([
@@ -133,31 +134,43 @@ class Subject extends Component
         ]);
     }
 
-    public function editSubject(Subjects $subject)
+    public function editSubject($id)
     {
         $this->openEditModal();
 
         $teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get();
 
+        $subject = Subjects::find($id);
+
+        // dd($subject);
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
-        $this->teachers = $teachers;
+        $this->teacher_id = $teachers;
 
         $this->dispatchBrowserEvent('successStoredSubject');
     }
 
-    public function updateUpdate($id)
+    public function updateSubject()
     {
-        $this->subject = Subjects::where('id', $id)->update([
-            'code_subject'      => $this->code_subject,
-            'name'              => $this->name,
-            'teacher_id'        => $this->teacher_id,
-        ]);
+        $subject = Subjects::find($this->id_subject);
+        $id_subject = $subject;
+        // dd('Testing update');
+        // $this->id_subject = $id;
 
-        $this->subject->save();
+        // dd($this->subject);
+
+    $subject->update(['id', $id_subject], [
+        'name'      => $subject->name,
+        'code_subject'  => $subject->code_subject,
+        'teacher_id'    => $subject->teacher_id
+    ]);
+
+
+
+        // $this->closeEditModal();
     }
 
-    public function deleteConfirmationSubject($id){
+    public function deleteConfirmation($id){
         $this->id_subject = $id;
 
         $this->dispatchBrowserEvent('swal:confirm', [
@@ -180,7 +193,7 @@ class Subject extends Component
         // $subject->load('teacher');
     }
 
-    public function deleteSubject($id)
+    public function deleteClassroom($id)
     {
         Subjects::where('id', $id)->delete();
 

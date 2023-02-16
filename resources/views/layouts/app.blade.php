@@ -98,14 +98,14 @@
                     if(will_delete){
                         window.livewire.emit('deleteSubject', event.detail.id);
                     }else{
-                        swal("Data masih ada..");
+                        swal("Data Mata Pelajaran masih ada..");
                     }
                 })
             });
 
             // event listener info delete subject
             window.addEventListener('subjectDeleted', event => {
-                Swal.fire(
+                swal(
                     'Deleted!',
                     'Data Mata Pelajaran Berhasil Dihapus',
                     'success'

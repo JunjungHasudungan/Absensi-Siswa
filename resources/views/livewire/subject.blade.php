@@ -72,7 +72,7 @@
                                 Detail
                             </button>
 
-                            <button wire:click.prevent="deleteConfirmationSubject( {{ $subject->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            <button wire:click.prevent="deleteConfirmation( {{ $subject->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                 Hapus
                             </button>
                         </td>
@@ -92,10 +92,23 @@
     {{-- add script for delete --}}
     @push('scripts')
     <script>
-        function deleteSubject(id){
-            if(confirm('Yakin untuk menghapus??'))
-            window.livewire.emit('deleteSubjectListener', id);
-        }
+        // eventListener confirm delete mata pelajaran
+        window.addEventListener('swal:confirm', event => {
+                swal({
+                    title: event.detail.title,
+                    text: event.detail.text,
+                    icon: event.detail.type,
+                    buttons: true,
+                    dangerMode: false,
+                })
+                .then( will_delete => {
+                    if(will_delete){
+                        window.livewire.emit('deleteSubject', event.detail.id);
+                    }else{
+                        swal("Data Mata Pelajaran masih ada..");
+                    }
+                })
+            });
     </script>
     @endpush
 
