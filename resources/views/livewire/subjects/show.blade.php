@@ -45,15 +45,21 @@
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                                 {{ $teacher_name }}
                             </td>
+                            @forelse ($subject_weekday as $weekday)
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                              Jumat
+                                    {{ $weekday['name'] }}
                             </td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                              12:00
+                              {{ $weekday['start_time'] }}
                             </td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                                12:00
+                                {{ $weekday['end_time'] }}
                               </td>
+                            @empty
+                                <td class="text-sm text-yellow-700 font-bold px-6 py-4 whitespace-nowrap">
+                                    {{ __('Belum Tersedia...') }}
+                                </td>
+                            @endforelse
                           </tr>
                         </tbody>
                       </table>

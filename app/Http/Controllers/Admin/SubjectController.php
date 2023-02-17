@@ -11,7 +11,7 @@ class SubjectController extends Controller
 
     public function index()
     {
-        $subjects = Subject::all();
+        $subjects = Subject::with(['teacher', 'subjectWeekday'])->get();
         // dd($subjects);
         return view('admin.subjects.index', ['subjects' => $subjects]);
     }

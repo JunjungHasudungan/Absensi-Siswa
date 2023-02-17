@@ -22,16 +22,23 @@ class Subject extends Component
             $code_subject,
             $teachers,
             $teacher_id,
-            $teacher_name;
+            $teacher_name,
+            $subject_weekday;
 
     public  $is_create = false,
             $is_edit = false,
             $is_detail = false;
 
+    public function mount()
+    {
+        $this->teacher_id = User::where('role_id', 2)->get();
+        $this->subject_weekday = Subjects::with('subjectWeekday')->get();
+    }
+
     public function render()
     {
         return view('livewire.subject', [
-            $this->subjects = Subjects::all(),
+            $this->subjects = Subjects::with(['teacher', 'subjectWeekday'])->get(),
             $this->teachers = User::where('role_id', 2)->get(),
         ]);
     }
@@ -49,10 +56,6 @@ class Subject extends Component
     ];
 
 
-    public function mount()
-    {
-        $this->teacher_id = User::where('role_id', 2)->get();
-    }
 
     // function for open modal
     public function openCreateModal()
@@ -186,9 +189,15 @@ class Subject extends Component
     public function detailSubject(Subjects $subject)
     {
         $this->openDetailModal();
+
         $this->id_subject = $subject->id;
         $this->name = $subject->name;
         $this->teacher_name = $subject->teacher->name;
+        $this->subject_weekday = $subject->subjectWeekday;
+        // foreach ($subject->subjectWeekday as  $value) {
+        //     echo $value->name;
+        // }
+        // $this->subject_weekday = $subject->subjectWeekday->name;
 
         // $subject->load('teacher');
     }

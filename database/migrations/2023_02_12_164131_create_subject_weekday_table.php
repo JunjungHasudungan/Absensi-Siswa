@@ -19,8 +19,10 @@ return new class extends Migration
     {
         Schema::create('subject_weekday', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Subject::class);
-            $table->foreignIdFor(Weekday::class);
+            $table->unsignedBigInteger('subject_id');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->unsignedBigInteger('weekday_id');
+            $table->foreign('weekday_id')->references('id')->on('weekdays')->onDelete('cascade');
             $table->time('start_time');
             $table->time('end_time');
             $table->timestamps();

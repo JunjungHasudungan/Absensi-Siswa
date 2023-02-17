@@ -14,4 +14,9 @@ class SubjectWeekday extends Model
     protected $fillable = [
         'subject_id', 'weekday_id', 'start_time', 'end_time'
     ];
+
+    public function subjectWeekday()
+    {
+        return $this->belongsToMany('subject_id', 'weekday_id');
+    }
 }

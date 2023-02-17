@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name'              => 'Sumitro',
-                'email'             => 'rajiman@gmail.com',
+                'email'             => 'sumitro@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 1, // admin
                 'classroom_id'      => null,
