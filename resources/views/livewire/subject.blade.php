@@ -103,7 +103,7 @@
             </tbody>
         </table>
         <div class="text-gray-600 bg-secondary-50 mt-2">
-            {{-- {{ $subjects->links() }} --}}
+            {{ $subject_paginate->links('pagination::tailwind') }}
           </div>
     </div>
 

@@ -26,12 +26,15 @@ class Subject extends Component
             $teacher_name,
             $start_time,
             $end_time,
+            $search = '',
             $subject_weekday;
 
     public  $is_create = false,
             $is_edit = false,
             $is_search = false,
             $is_detail = false;
+
+    // protected $paginationTheme = 'bootstrap';
 
     public function mount()
     {
@@ -43,8 +46,8 @@ class Subject extends Component
     {
         return view('livewire.subject', [
             $this->subjects = Subjects::with(['teacher', 'subjectWeekday'])->get(),
-            $subject_paginate = Subjects::paginate(5),
             $this->teachers = User::where('role_id', 2)->get(),
+            'subject_paginate'=> Subjects::where('name', 'like', '%' . $this->search . '%')->paginate(5),
         ]);
     }
 
@@ -61,6 +64,11 @@ class Subject extends Component
     ];
 
 
+    // function reset Page pagination
+    public function updatingSearch()
+    {
+        return $this->resetPage();
+    }
 
     // function for open modal
     public function openCreateModal()
