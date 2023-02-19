@@ -16,9 +16,26 @@
         @endif
 
 {{-- button for add New data classroom --}}
-    <button wire:click.prevent="createSubject()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md my-3 py-2 px-4">
-        Tambah Data
+<div class=" inline-flex col-span-7 p-3 w-full">
+    <button wire:click.prevent="createSubject()"
+            class="bg-blue-500 hover:bg-blue-700 w-40
+            text-white font-bold rounded-md my-3 inline-flex py-2 px-5">
+        <svg class="w-5 h-6 -ml-1 inline-flex"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor">
+        <path fill-rule="evenodd"
+          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+          clip-rule="evenodd" />
+      </svg>
+        <span class="m-auto">
+            Add data
+        </span>
     </button>
+    @if (!$is_search)
+        @include('livewire.subjects.search-subject')
+    @endif
+</div>
 {{-- create some check condition --}}
     @if ($is_create)
         {{-- include file subjectcreate --}}
@@ -32,6 +49,7 @@
     @if ($is_detail)
         @include('livewire.subjects.show')
     @endif
+
 
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -73,7 +91,7 @@
                             </button>
 
                             <button wire:click.prevent="deleteConfirmation( {{ $subject->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                Hapus
+                                Delete
                             </button>
                         </td>
                     </tr>

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Requests\UpdateSubjectRequest;
+use Illuminate\Http\Request;
 use App\Models\{
             Subject as Subjects,
             User,
@@ -23,10 +24,13 @@ class Subject extends Component
             $teachers,
             $teacher_id,
             $teacher_name,
+            $start_time,
+            $end_time,
             $subject_weekday;
 
     public  $is_create = false,
             $is_edit = false,
+            $is_search = false,
             $is_detail = false;
 
     public function mount()
@@ -39,6 +43,7 @@ class Subject extends Component
     {
         return view('livewire.subject', [
             $this->subjects = Subjects::with(['teacher', 'subjectWeekday'])->get(),
+            $subject_paginate = Subjects::paginate(5),
             $this->teachers = User::where('role_id', 2)->get(),
         ]);
     }
@@ -122,7 +127,7 @@ class Subject extends Component
             'teacher_id'            => 'Guru Mata Pelajaran Wajib dipilih..'
         ]);
 
-        Subjects::create([
+        Subjects::updateOrCreate([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
             'teacher_id'        => $this->teacher_id
@@ -149,28 +154,28 @@ class Subject extends Component
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
         $this->teacher_id = $teachers;
+        $this->id_subject = $id;
 
         $this->dispatchBrowserEvent('successStoredSubject');
     }
 
-    public function updateSubject()
+    public function updateSubject($id_subject)
     {
-        $subject = Subjects::find($this->id_subject);
-        $id_subject = $subject;
-        // dd('Testing update');
-        // $this->id_subject = $id;
+        $subject = Subjects::find($id_subject);
 
-        // dd($this->subject);
+        $subject->code_subject = $this->code_subject;
+        $subject->name = $this->name;
+        $subject->teacher_id = $this->teacher_id;
+        $subject->save();
 
-    $subject->update(['id', $id_subject], [
-        'name'      => $subject->name,
-        'code_subject'  => $subject->code_subject,
-        'teacher_id'    => $subject->teacher_id
-    ]);
+        // dd($subject);
+        $this->closeEditModal();
 
+        $this->resetField();
 
-
-        // $this->closeEditModal();
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message'   => 'Data Berhasil diupdate...'
+        ]);
     }
 
     public function deleteConfirmation($id){
@@ -178,13 +183,11 @@ class Subject extends Component
 
         $this->dispatchBrowserEvent('swal:confirm', [
             'type'  => 'warning',
-            'title' => 'Yakin Menghapus?',
+            'title' => 'Are You sure to delete?',
             'text'  => '',
             'id'    => $id
         ]);
     }
-
-
 
     public function detailSubject(Subjects $subject)
     {
@@ -193,13 +196,9 @@ class Subject extends Component
         $this->id_subject = $subject->id;
         $this->name = $subject->name;
         $this->teacher_name = $subject->teacher->name;
-        $this->subject_weekday = $subject->subjectWeekday;
-        // foreach ($subject->subjectWeekday as  $value) {
-        //     echo $value->name;
-        // }
-        // $this->subject_weekday = $subject->subjectWeekday->name;
 
-        // $subject->load('teacher');
+        // dd($this->teacher_name);
+        $this->subject_weekday = $subject->subjectWeekday;
     }
 
     public function deleteClassroom($id)

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,6 +20,8 @@ class Subject extends Model
 
     public function subjectWeekday()
     {
-        return $this->belongsToMany(Weekday::class);
+        return $this->belongsToMany(Weekday::class, 'subject_weekday', 'subject_id', 'weekday_id');
     }
+
+
 }

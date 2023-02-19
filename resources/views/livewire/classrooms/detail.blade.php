@@ -23,9 +23,6 @@
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
                               Kode Kelas
                             </th>
-                            {{-- <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
-                              Wali Kelas
-                            </th> --}}
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
                               Nama Siswa
                             </th>
@@ -36,9 +33,6 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                 {{ $code_classroom }}
                             </td>
-                            {{-- <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                                {{ $teacher_name }}
-                            </td> --}}
                                 @forelse ($students_name as $student)
                                 <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                                     <p> {{ $student->name }} </p>
@@ -48,10 +42,6 @@
                                     <p class="text-yellow-700 font-bold"> Data Siswa Belum ada...</p>
                                 </td>
                                 @endforelse
-
-                            @foreach ($students_name as $item)
-                              {{ $item->name }}
-                            @endforeach
                           </tr>
                         </tbody>
                       </table>

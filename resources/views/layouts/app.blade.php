@@ -107,7 +107,7 @@
             window.addEventListener('subjectDeleted', event => {
                 swal(
                     'Deleted!',
-                    'Data Mata Pelajaran Berhasil Dihapus',
+                    'Data deleted successfully',
                     'success'
                 )
             });

@@ -30,10 +30,10 @@
                               Hari
                             </th>
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
-                              Jam
+                              Start Time
                             </th>
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
-                                Jam
+                                End Time
                               </th>
                           </tr>
                         </thead>
@@ -50,10 +50,10 @@
                                     {{ $weekday['name'] }}
                             </td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                              {{ $weekday['start_time'] }}
+                                {{ $weekday->start_time }}
                             </td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                                {{ $weekday['end_time'] }}
+                                {{ date('h:i', strtotime( $weekday->end_time )) }}
                               </td>
                             @empty
                                 <td class="text-sm text-yellow-700 font-bold px-6 py-4 whitespace-nowrap">
