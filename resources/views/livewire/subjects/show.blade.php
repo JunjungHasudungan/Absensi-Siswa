@@ -1,6 +1,6 @@
 <div>
 
-    <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400 w-full">
+    <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400 w-full h-full">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
           <div class="fixed inset-0 transition-opacity">
@@ -10,7 +10,9 @@
           <!-- This element is to trick the browser into centering the modal contents. -->
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>​
 
-          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                role="dialog" aria-modal="true"
+                aria-labelledby="modal-headline">
 
 
             <div class="flex flex-col">
@@ -30,10 +32,7 @@
                               Hari
                             </th>
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
-                              Start Time
-                            </th>
-                            <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
-                                End Time
+                                Kelas
                               </th>
                           </tr>
                         </thead>
@@ -49,13 +48,16 @@
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
                                     {{ $weekday['name'] }}
                             </td>
-                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                                {{-- {{ $weekday->start_time }} --}}
-                                10:00
-                            </td>
-                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                                12:00
-                              </td>
+                            @empty
+                                <td class="text-sm text-yellow-700 font-bold px-6 py-4 whitespace-nowrap">
+                                    {{ __('Belum Tersedia...') }}
+                                </td>
+                            @endforelse
+
+                            @forelse ($classroom_subject as $classroom)
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                    {{ $classroom['name'] }}
+                                </td>
                             @empty
                                 <td class="text-sm text-yellow-700 font-bold px-6 py-4 whitespace-nowrap">
                                     {{ __('Belum Tersedia...') }}

@@ -47,7 +47,7 @@
     @endif
 
     @if ($is_detail)
-        @include('livewire.subjects.show')
+        @include('livewire.subjects.detail')
     @endif
 
 

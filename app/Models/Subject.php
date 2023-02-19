@@ -23,5 +23,9 @@ class Subject extends Model
         return $this->belongsToMany(Weekday::class);
     }
 
+    public function classroomSubject()
+    {
+        return $this->belongsToMany(Classroom::class);
+    }
 
 }

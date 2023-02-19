@@ -23,9 +23,12 @@ class Subject extends Component
             $teachers,
             $teacher_id,
             $teacher_name,
+            $teacher_email,
             $start_time,
             $end_time,
             $search = '',
+            $classroom_subject,
+            $classroom_amount,
             $subject_weekday;
 
     public  $is_create = false,
@@ -202,9 +205,10 @@ class Subject extends Component
 
         $this->name = $subject->name;
         $this->teacher_name = $subject->teacher->name;
+        $this->teacher_email = $subject->teacher->email;
         $this->subject_weekday = $subject->subjectWeekday;
-
-        // $this->subject_weekday = $subject->subjectWeekday;
+        $this->classroom_amount = count($subject->classroomSubject);
+        $this->classroom_subject = $subject->classroomSubject;
     }
 
     public function deleteClassroom($id)
