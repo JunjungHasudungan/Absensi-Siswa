@@ -40,7 +40,7 @@
                                 class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">-- Pilih nama Guru --</option>
                             @forelse ($teachers as $id =>  $teacher)
-                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $id }}" {{  old('teacher_id') == $id ? 'selected' : ''}} > {{ $teacher->name }} </option>
+                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $id }}"> {{ $teacher->name }} </option>
                             @empty
                                 <option class="bg-yellow-300 font-normal text-yellow-500 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
                             @endforelse

@@ -11,7 +11,6 @@ use App\Models\{
             User,
         };
 
-
 class Subject extends Component
 {
     use WithPagination;
@@ -34,7 +33,7 @@ class Subject extends Component
             $is_search = false,
             $is_detail = false;
 
-    // protected $paginationTheme = 'bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     public function mount()
     {
@@ -47,7 +46,7 @@ class Subject extends Component
         return view('livewire.subject', [
             $this->subjects = Subjects::with(['teacher', 'subjectWeekday'])->get(),
             $this->teachers = User::where('role_id', 2)->get(),
-            'subject_paginate'=> Subjects::where('name', 'like', '%' . $this->search . '%')->paginate(5),
+            'subject_paginate'=> Subjects::paginate(5),
         ]);
     }
 
@@ -158,7 +157,7 @@ class Subject extends Component
 
         $subject = Subjects::find($id);
 
-        // dd($subject);
+        // dd($teachers);
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
         $this->teacher_id = $teachers;
@@ -176,7 +175,7 @@ class Subject extends Component
         $subject->teacher_id = $this->teacher_id;
         $subject->save();
 
-        // dd($subject);
+        dd($subject->teacher_id);
         $this->closeEditModal();
 
         $this->resetField();
@@ -201,12 +200,11 @@ class Subject extends Component
     {
         $this->openDetailModal();
 
-        $this->id_subject = $subject->id;
         $this->name = $subject->name;
         $this->teacher_name = $subject->teacher->name;
-
-        // dd($this->teacher_name);
         $this->subject_weekday = $subject->subjectWeekday;
+
+        // $this->subject_weekday = $subject->subjectWeekday;
     }
 
     public function deleteClassroom($id)

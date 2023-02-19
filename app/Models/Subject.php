@@ -20,7 +20,7 @@ class Subject extends Model
 
     public function subjectWeekday()
     {
-        return $this->belongsToMany(Weekday::class, 'subject_weekday', 'subject_id', 'weekday_id');
+        return $this->belongsToMany(Weekday::class);
     }
 
 

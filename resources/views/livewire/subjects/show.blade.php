@@ -1,6 +1,6 @@
 <div>
 
-    <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
+    <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400 w-full">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
           <div class="fixed inset-0 transition-opacity">
@@ -21,8 +21,8 @@
                         <thead class=" bg-white">
                           <tr>
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
-                              Id
-                            </th>
+                                Nama Pelajaran
+                              </th>
                             <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-4">
                               Guru Mata Pelajaran
                             </th>
@@ -40,9 +40,9 @@
                         <tbody>
                           <tr class="border-b">
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                {{ $id_subject }}
+                                {{ $name }}
                             </td>
-                            <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                 {{ $teacher_name }}
                             </td>
                             @forelse ($subject_weekday as $weekday)
@@ -50,10 +50,11 @@
                                     {{ $weekday['name'] }}
                             </td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                                {{ $weekday->start_time }}
+                                {{-- {{ $weekday->start_time }} --}}
+                                10:00
                             </td>
                             <td class="text-sm text-gray-900 font-semibold px-6 py-4 whitespace-nowrap">
-                                {{ date('h:i', strtotime( $weekday->end_time )) }}
+                                12:00
                               </td>
                             @empty
                                 <td class="text-sm text-yellow-700 font-bold px-6 py-4 whitespace-nowrap">

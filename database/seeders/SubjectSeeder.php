@@ -14,7 +14,7 @@ class SubjectSeeder extends Seeder
             [
                 'code_subject'      => 'PKN 01',
                 'name'              => 'PKN',
-                'teacher_id'        => 2
+                'teacher_id'        => 4
             ]
         ];
 
