@@ -32,6 +32,7 @@
             Add data
         </span>
     </button>
+
     @if (!$is_search)
         @include('livewire.subjects.search-subject')
     @endif

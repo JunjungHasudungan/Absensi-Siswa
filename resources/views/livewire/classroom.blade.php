@@ -29,7 +29,7 @@
         @endif
 
         @if ($is_detail)
-            @include('livewire.classrooms.detail')
+            @include('livewire.classrooms.show')
         @endif
 
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

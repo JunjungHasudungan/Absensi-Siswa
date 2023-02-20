@@ -34,20 +34,37 @@ class Subject extends Component
     public  $is_create = false,
             $is_edit = false,
             $is_search = false,
+            $page = 1,
             $is_detail = false;
 
     protected $paginationTheme = 'bootstrap';
+
+    protected $queryString = [
+        'search'    => ['except'    => ''],
+        'page'      => ['except'    => 1],
+    ];
+
+    public function updatedSearch()
+    {
+        $this->page = empty($this->search) ? 1 : $this->page;
+    }
 
     public function mount()
     {
         $this->teacher_id = User::where('role_id', 2)->get();
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
+        // where('name', 'like', $searchParam)
+        //                             ->orWhere('code_subject', $searchParam)
+        //                             ->orderBy('id', 'desc')->get();
     }
 
     public function render()
     {
+        $searchParam = '%' . $this->search . '%';
         return view('livewire.subject', [
-            $this->subjects = Subjects::with(['teacher', 'subjectWeekday'])->get(),
+            $this->subjects = Subjects::with(['teacher', 'subjectWeekday'])
+                            ->where('name', 'like', $searchParam)
+                            ->orwhere('code_subject', 'like', $searchParam)->get(),
             $this->teachers = User::where('role_id', 2)->get(),
             'subject_paginate'=> Subjects::paginate(5),
         ]);
@@ -171,10 +188,9 @@ class Subject extends Component
     {
         $subject = Subjects::find($id_subject);
 
-        // $this->id_subject = $id_subject;
         $this->validate();
 
-        $subject->update( [
+        $subject->update([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
             'teacher_id'        => $this->teacher_id
