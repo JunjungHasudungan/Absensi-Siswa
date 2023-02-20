@@ -47,45 +47,45 @@
 
                     {{-- Kelas --}}
                     <div class="divide-y">
-                    <div class="flex items-center justify-between mb-4">
-                        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Kelas</h5>
-                        <p class="text-sm font-medium text-blue-600 dark:text-white">
-                            Jam Pelajaran
-                        </p>
-                    </div>
-                    <div class="flow-root">
-                        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                            <li class="py-3 sm:py-4">
-                                <div class="flex items-center space-x-4">
-                                    <div class="flex-1 min-w-0 px-2">
-                                        @forelse ($classroom_subject as $classroom)
-                                            <p class="text-sm font-medium lowercase text-gray-900 truncate dark:text-white">
-                                                {{ $classroom['name'] }}
-                                            </p>
-                                        @empty
-                                            <p class="text-sm font-medium text-yellow-900 truncate dark:text-yellow-400">
-                                                {{ __('Data Kelas Belum tersedia..') }}
-                                            </p>
-                                        @endforelse
+                        <div class="flex items-center justify-between mb-4">
+                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Kelas</h5>
+                            <p class="text-sm font-medium text-blue-600 dark:text-white">
+                                Jam Pelajaran
+                            </p>
+                        </div>
+                        <div class="flow-root">
+                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+                                <li class="py-3 sm:py-4">
+                                    <div class="flex items-center space-x-4">
+                                        <div class="flex-1 min-w-0 px-2">
+                                            @forelse ($classroom_subject as $classroom)
+                                                <p class="text-sm font-medium lowercase text-gray-900 truncate dark:text-white">
+                                                    {{ $classroom['name'] }}
+                                                </p>
+                                            @empty
+                                                <p class="text-sm font-medium text-yellow-900 truncate dark:text-yellow-400">
+                                                    {{ __('Data Kelas Belum tersedia..') }}
+                                                </p>
+                                            @endforelse
+                                        </div>
+                                        <div class="justify-center items-center text-base font-semibold text-gray-900 dark:text-white">
+                                            @if ($classroom_amount == 0)
+                                                <p class="text-sm font-bold text-yellow-900 truncate dark:text-yellow-400">
+                                                    {{__('Data Jam Pelajaran Belum Tersedia..')}}
+                                                </p>
+                                            @else
+                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                    10:00 - 11:00
+                                                </p>
+                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                    11:00 - 12:00
+                                                </p>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div class="justify-center items-center text-base font-semibold text-gray-900 dark:text-white">
-                                        @if ($classroom_amount == 0)
-                                            <p class="text-sm font-bold text-yellow-900 truncate dark:text-yellow-400">
-                                                {{__('Data Jam Pelajaran Belum Tersedia..')}}
-                                            </p>
-                                        @else
-                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                10:00 - 11:00
-                                            </p>
-                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                11:00 - 12:00
-                                            </p>
-                                        @endif
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     {{-- end Kelas --}}
 

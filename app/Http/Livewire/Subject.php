@@ -156,29 +156,32 @@ class Subject extends Component
     {
         $this->openEditModal();
 
+        $subject = Subjects::find($id);
         $teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get();
 
-        $subject = Subjects::find($id);
-
-        // dd($teachers);
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
-        $this->teacher_id = $teachers;
-        $this->id_subject = $id;
+        $this->teacher_id = $subject->teacher_id;
+        $this->id_subject = $subject->id;
 
-        $this->dispatchBrowserEvent('successStoredSubject');
+        // $this->dispatchBrowserEvent('successStoredSubject');
     }
 
     public function updateSubject($id_subject)
     {
         $subject = Subjects::find($id_subject);
 
-        $subject->code_subject = $this->code_subject;
-        $subject->name = $this->name;
-        $subject->teacher_id = $this->teacher_id;
-        $subject->save();
+        // $this->id_subject = $id_subject;
+        $this->validate();
 
-        dd($subject->teacher_id);
+        $subject->update( [
+            'code_subject'      => $this->code_subject,
+            'name'              => $this->name,
+            'teacher_id'        => $this->teacher_id
+        ]);
+
+        $subject->update();
+
         $this->closeEditModal();
 
         $this->resetField();
@@ -211,9 +214,9 @@ class Subject extends Component
         $this->classroom_subject = $subject->classroomSubject;
     }
 
-    public function deleteClassroom($id)
+    public function deleteClassroom(Subjects $subject)
     {
-        Subjects::where('id', $id)->delete();
+        $subject->delete();
 
         $this->dispatchBrowserEvent('subjectDeleted');
     }
