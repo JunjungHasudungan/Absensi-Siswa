@@ -14,12 +14,12 @@
                 aria-labelledby="modal-headline">
                 {{-- card --}}
                 <div class="w-full p-4 bg-white  border border-gray-200 rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
-                   {{-- guru mata pelajaran --}}
+                   {{-- Jumlah Siswa --}}
                    <div class="divide-y">
                         <div class="flex items-center  justify-between mb-2 ">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Guru Mata Pelajaran</h5>
+                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Siswa</h5>
                             <p class="text-sm font-medium text-blue-600 dark:text-white">
-                                Jumlah Kelas
+                                Jumlah
                             </p>
                         </div>
                         <div class="flow-root divide-y">
@@ -27,29 +27,38 @@
                                 <li class="py-3 sm:py-4">
                                     <div class="flex items-center space-x-2">
                                         <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                {{ $teacher_name }}
+                                            @forelse ($student_name as $name)
+                                                <p class="text-sm text-gray-500 inline truncate dark:text-gray-400">
+                                                    {{ $name->name }}
+                                                </p>
+                                            @empty
+                                            <p class="text-sm text-yellow-500 inline truncate ">
+                                                {{ __('Siswa Belum tersedia..') }}
                                             </p>
-                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                                {{ $name }}
-                                            </p>
+                                            @endforelse
                                         </div>
+                                        @if ($student_amount == 0)
+                                            <div class="justify-center items-center text-base font-semibold text-gray-900 dark:text-white">
+                                                {{ $student_amount }}
+                                            </div>
+                                        @else
                                         <div class="justify-center items-center text-base font-semibold text-gray-900 dark:text-white">
-                                            {{ $classroom_amount ?? 'Kelas Belum Tersedia..'}}
+                                            {{ $student_amount }}
                                         </div>
+                                        @endif
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    {{-- end guru mata pelajaran --}}
+                    {{-- end Jumlah Siswa --}}
 
-                    {{-- Kelas --}}
+                    {{-- Mata Pelajaran --}}
                     <div class="divide-y">
                         <div class="flex items-center justify-between mb-4">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Kelas</h5>
+                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Mata Pelajaran</h5>
                             <p class="text-sm font-medium text-blue-600 dark:text-white">
-                                Jam Pelajaran
+                               Jumlah
                             </p>
                         </div>
                         <div class="flow-root">
@@ -57,36 +66,27 @@
                                 <li class="py-3 sm:py-4">
                                     <div class="flex items-center space-x-4">
                                         <div class="flex-1 min-w-0 px-2">
-                                            @forelse ($classroom_subject as $classroom)
-                                                <p class="text-sm font-medium lowercase text-gray-900 truncate dark:text-white">
-                                                    {{ $classroom['name'] }}
+                                            @forelse ($subject_classroom as $subject)
+                                                <p class="text-sm font-medium inline-block lowercase text-gray-900 truncate dark:text-white">
+                                                    {{ $subject->name }} ,
                                                 </p>
                                             @empty
                                                 <p class="text-sm font-medium text-yellow-900 truncate dark:text-yellow-400">
-                                                    {{ __('Data Kelas Belum tersedia..') }}
+                                                    {{ __('Mata Pelajaran Belum tersedia..') }}
                                                 </p>
                                             @endforelse
                                         </div>
                                         <div class="justify-center items-center text-base font-semibold text-gray-900 dark:text-white">
-                                            @if ($classroom_amount == 0)
-                                                <p class="text-sm font-bold text-yellow-900 truncate dark:text-yellow-400">
-                                                    {{__('Data Jam Pelajaran Belum Tersedia..')}}
-                                                </p>
-                                            @else
-                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                    10:00 - 11:00
-                                                </p>
-                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                    11:00 - 12:00
-                                                </p>
-                                            @endif
+                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                                {{ $subject_amount }}
+                                            </p>
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    {{-- end Kelas --}}
+                    {{-- end Mata Pelajaran --}}
                    {{-- button --}}
                     <div class="divide-y">
                        <div class=" px-4 py-3 item-center justify-center w-full sm:px-6 sm:flex sm:flex-row-reverse">

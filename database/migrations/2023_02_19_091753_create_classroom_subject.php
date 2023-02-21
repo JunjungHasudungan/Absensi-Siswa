@@ -5,7 +5,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Models\{
     Classroom,
-    Subject};
+    Subject
+};
 
 return new class extends Migration
 {
@@ -13,8 +14,10 @@ return new class extends Migration
     {
         Schema::create('classroom_subject', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Classroom::class);
-            $table->foreignIdFor(Subject::class);
+            $table->unsignedBigInteger('classroom_id');
+            $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
+            $table->unsignedBigInteger('subject_id');
+            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
         });
     }
 

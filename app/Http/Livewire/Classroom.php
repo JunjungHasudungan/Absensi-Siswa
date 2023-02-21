@@ -27,11 +27,13 @@ class Classroom extends Component
             $user_id,
             $classroom,
             $classrooms,
-            $classroom_subject,
+            $subject_classroom,
+            $subject_amount,
             $name,
             $teachers,
-            $teacher_name,
-            $students_name;
+            $home_teacher,
+            $student_name,
+            $student_amount;
 
     // create rules
     protected $rules  = [
@@ -70,10 +72,13 @@ class Classroom extends Component
 
         return view('livewire.classroom', [
 
-            $this->classrooms = Classrooms::where('name', 'LIKE', $searchParam)
+            $this->classrooms = Classrooms::with(['students'])
+                                ->where('name', 'LIKE', $searchParam)
                                 ->orWhere('code_classroom', 'LIKE', $searchParam)->get(),
 
             $this->teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get(),
+
+            'classroom_paginate'    => Classrooms::paginate(5),
         ]);
     }
 
@@ -125,13 +130,13 @@ class Classroom extends Component
     {
         $this->openModalDetail();
 
-        $this->name = $classroom->name;
-
-        dd($classroom);
-
+        $this->student_name = $classroom->students; // nama siswa
+        $this->student_amount = count($classroom->students); // jumlah siswa
+        $this->subject_classroom = $classroom->subjectClassroom; // mata pelajaran kelas
+        $this->subject_amount = count($classroom->subjectClassroom); // jumlah mata pelajaran
     }
 
-    public function closeModalDetail()
+    public function closeDetailModal()
     {
         return $this->is_detail = false;
     }

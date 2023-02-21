@@ -11,7 +11,6 @@ class Classroom extends Model
 
     protected $guarded = [];
 
-
     public function homeTeacher()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -19,10 +18,10 @@ class Classroom extends Model
 
     public function students()
     {
-        return $this->hasMany(User::class, 'classroom_id');
+        return $this->hasMany(User::class, 'classroom_id')->where('role_id', 3);
     }
 
-    public function classroomSubject()
+    public function subjectClassroom()
     {
         return $this->belongsToMany(Subject::class);
     }
