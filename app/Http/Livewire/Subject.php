@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\{
             Subject as Subjects,
             User,
+            Classroom as Classrooms
         };
 
 class Subject extends Component
@@ -27,6 +28,7 @@ class Subject extends Component
             $start_time,
             $end_time,
             $search = '',
+            $classrooms,
             $classroom_subject,
             $classroom_amount,
             $subject_weekday;
@@ -51,6 +53,7 @@ class Subject extends Component
 
     public function mount()
     {
+        // $classroom->classroomSubject()->pluck()
         $this->teacher_id = User::where('role_id', 2)->get();
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
     }
@@ -59,11 +62,12 @@ class Subject extends Component
     {
         $searchParam = '%' . $this->search . '%';
         return view('livewire.subject', [
-            $this->subjects = Subjects::with(['teacher', 'subjectWeekday'])
+            $this->subjects = Subjects::with(['teacher', 'subjectWeekday', 'classroomSubject'])
                             ->where('name', 'like', $searchParam)
                             ->orwhere('code_subject', 'like', $searchParam)->get(),
             $this->teachers = User::where('role_id', 2)->get(),
             'subject_paginate'=> Subjects::paginate(5),
+            $this->classrooms = Classrooms::all(),
         ]);
     }
 
@@ -76,7 +80,7 @@ class Subject extends Component
     protected $rules = [
         'code_subject'     =>  'required|string|max:30|min:3',
         'name'             =>  'required|string|max:25|min:4',
-        'teacher_id'       =>   'required|integer'
+        'teacher_id'       =>   'required|integer',
     ];
 
 
