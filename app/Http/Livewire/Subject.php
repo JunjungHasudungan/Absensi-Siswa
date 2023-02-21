@@ -53,9 +53,6 @@ class Subject extends Component
     {
         $this->teacher_id = User::where('role_id', 2)->get();
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
-        // where('name', 'like', $searchParam)
-        //                             ->orWhere('code_subject', $searchParam)
-        //                             ->orderBy('id', 'desc')->get();
     }
 
     public function render()

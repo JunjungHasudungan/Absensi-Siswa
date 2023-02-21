@@ -19,10 +19,15 @@ class Classroom extends Component
     public  $is_create = false,
             $is_detail = false,
             $is_edit = false,
+            $is_search = false,
+            $search = '',
+            $page = 1,
             $id_classroom,
             $code_classroom,
             $user_id,
+            $classroom,
             $classrooms,
+            $classroom_subject,
             $name,
             $teachers,
             $teacher_name,
@@ -44,9 +49,32 @@ class Classroom extends Component
         return $this->is_create  = true;
     }
 
+    protected $queryString = [
+        'search'    => ['except'    => ''],
+        'page'      => ['except'    => 1],
+    ];
+
+    public function updatedSearch()
+    {
+        $this->page = empty($this->search) ? 1 : $this->page;
+    }
+
     public function mount()
     {
         $this->teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get();
+    }
+
+    public function render()
+    {
+        $searchParam  = '%' . $this->search  . '%';
+
+        return view('livewire.classroom', [
+
+            $this->classrooms = Classrooms::where('name', 'LIKE', $searchParam)
+                                ->orWhere('code_classroom', 'LIKE', $searchParam)->get(),
+
+            $this->teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get(),
+        ]);
     }
 
     public function createClassroom()
@@ -95,13 +123,12 @@ class Classroom extends Component
 
     public function detailClassroom(Classrooms $classroom)
     {
-        $this->id_classroom = $classroom->id;
-
         $this->openModalDetail();
 
-        $this->students_name = $classroom->students()->where('role_id', 3)->get();
-        $this->code_classroom = $classroom->code_classroom;
-        // $this->teacher_name  = $classroom->homeTeacher->name;
+        $this->name = $classroom->name;
+
+        dd($classroom);
+
     }
 
     public function closeModalDetail()
@@ -112,6 +139,11 @@ class Classroom extends Component
     public function openModalEdit()
     {
         return $this->is_edit = true;
+    }
+
+    public function openSearch()
+    {
+        return $this->is_search = false;
     }
 
     public function editClassroom(Classrooms $classroom)
@@ -159,13 +191,4 @@ class Classroom extends Component
         $this->code_classroom = '';
     }
 
-    public function render()
-    {
-
-        return view('livewire.classroom', [
-            $this->classrooms = Classrooms::all(),
-
-            $this->teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get(),
-        ]);
-    }
 }

@@ -21,4 +21,9 @@ class Classroom extends Model
     {
         return $this->hasMany(User::class, 'classroom_id');
     }
+
+    public function classroomSubject()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
 }
