@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\{
     ClassroomController,
     PostController,
     AdministrationController,
+    UserController,
 };
 use Illuminate\Support\Facades\Route;
 
@@ -44,6 +45,7 @@ Route::group(['middleware'  => 'role:admin', 'prefix' => 'admin',  'as' => 'admi
         'classrooms'        => ClassroomController::class,
         'posts'             => PostController::class,
         'administrations'   => AdministrationController::class,
+        'users'             => UserController::class,
     ]);
 
 });
