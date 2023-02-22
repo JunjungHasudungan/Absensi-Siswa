@@ -45,7 +45,9 @@
 
                     {{-- select teacher --}}
                     <div class="mb-6">
-                        <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">Select Nama Guru</label>
+                        <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
+                            Nama Guru
+                        </label>
                         <select wire:model="teacher_id"
                                 id="teacher_id"
                                 class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
@@ -75,31 +77,114 @@
                                 class="block mb-2 text-sm font-bold text-gray-900">
                                 Pilih Nama Kelas
                         </label>
-                        <div class="flex">
-                            <div class="flex items-center mr-4">
-                                @forelse ($classrooms as $classroom)
-                                    <input  id="inline-checkbox"
-                                            type="checkbox"
-                                            value=""
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
-                                            dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                                            dark:border-gray-600">
-                                    <label  for="inline-checkbox"
-                                            class="ml-2 text-sm font-bold text-gray-900 m-2">
-                                        {{ $classroom->name }}
-                                    </label>
+                        <div class="flex justify-center items-center w-full bg-gray-300 rounded-lg p-2">
+                            <div class="inline-block justify-center">
 
-                                @empty
-                                    <div class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
-                                    w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
-                                    dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                        <p class="text-yellow-900 font-extrabold text-justify">Kelas Belum Tersedia...</p>
-                                    </div>
-                                @endforelse
+                                <div class="flex items-center mr-4">
+                                    @forelse ($classrooms as $classroom)
+                                        <input  id="inline-checkbox"
+                                        type="checkbox"
+                                        value=""
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
+                                        dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
+                                        dark:border-gray-600">
+                                        <label  for="inline-checkbox"
+                                                class="ml-2 text-sm font-bold text-gray-900 m-2">
+                                                    {{ $classroom->name }}
+                                        </label>
+                                    @empty
+                                        <div class="w-full border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
+                                            w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
+                                            dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <p class="w-full text-yellow-900 font-extrabold justify-center items-center">Kelas Belum Tersedia...</p>
+                                        </div>
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
                     </div>
                     {{-- end multi select subject classroom --}}
+
+                    {{-- jadwal mata pelajaran --}}
+                    <div class="mb-6">
+                        <div class="grid md:grid-cols-3 md:gap-6">
+                            {{-- Pilihan hari Pelajaran --}}
+                            <div class="relative z-0 w-full mb-3 group">
+                                <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
+                                    Hari
+                                </label>
+                                <select wire:model="teacher_id"
+                                    id="teacher_id"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
+                                    w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
+                                    dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" class="text-center">Pilih Hari</option>
+                                    @forelse ($subject_weekday as $weekday)
+                                        <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
+                                                value="{{ $weekday->id }}">
+                                                {{ $weekday->name }}
+                                        </option>
+                                    @empty
+                                        <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
+                                            Data Guru Belum Tersedia..
+                                        </option>
+                                    @endforelse
+                                </select>
+                            </div>
+                            {{-- end Pilihan  Hari Pelajaran--}}
+
+                             {{-- Pilihan Start Time --}}
+                             <div class="relative z-0 w-full mb-6 group">
+                                <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
+                                    Waktu Mulai
+                                </label>
+                                <select wire:model="teacher_id"
+                                    id="teacher_id"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
+                                    w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
+                                    dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" class="text-center">Pilih Jam</option>
+                                    @forelse ($subject_weekday as $weekday)
+                                        <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
+                                                value="{{ $weekday->id }}">
+                                                {{ $weekday->name }}
+                                        </option>
+                                    @empty
+                                        <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
+                                            Data Guru Belum Tersedia..
+                                        </option>
+                                    @endforelse
+                                </select>
+                            </div>
+                            {{-- end Start Time  --}}
+
+                            {{-- Pilihan Start Time --}}
+                            <div class="relative z-0 w-full mb-6 group">
+                                <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
+                                    Waktu Mulai
+                                </label>
+                                <select wire:model="teacher_id"
+                                    id="teacher_id"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
+                                    w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
+                                    dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="" class="text-center">Pilih Jam</option>
+                                    @forelse ($subject_weekday as $weekday)
+                                        <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
+                                                value="{{ $weekday->id }}">
+                                                {{ $weekday->name }}
+                                        </option>
+                                    @empty
+                                        <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
+                                            Data Guru Belum Tersedia..
+                                        </option>
+                                    @endforelse
+                                </select>
+                            </div>
+                            {{-- end Start Time  --}}
+                          </div>
+                    </div>
+                    {{-- end jadwal mata pelajran --}}
               </div>
             </div>
 
@@ -107,7 +192,10 @@
               <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                 <button wire:click.prevent="storeSubject()"
                         type="button"
-                        class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                        class="inline-flex justify-center w-full rounded-md border border-transparent
+                        px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm
+                        hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green
+                        transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                   Simpan
                 </button>
               </span>
@@ -115,7 +203,10 @@
 
                 <button wire:click="closeCreateModal()"
                         type="button"
-                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gray-600 text-base  text-white leading-6 font-medium text-whiteshadow-sm hover:bg-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                        class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2
+                        bg-gray-600 text-base  text-white leading-6 font-medium text-whiteshadow-sm
+                        hover:bg-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue
+                        transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                   Cancel
                 </button>
               </span>

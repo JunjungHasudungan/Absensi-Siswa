@@ -9,12 +9,15 @@ use Illuminate\Http\Request;
 use App\Models\{
             Subject as Subjects,
             User,
-            Classroom as Classrooms
+            Classroom as Classrooms,
+            Weekday as Weekdays,
         };
 
 class Subject extends Component
 {
     use WithPagination;
+
+    public Classrooms $classroom;
 
     public $id_subject,
             $subjects,
@@ -31,6 +34,7 @@ class Subject extends Component
             $classrooms,
             $classroom_subject,
             $classroom_amount,
+            $weekday,
             $subject_weekday;
 
     public  $is_create = false,
@@ -53,6 +57,7 @@ class Subject extends Component
 
     public function mount()
     {
+        // $this->classroom = Classrooms::find($id);
         // $classroom->classroomSubject()->pluck()
         $this->teacher_id = User::where('role_id', 2)->get();
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
@@ -65,6 +70,7 @@ class Subject extends Component
             $this->subjects = Subjects::with(['teacher', 'subjectWeekday', 'classroomSubject'])
                             ->where('name', 'like', $searchParam)
                             ->orwhere('code_subject', 'like', $searchParam)->get(),
+            $this->subject_weekday = Weekdays::all(),
             $this->teachers = User::where('role_id', 2)->get(),
             'subject_paginate'=> Subjects::paginate(5),
             $this->classrooms = Classrooms::all(),
