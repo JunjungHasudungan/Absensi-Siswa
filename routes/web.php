@@ -12,6 +12,10 @@ use App\Http\Controllers\Admin\{
     AdministrationController,
     UserController,
 };
+
+use App\Http\Controllers\Teacher\{
+    AdministrationController as TeacherAdministrationController
+};
 use Illuminate\Support\Facades\Route;
 
 
@@ -50,7 +54,11 @@ Route::group(['middleware'  => 'role:admin', 'prefix' => 'admin',  'as' => 'admi
 
 });
 
-
+Route::group(['middleware' => 'role:teacher', 'prefix'  => 'teacher', 'as' => 'teacher.'], function(){
+    Route::resources([
+        'administrations'      =>  TeacherAdministrationController::class,
+    ]);
+});
 
 
 require __DIR__.'/auth.php';

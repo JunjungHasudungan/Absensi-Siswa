@@ -75,7 +75,7 @@
                     <div class="mb-6">
                         <label  for="teacher_id"
                                 class="block mb-2 text-sm font-bold text-gray-900">
-                                Pilih Nama Kelas
+                                Pilih Kelas
                         </label>
                         <div class="flex justify-center items-center w-full bg-gray-300 rounded-lg p-2">
                             <div class="inline-block justify-center">

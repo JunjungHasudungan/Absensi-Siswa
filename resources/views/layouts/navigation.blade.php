@@ -40,9 +40,19 @@
                         </x-nav-link>
                     @endif
 
+                    {{-- teacher route --}}
                     @if (auth()->user()->role_id === 2)
-                    <x-nav-link :href="route('students.subjects.index')" :active="request()->routeIs('students.subjects.index')">
-                        {{ __('Mata Pelajaran') }}
+
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+
+                    {{-- <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                        {{ __('Home') }}
+                    </x-nav-link> --}}
+
+                    <x-nav-link :href="route('teacher.administrations.index')" :active="request()->routeIs('teacher.administrations.index')">
+                        {{ __('Administrasi') }}
                     </x-nav-link>
                     @endif
                 </div>
