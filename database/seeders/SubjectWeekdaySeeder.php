@@ -12,15 +12,15 @@ class SubjectWeekdaySeeder extends Seeder
     {
         $subjectWeekdays = [
             [
-                'subject_id'        => 1, 
+                'subject_id'        => 1,
                 'weekday_id'        => 1,
-                'start_time'        => '15:00',
-                'end_time'          => '16:00'
+                'start_time'        => 1,
+                'end_time'          => 2
             ],
         ];
 
         SubjectWeekday::insert($subjectWeekdays);
-        
+
 
     }
 }

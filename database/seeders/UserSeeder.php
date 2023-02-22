@@ -16,6 +16,7 @@ class UserSeeder extends Seeder
                 'email'             => 'hasudungan@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 1, // admin
+                'address'           => 'batam',
                 'classroom_id'      => null,
             ],
             [
@@ -23,6 +24,7 @@ class UserSeeder extends Seeder
                 'email'             => 'rajiman@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 1, // admin
+                'address'           => 'batam',
                 'classroom_id'      => null,
             ],
             [
@@ -30,6 +32,7 @@ class UserSeeder extends Seeder
                 'email'             => 'sumitro@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 1, // admin
+                'address'           => 'batam',
                 'classroom_id'      => null,
             ],
             [
@@ -37,6 +40,7 @@ class UserSeeder extends Seeder
                 'email'             => 'satrioKuncoro@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 2, // guru,
+                'address'           => 'batam',
                 'classroom_id'      => 1,
             ],
             [
@@ -44,6 +48,7 @@ class UserSeeder extends Seeder
                 'email'             => 'geraldi@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
+                'address'           => 'batam',
                 'classroom_id'      => 1
             ],
             [
@@ -51,6 +56,7 @@ class UserSeeder extends Seeder
                 'email'             => 'tasya@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
+                'address'           => 'batam',
                 'classroom_id'      => 1
             ]
         ];

@@ -23,8 +23,8 @@ return new class extends Migration
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
             $table->unsignedBigInteger('weekday_id');
             $table->foreign('weekday_id')->references('id')->on('weekdays')->onDelete('cascade');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->integer('start_time');
+            $table->integer('end_time');
             $table->timestamps();
         });
     }

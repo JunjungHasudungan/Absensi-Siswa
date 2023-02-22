@@ -15,7 +15,7 @@
 
         <div class=" inline-flex col-span-7 p-3 w-full">
             {{-- button --}}
-            <button wire:click.prevent="createSubject()"
+            <button wire:click.prevent="createUser()"
                 class="bg-blue-500 hover:bg-blue-700 w-40
                 text-white font-bold rounded-md my-3 inline-flex py-2 px-5">
                 <svg class="w-5 h-6 -ml-1 inline-flex"
@@ -31,6 +31,9 @@
             </span>
             </button>
             {{-- end button --}}
+                @if ($is_create)
+                    @include('livewire.users.create')
+                @endif
             {{-- search --}}
                 @if (!$is_search)
                     @include('livewire.users.search-user')
