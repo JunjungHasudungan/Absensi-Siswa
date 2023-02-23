@@ -47,12 +47,13 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    {{-- <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                        {{ __('Home') }}
-                    </x-nav-link> --}}
 
                     <x-nav-link :href="route('teacher.administrations.index')" :active="request()->routeIs('teacher.administrations.index')">
                         {{ __('Administrasi') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('teacher.attendances.index')" :active="request()->routeIs('teacher.attendances.index')">
+                        {{ __('Absensi') }}
                     </x-nav-link>
                     @endif
                 </div>

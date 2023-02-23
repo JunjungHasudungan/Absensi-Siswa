@@ -14,7 +14,8 @@ use App\Http\Controllers\Admin\{
 };
 
 use App\Http\Controllers\Teacher\{
-    AdministrationController as TeacherAdministrationController
+    AdministrationController as TeacherAdministrationController,
+    AttendanceController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -57,6 +58,7 @@ Route::group(['middleware'  => 'role:admin', 'prefix' => 'admin',  'as' => 'admi
 Route::group(['middleware' => 'role:teacher', 'prefix'  => 'teacher', 'as' => 'teacher.'], function(){
     Route::resources([
         'administrations'      =>  TeacherAdministrationController::class,
+        'attendances'          =>  AttendanceController::class,
     ]);
 });
 
