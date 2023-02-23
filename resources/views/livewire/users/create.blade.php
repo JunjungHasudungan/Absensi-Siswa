@@ -1,6 +1,6 @@
 <div>
     <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
-        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="flex items-end justify-center max-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
           <div class="fixed inset-0 transition-opacity">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -32,12 +32,13 @@
                                 class="block text-gray-700 text-sm font-bold mb-2">
                                 Email:
                         </label>
-                        <input  type="text"
+                        <input  type="email"
                                 wire:model="email"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="exampleFormControlInput2"
-                                placeholder="Masukkan Email User..">
-                        @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
+                                placeholder="Masukkan Email User.."
+                                required autocomplete="current-password">
+                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     {{-- end input email user --}}
                     {{-- input password user --}}
@@ -54,81 +55,37 @@
                         @error('password') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
                     {{-- end input password user --}}
-                    {{-- select role --}}
-                    <div class="mb-6">
+                     {{-- select role --}}
+                     <div class="mb-6">
                         <label for="role_id" class="block mb-2 text-sm font-bold text-gray-900">
-                            Jabatan:
+                            Pilih Jabatan
                         </label>
                         <select wire:model="role_id"
                                 id="role_id"
-                                x-model="role_id"
-                                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
-                                w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
-                                dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">-- Pilih Jabatan --</option>
-                                @forelse ($roles as $role)
+                            @forelse ($roles as $role)
                                 <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
-                                        value="{{ $role->id }}">
-                                        {{ $role->name }}
-                                </option>
+                                value="{{ $role->id }}"> {{ $role->name }} </option>
                             @empty
-                                <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
-                                    Data Jabatan Tersedia..
-                                </option>
+                                <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
                             @endforelse
                         </select>
-                            @error('role_id')
-                                    <p class="text-sm text-red-600">{{ $message }}</p>
-                            @enderror
+                        @error('role_id') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
-                    {{-- end select role --}}
+                    {{-- end select teacher --}}
+                    @if ($role_id == 3)
                     {{-- select classroom --}}
-                    <div class="mb-6" x-show="role_id == 3">
-                        <label for="classroom_id" class="block mb-2 text-sm font-bold text-gray-900">
-                            Kelas:
-                        </label>
-                        <select wire:model="classroom_id"
-                                id="classroom_id"
-                                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
-                                w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
-                                dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="">-- Pilih Kelas --</option>
-                                @forelse ($classrooms as $classroom)
-                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
-                                        value="{{ $classroom->id }}">
-                                        {{ $classroom->name }}
-                                </option>
-                            @empty
-                                <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
-                                    Data Kelas Tersedia..
-                                </option>
-                            @endforelse
-                        </select>
-                            @error('classroom_id')
-                                    <p class="text-sm text-red-600">{{ $message }}</p>
-                            @enderror
-                    </div>
+                        @include('livewire.users.select-classroom')
+                    @endif
                     {{-- end select classroom --}}
-                     {{-- input NISN student --}}
-                    <div class="mb-4" x-show="role_id == 3">
-                        <label for="exampleFormControlInput2"
-                                class="block text-gray-700 text-sm font-bold mb-2">
-                                NISN:
-                        </label>
-                        <input  type="text"
-                                wire:model="nisn"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="exampleFormControlInput2"
-                                placeholder="Masukkan nisn Siswa..">
-                        @error('nisn') <span class="text-red-500">{{ $message }}</span>@enderror
-                    </div>
-                    {{-- end input NISN user --}}
               </div>
             </div>
 
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
                 <button
+                        wire:click.prevent="storeUser()"
                         type="button"
                         class="inline-flex justify-center w-full rounded-md border border-transparent
                         px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm

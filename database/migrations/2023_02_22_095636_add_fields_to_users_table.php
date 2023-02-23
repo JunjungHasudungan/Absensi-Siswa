@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('nisn')->nullable()->after('classroom_id');
-            $table->string('address')->after('nisn');
+            $table->string('address')->nullable()->after('nisn');
         });
     }
 
