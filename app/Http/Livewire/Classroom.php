@@ -37,8 +37,8 @@ class Classroom extends Component
 
     // create rules
     protected $rules  = [
-        'name'              => 'required|unique|string|max:10|min:3',
-        'code_classroom'    => 'required|string|max:10|min:3',
+        'name'              => 'required|string|max:20|min:2',
+        'code_classroom'    => 'required|string|max:20|min:2',
         'user_id'           => 'required|integer'
     ];
 
@@ -153,12 +153,13 @@ class Classroom extends Component
 
     public function editClassroom(Classrooms $classroom)
     {
+        $this->openModalEdit();
+
         $this->id_classroom = $classroom->id;
         $this->code_classroom  = $classroom->code_classroom;
         $this->name = $classroom->name;
         $this->user_id = $classroom->user_id;
 
-        $this->openModalEdit();
     }
 
     public function updateClassroom($id_classroom)
@@ -168,11 +169,19 @@ class Classroom extends Component
         $this->validate();
 
         $classroom->update([
-            'code_classroom'    => $this->classroom->code_classroom,
-            'name'              => $this->classroom->name,
-            'user_id'           => $this->classroom->user_id,
+            'code_classroom'    => $this->code_classroom,
+            'name'              => $this->name,
+            'user_id'           => $this->user_id,
         ]);
-        dd('update berhasil');
+        // dd('update berhasil');
+        $this->closeModalEdit();
+
+        $this->resetFieldModal();
+
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message'   => 'Data Berhasil diupdate...'
+        ]);
+
     }
 
     public function closeModalEdit()
