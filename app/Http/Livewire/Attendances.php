@@ -9,6 +9,6 @@ class Attendances extends Component
 {
     public function render()
     {
-        return view('livewire.teacher.attendances.attendances');
+        return view('livewire.attendances');
     }
 }

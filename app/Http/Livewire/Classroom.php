@@ -92,13 +92,13 @@ class Classroom extends Component
         $this->validate([
             'name'                          => 'required|string|unique:classrooms,name',
             'code_classroom'                => 'required',
-            'user_id'                       => 'required|integer'
+            'user_id'                       => 'required'
         ],[
             'name.required'                 => 'Nama Kelas Wajib di isi...',
             'name.unique'                   => 'Nama Kelas Sudah di gunakan...',
             'code_classroom.required'       => 'Kode Kelas Wajib di isi..',
             'name'                          => 'required',
-            'user_id'                       => 'required|integer'
+            'user_id'                       => 'required'
         ]);
 
         Classrooms::create([
@@ -161,9 +161,18 @@ class Classroom extends Component
         $this->openModalEdit();
     }
 
-    public function updateClassroom(Classrooms $classroom)
+    public function updateClassroom($id_classroom)
     {
-        dd('Testing updating');
+        $classroom = Classrooms::find($id_classroom);
+
+        $this->validate();
+
+        $classroom->update([
+            'code_classroom'    => $this->classroom->code_classroom,
+            'name'              => $this->classroom->name,
+            'user_id'           => $this->classroom->user_id,
+        ]);
+        dd('update berhasil');
     }
 
     public function closeModalEdit()

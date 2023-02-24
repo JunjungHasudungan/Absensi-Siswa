@@ -24,23 +24,27 @@ class User extends Component
             $address,
             $password,
             $users,
+            $user_classroom,
             $is_student,
             $is_teacher,
             $search,
             $is_create = false,
-            $id_edit = false,
+            $is_edit = false,
             $is_search = false,
-            $id_detail = false;
+            $is_detail = false;
 
     public function render()
     {
         return view('livewire.user', [
-            $this->is_student = Users::with('role')->where('role_id', 3)->get(),
+            $this->users = Users::all(),
+            // $this->users = Users::with('role')->where('role_id', 3)->get(),
             $this->roles = Roles::all(),
+            $this->users = Users::with(['role', 'classroom'])->get(),
             $this->classrooms = Classrooms::all(),
             $this->is_teacher = Users::where('role_id', 2)->get(),
 
         ]);
+        // dd($this->users);
     }
 
     public function closeModalCreate()
@@ -58,6 +62,44 @@ class User extends Component
         $this->nisn = '';
         $this->address = '';
 
+    }
+
+    public function openModalDetail()
+    {
+        return $this->is_detail = true;
+    }
+
+    public function detailUser(Users $user)
+    {
+        $this->openModalDetail();
+
+        dd($user);
+    }
+
+    public function closeModalDetail()
+    {
+        return $this->is_detail = false;
+    }
+
+    public function openModalEdit()
+    {
+        return $this->is_edit = true;
+    }
+
+    public function editUser(Users $user)
+    {
+        $this->openModalEdit();
+
+        $this->user_classroom = Users::find($user);
+        // dd('edit user');
+        // $this->user_classroom = $user->classroom;
+
+        dd($this->user_classroom);
+    }
+
+    public function closeModalEdit()
+    {
+        return $this->is_edit = false;
     }
 
     public function openModalCreate()

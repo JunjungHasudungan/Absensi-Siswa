@@ -62,8 +62,18 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class);
+    }
+
     public function getIsStudentAttribute()
     {
         return $this->role()->where('id', 3)->exists();
     }
+
+    // public function student()
+    // {
+    //     return $this->belongsTo(Role::class, 'classroom_id');
+    // }
 }
