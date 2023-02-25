@@ -1,4 +1,6 @@
 <div>
+    {{-- <form action="{{ route('admin.subjects.store') }}" method="POST">
+        @csrf --}}
 
     <div class="fixed z-10 inset-0 overflow-y-auto ease-out duration-400">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
@@ -21,7 +23,8 @@
                                 Kode Mata Pelajaran :
                         </label>
                         <input type="text"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                name="code_subject"
+                                class="form-control shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                 id="exampleFormControlInput1"
                                 placeholder="Kode Mata Pelajaran.."
                                 wire:model="code_subject">
@@ -72,22 +75,17 @@
                     {{-- end select teacher --}}
 
                     {{-- multi select subject classroom --}}
-
-
-
-
-                    <div class="mb-2 w-full inline ">
-                        <label  for="teacher_id"
-                                class="block mb-1 text-sm font-bold text-gray-900">
-                                Nama Kelas
-                        </label>
-
+                    <div class="mb-2 w-full inline space-x-4 space-x-reverse">
                     <table class="w-full text-sm rounded text-left text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 text-gray-400">
+                        <thead class="text-xs text-gray-700 camelcase bg-gray-50 text-gray-400">
                             <tr>
-                                <th scope="col" class="px-4 px-3">
-                                    {{-- Kelas --}}
+                                <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
+                                    Nama Kelas
                                 </th>
+                                <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
+                                    Hari
+                                </th>
+
                                 <th scope="col" class="px-4 px-3">
 
                                 </th>
@@ -103,7 +101,6 @@
                                                 class="border border-gray-300 text-gray-900 text-sm rounded-lg ring-blue-500 border-blue-500 block
                                                 w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 font-semibold
                                                 ">
-                                            {{-- <option value="" class="text-center">Pilih Kelas</option> --}}
                                                 @forelse ($allClassroom as $classroom)
                                                     <option class="font-normal dark:border-gray-600  hover:font-bold gap-y-px border-gray-300 rounded-lg capitalize"
                                                             value="{{ $classroom->id }}">
@@ -116,22 +113,43 @@
                                                 @endforelse
                                         </select>
                                     </td>
+                                    <td class="px-4 py-4">
+
+                                        <select
+                                        id="teacher_id"
+                                        class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
+                                        w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
+                                        dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        @forelse (\App\Helpers\Weekday::WEEK_DAYS as $key => $value)
+                                            <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
+                                                    value="{{ $value }}">
+                                                    {{ $key }}
+                                            </option>
+                                        @empty
+                                            <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
+                                                Data Guru Belum Tersedia..
+                                            </option>
+                                        @endforelse
+                                    </select>
+
+                                    </td>
                                     <td class="item-right">
                                         <button href="#" wire:click.prevent="removeClassroom({{$index}})"
-                                                    class="inline-flex items-center mr-4 text-sm font-bold
+                                                    class=" w-full inline-flex items-center mr-4 text-sm font-bold m-auto px-8
                                                     text-center text-yellow-900">
-                                           Hapus
+                                           <span class="text-center">
+                                               Hapus
+                                           </span>
                                         </button>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-
                     <div>
                         <button wire:click.prevent="addClassroom"
                                 class="w-auto text-white bg-blue-700 hover:bg-blue-800
-                                mt-4
+                                m-4
                                 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium
                                 rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600
                                 hover:bg-blue-700 focus:ring-blue-800">
@@ -141,99 +159,27 @@
                     </div>
                     {{-- end multi select subject classroom --}}
 
-                    {{-- jadwal mata pelajaran --}}
-                    <div class="mb-6">
-                        <div class="grid md:grid-cols-3 md:gap-6">
-                            {{-- Pilihan hari Pelajaran --}}
-                            {{-- <div class="relative z-0 w-full mb-3 group">
-                                <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
-                                    Hari
-                                </label>
-                                <select wire:model="teacher_id"
-                                    id="teacher_id"
-                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
-                                    w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
-                                    dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="" class="text-center">Pilih Hari</option>
-                                    @forelse ($subject_weekday as $weekday)
-                                        <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
-                                                value="{{ $weekday->id }}">
-                                                {{ $weekday->name }}
-                                        </option>
-                                    @empty
-                                        <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
-                                            Data Guru Belum Tersedia..
-                                        </option>
-                                    @endforelse
-                                </select>
-                            </div> --}}
-                            {{-- end Pilihan  Hari Pelajaran--}}
-
-                             {{-- Pilihan Start Time --}}
-                             {{-- <div class="relative z-0 w-full mb-6 group">
-                                <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
-                                    Waktu Mulai
-                                </label>
-                                <select wire:model="teacher_id"
-                                    id="teacher_id"
-                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
-                                    w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
-                                    dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="" class="text-center">Pilih Jam</option>
-                                    @forelse ($subject_weekday as $weekday)
-                                        <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
-                                                value="{{ $weekday->id }}">
-                                                {{ $weekday->name }}
-                                        </option>
-                                    @empty
-                                        <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
-                                            Data Guru Belum Tersedia..
-                                        </option>
-                                    @endforelse
-                                </select>
-                            </div> --}}
-                            {{-- end Start Time  --}}
-
-                            {{-- Pilihan Start Time --}}
-                            {{-- <div class="relative z-0 w-full mb-6 group">
-                                <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
-                                    Waktu Mulai
-                                </label>
-                                <select wire:model="teacher_id"
-                                    id="teacher_id"
-                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
-                                    w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
-                                    dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="" class="text-center">Pilih Jam</option>
-                                    @forelse ($subject_weekday as $weekday)
-                                        <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
-                                                value="{{ $weekday->id }}">
-                                                {{ $weekday->name }}
-                                        </option>
-                                    @empty
-                                        <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
-                                            Data Guru Belum Tersedia..
-                                        </option>
-                                    @endforelse
-                                </select>
-                            </div> --}}
-                            {{-- end Start Time  --}}
-                          </div>
-                    </div>
-                    {{-- end jadwal mata pelajran --}}
               </div>
             </div>
 
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                <button wire:click.prevent="storeSubject()"
-                        type="button"
-                        class="inline-flex justify-center w-full rounded-md border border-transparent
+                <div>
+                    <button wire:click.prevent="storeSubject()"
+                    type="button"
+                    class="inline-flex justify-center w-full rounded-md border border-transparent
                         px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm
                         hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green
                         transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-                  Simpan
-                </button>
+              Simpan
+            </button>
+
+                    {{-- <input type="submit"  value="Simpan"
+                    class="inline-flex justify-center w-full rounded-md border border-transparent
+                        px-4 py-2 bg-green-600 text-base leading-6 font-medium text-white shadow-sm
+                        hover:bg-green-500 focus:outline-none focus:border-green-700 focus:shadow-outline-green
+                        transition ease-in-out duration-150 sm:text-sm sm:leading-5"> --}}
+                </div>
               </span>
               <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
 
@@ -253,5 +199,5 @@
         </div>
       </div>
 
-
+    {{-- </form> --}}
 </div>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Subject;
+use App\Models\{Subject,
+        User,
+    };
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
@@ -18,26 +20,26 @@ class SubjectController extends Controller
 
     public function create()
     {
-        //
+        return view('admin.subjects.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        // dd('testing');
+        $subject = Subject::create([
+            'code_subject'      => $request->code_subject,
+            'name'              => $request->name,
+            'teacher_id'        => $request->teacher_id
+        ]);
+
+
+        foreach ($request->classroomSubject as $classroom) {
+            $subject->classroomSubject()->attach($classroom['classroom_id']);
+        }
+
+        dd('berhasil ditambahkan..');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Subject  $subject
-     * @return \Illuminate\Http\Response
-     */
     public function show(Subject $subject)
     {
         //

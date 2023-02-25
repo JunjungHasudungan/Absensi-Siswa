@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->integer('weekday')->default(1);
         });
     }
 

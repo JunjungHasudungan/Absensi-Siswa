@@ -10,8 +10,9 @@ use App\Models\{
             Subject as Subjects,
             User,
             Classroom as Classrooms,
-            Weekday as Weekdays,
         };
+
+use App\Helpers\Weekday;
 
 class Subject extends Component
 {
@@ -32,9 +33,10 @@ class Subject extends Component
             $end_time,
             $search = '',
             $classrooms,
+            $classroom_id,
             $classroom_subject,
             $classroom_amount,
-            $weekday,
+            $weekdays,
             $subject_weekday;
 
     public  $is_create = false,
@@ -63,6 +65,7 @@ class Subject extends Component
         $this->allClassroom = Classrooms::all();
         $this->classroomSubject = ['classroom_id'  => ''];
         $this->teacher_id = User::where('role_id', 2)->get();
+        $this->weekdays = Weekday::WEEK_DAYS;
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
     }
 
@@ -73,7 +76,7 @@ class Subject extends Component
             $this->subjects = Subjects::with(['teacher', 'subjectWeekday', 'classroomSubject'])
                             ->where('name', 'like', $searchParam)
                             ->orwhere('code_subject', 'like', $searchParam)->get(),
-            $this->subject_weekday = Weekdays::all(),
+            $this->weekdays = Weekday::WEEK_DAYS,
             $this->teachers = User::where('role_id', 2)->get(),
             'subject_paginate'=> Subjects::paginate(5),
             $this->classrooms = Classrooms::all(),
@@ -89,7 +92,8 @@ class Subject extends Component
     protected $rules = [
         'code_subject'     =>  'required|string|max:30|min:3',
         'name'             =>  'required|string|max:25|min:4',
-        'teacher_id'       =>   'required|integer',
+        'teacher_id'       =>  'required|integer',
+        'classroom_id'     =>   'required|max:5'
     ];
 
 
@@ -164,25 +168,24 @@ class Subject extends Component
 
     public function storeSubject()
     {
+
         $this->validate([
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
-            'teacher_id'        => 'required'
+            'teacher_id'        => 'required',
         ],[
             'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
             'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
             'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
             'name.required'         => 'Nama Mata Pelajaran Wajib terisi..',
-            'teacher_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..'
+            'teacher_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..',
         ]);
 
         Subjects::create([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
-            'teacher_id'        => $this->teacher_id
+            'teacher_id'        => $this->teacher_id,
         ]);
-
-        // foreach()
 
         $this->closeCreateModal();
 
