@@ -72,36 +72,72 @@
                     {{-- end select teacher --}}
 
                     {{-- multi select subject classroom --}}
-                    <div class="mb-6">
-                        <label  for="teacher_id"
-                                class="block mb-2 text-sm font-bold text-gray-900">
-                                Pilih Kelas
-                        </label>
-                        <div class="flex justify-center items-center w-full bg-gray-300 rounded-lg p-2">
-                            <div class="inline-block justify-center">
 
-                                <div class="flex items-center mr-4">
-                                    @forelse ($classrooms as $classroom)
-                                        <input  id="inline-checkbox"
-                                        type="checkbox"
-                                        value=""
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500
-                                        dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700
-                                        dark:border-gray-600">
-                                        <label  for="inline-checkbox"
-                                                class="ml-2 text-sm font-bold text-gray-900 m-2">
-                                                    {{ $classroom->name }}
-                                        </label>
-                                    @empty
-                                        <div class="w-full border border-yellow-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
-                                            w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
-                                            dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <p class="w-full text-yellow-900 font-extrabold justify-center items-center">Kelas Belum Tersedia...</p>
-                                        </div>
-                                    @endforelse
-                                </div>
-                            </div>
-                        </div>
+
+
+
+                    <div class="mb-2 w-full inline ">
+                        <label  for="teacher_id"
+                                class="block mb-1 text-sm font-bold text-gray-900">
+                                Nama Kelas
+                        </label>
+
+                    <table class="w-full text-sm rounded text-left text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 text-gray-400">
+                            <tr>
+                                <th scope="col" class="px-4 px-3">
+                                    {{-- Kelas --}}
+                                </th>
+                                <th scope="col" class="px-4 px-3">
+
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($classroomSubject as $index => $classroom)
+                                <tr class="bg-white w-full">
+                                    <td class="px-4 py-4">
+                                        <select name="classroomSubject[{{$index}}][classroom_id]"
+                                                wire:model="classroomSubject.{{$index}}.classroom_id"
+                                                id="classroomSubject"
+                                                class="border border-gray-300 text-gray-900 text-sm rounded-lg ring-blue-500 border-blue-500 block
+                                                w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 font-semibold
+                                                ">
+                                            {{-- <option value="" class="text-center">Pilih Kelas</option> --}}
+                                                @forelse ($allClassroom as $classroom)
+                                                    <option class="font-normal dark:border-gray-600  hover:font-bold gap-y-px border-gray-300 rounded-lg capitalize"
+                                                            value="{{ $classroom->id }}">
+                                                            {{ $classroom->name }}
+                                                    </option>
+                                                @empty
+                                                    <option class="bg-yellow-400 font-bold capitalize">
+                                                        Data Kelas Belum Tersedia..
+                                                    </option>
+                                                @endforelse
+                                        </select>
+                                    </td>
+                                    <td class="item-right">
+                                        <button href="#" wire:click.prevent="removeClassroom({{$index}})"
+                                                    class="inline-flex items-center mr-4 text-sm font-bold
+                                                    text-center text-yellow-900">
+                                           Hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <button wire:click.prevent="addClassroom"
+                                class="w-auto text-white bg-blue-700 hover:bg-blue-800
+                                mt-4
+                                focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium
+                                rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600
+                                hover:bg-blue-700 focus:ring-blue-800">
+                                + Kelas
+                        </button>
+                    </div>
                     </div>
                     {{-- end multi select subject classroom --}}
 
@@ -109,7 +145,7 @@
                     <div class="mb-6">
                         <div class="grid md:grid-cols-3 md:gap-6">
                             {{-- Pilihan hari Pelajaran --}}
-                            <div class="relative z-0 w-full mb-3 group">
+                            {{-- <div class="relative z-0 w-full mb-3 group">
                                 <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
                                     Hari
                                 </label>
@@ -130,11 +166,11 @@
                                         </option>
                                     @endforelse
                                 </select>
-                            </div>
+                            </div> --}}
                             {{-- end Pilihan  Hari Pelajaran--}}
 
                              {{-- Pilihan Start Time --}}
-                             <div class="relative z-0 w-full mb-6 group">
+                             {{-- <div class="relative z-0 w-full mb-6 group">
                                 <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
                                     Waktu Mulai
                                 </label>
@@ -155,11 +191,11 @@
                                         </option>
                                     @endforelse
                                 </select>
-                            </div>
+                            </div> --}}
                             {{-- end Start Time  --}}
 
                             {{-- Pilihan Start Time --}}
-                            <div class="relative z-0 w-full mb-6 group">
+                            {{-- <div class="relative z-0 w-full mb-6 group">
                                 <label for="teacher_id" class="block mb-2 text-sm font-bold text-gray-900">
                                     Waktu Mulai
                                 </label>
@@ -180,7 +216,7 @@
                                         </option>
                                     @endforelse
                                 </select>
-                            </div>
+                            </div> --}}
                             {{-- end Start Time  --}}
                           </div>
                     </div>

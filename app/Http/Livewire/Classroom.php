@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User;
 use App\Models\{
     Classroom as Classrooms,
     User as Users,
+    Subject as Subjects,
 };
 use Livewire\WithPagination;
 

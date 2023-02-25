@@ -43,7 +43,7 @@
                     {{-- select teacher --}}
                     <div class="mb-6">
                         <label for="user_id" class="block mb-2 text-sm font-bold text-gray-900">
-                            Pilih Nama Guru
+                            Nama Guru
                         </label>
                         <select wire:model="user_id"
                                 id="user_id"

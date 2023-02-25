@@ -43,6 +43,9 @@ class Subject extends Component
             $page = 1,
             $is_detail = false;
 
+    public $allClassroom = [];
+    public $classroomSubject = []; // data array
+
     protected $paginationTheme = 'bootstrap';
 
     protected $queryString = [
@@ -57,8 +60,8 @@ class Subject extends Component
 
     public function mount()
     {
-        // $this->classroom = Classrooms::find($id);
-        // $classroom->classroomSubject()->pluck()
+        $this->allClassroom = Classrooms::all();
+        $this->classroomSubject = ['classroom_id'  => ''];
         $this->teacher_id = User::where('role_id', 2)->get();
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
     }
@@ -147,6 +150,18 @@ class Subject extends Component
         $this->openCreateModal();
     }
 
+    public function addClassroom()
+    {
+        $this->classroomSubject[] = ['classroom_id' => ''];
+    }
+
+    public function removeClassroom($index)
+    {
+        unset($this->classroomSubject[$index]);
+
+        $this->classroomSubject = array_values($this->classroomSubject);
+    }
+
     public function storeSubject()
     {
         $this->validate([
@@ -161,11 +176,13 @@ class Subject extends Component
             'teacher_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..'
         ]);
 
-        Subjects::updateOrCreate([
+        Subjects::create([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
             'teacher_id'        => $this->teacher_id
         ]);
+
+        // foreach()
 
         $this->closeCreateModal();
 
