@@ -97,8 +97,7 @@ class Classroom extends Component
             'name.required'                 => 'Nama Kelas Wajib di isi...',
             'name.unique'                   => 'Nama Kelas Sudah di gunakan...',
             'code_classroom.required'       => 'Kode Kelas Wajib di isi..',
-            'name'                          => 'required',
-            'user_id'                       => 'required'
+            'user_id.required'              => 'Wali Kelas Waib dipilih'
         ]);
 
         Classrooms::create([

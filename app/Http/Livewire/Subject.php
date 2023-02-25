@@ -152,13 +152,13 @@ class Subject extends Component
         $this->validate([
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
-            'teacher_id'        => 'required|integer'
+            'teacher_id'        => 'required'
         ],[
             'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
             'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
             'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
             'name.required'         => 'Nama Mata Pelajaran Wajib terisi..',
-            'teacher_id'            => 'Guru Mata Pelajaran Wajib dipilih..'
+            'teacher_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..'
         ]);
 
         Subjects::updateOrCreate([
