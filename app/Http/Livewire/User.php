@@ -6,8 +6,10 @@ use App\Models\{
     User as Users,
     Role as Roles,
     Classroom as Classrooms,
+    Subject as Subjects,
     };
 use Livewire\Component;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class User extends Component
@@ -22,8 +24,12 @@ class User extends Component
             $classroom,
             $classrooms,
             $home_teacher,
+            $home_teacher_name,
             $classroom_id,
             $amount_student,
+            $amount_subject_student,
+            $subject_teacher,
+            $subject_student,
             $nisn,
             $address,
             $password,
@@ -79,9 +85,13 @@ class User extends Component
         // Users
         $this->user = $user;
         $this->openModalDetail();
-        $this->classroom = $user->classroom->name ??  '';
+        $this->classroom = $user->classroom->name ??  ''; // classroom name
         $id_student_classroom = $user->classroom->user_id ?? '' ;
-        $id_classroom = $user->classroom->id;
+        $id_classroom = $user->classroom->id ?? ''; // id classroom user
+        $this->subject_student = $user->subjectUser ?? ''; // mata pelajaran siswa
+        $this->subject_teacher = $user->subjectTeacher; // mata pelajaran untuk guru
+        $this->home_teacher_name = $user->homeTeacher ?? ''; // nama wali kelas
+        $this->amount_subject_student = DB::table('classroom_subject')->where('classroom_id', $id_classroom)->count();
         $this->amount_student = Users::where('classroom_id', $id_classroom)->where('role_id', 3)->count();
         // $this->amount_student = count($user->classroom_id) ?? '';
         $this->name = $user->name;
@@ -90,7 +100,7 @@ class User extends Component
         $this->nisn = $user->nisn ?? '';
         $this->role = $user->role->name;
         $this->home_teacher = Users::find($id_student_classroom);
-        // dd($amount_student);
+        // dd($user->classroom);
     }
 
     public function closeModalDetail()

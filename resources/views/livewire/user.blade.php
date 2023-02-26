@@ -54,13 +54,13 @@
                     No
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Kode Mata Pelajaran
+                    Nama
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Nama Mata Pelajaran
+                    Jabatan
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Action
+
                 </th>
             </tr>
         </thead>
@@ -71,10 +71,10 @@
                         {{$loop->iteration}}
                     </th>
                     <td class="px-6 py-4">
-                        {{ $user['code_subject'] }}
+                        {{ $user['name'] }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $user['name'] }}
+                        {{ $user->role->name }}
                     </td>
                     <td class="px-6 py-4">
                         {{-- add button for edit and delete data classroom --}}

@@ -23,6 +23,6 @@ class Classroom extends Model
 
     public function subjectClassroom()
     {
-        return $this->belongsToMany(Subject::class);
+        return $this->belongsToMany(Subject::class)->withPivot(['subject_id', 'classroom_id']);
     }
 }

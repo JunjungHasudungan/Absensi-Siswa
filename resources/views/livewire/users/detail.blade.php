@@ -19,7 +19,7 @@
                    <div class="divide-y">
                         <div class="flex items-center  justify-center mb-2 ">
                             <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
-                                {{__('Data Diri')}}
+                                {{__('Biodata')}}
                             </h5>
                         </div>
                         <div class="flow-root ">
@@ -107,6 +107,17 @@
                                     <li class="py-3 sm:py-4">
                                         {{-- Kelas --}}
                                         <div class="flex items-center space-x-2">
+                                            @if ($user->role_id == 2)
+                                            <div class="flex-1 min-w-0 px-2">
+                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                    Wali Kelas
+                                                </p>
+                                            </div>
+                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                                    {{ $home_teacher_name->name }}
+                                                </div>
+                                            @endif
+
                                             @if ($user->role_id == 3)
                                                 <div class="flex-1 min-w-0 px-2">
                                                     <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
@@ -151,6 +162,80 @@
                         </div>
                         @endif
                         {{-- end Data Kelas --}}
+                        {{-- data Mata Pelajaran --}}
+                    @if ($user->role_id == 2 || $user->role_id == 3)
+                    <div class="divide-y">
+                        <div class="flex items-center  justify-center mb-2 ">
+                            <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
+                                {{__('Data Mata Pelajran')}}
+                            </h5>
+                        </div>
+                        <div class="flow-root ">
+                            <ul role="list" class="">
+                                <li class="py-3 sm:py-4">
+                                    {{-- Nama Mata Pelajaran --}}
+                                    <div class="flex items-center space-x-2">
+                                        {{-- mata pelajaran student --}}
+                                        @if ($user->role_id == 3)
+                                            <div class="flex-1 min-w-0 px-2">
+                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                    Nama Mata Pelajaran
+                                                </p>
+                                            </div>
+                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                                    @forelse ($subject_student as $subject)
+                                                        <p class="text-sm font-medium inline-block lowercase text-gray-900 truncate dark:text-white">
+                                                            {{$subject->name}}
+                                                        </p>
+                                                    @empty
+                                                        <div class="justify-center items-left text-base font-medium text-yellow-400">
+                                                            {{ __('Mata Pelajaran Belum ada..') }}
+                                                        </div>
+                                                    @endforelse
+                                                </div>
+                                        @endif
+                                        {{-- end mata pelajaran student --}}
+
+                                        @if ($user->role_id == 2)
+                                        <div class="flex-1 min-w-0 px-2">
+                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                Nama Mata Pelajaran
+                                            </p>
+                                        </div>
+                                            <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                                @forelse ($subject_teacher as $subject)
+                                                    <p class="text-sm font-medium inline-block lowercase text-gray-900 truncate dark:text-white">
+                                                        {{$subject->name}}
+                                                    </p>
+                                                @empty
+                                                    <div class="justify-center items-left text-base font-medium text-yellow-400">
+                                                        {{ __('Mata Pelajaran Belum ada..') }}
+                                                    </div>
+                                                @endforelse
+                                            </div>
+                                        @endif
+                                    </div>
+                                    {{-- end Nama Mata Pelajaran --}}
+                                    {{-- Jumlah Mata Pelajaran --}}
+                                    <div class="flex items-center space-x-2">
+                                        @if ($user->role_id == 3)
+                                            <div class="flex-1 min-w-0 px-2">
+                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                   Jumlah Pelajaran
+                                                </p>
+                                            </div>
+                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                                    {{ $amount_subject_student }}
+                                                </div>
+                                        @endif
+                                    </div>
+                                    {{-- end Jumlah Mata Pelajaran --}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    @endif
+                    {{-- end Data Mata Pelajaran --}}
                    {{-- button --}}
                     <div class="divide-y">
                        <div class=" px-4 py-3 item-center justify-center w-full sm:px-6 sm:flex sm:flex-row-reverse">
