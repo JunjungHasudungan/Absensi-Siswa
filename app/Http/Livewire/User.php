@@ -16,13 +16,18 @@ class User extends Component
     public  $name,
             $email,
             $roles,
+            $role,
             $role_id,
             $id_role,
+            $classroom,
             $classrooms,
+            $home_teacher,
             $classroom_id,
+            $amount_student,
             $nisn,
             $address,
             $password,
+            $user,
             $users,
             $user_classroom,
             $is_student,
@@ -39,7 +44,7 @@ class User extends Component
             $this->users = Users::all(),
             // $this->users = Users::with('role')->where('role_id', 3)->get(),
             $this->roles = Roles::all(),
-            $this->users = Users::with(['role', 'classroom'])->get(),
+            $this->users = Users::with(['role', 'classroom', 'homeTeacher', 'subjectUser'])->get(),
             $this->classrooms = Classrooms::all(),
             $this->is_teacher = Users::where('role_id', 2)->get(),
 
@@ -71,9 +76,21 @@ class User extends Component
 
     public function detailUser(Users $user)
     {
+        // Users
+        $this->user = $user;
         $this->openModalDetail();
-
-        dd($user);
+        $this->classroom = $user->classroom->name ??  '';
+        $id_student_classroom = $user->classroom->user_id ?? '' ;
+        $id_classroom = $user->classroom->id;
+        $this->amount_student = Users::where('classroom_id', $id_classroom)->where('role_id', 3)->count();
+        // $this->amount_student = count($user->classroom_id) ?? '';
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->address = $user->address;
+        $this->nisn = $user->nisn ?? '';
+        $this->role = $user->role->name;
+        $this->home_teacher = Users::find($id_student_classroom);
+        // dd($amount_student);
     }
 
     public function closeModalDetail()
@@ -110,6 +127,8 @@ class User extends Component
     public function createUser()
     {
         $this->openModalCreate();
+
+        $this->resetField();
     }
 
     public function storeUser()

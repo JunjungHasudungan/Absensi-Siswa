@@ -34,6 +34,10 @@
                 @if ($is_create)
                     @include('livewire.users.create')
                 @endif
+
+                @if ($is_detail)
+                    @include('livewire.users.detail')
+                @endif
             {{-- search --}}
                 @if (!$is_search)
                     @include('livewire.users.search-user')

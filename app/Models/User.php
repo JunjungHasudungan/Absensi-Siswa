@@ -67,13 +67,19 @@ class User extends Authenticatable
         return $this->belongsTo(Classroom::class);
     }
 
+    public function subjectUser()
+    {
+        return $this->belongsToMany(Subject::class);
+    }
+
+    public function homeTeacher()
+    {
+        return $this->hasOne(Classroom::class);
+    }
+
     public function getIsStudentAttribute()
     {
         return $this->role()->where('id', 3)->exists();
     }
 
-    // public function student()
-    // {
-    //     return $this->belongsTo(Role::class, 'classroom_id');
-    // }
 }
