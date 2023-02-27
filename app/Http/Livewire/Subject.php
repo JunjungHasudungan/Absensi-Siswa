@@ -26,6 +26,7 @@ class Subject extends Component
             $name,
             $code_subject,
             $teachers,
+            $subject_teacher,
             $teacher_id,
             $teacher_name,
             $teacher_email,
@@ -93,7 +94,7 @@ class Subject extends Component
         'code_subject'     =>  'required|string|max:30|min:3',
         'name'             =>  'required|string|max:25|min:4',
         'teacher_id'       =>  'required|integer',
-        'classroom_id'     =>   'required|max:5'
+        // 'classroom_id'     =>   'required|max:5'
     ];
 
 
@@ -196,19 +197,16 @@ class Subject extends Component
         ]);
     }
 
-    public function editSubject($id)
+    public function editSubject($id_subject)
     {
         $this->openEditModal();
 
-        $subject = Subjects::find($id);
-        $teachers = User::where('role_id', 2)->orderBy('name', 'asc')->get();
+        $subject = Subjects::find($id_subject);
 
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
         $this->teacher_id = $subject->teacher_id;
         $this->id_subject = $subject->id;
-
-        // $this->dispatchBrowserEvent('successStoredSubject');
     }
 
     public function updateSubject($id_subject)
@@ -223,7 +221,7 @@ class Subject extends Component
             'teacher_id'        => $this->teacher_id
         ]);
 
-        $subject->update();
+        // dd($subject);
 
         $this->closeEditModal();
 
