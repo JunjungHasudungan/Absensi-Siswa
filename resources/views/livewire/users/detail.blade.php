@@ -25,6 +25,18 @@
                         <div class="flow-root ">
                             <ul role="list" class="">
                                 <li class="py-3 sm:py-4">
+                                    {{-- nama --}}
+                                    <div class="flex items-center space-x-2">
+                                        <div class="flex-1 min-w-0 px-2">
+                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                Nama
+                                            </p>
+                                        </div>
+                                            <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                                {{ $user->name }}
+                                            </div>
+                                    </div>
+                                    {{-- end nama --}}
                                     {{-- jabatan --}}
                                     <div class="flex items-center space-x-2">
                                         <div class="flex-1 min-w-0 px-2">
@@ -110,12 +122,18 @@
                                             @if ($user->role_id == 2)
                                             <div class="flex-1 min-w-0 px-2">
                                                 <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                    Wali Kelas
+                                                    Kelas
                                                 </p>
                                             </div>
-                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                    {{ $home_teacher_name->name }}
-                                                </div>
+                                                @if ($home_teacher_name == '')
+                                                    <div class="justify-center items-left text-base font-medium text-yellow-400">
+                                                        {{ __('Belum jadi wali kelas..') }}
+                                                    </div>
+                                                @else
+                                                    <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                                        {{ $home_teacher_name->name }}
+                                                    </div>
+                                                @endif
                                             @endif
 
                                             @if ($user->role_id == 3)
@@ -156,6 +174,18 @@
                                                     </div>
                                         </div>
                                         {{-- end Jumlah Siswa --}}
+                                         {{-- Jumlah MaPel Kelas --}}
+                                         <div class="flex items-center space-x-2">
+                                            <div class="flex-1 min-w-0 px-2">
+                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                    Jumlah Mapel
+                                                </p>
+                                            </div>
+                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                                    {{ $amount_subject_classroom }}
+                                                </div>
+                                    </div>
+                                    {{-- end Jumlah Mapel Kelas --}}
                                     </li>
                                 </ul>
                             </div>
@@ -167,7 +197,10 @@
                     <div class="divide-y">
                         <div class="flex items-center  justify-center mb-2 ">
                             <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
-                                {{__('Data Mata Pelajran')}}
+                                {{__('Data Mapel')}}
+                                <span class="capitalize">
+                                    {{$role}}
+                                </span>
                             </h5>
                         </div>
                         <div class="flow-root ">
@@ -221,7 +254,7 @@
                                         @if ($user->role_id == 3)
                                             <div class="flex-1 min-w-0 px-2">
                                                 <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                   Jumlah Pelajaran
+                                                   Jumlah Mapel
                                                 </p>
                                             </div>
                                                 <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">

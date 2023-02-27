@@ -38,7 +38,7 @@ class Classroom extends Component
 
     // create rules
     protected $rules  = [
-        'name'              => 'required|string|max:20|min:2',
+        'name'              => 'required|string|max:20',
         'code_classroom'    => 'required|string|max:20|min:2',
         'user_id'           => 'required|integer'
     ];
@@ -73,7 +73,7 @@ class Classroom extends Component
 
         return view('livewire.classroom', [
 
-            $this->classrooms = Classrooms::with(['students'])
+            $this->classrooms = Classrooms::with(['students', 'homeTeacher'])
                                 ->where('name', 'LIKE', $searchParam)
                                 ->orWhere('code_classroom', 'LIKE', $searchParam)->get(),
 
@@ -151,21 +151,23 @@ class Classroom extends Component
         return $this->is_search = false;
     }
 
-    public function editClassroom(Classrooms $classroom)
+    public function editClassroom($id)
     {
+        $classroom = Classrooms::find($id);
+
         $this->openModalEdit();
 
         $this->id_classroom = $classroom->id;
         $this->code_classroom  = $classroom->code_classroom;
         $this->name = $classroom->name;
         $this->user_id = $classroom->user_id;
-
     }
 
     public function updateClassroom($id_classroom)
     {
         $classroom = Classrooms::find($id_classroom);
 
+        // $home_teacher = $classroom->homeTeacher;
         $this->validate();
 
         $classroom->update([
@@ -173,7 +175,7 @@ class Classroom extends Component
             'name'              => $this->name,
             'user_id'           => $this->user_id,
         ]);
-        // dd('update berhasil');
+        // dd($classroom);
         $this->closeModalEdit();
 
         $this->resetFieldModal();

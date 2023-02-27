@@ -27,6 +27,7 @@ class User extends Component
             $home_teacher_name,
             $classroom_id,
             $amount_student,
+            $amount_subject_classroom,
             $amount_subject_student,
             $subject_teacher,
             $subject_student,
@@ -91,9 +92,9 @@ class User extends Component
         $this->subject_student = $user->subjectUser ?? ''; // mata pelajaran siswa
         $this->subject_teacher = $user->subjectTeacher; // mata pelajaran untuk guru
         $this->home_teacher_name = $user->homeTeacher ?? ''; // nama wali kelas
-        $this->amount_subject_student = DB::table('classroom_subject')->where('classroom_id', $id_classroom)->count();
+        $this->amount_subject_classroom = DB::table('classroom_subject')->where('classroom_id', $id_classroom)->count();
         $this->amount_student = Users::where('classroom_id', $id_classroom)->where('role_id', 3)->count();
-        // $this->amount_student = count($user->classroom_id) ?? '';
+        $this->amount_subject_student = count($user->subjectUser) ?? '';
         $this->name = $user->name;
         $this->email = $user->email;
         $this->address = $user->address;
