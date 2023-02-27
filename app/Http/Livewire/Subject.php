@@ -27,7 +27,7 @@ class Subject extends Component
             $code_subject,
             $teachers,
             $subject_teacher,
-            $teacher_id,
+            $user_id,
             $teacher_name,
             $teacher_email,
             $start_time,
@@ -65,7 +65,7 @@ class Subject extends Component
     {
         $this->allClassroom = Classrooms::all();
         $this->classroomSubject = ['classroom_id'  => ''];
-        $this->teacher_id = User::where('role_id', 2)->get();
+        $this->user_id = User::where('role_id', 2)->get();
         $this->weekdays = Weekday::WEEK_DAYS;
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
     }
@@ -93,7 +93,7 @@ class Subject extends Component
     protected $rules = [
         'code_subject'     =>  'required|string|max:30|min:3',
         'name'             =>  'required|string|max:25|min:4',
-        'teacher_id'       =>  'required|integer',
+        'user_id'       =>  'required|integer',
         // 'classroom_id'     =>   'required|max:5'
     ];
 
@@ -144,7 +144,7 @@ class Subject extends Component
         $this->code_subject = '';
         $this->name = '';
         $this->id_subject = '';
-        $this->teacher_id = '';
+        $this->user_id = '';
     }
 
     // function for create new data subject
@@ -173,19 +173,19 @@ class Subject extends Component
         $this->validate([
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
-            'teacher_id'        => 'required',
+            'user_id'        => 'required',
         ],[
             'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
             'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
             'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
             'name.required'         => 'Nama Mata Pelajaran Wajib terisi..',
-            'teacher_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..',
+            'user_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..',
         ]);
 
         Subjects::create([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
-            'teacher_id'        => $this->teacher_id,
+            'user_id'           => $this->user_id,
         ]);
 
         $this->closeCreateModal();
@@ -205,7 +205,7 @@ class Subject extends Component
 
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
-        $this->teacher_id = $subject->teacher_id;
+        $this->user_id = $subject->user_id;
         $this->id_subject = $subject->id;
     }
 
@@ -218,7 +218,7 @@ class Subject extends Component
         $subject->update([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
-            'teacher_id'        => $this->teacher_id
+            'user_id'        => $this->user_id
         ]);
 
         // dd($subject);

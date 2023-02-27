@@ -74,7 +74,7 @@ class User extends Authenticatable
 
     public function subjectTeacher()
     {
-        return $this->hasMany(Subject::class, 'teacher_id');
+        return $this->hasMany(Subject::class, 'user_id');
     }
 
     public function homeTeacher()

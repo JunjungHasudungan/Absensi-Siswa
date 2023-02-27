@@ -142,9 +142,16 @@
                                                         Kelas
                                                     </p>
                                                 </div>
+                                                @isset($classroom)
                                                     <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
                                                         {{ $classroom }}
                                                     </div>
+                                                @endisset
+                                                @empty($classroom)
+                                                    <div class="justify-center items-left text-base font-medium text-yellow-400">
+                                                        {{ __('Belum Masuk kelas..') }}
+                                                    </div>
+                                                @endempty
                                             @endif
                                         </div>
                                         {{-- end Kelas --}}
@@ -156,9 +163,16 @@
                                                         Wali Kelas
                                                     </p>
                                                 </div>
+                                                @isset($home_teacher)
                                                     <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
                                                         {{ $home_teacher->name }}
                                                     </div>
+                                                @endisset
+                                                @empty($home_teacher)
+                                                    <div class="justify-center items-left text-base font-medium text-yellow-400">
+                                                        {{ __('Belum Terdaftar dalam kelas..') }}
+                                                    </div>
+                                                @endempty
                                             @endif
                                         </div>
                                         {{-- end WaliKelas --}}

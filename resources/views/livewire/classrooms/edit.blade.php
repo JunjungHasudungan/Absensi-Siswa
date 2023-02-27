@@ -46,7 +46,7 @@
                         <select
                                 wire:model="user_id"
                                 class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                {{-- <option value="">-- Pilih Nama Guru --</option> --}}
+                                <option value="">-- Pilih Nama Guru --</option>
                                 @forelse ($teachers as $teacher)
                                 <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
                                         value="{{ $teacher->id }}" > {{ $teacher['name'] }} </option>

@@ -21,6 +21,7 @@ class User extends Component
             $role,
             $role_id,
             $id_role,
+            $id_user,
             $classroom,
             $classrooms,
             $home_teacher,
@@ -56,8 +57,21 @@ class User extends Component
             $this->is_teacher = Users::where('role_id', 2)->get(),
 
         ]);
-        // dd($this->users);
     }
+
+    public $rules = [
+        'name'              => 'required',
+        'email'             => 'required',
+        'password'          => 'required',
+        'role_id'           => 'required',
+        'classroom_id'      => 'nullable',
+        'nisn'              => 'nullable',
+        'address'           => 'nullable'
+    ];
+
+    protected $listeners = [
+        'deleteClassroom',
+    ];
 
     public function closeModalCreate()
     {
@@ -144,30 +158,29 @@ class User extends Component
 
     public function storeUser()
     {
+        $user = new Users();
+        $id_classroom = $user->classroom_id;
+
         $this->validate([
             'name'                  => 'required|string|max:25|min:3',
             'email'                 => 'required',
             'password'              => 'required',
-            'role_id'               => 'required|integer',
-            'classroom_id'          => 'nullable',
-            'nisn'                  => 'nullable|max:25|min:3',
-            'address'               => 'nullable|max:25|min:3',
+            'role_id'               => 'required',
         ],[
             'name'                  => 'Nama Wajib di isi..',
             'email'                 => 'Email Wajib di isi..',
             'password'              => 'Password Wajib disi',
-            'role_id.required'      => 'Jabatan wajib dipilih..'
+            'role_id.required'      => 'Jabatan wajib dipilih..',
         ]);
+        $classroom_id = $this->classroom_id ? $this->classroom_id : $id_classroom;
 
-        Users::create([
-            'name'          => $this->name,
-            'email'         => $this->email,
-            'password'      => Hash::make($this->password),
-            'role_id'       => $this->role_id,
-            'classroom_id'  =>$this->classroom_id,
-            'nisn'          => $this->nisn,
-            'address'       => $this->address
-        ]);
+            Users::create([
+                'name'          => $this->name,
+                'email'         => $this->email,
+                'password'      => Hash::make($this->password),
+                'role_id'       => $this->role_id,
+                'classroom_id'  =>  $classroom_id,
+            ]);
 
         $this->closeModalCreate();
 
@@ -176,6 +189,24 @@ class User extends Component
         $this->dispatchBrowserEvent('toastr:info', [
             'message'   => 'Data Berhasil ditambahkan...'
         ]);
-        // dd('Berhasil..');
+    }
+
+    public function deleteConfirmation($id)
+    {
+        $this->id_user = $id;
+
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type'  => 'warning',
+            'title' => 'Are You sure to delete?',
+            'text'  => '',
+            'id'    => $id
+        ]);
+    }
+
+    public function deleteClassroom(Users $user)
+    {
+        $user->delete();
+
+        $this->dispatchBrowserEvent('subjectDeleted');
     }
 }

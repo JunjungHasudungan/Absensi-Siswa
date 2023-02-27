@@ -16,7 +16,7 @@ class Subject extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function subjectWeekday()

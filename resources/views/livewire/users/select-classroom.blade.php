@@ -19,7 +19,5 @@
             </option>
         @endforelse
     </select>
-        @error('classroom_id')
-                <p class="text-sm text-red-600">{{ $message }}</p>
-        @enderror
+    @error('classroom_id') <span class="text-red-500">{{ $message }}</span>@enderror
 </div>
