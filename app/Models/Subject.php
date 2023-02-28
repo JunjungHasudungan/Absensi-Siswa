@@ -26,7 +26,7 @@ class Subject extends Model
 
     public function classroomSubject()
     {
-        return $this->belongsTo(Classroom::class, 'classroom_id');
+        return $this->belongsToMany(Classroom::class);
     }
 
 }

@@ -15,7 +15,7 @@
 
                 {{-- card --}}
                 <div class="w-full p-4 bg-white  border border-gray-200 rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
-                   {{-- guru mata pelajaran --}}
+                   {{-- mata pelajaran --}}
                    <div class="divide-y">
                     <div class="flex items-center  justify-center mb-2 ">
                         <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
@@ -41,12 +41,12 @@
                                     <div class="flex items-center space-x-2">
                                         <div class="flex-1 min-w-0 px-2">
                                             <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Kelas
+                                                Guru
                                             </p>
                                         </div>
 
                                         <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                            {{ $classroom_subject->name }}
+                                            {{ $teacher_name }}
                                         </div>
                                     </div>
                                     {{-- end kelas --}}
@@ -54,7 +54,59 @@
                             </ul>
                         </div>
                     </div>
-                    {{-- end guru mata pelajaran --}}
+                    {{-- end mata pelajaran --}}
+                    {{-- Kelas --}}
+                   <div class="divide-y">
+                    <div class="flex items-center  justify-center mb-2 ">
+                        <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
+                            {{__('Data Kelas')}}
+                        </h5>
+                    </div>
+                        {{-- table --}}
+                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">
+                                            Nama Kelas
+                                        </th>
+                                        <th scope="col" class="px-6 py-3">
+                                            Hari
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                            @forelse ($classroom_subject as $classroom)
+                                            <ul class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                               <li>
+                                                    {{ $classroom->name }}
+                                                </li>
+                                            </ul>
+                                            @empty
+                                            <span class="font-bold text-yellow-400">{{ __('Data Kelas Belum ada..')}} </span>
+                                            @endforelse
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            @forelse ($table_pivot as $key => $item)
+                                                <ul class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                                    <li>
+                                                        {{ $item->weekday }}
+                                                    </li>
+                                                </ul>
+
+                                            @empty
+
+                                            @endforelse
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {{-- end table --}}
+                    </div>
+                    {{-- end Kelas --}}
 
 
                    {{-- button --}}

@@ -12,6 +12,7 @@ use App\Models\{
             Classroom as Classrooms,
         };
 
+use Illuminate\Support\Facades\DB;
 use App\Helpers\Weekday;
 
 class Subject extends Component
@@ -38,7 +39,8 @@ class Subject extends Component
             $classroom_subject,
             $classroom_amount,
             $weekdays,
-            $subject_weekday;
+            $subject_weekday,
+            $table_pivot;
 
     public  $is_create = false,
             $is_edit = false,
@@ -182,11 +184,13 @@ class Subject extends Component
             'user_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..',
         ]);
 
-        Subjects::create([
+        $subject = Subjects::create([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
             'user_id'           => $this->user_id,
         ]);
+
+        dd($subject);
 
         $this->closeCreateModal();
 
@@ -246,13 +250,15 @@ class Subject extends Component
     public function detailSubject(Subjects $subject)
     {
         $this->openDetailModal();
-
         $this->name = $subject->name;
         $this->teacher_name = $subject->teacher->name;
         $this->teacher_email = $subject->teacher->email;
         $this->subject_weekday = $subject->subjectWeekday;
         $this->classroom_amount = count($subject->classroomSubject);
         $this->classroom_subject = $subject->classroomSubject;
+        $this->table_pivot = DB::table('classroom_subject')->where('subject_id', $subject->id)
+                                        ->orderBy('weekday', 'asc')->get();
+        // dd($this->table_pivot);
     }
 
     public function deleteClassroom(Subjects $subject)

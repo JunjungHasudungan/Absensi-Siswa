@@ -171,9 +171,6 @@ class User extends Component
 
     public function storeUser()
     {
-        $user = new Users();
-        $id_classroom = $user->classroom_id;
-
         $this->validate([
             'name'                  => 'required|string|max:25|min:3',
             'email'                 => 'required',
@@ -192,6 +189,9 @@ class User extends Component
             'classroom_id.required' => 'Kelas wajib dipilih..',
             'role_id.required'      => 'Jabatan wajib dipilih..',
         ]);
+
+            $user = new Users();
+            $id_classroom = $user->classroom_id;
 
             Users::create([
                 'name'          => $this->name,

@@ -18,8 +18,6 @@ return new class extends Migration
     {
         Schema::table('subjects', function (Blueprint $table) {
             $table->foreignIdFor(User::class);
-            $table->foreignIdFor(Classroom::class);
-            $table->integer('weekday')->default(1);
         });
     }
 
