@@ -69,7 +69,7 @@
                             @endforelse
                         </select>
                             @error('user_id')
-                            <span class="text-red-500">{{ $message }}</span>
+                                <span class="text-red-500">{{ $message }}</span>
                             @enderror
                     </div>
                     {{-- end select teacher --}}
@@ -92,15 +92,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($classroomSubject as $index => $classroom)
+                            @foreach ($subject_classrooms as $index => $classroom)
                                 <tr class="bg-white w-full">
                                     <td class="px-4 py-4">
-                                        <select name="classroomSubject[{{$index}}][classroom_id]"
-                                                wire:model="classroomSubject.{{$index}}.classroom_id"
+                                        <select name="subject_classrooms[{{$index}}][classroom_id]"
+                                                wire:model="subject_classrooms.{{$index}}.classroom_id"
                                                 id="classroomSubject"
                                                 class="border border-gray-300 text-gray-900 text-sm rounded-lg ring-blue-500 border-blue-500 block
                                                 w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 font-semibold
                                                 ">
+                                                <option value="">-- Pilih Kelas --</option>
                                                 @forelse ($allClassroom as $classroom)
                                                     <option class="font-normal dark:border-gray-600  hover:font-bold gap-y-px border-gray-300 rounded-lg capitalize"
                                                             value="{{ $classroom->id }}">
@@ -112,18 +113,25 @@
                                                     </option>
                                                 @endforelse
                                         </select>
+                                        @error('classroom_id')
+                                            <span class="text-red-500">{{ $message }}</span>
+                                        @enderror
                                     </td>
-                                    <td class="px-4 py-4">
+                                    {{-- <td class="px-4 py-4">
 
                                         <select
-                                        id="teacher_id"
+                                        id="weekday"
+                                        name="subject_classrooms.[{{$index}}].['weekday']"
+                                        wire="subject_classrooms.{{$index}}.weekday"
                                         class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
                                         w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
                                         dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                        <option value="">-- Pilih Hari --</option>
                                         @forelse (\App\Helpers\Weekday::WEEK_DAYS as $key => $value)
                                             <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
-                                                    value="{{ $value }}">
-                                                    {{ $key }}
+                                                    value="{{ $key }}">
+                                                    {{ $value }}
                                             </option>
                                         @empty
                                             <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
@@ -132,7 +140,7 @@
                                         @endforelse
                                     </select>
 
-                                    </td>
+                                    </td> --}}
                                     <td class="item-right">
                                         <button href="#" wire:click.prevent="removeClassroom({{$index}})"
                                                     class=" w-full inline-flex items-center mr-4 text-sm font-bold m-auto px-8

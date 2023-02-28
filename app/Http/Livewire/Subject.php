@@ -10,10 +10,11 @@ use App\Models\{
             Subject as Subjects,
             User,
             Classroom as Classrooms,
+            ClassroomSubject as ClassroomSubjects,
         };
-
 use Illuminate\Support\Facades\DB;
-use App\Helpers\Weekday;
+// use App\Helpers\Weekday;
+use App\Enums\Weekday as EnumWeekday;
 
 class Subject extends Component
 {
@@ -35,6 +36,7 @@ class Subject extends Component
             $end_time,
             $search = '',
             $classrooms,
+            $enum_weekdays,
             $classroom_id,
             $classroom_subject,
             $classroom_amount,
@@ -49,7 +51,7 @@ class Subject extends Component
             $is_detail = false;
 
     public $allClassroom = [];
-    public $classroomSubject = []; // data array
+    public $subject_classrooms = []; // data array
 
     protected $paginationTheme = 'bootstrap';
 
@@ -66,9 +68,8 @@ class Subject extends Component
     public function mount()
     {
         $this->allClassroom = Classrooms::all();
-        $this->classroomSubject = ['classroom_id'  => ''];
+        $this->subject_classrooms = ['classroom_id'  => ''];
         $this->user_id = User::where('role_id', 2)->get();
-        $this->weekdays = Weekday::WEEK_DAYS;
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
     }
 
@@ -79,11 +80,11 @@ class Subject extends Component
             $this->subjects = Subjects::with(['teacher', 'subjectWeekday', 'classroomSubject'])
                             ->where('name', 'like', $searchParam)
                             ->orwhere('code_subject', 'like', $searchParam)->get(),
-            $this->weekdays = Weekday::WEEK_DAYS,
             $this->teachers = User::where('role_id', 2)->get(),
             'subject_paginate'=> Subjects::paginate(5),
             $this->classrooms = Classrooms::all(),
         ]);
+        info($this->subject_classrooms);
     }
 
     // cretate emit listener
@@ -95,8 +96,9 @@ class Subject extends Component
     protected $rules = [
         'code_subject'     =>  'required|string|max:30|min:3',
         'name'             =>  'required|string|max:25|min:4',
-        'user_id'       =>  'required|integer',
-        // 'classroom_id'     =>   'required|max:5'
+        'user_id'          =>  'required|integer',
+        'classroom_id'     =>   'required',
+        // 'weekday'          => 'required'
     ];
 
 
@@ -159,19 +161,18 @@ class Subject extends Component
 
     public function addClassroom()
     {
-        $this->classroomSubject[] = ['classroom_id' => ''];
+        $this->subject_classrooms[] = ['classroom_id' => ''];
     }
 
     public function removeClassroom($index)
     {
-        unset($this->classroomSubject[$index]);
+        unset($this->subject_classrooms[$index]);
 
-        $this->classroomSubject = array_values($this->classroomSubject);
+        $this->subject_classrooms = array_values($this->subject_classrooms);
     }
 
     public function storeSubject()
     {
-
         $this->validate([
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
@@ -189,8 +190,10 @@ class Subject extends Component
             'name'              => $this->name,
             'user_id'           => $this->user_id,
         ]);
-
-        dd($subject);
+        foreach ($this->subject_classrooms as $classroom) {
+            $subject->classroomSubject()->attach($classroom['classroom_id']);
+        }
+        // $subject->
 
         $this->closeCreateModal();
 
@@ -256,9 +259,6 @@ class Subject extends Component
         $this->subject_weekday = $subject->subjectWeekday;
         $this->classroom_amount = count($subject->classroomSubject);
         $this->classroom_subject = $subject->classroomSubject;
-        $this->table_pivot = DB::table('classroom_subject')->where('subject_id', $subject->id)
-                                        ->orderBy('weekday', 'asc')->get();
-        // dd($this->table_pivot);
     }
 
     public function deleteClassroom(Subjects $subject)

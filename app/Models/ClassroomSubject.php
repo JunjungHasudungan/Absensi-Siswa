@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Helpers\Weekday;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Enums\Weekday as WeekdayEnum;
 
 class ClassroomSubject extends Model
 {
@@ -12,30 +12,13 @@ class ClassroomSubject extends Model
 
     protected $table = 'classroom_subject';
 
-    protected $guarded = [];
+    // protected $guarded = [];
 
-    public function getIsSeninAttribute()
-    {
-        return $this->weekday === Weekday::WEEK_DAYS['senin'];
-    }
+    protected $fillable = [
+        'classroom_id', 'subject_id', 'weekday'
+    ];
 
-    public function getIsSelasaAttribute()
-    {
-        return $this->weekday === Weekday::WEEK_DAYS['selasa'];
-    }
-
-    public function getIsRabuAttribute()
-    {
-        return $this->weekday === Weekday::WEEK_DAYS['rabu'];
-    }
-
-    public function getIsKamisAttribute()
-    {
-        return $this->weekday === Weekday::WEEK_DAYS['kamis'];
-    }
-
-    public function getIsJumatAttribute()
-    {
-        return $this->weekday === Weekday::WEEK_DAYS['jumat'];
-    }
+    // protected $casts  = [
+    //     'weekday'   => WeekdayEnum::class
+    // ];
 }

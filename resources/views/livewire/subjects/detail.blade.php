@@ -70,9 +70,6 @@
                                         <th scope="col" class="px-6 py-3">
                                             Nama Kelas
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            Hari
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -85,19 +82,7 @@
                                                 </li>
                                             </ul>
                                             @empty
-                                            <span class="font-bold text-yellow-400">{{ __('Data Kelas Belum ada..')}} </span>
-                                            @endforelse
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            @forelse ($table_pivot as $key => $item)
-                                                <ul class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
-                                                    <li>
-                                                        {{ $item->weekday }}
-                                                    </li>
-                                                </ul>
-
-                                            @empty
-
+                                            <span class="font-bold text-yellow-400">{{ __('Data Kelas Belum dipilih..')}} </span>
                                             @endforelse
                                         </td>
                                     </tr>
