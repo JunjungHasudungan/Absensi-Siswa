@@ -17,77 +17,45 @@
                 <div class="w-full p-4 bg-white  border border-gray-200 rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
                    {{-- guru mata pelajaran --}}
                    <div class="divide-y">
-                        <div class="flex items-center  justify-between mb-2 ">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Guru Mata Pelajaran</h5>
-                            <p class="text-sm font-medium text-blue-600 dark:text-white">
-                                Jumlah Kelas
-                            </p>
-                        </div>
+                    <div class="flex items-center  justify-center mb-2 ">
+                        <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
+                            {{__('Data Mata Pelajaran')}}
+                        </h5>
+                    </div>
                         <div class="flow-root divide-y">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 <li class="py-3 sm:py-4">
+                                    {{-- nama --}}
                                     <div class="flex items-center space-x-2">
                                         <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                {{ $teacher_name }}
-                                            </p>
-                                            <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                                {{ $name }}
+                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                Nama
                                             </p>
                                         </div>
-                                        <div class="justify-center items-center text-base font-semibold text-gray-900 dark:text-white">
-                                            {{ $classroom_amount ?? 'Kelas Belum Tersedia..'}}
+                                            <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                                {{ $name }}
+                                            </div>
+                                    </div>
+                                    {{-- end nama --}}
+                                    {{-- kelas --}}
+                                    <div class="flex items-center space-x-2">
+                                        <div class="flex-1 min-w-0 px-2">
+                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                Kelas
+                                            </p>
+                                        </div>
+
+                                        <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                            {{ $classroom_subject->name }}
                                         </div>
                                     </div>
+                                    {{-- end kelas --}}
                                 </li>
                             </ul>
                         </div>
                     </div>
                     {{-- end guru mata pelajaran --}}
 
-                    {{-- Kelas --}}
-                    <div class="divide-y">
-                        <div class="flex items-center justify-between mb-4">
-                            <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Kelas</h5>
-                            <p class="text-sm font-medium text-blue-600 dark:text-white">
-                                Jam Pelajaran
-                            </p>
-                        </div>
-                        <div class="flow-root">
-                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                <li class="py-3 sm:py-4">
-                                    <div class="flex items-center space-x-4">
-                                        <div class="flex-1 min-w-0 px-2">
-                                            @forelse ($classroom_subject as $classroom)
-                                                <p class="text-sm font-medium lowercase text-gray-900 truncate dark:text-white">
-                                                    {{ $classroom['name'] }}
-                                                </p>
-                                            @empty
-                                                <p class="text-sm font-medium text-yellow-900 truncate dark:text-yellow-400">
-                                                    {{ __('Data Kelas Belum tersedia..') }}
-                                                </p>
-                                            @endforelse
-                                        </div>
-                                        <div class="justify-center items-center text-base font-semibold text-gray-900 dark:text-white">
-                                            @if ($classroom_amount == 0)
-                                                <p class="text-sm font-bold text-yellow-900 truncate dark:text-yellow-400">
-                                                    {{__('Data Jam Pelajaran Belum Tersedia..')}}
-                                                </p>
-                                            @else
-                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                    10:00 - 11:00
-                                                </p>
-                                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                                    11:00 - 12:00
-                                                </p>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    {{-- end Kelas --}}
 
                    {{-- button --}}
                     <div class="divide-y">
@@ -104,14 +72,6 @@
 
                 </div>
                 {{-- end card --}}
-
-
-
-
-
-
-
-
             </div>
           </div>
         </div>

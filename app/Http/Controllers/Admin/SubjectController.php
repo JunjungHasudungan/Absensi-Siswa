@@ -26,10 +26,22 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         // dd('testing');
+        $this->validate($request, [
+            'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
+            'name'              => 'required|string|max:25|min:3',
+            'user_id'        => 'required',
+            ''
+        ],[
+            'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
+            'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
+            'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
+            'name.required'         => 'Nama Mata Pelajaran Wajib terisi..',
+            'user_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..',
+        ]);
         $subject = Subject::create([
             'code_subject'      => $request->code_subject,
             'name'              => $request->name,
-            'teacher_id'        => $request->teacher_id
+            'user_id'        => $request->user_id
         ]);
 
 

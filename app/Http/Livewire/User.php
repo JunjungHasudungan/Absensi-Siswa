@@ -37,10 +37,12 @@ class User extends Component
             $password,
             $user,
             $users,
+            $students,
             $user_classroom,
             $is_student,
             $is_teacher,
             $search,
+            $page = 1,
             $is_create = false,
             $is_edit = false,
             $is_search = false,
@@ -48,11 +50,13 @@ class User extends Component
 
     public function render()
     {
+        $searchParam = '%' . $this->search . '%'; // var for search field
         return view('livewire.user', [
             $this->users = Users::all(),
-            // $this->users = Users::with('role')->where('role_id', 3)->get(),
             $this->roles = Roles::all(),
-            $this->users = Users::with(['role', 'classroom', 'homeTeacher', 'subjectUser'])->get(),
+            $this->users = Users::with(['role', 'classroom', 'homeTeacher', 'subjectUser'])
+                            ->where('name', 'LIKE', $searchParam)
+                            ->orWhere('role_id', 'LIKE', $searchParam)->get(),
             $this->classrooms = Classrooms::all(),
             $this->is_teacher = Users::where('role_id', 2)->get(),
 
@@ -61,13 +65,23 @@ class User extends Component
 
     public $rules = [
         'name'              => 'required',
-        'email'             => 'required',
+        'email'             => 'required|unique',
         'password'          => 'required',
         'role_id'           => 'required',
         'classroom_id'      => 'nullable',
         'nisn'              => 'nullable',
         'address'           => 'nullable'
     ];
+
+    protected $queryString = [
+        'search'    => ['except'    => ''],
+        'page'      => ['except'    => 1],
+    ];
+
+    public function updatedSearch()
+    {
+        $this->page = empty($this->search) ? 1 : $this->page;
+    }
 
     protected $listeners = [
         'deleteClassroom',
@@ -97,7 +111,6 @@ class User extends Component
 
     public function detailUser(Users $user)
     {
-        // Users
         $this->user = $user;
         $this->openModalDetail();
         $this->classroom = $user->classroom->name ??  ''; // classroom name
@@ -136,7 +149,7 @@ class User extends Component
         // dd('edit user');
         // $this->user_classroom = $user->classroom;
 
-        dd($this->user_classroom);
+        dd($user);
     }
 
     public function closeModalEdit()
@@ -166,20 +179,28 @@ class User extends Component
             'email'                 => 'required',
             'password'              => 'required',
             'role_id'               => 'required',
+            'address'               => 'nullable',
+            'nisn'                  => 'nullable',
+            'classroom_id'          => 'nullable'
         ],[
             'name'                  => 'Nama Wajib di isi..',
             'email'                 => 'Email Wajib di isi..',
+            'email.required'        => 'nama email sudah dipakai',
             'password'              => 'Password Wajib disi',
+            'address.nullable'      => 'Alamat siswa wajib diisi..',
+            'nisn.nullable'         => 'NISN siswa wajib diisi..',
+            'classroom_id.required' => 'Kelas wajib dipilih..',
             'role_id.required'      => 'Jabatan wajib dipilih..',
         ]);
-        $classroom_id = $this->classroom_id ? $this->classroom_id : $id_classroom;
 
             Users::create([
                 'name'          => $this->name,
                 'email'         => $this->email,
                 'password'      => Hash::make($this->password),
                 'role_id'       => $this->role_id,
-                'classroom_id'  =>  $classroom_id,
+                'classroom_id'  => $this->classroom_id ?: $id_classroom,
+                'address'       => $user->address ?: $this->address,
+                'nisn'          => $user->nisn ?: $this->nisn,
             ]);
 
         $this->closeModalCreate();

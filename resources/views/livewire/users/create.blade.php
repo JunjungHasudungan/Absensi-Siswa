@@ -38,7 +38,7 @@
                                 id="exampleFormControlInput2"
                                 placeholder="Masukkan Email User.."
                                 required autocomplete="current-password">
-                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
                     {{-- end input email user --}}
                     {{-- input password user --}}
@@ -98,7 +98,51 @@
                                 </option>
                             @endforelse
                         </select>
+                        @error('classroom_id') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
+
+                    {{-- multi select subject classroom --}}
+                    <div class="mb-2 w-full inline space-x-4 space-x-reverse">
+                        <table class="w-full text-sm rounded text-left text-gray-400">
+                            <thead class="text-xs text-gray-700 camelcase bg-gray-50 text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
+                                        Alamat
+                                    </th>
+                                    <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
+                                       NISN
+                                 </th>
+
+                                    <th scope="col" class="px-4 px-3">
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white w-full">
+                                    <td class="px-4 py-4">
+                                        <input  type="text"
+                                            wire:model="address"
+                                            class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700
+                                            leading-tight focus:outline-none focus:shadow-outline"
+                                            id="exampleFormControlInput2"
+                                            placeholder="Alamat User..">
+                                            @error('address') <span class="text-red-500">{{ $message }}</span>@enderror
+                                    </td>
+                                    <td class="px-4 py-4">
+                                        <input  type="text"
+                                        wire:model="nisn"
+                                        class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700
+                                        leading-tight focus:outline-none focus:shadow-outline"
+                                        id="exampleFormControlInput2"
+                                        placeholder="NISN User..">
+                                        @error('nisn') <span class="text-red-500">{{ $message }}</span>@enderror
+                                        </td>
+                                    </tr>
+                            </tbody>
+                        </table>
+                </div>
+                    {{-- end multi select subject classroom --}}
                     @endif
                     {{-- end select classroom --}}
               </div>
