@@ -113,9 +113,9 @@
                                                     </option>
                                                 @endforelse
                                         </select>
-                                        @error('classroom_id')
+                                        {{-- @error('classroom_id')
                                             <span class="text-red-500">{{ $message }}</span>
-                                        @enderror
+                                        @enderror --}}
                                     </td>
                                     {{-- <td class="px-4 py-4">
 

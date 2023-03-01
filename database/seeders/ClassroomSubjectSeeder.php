@@ -15,7 +15,6 @@ class ClassroomSubjectSeeder extends Seeder
             [
                 'subject_id'        => 1,
                 'classroom_id'      => 1,
-                // 'weekday'           => 1,
             ]
         ];
 

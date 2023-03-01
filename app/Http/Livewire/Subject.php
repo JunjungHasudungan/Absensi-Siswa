@@ -97,8 +97,7 @@ class Subject extends Component
         'code_subject'     =>  'required|string|max:30|min:3',
         'name'             =>  'required|string|max:25|min:4',
         'user_id'          =>  'required|integer',
-        'classroom_id'     =>   'required',
-        // 'weekday'          => 'required'
+        // 'classroom_id'     =>   'required',
     ];
 
 
@@ -177,12 +176,14 @@ class Subject extends Component
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
             'user_id'        => 'required',
+            // 'classroom_id'      => 'required'
         ],[
             'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
             'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
             'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
             'name.required'         => 'Nama Mata Pelajaran Wajib terisi..',
-            'user_id.required'   => 'Guru Mata Pelajaran Wajib dipilih..',
+            'user_id.required'      => 'Guru Mata Pelajaran Wajib dipilih..',
+            // 'classroom_id.required' => 'Kelas Wajib dipilih..'
         ]);
 
         $subject = Subjects::create([
