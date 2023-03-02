@@ -12,14 +12,14 @@ class AdministrationSeeder extends Seeder
     {
         $administrations = [
         [
-                'title'             => 'Cara Memasak Nasi',
-                'method'            => 1,
-                'status'            => 0,
-                'comment'           => 'Percobaan Membuat administrasi',
-                'completeness'      => 0,
-                'classroom_id'      => 1,
-                'subject_id'        => 2,
-                'teacher_id'        => 4,
+                'title'                 => 'Cara Memasak Nasi',
+                'method_learning'       => 1,
+                'status'                => 0,
+                'comment'               => 'Percobaan Membuat administrasi',
+                'completeness'          => 0,
+                'classroom_id'          => 1,
+                'subject_id'            => 2,
+                'teacher_id'            => 4,
         ],
     ];
 

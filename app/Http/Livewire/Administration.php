@@ -3,7 +3,10 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Administration as Administrations;
+use App\Models\{Administration as Administrations,
+    Subject as Subjects,
+};
+// use App\Models\Subject;
 
 class Administration extends Component
 {
@@ -14,7 +17,9 @@ class Administration extends Component
             $is_detail = false,
             $teacher,
             $title,
-            $method,
+            $method_learning,
+            $method_learnings,
+            $subjects,
             $status,
             $comment,
             $description,
@@ -27,13 +32,51 @@ class Administration extends Component
     {
         return view('livewire.administration', [
 
-            $this->administrations = Administration::with(['teachers', 'clasroom', 'subject'])->get(),
+            $this->administrations = Administration::all(),
+            $this->subjects = Subjects::where('user_id', auth()->user()->id)->select('name')->get(),
+            // dd($this->subjects)
         ]);
     }
 
+    protected $rules = [
+        'title'     => 'required'
+    ];
+
     public function isOpenModalCreate()
     {
-        return $this->is_create = false;
+        return $this->is_create = true;
+    }
+
+    public function storeAdministration()
+    {
+        $this->isOpenModalCreate();
+
+        $this->validate([
+            'title'                     => 'required|max:35',
+            'subject_id'                => 'required',
+            'method_learning'           => 'required',
+            'classroom_id'              => 'required'
+        ],[
+            'title.required'            => 'Judul Materi wajib di isi..',
+            'subject_id.required'       => 'Mata Pelajaran Wajib di pilih..',
+            'method_learning.required'  => 'Metode Pengajaran wajib dipilih',
+            'classroom_id.required'     => 'Kelas Wajib dipilih',
+        ]);
+        // dd('Testing');
+       Administrations::create([
+            'title' => $this->title,
+            'subject_id'    => $this->subject_id,
+            'method_learning'   => $this->method_learning,
+            'completeness'      => $this->completeness,
+            'classroom_id'      => $this->classroom_id,
+            'teacher_id'        => auth()->user()->id
+        ]);
+            // $this->resetField();
+            // $administration = new Administrations();
+            // $administration->title = $this->title;
+            // $administration->subject_id = $this->subject_id;
+            // dd($administration);
+            // $administration->save();
     }
 
     public function isCloseModalCreate()
@@ -64,7 +107,7 @@ class Administration extends Component
     public function resetField()
     {
         $this->title = '';
-        $this->method = '';
+        $this->method_learning = '';
         $this->description = '';
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\MethodLearning;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,5 +25,10 @@ class Administration extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    public function getIsPraktekAttribute()
+    {
+        return $this->method = MethodLearning::METHOD_LEARING['Praktek'];
     }
 }

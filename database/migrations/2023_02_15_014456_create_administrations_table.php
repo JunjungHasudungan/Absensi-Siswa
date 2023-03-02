@@ -20,7 +20,7 @@ return new class extends Migration
         Schema::create('administrations', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('method')->default(0);
+            $table->integer('method_learning')->default(0);
             $table->integer('status')->default(0);
             $table->string('comment')->nullable();
             $table->string('description')->nullable();
