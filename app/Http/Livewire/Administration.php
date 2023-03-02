@@ -20,6 +20,7 @@ class Administration extends Component
             $method_learning,
             $method_learnings,
             $subjects,
+            $classrooms,
             $status,
             $comment,
             $description,
@@ -27,6 +28,12 @@ class Administration extends Component
             $classroom_id,
             $subject_id,
             $teacher_id;
+
+
+    public function mount()
+    {
+        $this->subjects = Subjects::where('user_id', auth()->user()->id)->get();
+    }
 
     public function render()
     {
@@ -79,6 +86,7 @@ class Administration extends Component
             // $administration->subject_id = $this->subject_id;
             // dd($administration);
             // $administration->save();
+            dd('test store');
     }
 
     public function isCloseModalCreate()

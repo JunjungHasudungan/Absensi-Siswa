@@ -29,6 +29,7 @@
                     </div>
                     {{-- end input title --}}
 
+                    <div class="grid md:grid-cols-2 md:gap-6">
                      {{-- select Mata Pelajaran --}}
                      <div class="mb-6">
                         <label for="user_id" class="block mb-2 text-sm font-bold text-gray-900">
@@ -45,10 +46,9 @@
                                     <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
                                 @endforelse
                         </select>
-                        @error('subject_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                    </div>
+                            @error('subject_id') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
                     {{-- end select Mata Pelajaran --}}
-
                       {{-- select classroom --}}
                       <div class="mb-6">
                         <label for="user_id" class="block mb-2 text-sm font-bold text-gray-900">
@@ -66,47 +66,51 @@
                                 @endforelse
                         </select>
                         @error('classroom_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                    </div>
+                        </div>
                     {{-- end select Classroom --}}
+                    </div>
 
-                    {{-- select completeness --}}
-                    <div class="mb-6">
-                        <label for="completeness" class="block mb-2 text-sm font-bold text-gray-900">
-                         Ketuntasan Materi
-                        </label>
-                        <select wire:model="completeness"
-                                name="completeness"
-                                id="completeness"
-                                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="">-- Pilih Ketuntasan Materi --</option>
-                                @forelse (\App\Helpers\Completeness::COMPLETENESS as $key => $completeness)
-                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $completeness }}"> {{ $key }} </option>
+                    <div class="grid md:grid-cols-2 md:gap-6">
+                        {{-- select completeness --}}
+                        <div class="mb-6">
+                            <label for="completeness" class="block mb-2 text-sm font-bold text-gray-900">
+                             Ketuntasan Materi
+                            </label>
+                            <select wire:model="completeness"
+                                    name="completeness"
+                                    id="completeness"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="">-- Pilih Ketuntasan --</option>
+                                    @forelse (\App\Helpers\Completeness::COMPLETENESS as $key => $completeness)
+                                    <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $completeness }}"> {{ $key }} </option>
+                                    @empty
+                                    <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
+                                    @endforelse
+                            </select>
+                            @error('completeness') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        {{-- end select completeness --}}
+
+                        {{-- select method_learning --}}
+                        <div class="mb-6">
+                            <label for="method_learning" class="block mb-2 text-sm font-bold text-gray-900">
+                               Metode Pembelajaran
+                            </label>
+                            <select wire:model="method_learning"
+                                    id="method_learning"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="">-- Pilih Metode --</option>
+                                @forelse (\App\Helpers\MethodLearning::METHOD_LEARING as $key => $method_learing)
+                                    <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $method_learning }}"> {{ $key }} </option>
                                 @empty
-                                <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
+                                    <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
                                 @endforelse
-                        </select>
-                        @error('completeness') <span class="text-red-500">{{ $message }}</span>@enderror
+                            </select>
+                            @error('method_learning') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                        {{-- end select method_learning --}}
                     </div>
-                    {{-- end select completeness --}}
 
-                    {{-- select method_learning --}}
-                    <div class="mb-6">
-                        <label for="method_learning" class="block mb-2 text-sm font-bold text-gray-900">
-                           Metode Pembelajaran
-                        </label>
-                        <select wire:model="method_learning"
-                                id="method_learning"
-                                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="">-- Pilih Metode Pembelajaran --</option>
-                            @forelse (\App\Helpers\MethodLearning::METHOD_LEARING as $key => $method_learing)
-                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $method_learning }}"> {{ $key }} </option>
-                            @empty
-                                <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
-                            @endforelse
-                        </select>
-                        @error('method_learning') <span class="text-red-500">{{ $message }}</span>@enderror
-                    </div>
-                    {{-- end select method_learning --}}
 
               </div>
             </div>
