@@ -17,17 +17,17 @@ class Administration extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function clasroom()
+    public function classroom()
     {
         return $this->belongsTo(Classroom::class);
     }
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class);
+        return $this->belongsTo(Subject::class,'id');
     }
 
     public function getIsPraktekAttribute()

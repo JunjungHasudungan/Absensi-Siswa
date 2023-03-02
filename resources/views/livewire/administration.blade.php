@@ -37,10 +37,10 @@
                 @if ($is_create)
                     @include('livewire.administrations.create')
                 @endif
-{{--
+
                 @if ($is_detail)
-                    @include('livewire.users.detail')
-                @endif --}}
+                    @include('livewire.administrations.detail')
+                @endif
             {{-- search --}}
                 {{-- @if (!$is_search)
                     @include('livewire.users.search-user')
@@ -57,10 +57,10 @@
                     No
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Nama
+                    Nama Kelas
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Mata Pelajaran
+                    Nama Pelajaran
                 </th>
                 <th scope="col" class="px-6 py-3">
 
@@ -68,47 +68,33 @@
             </tr>
         </thead>
         <tbody>
-            {{-- @forelse ($users as $user) --}}
+
+            @forelse ($administrations as $administration)
                 <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        1
+                        {{ $loop->iteration }}
                     </th>
                     <td class="px-6 py-4">
-                       Nama User
+                        {{ $administration->classroom->name }}
                     </td>
                     <td class="px-6 py-4">
-                       Nama Mata Pelajaran
+                        {{  $administration->subject->name}}
                     </td>
-                    <td class="px-6 py-4">
-                        {{-- add button for edit and delete data classroom --}}
-                        @if (auth()->user()->role_id == 1)
-                            <button   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Review
-                            </button>
-                        @endif
-
-                        @if (auth()->user()->role_id == 2)
-                            <button   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Edit
-                            </button>
-                        @endif
-
-                        <button   class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                    <td class="px-6 py-4 item-center justify-center">
+                        <button wire:click="detailAdministration({{ $administration->id }})"
+                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                             Detail
                         </button>
-
-                        @if (auth()->user()->role_id == 2)
-                            <button  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                Delete
-                            </button>
-                        @endif
+                        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            Delete
+                        </button>
                     </td>
                 </tr>
-            {{-- @empty --}}
+            @empty
                 <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-3">
                     Data Belum Tersedia.
                 </div>
-            {{-- @endforelse --}}
+            @endforelse
         </tbody>
     </table>
     {{-- end table --}}
