@@ -55,12 +55,14 @@ class Administration extends Component
             'title'                     => 'required|max:35',
             'subject_id'                => 'required',
             'method_learning'           => 'required',
-            'classroom_id'              => 'required'
+            'classroom_id'              => 'required',
+            'completeness'              => 'required',
         ],[
             'title.required'            => 'Judul Materi wajib di isi..',
             'subject_id.required'       => 'Mata Pelajaran Wajib di pilih..',
             'method_learning.required'  => 'Metode Pengajaran wajib dipilih',
             'classroom_id.required'     => 'Kelas Wajib dipilih',
+            'completeness'              => 'Ketuntasan Materi Wajib dipilih...'
         ]);
         // dd('Testing');
        Administrations::create([

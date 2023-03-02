@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
-use App\Helpers\MethodLearning;
+use App\Helpers\{
+    MethodLearning,
+    Completeness,
+};
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -30,5 +33,15 @@ class Administration extends Model
     public function getIsPraktekAttribute()
     {
         return $this->method = MethodLearning::METHOD_LEARING['Praktek'];
+    }
+
+    public function getIsTuntasAttribute()
+    {
+        return $this->completeness = Completeness::COMPLETENESS['Tuntas'];
+    }
+
+    public function getIsBersambungAttribute()
+    {
+        return $this->completeness = Completeness::COMPLETENESS['Bersambung'];
     }
 }
