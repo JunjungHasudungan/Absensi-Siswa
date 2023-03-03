@@ -27,7 +27,7 @@ class Administration extends Model
 
     public function subject()
     {
-        return $this->belongsTo(Subject::class,'id');
+        return $this->belongsTo(Subject::class);
     }
 
     public function getIsPraktekAttribute()
