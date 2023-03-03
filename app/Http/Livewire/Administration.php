@@ -120,4 +120,12 @@ class Administration extends Component
         $this->method_learning = '';
         $this->description = '';
     }
+
+    public function deleteAdministration(Administrations $administration)
+    {
+        $administration->delete();
+
+        $this->dispatchBrowserEvent('classroomDeleted');
+        // dd($administration);
+    }
 }
