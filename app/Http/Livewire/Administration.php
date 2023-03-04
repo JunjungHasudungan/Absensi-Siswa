@@ -5,13 +5,16 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\{
     Administration as Administrations,
+    Classroom as Classrooms,
     Subject as Subjects,
 };
+use Illuminate\Support\Facades\DB;
 // use App\Models\Subject;
 
 class Administration extends Component
 {
     public  $administrations,
+            $id_administration,
             $is_create = false,
             $is_review = false,
             $is_edit = false,
@@ -30,12 +33,15 @@ class Administration extends Component
             $completeness,
             $classroom_id,
             $subject_id,
+            $user_id,
             $teacher_id;
 
 
     public function mount()
     {
-        $this->subjects = Subjects::where('user_id', auth()->user()->id)->get();
+        $this->subjects = Subjects::with('classroomSubject')
+                                    ->where('user_id', auth()->user()->id)->get();
+
     }
 
     public function render()
@@ -47,8 +53,18 @@ class Administration extends Component
         ]);
     }
 
+    public $listeners = [
+        'deleteClassroom'
+    ];
+
     protected $rules = [
-        'title'     => 'required'
+        'title'             => 'required',
+        'method_learning'   => 'required',
+        'status'            => 'required',
+        'completeness'      => 'required',
+        'classroom_id'      => 'required',
+        'subject_id'        => 'required',
+        'user_id'           => 'required'
     ];
 
     public function isOpenModalCreate()
@@ -61,14 +77,39 @@ class Administration extends Component
         $this->isOpenModalCreate();
 
         $this->validate([
-            'title'     => 'required'
+            'title'             => 'required',
         ], [
             'title.required'    => 'Judul Mata Pelajaran Wajib diisi..'
+        ]);
+
+        Administrations::create([
+            'title'             => $this->title,
+            'completeness'      => $this->completeness,
+            'method_learning'   => $this->method_learning,
+            'subject_id'        => $this->subject_id,
+            'classroom_id'      => $this->classroom_id,
+            'user_id'           => auth()->user()->id,
         ]);
 
             $this->resetField();
 
             $this->isCloseModalCreate();
+
+            $this->dispatchBrowserEvent('toastr:info', [
+                'message'   => 'Data Berhasil ditambahkan...'
+            ]);
+    }
+
+    public function deleteConfirmation($id)
+    {
+        $this->id_administration = $id;
+
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'type'  => 'warning',
+            'title' => 'Yakin Menghapus?',
+            'text'  => '',
+            'id'    => $id
+        ]);
     }
 
     public function isCloseModalCreate()
@@ -127,9 +168,9 @@ class Administration extends Component
         $this->description = '';
     }
 
-    public function deleteAdministration(Administrations $administration)
+    public function deleteClassroom($id)
     {
-        $administration->delete();
+        Administrations::where('id', $id)->delete();
 
         $this->dispatchBrowserEvent('classroomDeleted');
         // dd($administration);
