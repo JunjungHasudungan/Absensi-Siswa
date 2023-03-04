@@ -20,7 +20,9 @@ class Administration extends Component
             $title,
             $method_learning,
             $method_learnings,
+            $subject,
             $subjects,
+            $classroom,
             $classrooms,
             $status,
             $comment,
@@ -94,6 +96,10 @@ class Administration extends Component
         $this->isOpenModalDetail();
 
         $administration = Administrations::find($id_administration);
+        $this->classroom = $administration->classroom;
+        $this->subject = $administration->subject;
+        $this->title = $administration->title;
+        $this->completeness = $administration->completeness;
         // $$administration->teacher;
         // dd($administration);
 

@@ -25,31 +25,69 @@
                         <div class="flow-root divide-y">
                             <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
                                 <li class="py-3 sm:py-4">
-                                    {{-- nama --}}
+                                    {{-- Classroom --}}
                                     <div class="flex items-center space-x-2">
                                         <div class="flex-1 min-w-0 px-2">
                                             <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Nama Guru
+                                                Kelas
                                             </p>
                                         </div>
                                             <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                {{-- {{ $name }} --}}
+                                                {{ $classroom->name }}
                                             </div>
                                     </div>
-                                    {{-- end nama --}}
-                                    {{-- kelas --}}
+                                    {{-- end Classroom --}}
+
+                                    {{-- subject name --}}
                                     <div class="flex items-center space-x-2">
                                         <div class="flex-1 min-w-0 px-2">
                                             <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Guru
+                                                Mata Pelajaran
                                             </p>
                                         </div>
 
                                         <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                            {{-- {{ $teacher_name }} --}}
+                                            {{ $subject->name }}
                                         </div>
                                     </div>
-                                    {{-- end kelas --}}
+                                    {{-- end subject name --}}
+
+                                    {{-- subject name --}}
+                                    <div class="flex items-center space-x-2">
+                                        <div class="flex-1 min-w-0 px-2">
+                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                Materi Pelajaran
+                                            </p>
+                                        </div>
+
+                                        <p class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                            {{ $title }}
+                                        </p>
+                                    </div>
+                                    {{-- end subject name --}}
+
+                                     {{-- Completeness --}}
+                                     <div class="flex items-center space-x-2">
+                                        <div class="flex-1 min-w-0 px-2">
+                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                                Ketuntasan Pelajaran
+                                            </p>
+                                        </div>
+
+                                        <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
+                                            @if ($completeness == 1)
+                                                <p class="text-sm font-bold text-blue-900 font-bold truncate">
+                                                   {{__('Tuntas') }}
+                                                </p>
+                                            @endif
+                                            @if ($completeness == 2)
+                                            <p class="text-sm font-bold text-green-900 truncate">
+                                                {{__('Bersambung')}}
+                                            </p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    {{-- end Completeness --}}
                                 </li>
                             </ul>
                         </div>

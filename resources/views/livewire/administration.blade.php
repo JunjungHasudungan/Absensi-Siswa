@@ -93,7 +93,7 @@
                 </tr>
             @empty
                 <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-3">
-                    Data Belum Tersedia.
+                    {{ __('Data Administrasi Belum Ada..') }}
                 </div>
             @endforelse
         </tbody>
