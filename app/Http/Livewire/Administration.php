@@ -48,7 +48,7 @@ class Administration extends Component
     {
         return view('livewire.administration', [
 
-            $this->administrations = Administrations::with(['teacher', 'subject', 'classroom'])
+            $this->administrations = Administrations::with(['teacher', 'subject', 'classroom', 'comment'])
                                     ->where('user_id', auth()->user()->id)->get(),
         ]);
     }
@@ -58,7 +58,7 @@ class Administration extends Component
     ];
 
     protected $rules = [
-        'title'             => 'required',
+        'title'             => 'required|string|max:20',
         'method_learning'   => 'required',
         'status'            => 'required',
         'completeness'      => 'required',
@@ -77,9 +77,18 @@ class Administration extends Component
         $this->isOpenModalCreate();
 
         $this->validate([
-            'title'             => 'required',
-        ], [
-            'title.required'    => 'Judul Mata Pelajaran Wajib diisi..'
+            'title'                         => 'required',
+            'subject_id'                    => 'required',
+            'classroom_id'                  => 'required',
+            'method_learning'               => 'required',
+            'completeness'                  => 'required'
+        ],[
+            'title.required'                => 'Judul Mata Pelajaran Wajib diisi..',
+            'subject_id.required'           => 'Mata Pelajaran Wajib dipilih..',
+            'classroom_id.required'         => 'Kelas Wajib dipilih',
+            'method_learning.required'      => 'Metode Wajib dipilih..',
+            'completeness.required'         => 'Ketuntasan Wajib dipilih..'
+
         ]);
 
         Administrations::create([
@@ -114,7 +123,10 @@ class Administration extends Component
 
     public function isCloseModalCreate()
     {
+        $this->resetField();
+
         return $this->is_create = false;
+
     }
 
     public function isOpenModalEdit()
@@ -166,6 +178,9 @@ class Administration extends Component
         $this->title = '';
         $this->method_learning = '';
         $this->description = '';
+        $this->classroom_id = '';
+        $this->subject_id = '';
+        $this->completeness = '';
     }
 
     public function deleteClassroom($id)

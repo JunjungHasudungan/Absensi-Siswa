@@ -12,21 +12,17 @@
             <form>
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="">
-                    {{-- input title --}}
-                    <div class="mb-4">
-                        <label for="exampleFormControlInput2"
-                                class="block text-gray-700 text-sm font-bold mb-2">
-                                Judul Materi Pelajaran:
-                        </label>
-                        <input  type="text"
-                                wire:model="title"
-                                name="title"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="exampleFormControlInput2"
-                                placeholder="Masukkan Judul Materi..">
+                     {{-- input code classroom --}}
+                     <div class="mb-4">
+                        <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Judul Materi :</label>
+                        <input type="text"
+                        wire:model="title"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="title"
+                        placeholder="Masukkan Nama Mata Pelajaran..">
                         @error('title') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
-                    {{-- end input name user --}}
+                    {{-- end input code classroom --}}
 
                     <div class="grid md:grid-cols-2 md:gap-6">
                         {{-- select completeness --}}
