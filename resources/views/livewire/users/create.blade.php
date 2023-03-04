@@ -12,35 +12,38 @@
             <form>
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div class="">
+                <div class="grid md:grid-cols-2 md:gap-6">
                     {{-- input name user --}}
                     <div class="mb-4">
                         <label for="exampleFormControlInput2"
-                                class="block text-gray-700 text-sm font-bold mb-2">
-                                Nama:
+                            class="block text-gray-700 text-sm font-bold mb-2">
+                            Nama:
                         </label>
                         <input  type="text"
-                                wire:model="name"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="exampleFormControlInput2"
-                                placeholder="Masukkan Nama User..">
+                        wire:model="name"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="exampleFormControlInput2"
+                        placeholder="Masukkan Nama User..">
                         @error('name') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
                     {{-- end input name user --}}
                     {{-- input email user --}}
                     <div class="mb-4">
                         <label for="exampleFormControlInput2"
-                                class="block text-gray-700 text-sm font-bold mb-2">
-                                Email:
+                            class="block text-gray-700 text-sm font-bold mb-2">
+                            Email:
                         </label>
                         <input  type="email"
-                                wire:model="email"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="exampleFormControlInput2"
-                                placeholder="Masukkan Email User.."
-                                required autocomplete="current-password">
-                                @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
+                            wire:model="email"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            id="exampleFormControlInput2"
+                            placeholder="Masukkan Email User.."
+                            required autocomplete="current-password">
+                            @error('email') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
                     {{-- end input email user --}}
+                </div>
+                <div class="grid md:grid-cols-2 md:gap-6">
                     {{-- input password user --}}
                     <div class="mb-4">
                         <label for="exampleFormControlInput2"
@@ -55,6 +58,23 @@
                         @error('password') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
                     {{-- end input password user --}}
+
+                        {{-- address --}}
+                    <div class="mb-4">
+                        <label for="exampleFormControlInput2"
+                            class="block text-gray-700 text-sm font-bold mb-2">
+                            Alamat:
+                        </label>
+                        <input  type="text"
+                            wire:model="address"
+                            class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700
+                            leading-tight focus:outline-none focus:shadow-outline"
+                            id="exampleFormControlInput2"
+                            placeholder="Alamat User..">
+                            @error('address') <span class="text-red-500">{{ $message }}</span>@enderror
+                        {{-- end addres --}}
+                    </div>
+                </div>
                      {{-- select role --}}
                      <div class="mb-6">
                         <label for="role_id" class="block mb-2 text-sm font-bold text-gray-900">
@@ -107,11 +127,8 @@
                             <thead class="text-xs text-gray-700 camelcase bg-gray-50 text-gray-400">
                                 <tr>
                                     <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
-                                        Alamat
-                                    </th>
-                                    <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
                                        NISN
-                                 </th>
+                                    </th>
 
                                     <th scope="col" class="px-4 px-3">
 
@@ -120,15 +137,6 @@
                             </thead>
                             <tbody>
                                 <tr class="bg-white w-full">
-                                    <td class="px-4 py-4">
-                                        <input  type="text"
-                                            wire:model="address"
-                                            class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700
-                                            leading-tight focus:outline-none focus:shadow-outline"
-                                            id="exampleFormControlInput2"
-                                            placeholder="Alamat User..">
-                                            @error('address') <span class="text-red-500">{{ $message }}</span>@enderror
-                                    </td>
                                     <td class="px-4 py-4">
                                         <input  type="text"
                                         wire:model="nisn"

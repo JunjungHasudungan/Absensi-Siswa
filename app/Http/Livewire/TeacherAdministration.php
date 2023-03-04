@@ -50,10 +50,16 @@ class TeacherAdministration extends Component
         $this->created_at = $administration->created_at;
         $this->method_learning = $administration->method_learning;
         $this->completeness = $administration->completeness;
+        $this->status = $administration->status;
+        $this->comment = $administration->comment;
 
         // dd($this->method_learning);
     }
 
+    public function sendComment($comment)
+    {
+        dd($comment);
+    }
     public function updateAdministration($id_administration)
     {
         dd($id_administration);

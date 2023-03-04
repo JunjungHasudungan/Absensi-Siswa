@@ -20,6 +20,11 @@ class Administration extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+    public function comment()
+    {
+        return $this->hasOne(Comment::class);
+    }
+
     public function classroom()
     {
         return $this->belongsTo(Classroom::class);

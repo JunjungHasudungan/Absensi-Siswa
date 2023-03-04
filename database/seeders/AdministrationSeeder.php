@@ -15,10 +15,9 @@ class AdministrationSeeder extends Seeder
                 'title'                 => 'Cara Memasak Nasi',
                 'method_learning'       => 1,
                 'status'                => 0,
-                'comment'               => 'Percobaan Membuat administrasi',
                 'completeness'          => 0,
                 'classroom_id'          => 1,
-                'subject_id'            => 2,
+                'subject_id'            => 1,
                 'user_id'               => 4,
         ],
     ];
