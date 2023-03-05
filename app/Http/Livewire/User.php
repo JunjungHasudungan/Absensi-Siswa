@@ -158,8 +158,6 @@ class User extends Component
         $this->openModalEdit();
 
         $this->user_classroom = Users::find($user);
-        // dd('edit user');
-        // $this->user_classroom = $user->classroom;
 
         dd($user);
     }

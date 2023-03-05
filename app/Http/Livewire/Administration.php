@@ -9,6 +9,7 @@ use App\Models\{
     Subject as Subjects,
 };
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 // use App\Models\Subject;
 
 class Administration extends Component
@@ -36,13 +37,6 @@ class Administration extends Component
             $user_id,
             $teacher_id;
 
-
-    public function mount()
-    {
-        $this->subjects = Subjects::with('classroomSubject')
-                                    ->where('user_id', auth()->user()->id)->get();
-
-    }
 
     public function render()
     {
@@ -76,29 +70,37 @@ class Administration extends Component
     {
         $this->isOpenModalCreate();
 
-        $this->validate([
-            'title'                         => 'required',
-            'subject_id'                    => 'required',
-            'classroom_id'                  => 'required',
-            'method_learning'               => 'required',
-            'completeness'                  => 'required'
-        ],[
-            'title.required'                => 'Judul Mata Pelajaran Wajib diisi..',
-            'subject_id.required'           => 'Mata Pelajaran Wajib dipilih..',
-            'classroom_id.required'         => 'Kelas Wajib dipilih',
-            'method_learning.required'      => 'Metode Wajib dipilih..',
-            'completeness.required'         => 'Ketuntasan Wajib dipilih..'
+        $this->subjects = Subjects::where('user_id', Auth::id())->get() ?: 0;
 
-        ]);
+        if (count($this->subjects) == 0) {
+                dd('belum ada data mata pelajaran');
+        }else{
 
-        Administrations::create([
-            'title'             => $this->title,
-            'completeness'      => $this->completeness,
-            'method_learning'   => $this->method_learning,
-            'subject_id'        => $this->subject_id,
-            'classroom_id'      => $this->classroom_id,
-            'user_id'           => auth()->user()->id,
-        ]);
+            $this->validate([
+                'title'                         => 'required',
+                'subject_id'                    => 'required',
+                'classroom_id'                  => 'required',
+                'method_learning'               => 'required',
+                'completeness'                  => 'required'
+            ],[
+                'title.required'                => 'Judul Mata Pelajaran Wajib diisi..',
+                'subject_id.required'           => 'Mata Pelajaran Wajib dipilih..',
+                'classroom_id.required'         => 'Kelas Wajib dipilih',
+                'method_learning.required'      => 'Metode Wajib dipilih..',
+                'completeness.required'         => 'Ketuntasan Wajib dipilih..'
+
+            ]);
+
+                Administrations::create([
+                    'title'             => $this->title,
+                    'completeness'      => $this->completeness,
+                    'method_learning'   => $this->method_learning,
+                    'subject_id'        => $this->subject_id,
+                    'classroom_id'      => $this->classroom_id,
+                    'user_id'           => auth()->user()->id,
+                ]);
+        }
+
 
             $this->resetField();
 

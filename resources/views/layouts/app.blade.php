@@ -66,6 +66,12 @@
                 });
             });
 
+            // Swal.fire({
+            //     icon: 'error',
+            //     title: 'Oops...',
+            //     text: 'Anda belum memiliki mata pelajaran..',
+            //     })
+
             // sweet alert delete data classroom
             window.addEventListener('swal:confirm', event => {
                 swal({

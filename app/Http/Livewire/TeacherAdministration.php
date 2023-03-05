@@ -3,10 +3,14 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Administration as Administrations;
+use App\Models\{
+    Administration as Administrations,
+    User as User,
+};
 
 class TeacherAdministration extends Component
 {
+    public User $user;
     public  $is_review = false,
             $is_search = false,
             $name,
@@ -18,13 +22,29 @@ class TeacherAdministration extends Component
             $classroom,
             $subject,
             $teacher,
+            $teachers,
+            $teacher_id,
             $created_at,
             $administrations;
-    public function render()
+
+
+
+            public function render()
+            {
+                $this->administrations = Administrations::with('teacher')->get();
+
+                foreach ($this->administrations as $key => $value) {
+                   $this->teacher = $value;
+                }
+                dd($this->teacher);
+        return view('livewire.teacher-administration');
+    }
+
+    public function getNameTeacher()
     {
-        return view('livewire.teacher-administration',[
-            $this->administrations = Administrations::all()
-        ]);
+        foreach ($this->administratiions as $key => $value) {
+            dd($value->name);
+        }
     }
 
     public function isModalReviewOpen()
@@ -43,7 +63,7 @@ class TeacherAdministration extends Component
 
         $administration = Administrations::find($id_administration);
         // dd($administration);
-        $this->teacher = $administration->teacher;
+        $this->teacher = $administration->teacher ?: null;
         $this->classroom = $administration->classroom;
         $this->subject = $administration->subject;
         $this->title = $administration->title;

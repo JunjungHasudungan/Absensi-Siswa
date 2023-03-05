@@ -29,7 +29,7 @@
                                                 Nama Guru
                                             </th>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                                {{ $teacher->name }}
+                                                {{ $teacher->name ?? ''}}
                                             </td>
                                         </tr>
                                         {{-- end teacher administration --}}

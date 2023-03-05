@@ -17,7 +17,7 @@ class Administration extends Model
 
     public function teacher()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class);
     }
 
     public function comment()

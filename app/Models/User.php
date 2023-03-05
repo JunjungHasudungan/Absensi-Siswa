@@ -82,6 +82,11 @@ class User extends Authenticatable
         return $this->hasOne(Classroom::class);
     }
 
+    public function administrations()
+    {
+        return $this->hasMany(Administration::class);
+    }
+
     public function getIsStudentAttribute()
     {
         return $this->role()->where('id', 3)->exists();
