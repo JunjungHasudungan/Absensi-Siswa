@@ -128,8 +128,8 @@ class User extends Component
 
         $id_student_classroom = $user->classroom->user_id ?? '' ;
         $id_classroom = $user->homeTeacher->id ?? ''; // id classroom teacher
-        // dd($classroom_name_student);
         $this->subject_student = $user->subjectUser ?? ''; // mata pelajaran siswa
+        // dd($this->subject_student);
         $this->subject_teacher = $user->subjectTeacher ?? ''; // mata pelajaran untuk guru
         $this->home_teacher_classroom = $user->homeTeacher ?? ''; // nama kelas wali
         $this->amount_subject_classroom = DB::table('classroom_subject')->where('classroom_id', $id_classroom)->count();

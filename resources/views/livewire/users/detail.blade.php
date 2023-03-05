@@ -62,26 +62,24 @@
                                             </tr>
                                             {{-- end address user --}}
                                             {{-- if role teacher --}}
-                                            @if ($user->role_id == 2)
+                                            @if ($user->role_id === 2)
                                             {{-- administration subject name --}}
                                             <tr class="border-b">
                                                 <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                                                     Mata Pelajaran
                                                 </th>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
                                                     @forelse ($subject_teacher as $subject)
-                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-gray-700 bg-white bg-gray-400 divide-y divide-gray-200">
-                                                            <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
-                                                                <li>
-                                                                    {{ $subject->name }}
-                                                                </li>
-                                                            </ul>
-                                                            @empty
-                                                                <p class="font-bold text-yellow-400">
-                                                                    {{ __('Mata Pelajaran Belun ada') }}
-                                                                </p>
-                                                            @endforelse
-                                                        </td>
-                                                </tr>
+                                                        <ul class="list-disc list-inside max-w-md space-y-1 text-gray-900">
+                                                            <li> {{$subject->name}} </li>
+                                                        </ul>
+                                                        @empty
+                                                            <p class="text-yellow-900 font-bold">
+                                                                {{ __('Mata Pelajaran Belum ada..') }}
+                                                            </p>
+                                                    @endforelse
+                                                </td>
+                                            </tr>
                                                 {{-- end administration subject name --}}
                                                 {{-- home teacher classroom --}}
                                                 <tr class="border-b">
@@ -134,14 +132,35 @@
                                                     @forelse ($teacher as $home_teacher)
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
                                                             {{ $home_teacher->name}}
-                                                        </td>
-                                                    @empty
-                                                        <p>
-                                                            {{ __('Belum ada wali kelas.') }}
-                                                        </p>
+                                                            @empty
+                                                                <p class="text-yellow-900 font-bold">
+                                                                    {{ __('Belum ada wali kelas.') }}
+                                                                </p>
                                                     @endforelse
+                                                        </td>
                                                 </tr>
                                                 {{-- end home teacher student --}}
+
+                                                {{-- subject name for student --}}
+                                                <tr class="border-b">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                       Mata Pelajaran
+                                                    </th>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                            @forelse ($subject_student as $subject)
+                                                                <ul class="list-disc list-inside text-gray-900">
+                                                                    <li>
+                                                                        {{ $subject->name ?? 'Belum ada'}}
+                                                                    </li>
+                                                                </ul>
+                                                            @empty
+                                                            <p class="text-yellow-900 font-bold">
+                                                                {{ __('Mata Pelajaran Belum ada.') }}
+                                                            </p>
+                                                            @endforelse
+                                                        </td>
+                                                </tr>
+                                                {{-- end subject name for student --}}
 
                                                 @endif
                                                 {{-- end if role student --}}
