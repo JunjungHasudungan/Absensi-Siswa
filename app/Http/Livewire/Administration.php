@@ -44,11 +44,14 @@ class Administration extends Component
 
             $this->administrations = Administrations::with(['teacher', 'subject', 'classroom', 'comment'])
                                     ->where('user_id', auth()->user()->id)->get(),
+            $this->subjects = Subjects::with(['classroomSubject'])->where('user_id', Auth::id())->get() ?: 0,
         ]);
     }
 
     public $listeners = [
-        'deleteClassroom'
+        'deleteClassroom',
+        'showEmpySubject'
+
     ];
 
     protected $rules = [
@@ -68,47 +71,59 @@ class Administration extends Component
 
     public function storeAdministration()
     {
-        $this->isOpenModalCreate();
 
         $this->subjects = Subjects::where('user_id', Auth::id())->get() ?: 0;
 
-        if (count($this->subjects) == 0) {
-                dd('belum ada data mata pelajaran');
+        if(count($this->subjects) == 0){
+            $this->showEmpySubject();
         }else{
+            $this->isOpenModalCreate();
 
-            $this->validate([
-                'title'                         => 'required',
-                'subject_id'                    => 'required',
-                'classroom_id'                  => 'required',
-                'method_learning'               => 'required',
-                'completeness'                  => 'required'
-            ],[
-                'title.required'                => 'Judul Mata Pelajaran Wajib diisi..',
-                'subject_id.required'           => 'Mata Pelajaran Wajib dipilih..',
-                'classroom_id.required'         => 'Kelas Wajib dipilih',
-                'method_learning.required'      => 'Metode Wajib dipilih..',
-                'completeness.required'         => 'Ketuntasan Wajib dipilih..'
+                $this->validate([
+                    'title'                         => 'required',
+                    'subject_id'                    => 'required',
+                    'classroom_id'                  => 'required',
+                    'method_learning'               => 'required',
+                    'completeness'                  => 'required'
+                ],[
+                    'title.required'                => 'Judul Mata Pelajaran Wajib diisi..',
+                    'subject_id.required'           => 'Mata Pelajaran Wajib dipilih..',
+                    'classroom_id.required'         => 'Kelas Wajib dipilih',
+                    'method_learning.required'      => 'Metode Wajib dipilih..',
+                    'completeness.required'         => 'Ketuntasan Wajib dipilih..'
 
-            ]);
-
-                Administrations::create([
-                    'title'             => $this->title,
-                    'completeness'      => $this->completeness,
-                    'method_learning'   => $this->method_learning,
-                    'subject_id'        => $this->subject_id,
-                    'classroom_id'      => $this->classroom_id,
-                    'user_id'           => auth()->user()->id,
                 ]);
+
+                    Administrations::create([
+                        'title'             => $this->title,
+                        'completeness'      => $this->completeness,
+                        'method_learning'   => $this->method_learning,
+                        'subject_id'        => $this->subject_id,
+                        'classroom_id'      => $this->classroom_id,
+                        'user_id'           => auth()->user()->id,
+                    ]);
+
+                    $this->resetField();
+
+                    $this->isCloseModalCreate();
+
+                    $this->dispatchBrowserEvent('toastr:info', [
+                        'message'   => 'Data Berhasil ditambahkan...'
+                    ]);
         }
 
 
-            $this->resetField();
 
-            $this->isCloseModalCreate();
 
-            $this->dispatchBrowserEvent('toastr:info', [
-                'message'   => 'Data Berhasil ditambahkan...'
-            ]);
+    }
+
+    public function showEmpySubject()
+    {
+        $this->dispatchBrowserEvent('alert',[
+            'type' => 'error',
+            'message' => 'Anda Belum memiliki Mata Pelajaran'
+        ]);
+
     }
 
     public function deleteConfirmation($id)

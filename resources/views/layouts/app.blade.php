@@ -58,6 +58,14 @@
                 toastr.info(event.detail.message);
             });
 
+            window.addEventListener('alert', event => {
+                toastr[event.detail.type](event.detail.message,
+                event.detail.title ?? ''), toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                }
+                });
+
             window.addEventListener('swal:modal', event => {
                 swal({
                     title: event.detail.title,
@@ -66,11 +74,18 @@
                 });
             });
 
-            // Swal.fire({
-            //     icon: 'error',
-            //     title: 'Oops...',
-            //     text: 'Anda belum memiliki mata pelajaran..',
-            //     })
+            window.addEventListener('swal:error', event => {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Anda belum memiliki mata pelajaran..',
+                    }).then( empty =>{
+                        if(empty){
+                            window.livewire.emit('showEmpySubject');
+                        }
+                    })
+            });
 
             // sweet alert delete data classroom
             window.addEventListener('swal:confirm', event => {
