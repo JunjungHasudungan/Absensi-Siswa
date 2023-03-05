@@ -10,293 +10,155 @@
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>​
 
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
-                role="dialog" aria-modal="true"
+                role="dialog"
+                aria-modal="true"
                 aria-labelledby="modal-headline">
-
-                {{-- card --}}
-                <div class="w-full p-4 bg-white  border border-gray-200 rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
-                   {{-- Data Diri --}}
-                   <div class="divide-y">
-                        <div class="flex items-center  justify-center mb-2 ">
-                            <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
-                                {{__('Biodata')}}
-                            </h5>
-                        </div>
-                        <div class="flow-root ">
-                            <ul role="list" class="">
-                                <li class="py-3 sm:py-4">
-                                    {{-- nama --}}
-                                    <div class="flex items-center space-x-2">
-                                        <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="">
+                    {{-- table --}}
+                <div class="max-w-6xl mx-auto mb-2">
+                    <div class="flex flex-col">
+                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-200 w-full dark:text-gray-400">                                                {{-- user name --}}
+                                        <tr class="border-b">
+                                            <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                                                 Nama
-                                            </p>
-                                        </div>
-                                            <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                {{ $user->name }}
-                                            </div>
-                                    </div>
-                                    {{-- end nama --}}
-                                    {{-- jabatan --}}
-                                    <div class="flex items-center space-x-2">
-                                        <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Jabatan
-                                            </p>
-                                        </div>
-                                            <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                {{ $role }}
-                                            </div>
-                                    </div>
-                                    {{-- end jabatan --}}
-                                    {{-- email --}}
-                                    <div class="flex items-center space-x-2">
-                                        <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Email
-                                            </p>
-                                        </div>
-                                        <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                            {{ $email }}
-                                        </div>
-                                    </div>
-                                    {{-- end email --}}
-                                     {{-- Address --}}
-                                     <div class="flex items-center space-x-2">
-                                        <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Alamat
-                                            </p>
-                                        </div>
-                                        @isset($address)
-                                            <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                {{ $address }}
-                                            </div>
-                                        @endisset
-                                        @empty($address)
-                                        <div class="justify-center items-left text-base font-medium text-yellow-400">
-                                            {{ __('Alamat Belum dibuat..') }}
-                                        </div>
-                                        @endempty
-                                    </div>
-                                    {{-- end Address --}}
-                                     {{-- nis --}}
-                                     @if ($user->role_id == 3)
-                                        <div class="flex items-center space-x-2">
-                                            <div class="flex-1 min-w-0 px-2">
-                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                    NISN
-                                                </p>
-                                            </div>
-                                            @isset($nisn)
-                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                    {{ $nisn }}
-                                                </div>
-                                            @endisset
-                                            @empty($nisn)
-                                            <div class="justify-center items-left text-base font-medium text-yellow-400">
-                                                {{ __('NISN belum ada..') }}
-                                            </div>
-                                            @endempty
-                                        </div>
-                                     @endif
-                                    {{-- end nis --}}
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    {{-- data Kelas --}}
-                    @if ($user->role_id == 2 || $user->role_id == 3)
-                        <div class="divide-y">
-                            <div class="flex items-center  justify-center mb-2 ">
-                                <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
-                                    {{__('Data Kelas')}}
-                                </h5>
-                            </div>
-                            <div class="flow-root ">
-                                <ul role="list" class="">
-                                    <li class="py-3 sm:py-4">
-                                        {{-- Kelas --}}
-                                        <div class="flex items-center space-x-2">
+                                            </th>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                    {{ $user->name }}
+                                                </td>
+                                            </tr>
+                                            {{-- end user name --}}
+                                            {{-- role name --}}
+                                            <tr class="border-b">
+                                                <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                    Jabatan
+                                                </th>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                    {{ $user->role->name}}
+                                                </td>
+                                            </tr>
+                                            {{-- end role name --}}
+                                            {{-- email user --}}
+                                            <tr class="border-b">
+                                                <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                    Email
+                                                </th>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                    {{ $user->email}}
+                                                </td>
+                                            </tr>
+                                            {{-- end email user --}}
+                                            {{-- address user --}}
+                                            <tr class="border-b">
+                                                <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                    Alamat
+                                                </th>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                    {{ $user->address}}
+                                                </td>
+                                            </tr>
+                                            {{-- end address user --}}
+                                            {{-- if role teacher --}}
                                             @if ($user->role_id == 2)
-                                            <div class="flex-1 min-w-0 px-2">
-                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                    Kelas
-                                                </p>
-                                            </div>
-                                                @if ($home_teacher_name == '')
-                                                    <div class="justify-center items-left text-base font-medium text-yellow-400">
-                                                        {{ __('Belum jadi wali kelas..') }}
-                                                    </div>
-                                                @else
-                                                    <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                        {{ $home_teacher_name->name }}
-                                                    </div>
-                                                @endif
-                                            @endif
-
-                                            @if ($user->role_id == 3)
-                                                <div class="flex-1 min-w-0 px-2">
-                                                    <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                        Kelas
-                                                    </p>
-                                                </div>
-                                                @isset($classroom)
-                                                    <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                        {{ $classroom }}
-                                                    </div>
-                                                @endisset
-                                                @empty($classroom)
-                                                    <div class="justify-center items-left text-base font-medium text-yellow-400">
-                                                        {{ __('Belum Masuk kelas..') }}
-                                                    </div>
-                                                @endempty
-                                            @endif
-                                        </div>
-                                        {{-- end Kelas --}}
-                                        {{-- Wali Kelas --}}
-                                        <div class="flex items-center space-x-2">
-                                            @if ($user->role_id == 3)
-                                                <div class="flex-1 min-w-0 px-2">
-                                                    <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
+                                            {{-- administration subject name --}}
+                                            <tr class="border-b">
+                                                <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                    Mata Pelajaran
+                                                </th>
+                                                    @forelse ($subject_teacher as $subject)
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 text-gray-700 bg-white bg-gray-400 divide-y divide-gray-200">
+                                                            <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400">
+                                                                <li>
+                                                                    {{ $subject->name }}
+                                                                </li>
+                                                            </ul>
+                                                            @empty
+                                                                <p class="font-bold text-yellow-400">
+                                                                    {{ __('Mata Pelajaran Belun ada') }}
+                                                                </p>
+                                                            @endforelse
+                                                        </td>
+                                                </tr>
+                                                {{-- end administration subject name --}}
+                                                {{-- home teacher classroom --}}
+                                                <tr class="border-b">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                                                         Wali Kelas
-                                                    </p>
-                                                </div>
-                                                @isset($home_teacher)
-                                                    <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                        {{ $home_teacher->name }}
-                                                    </div>
-                                                @endisset
-                                                @empty($home_teacher)
-                                                    <div class="justify-center items-left text-base font-medium text-yellow-400">
-                                                        {{ __('Belum Terdaftar dalam kelas..') }}
-                                                    </div>
-                                                @endempty
-                                            @endif
-                                        </div>
-                                        {{-- end WaliKelas --}}
-                                         {{-- Jumlah Siswa --}}
-                                         <div class="flex items-center space-x-2">
-                                                <div class="flex-1 min-w-0 px-2">
-                                                    <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                        Jumlah Siswa
-                                                    </p>
-                                                </div>
-                                                    <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                        {{ $amount_student }}
-                                                    </div>
-                                        </div>
-                                        {{-- end Jumlah Siswa --}}
-                                         {{-- Jumlah MaPel Kelas --}}
-                                         <div class="flex items-center space-x-2">
-                                            <div class="flex-1 min-w-0 px-2">
-                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                    Jumlah Mapel
-                                                </p>
-                                            </div>
-                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                    {{ $amount_subject_classroom }}
-                                                </div>
+                                                    </th>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                        {{ $home_teacher_classroom->name}}
+                                                    </td>
+                                                </tr>
+                                                {{-- end home teacher classroom --}}
+                                                @endif
+                                                {{-- end if role teacher --}}
+
+                                                {{-- if role student --}}
+                                                @if ($user->role_id == 3)
+                                                {{-- classroom name --}}
+                                                <tr class="border-b">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                        Kelas
+                                                    </th>
+                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                        {{ $classroom}}
+                                                    </td>
+                                                </tr>
+                                                {{-- end classroom name --}}
+
+                                                {{-- NISN student --}}
+                                                <tr class="border-b">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                        NISN
+                                                    </th>
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                            {{ $nisn}}
+
+                                                            @empty($nisn)
+                                                                <p class="font-bold text-yellow-900">
+                                                                    {{ __('NISN Belun ada') }}
+                                                                </p>
+                                                            @endempty
+                                                        </td>
+                                                </tr>
+                                                {{-- end NISN student --}}
+
+                                                 {{-- home teacher student --}}
+                                                 <tr class="border-b">
+                                                    <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                        Wali Kelas
+                                                    </th>
+                                                    @forelse ($teacher as $home_teacher)
+                                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                            {{ $home_teacher->name}}
+                                                        </td>
+                                                    @empty
+                                                        <p>
+                                                            {{ __('Belum ada wali kelas.') }}
+                                                        </p>
+                                                    @endforelse
+                                                </tr>
+                                                {{-- end home teacher student --}}
+
+                                                @endif
+                                                {{-- end if role student --}}
+                                        </table>
                                     </div>
-                                    {{-- end Jumlah Mapel Kelas --}}
-                                    </li>
-                                </ul>
+                                </div>
                             </div>
                         </div>
-                        @endif
-                        {{-- end Data Kelas --}}
-                        {{-- data Mata Pelajaran --}}
-                    @if ($user->role_id == 2 || $user->role_id == 3)
-                    <div class="divide-y">
-                        <div class="flex items-center  justify-center mb-2 ">
-                            <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
-                                {{__('Data Mapel')}}
-                                <span class="capitalize">
-                                    {{$role}}
-                                </span>
-                            </h5>
-                        </div>
-                        <div class="flow-root ">
-                            <ul role="list" class="">
-                                <li class="py-3 sm:py-4">
-                                    {{-- Nama Mata Pelajaran --}}
-                                    <div class="flex items-center space-x-2">
-                                        {{-- mata pelajaran student --}}
-                                        @if ($user->role_id == 3)
-                                            <div class="flex-1 min-w-0 px-2">
-                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                    Nama Mata Pelajaran
-                                                </p>
-                                            </div>
-                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                    @forelse ($subject_student as $subject)
-                                                        <p class="text-sm font-medium inline-block lowercase text-gray-900 truncate dark:text-white">
-                                                            {{$subject->name}}
-                                                        </p>
-                                                    @empty
-                                                        <div class="justify-center items-left text-base font-medium text-yellow-400">
-                                                            {{ __('Mata Pelajaran Belum ada..') }}
-                                                        </div>
-                                                    @endforelse
-                                                </div>
-                                        @endif
-                                        {{-- end mata pelajaran student --}}
-
-                                        @if ($user->role_id == 2)
-                                        <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Nama Mata Pelajaran
-                                            </p>
-                                        </div>
-                                            <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                @forelse ($subject_teacher as $subject)
-                                                    <p class="text-sm font-medium inline-block lowercase text-gray-900 truncate dark:text-white">
-                                                        {{$subject->name}}
-                                                    </p>
-                                                @empty
-                                                    <div class="justify-center items-left text-base font-medium text-yellow-400">
-                                                        {{ __('Mata Pelajaran Belum ada..') }}
-                                                    </div>
-                                                @endforelse
-                                            </div>
-                                        @endif
-                                    </div>
-                                    {{-- end Nama Mata Pelajaran --}}
-                                    {{-- Jumlah Mata Pelajaran --}}
-                                    <div class="flex items-center space-x-2">
-                                        @if ($user->role_id == 3)
-                                            <div class="flex-1 min-w-0 px-2">
-                                                <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                   Jumlah Mapel
-                                                </p>
-                                            </div>
-                                                <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                    {{ $amount_subject_student }}
-                                                </div>
-                                        @endif
-                                    </div>
-                                    {{-- end Jumlah Mata Pelajaran --}}
-                                </li>
-                            </ul>
-                        </div>
+                        {{-- end table --}}
                     </div>
-                    @endif
-                    {{-- end Data Mata Pelajaran --}}
-                   {{-- button --}}
-                    <div class="divide-y">
-                       <div class=" px-4 py-3 item-center justify-center w-full sm:px-6 sm:flex sm:flex-row-reverse">
-                           <span class="mt-3 flex w-full item-center rounded-md shadow-sm sm:mt-0 sm:w-auto">
-                               <button wire:click="closeModalDetail()"
-                               type="button" class="item-center inline-flex bg-green-600 justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gren-300 text-base leading-6 font-medium text-white shadow-sm hover:bg-green-400 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-                                Kembali
-                                </button>
-                            </span>
-                        </div>
                     </div>
-                   {{-- / button --}}
-                </div>
-                {{-- end card --}}
+                    <div class="bg-gray-50 px-4 py-2 sm:px-6 sm:flex sm:flex-row-reverse">
+                      <span class="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:w-auto">
+                        <button wire:click="closeModalDetail()" type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-gray-600 text-base leading-6 font-bold text-white shadow-sm hover:bg-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                          Kembali
+                        </button>
+                      </span>
             </div>
           </div>
         </div>

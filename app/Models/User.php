@@ -64,7 +64,7 @@ class User extends Authenticatable
 
     public function classroom()
     {
-        return $this->belongsTo(Classroom::class, 'classroom_id', 'id');
+        return $this->belongsTo(Classroom::class);
     }
 
     public function subjectUser()
@@ -74,7 +74,7 @@ class User extends Authenticatable
 
     public function subjectTeacher()
     {
-        return $this->hasMany(Subject::class, 'user_id');
+        return $this->hasMany(Subject::class);
     }
 
     public function homeTeacher()

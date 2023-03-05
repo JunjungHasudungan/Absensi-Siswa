@@ -93,7 +93,6 @@
                         </div>
                     </div>
                     {{-- end mata pelajaran --}}
-
                    {{-- button --}}
                     <div class="divide-y">
                        <div class=" px-4 py-3 item-center justify-center w-full sm:px-6 sm:flex sm:flex-row-reverse">
@@ -106,7 +105,6 @@
                         </div>
                     </div>
                    {{-- / button --}}
-
                 </div>
                 {{-- end card --}}
             </div>

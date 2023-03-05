@@ -25,7 +25,7 @@ class User extends Component
             $classroom,
             $classrooms,
             $home_teacher,
-            $home_teacher_name,
+            $home_teacher_classroom,
             $classroom_id,
             $amount_student,
             $amount_subject_classroom,
@@ -41,6 +41,8 @@ class User extends Component
             $user_classroom,
             $is_student,
             $is_teacher,
+            $teacher,
+            $teacher_id,
             $search,
             $page = 1,
             $is_create = false,
@@ -111,15 +113,25 @@ class User extends Component
 
     public function detailUser($id_user)
     {
-        $user = Users::with(['classroom', 'homeTeacher', 'subjectUser'])->find($id_user);
+        $user = Users::with(['classroom', 'homeTeacher', 'subjectUser', 'subjectTeacher'])->find($id_user);
         $this->user = $user;
         $this->openModalDetail();
         $this->classroom = $user->classroom->name ??  ''; // classroom name
+        $classroom_id_student = $user->classroom->id ?? ''; // classroom id student
+        $classroom_student = Classrooms::where('id', $classroom_id_student)->get(); // id classroom
+
+        foreach($classroom_student as $classroom){
+            $this->teacher_id = $classroom->user_id;
+        }
+        $this->teacher = Users::select('name')->with(['homeTeacher'])->where('role_id', 2)
+                            ->where('id', $this->teacher_id)->get(); // home teacher name
+
         $id_student_classroom = $user->classroom->user_id ?? '' ;
-        $id_classroom = $user->homeTeacher->id ?? ''; // id classroom user
+        $id_classroom = $user->homeTeacher->id ?? ''; // id classroom teacher
+        // dd($classroom_name_student);
         $this->subject_student = $user->subjectUser ?? ''; // mata pelajaran siswa
-        $this->subject_teacher = $user->subjectTeacher; // mata pelajaran untuk guru
-        $this->home_teacher_name = $user->homeTeacher ?? ''; // nama wali kelas
+        $this->subject_teacher = $user->subjectTeacher ?? ''; // mata pelajaran untuk guru
+        $this->home_teacher_classroom = $user->homeTeacher ?? ''; // nama kelas wali
         $this->amount_subject_classroom = DB::table('classroom_subject')->where('classroom_id', $id_classroom)->count();
         $this->amount_student = Users::where('classroom_id', $id_classroom)->where('role_id', 3)->count();
         $this->amount_subject_student = count($user->subjectUser) ?? '';
