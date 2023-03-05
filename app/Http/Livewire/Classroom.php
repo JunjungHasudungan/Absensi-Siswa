@@ -31,6 +31,7 @@ class Classroom extends Component
             $subject_classroom,
             $subject_amount,
             $name,
+            $teacher,
             $teachers,
             $home_teacher,
             $student_name,
@@ -130,6 +131,8 @@ class Classroom extends Component
     {
         $this->openModalDetail();
 
+        $this->classroom = $classroom->name;
+        $this->teacher = $classroom->homeTeacher;
         $this->student_name = $classroom->students; // nama siswa
         $this->student_amount = count($classroom->students); // jumlah siswa
         $this->subject_classroom = $classroom->subjectClassroom; // mata pelajaran kelas

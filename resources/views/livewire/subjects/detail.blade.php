@@ -22,78 +22,62 @@
                             {{__('Data Mata Pelajaran')}}
                         </h5>
                     </div>
-                        <div class="flow-root divide-y">
-                            <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-                                <li class="py-3 sm:py-4">
-                                    {{-- nama --}}
-                                    <div class="flex items-center space-x-2">
-                                        <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Nama
-                                            </p>
-                                        </div>
-                                            <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                                {{ $name }}
-                                            </div>
-                                    </div>
-                                    {{-- end nama --}}
-                                    {{-- kelas --}}
-                                    <div class="flex items-center space-x-2">
-                                        <div class="flex-1 min-w-0 px-2">
-                                            <p class="text-sm font-bold text-gray-900 truncate dark:text-white">
-                                                Guru
-                                            </p>
-                                        </div>
 
-                                        <div class="justify-center items-left text-base font-medium text-gray-900 dark:text-white">
-                                            {{ $teacher_name }}
-                                        </div>
-                                    </div>
-                                    {{-- end kelas --}}
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                     {{-- end mata pelajaran --}}
-                    {{-- Kelas --}}
-                   <div class="divide-y">
-                    <div class="flex items-center  justify-center mb-2 ">
-                        <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
-                            {{__('Data Kelas')}}
-                        </h5>
-                    </div>
-                        {{-- table --}}
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3">
-                                            Nama Kelas
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                            @forelse ($classroom_subject as $classroom)
-                                            <ul class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
-                                               <li>
-                                                    {{ $classroom->name }}
-                                                </li>
-                                            </ul>
-                                            @empty
+
+                    {{-- table --}}
+                    {{-- subjects --}}
+                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-4">
+                        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">
+                                        Nama
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Guru
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
+                                        Kelas
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    {{-- subject name --}}
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <p class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                            {{ $name }}
+                                        </p>
+                                    </td>
+                                    {{-- end subject name --}}
+                                    {{-- teacher name --}}
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        <p class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                            {{ $teacher_name }}
+                                        </p>
+                                    </td>
+                                    {{-- end teacher name --}}
+                                    {{-- classroom --}}
+                                    <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        @forelse ($classroom_subject as $classroom)
+                                        <ul class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                           <li>
+                                                {{ $classroom->name }}
+                                            </li>
+                                        </ul>
+                                        @empty
                                             <span class="font-bold text-yellow-400">{{ __('Data Kelas Belum dipilih..')}} </span>
-                                            @endforelse
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        {{-- end table --}}
+                                        @endforelse
+                                    </td>
+                                    {{-- end classroom --}}
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    {{-- end Kelas --}}
-
-
+                    {{-- end subject --}}
+                    {{-- end table --}}
                    {{-- button --}}
                     <div class="divide-y">
                        <div class=" px-4 py-3 item-center justify-center w-full sm:px-6 sm:flex sm:flex-row-reverse">

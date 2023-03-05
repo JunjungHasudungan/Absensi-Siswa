@@ -109,13 +109,14 @@ class User extends Component
         return $this->is_detail = true;
     }
 
-    public function detailUser(Users $user)
+    public function detailUser($id_user)
     {
+        $user = Users::with(['classroom', 'homeTeacher', 'subjectUser'])->find($id_user);
         $this->user = $user;
         $this->openModalDetail();
         $this->classroom = $user->classroom->name ??  ''; // classroom name
         $id_student_classroom = $user->classroom->user_id ?? '' ;
-        $id_classroom = $user->classroom->id ?? ''; // id classroom user
+        $id_classroom = $user->homeTeacher->id ?? ''; // id classroom user
         $this->subject_student = $user->subjectUser ?? ''; // mata pelajaran siswa
         $this->subject_teacher = $user->subjectTeacher; // mata pelajaran untuk guru
         $this->home_teacher_name = $user->homeTeacher ?? ''; // nama wali kelas
@@ -128,7 +129,6 @@ class User extends Component
         $this->nisn = $user->nisn ?? '';
         $this->role = $user->role->name;
         $this->home_teacher = Users::find($id_student_classroom);
-        // dd($user->classroom);
     }
 
     public function closeModalDetail()

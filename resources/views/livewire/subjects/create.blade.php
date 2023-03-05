@@ -82,13 +82,6 @@
                                 <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
                                     Nama Kelas
                                 </th>
-                                <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
-                                    Hari
-                                </th>
-
-                                <th scope="col" class="px-4 px-3">
-
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
