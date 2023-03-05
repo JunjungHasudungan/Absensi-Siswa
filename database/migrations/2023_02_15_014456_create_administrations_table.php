@@ -27,7 +27,9 @@ return new class extends Migration
             $table->integer('completeness')->default(0);
             $table->foreignIdFor(Classroom::class);
             $table->foreignIdFor(Subject::class);
-            $table->foreignIdFor(User::class);
+            $table->unsignedBigInteger('teacher_id');
+            $table->foreign('teacher_id')->references('id')->on('users');
+            // $table->for
             $table->timestamps();
         });
     }

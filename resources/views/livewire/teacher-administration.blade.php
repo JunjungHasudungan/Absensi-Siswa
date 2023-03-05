@@ -61,7 +61,7 @@
                         {{  $administration->subject->name ?? ''}}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $administration->user_id ?? '' }}
+                        {{ $administration->teacher->name ?? '' }}
                     </td>
                     <td class="px-6 py-4 item-center justify-center">
                         <button wire:click="reviewAdministration({{ $administration->id }})"

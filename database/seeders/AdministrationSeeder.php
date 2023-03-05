@@ -18,7 +18,7 @@ class AdministrationSeeder extends Seeder
                 'completeness'          => 0,
                 'classroom_id'          => 1,
                 'subject_id'            => 1,
-                'user_id'               => 4,
+                'teacher_id'            => 7,
         ],
     ];
 

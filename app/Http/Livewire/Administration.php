@@ -43,7 +43,7 @@ class Administration extends Component
         return view('livewire.administration', [
 
             $this->administrations = Administrations::with(['teacher', 'subject', 'classroom', 'comment'])
-                                    ->where('user_id', auth()->user()->id)->get(),
+                                    ->where('teacher_id', auth()->user()->id)->get(),
             $this->subjects = Subjects::with(['classroomSubject'])->where('user_id', Auth::id())->get() ?: 0,
         ]);
     }
@@ -61,7 +61,7 @@ class Administration extends Component
         'completeness'      => 'required',
         'classroom_id'      => 'required',
         'subject_id'        => 'required',
-        'user_id'           => 'required'
+        'teacher_id'           => 'required'
     ];
 
     public function isOpenModalCreate()
@@ -100,7 +100,7 @@ class Administration extends Component
                         'method_learning'   => $this->method_learning,
                         'subject_id'        => $this->subject_id,
                         'classroom_id'      => $this->classroom_id,
-                        'user_id'           => auth()->user()->id,
+                        'teacher_id'           => auth()->user()->id,
                     ]);
 
                     $this->resetField();
