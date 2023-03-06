@@ -172,7 +172,7 @@ class Administration extends Component
         $this->completeness = $administration->completeness;
         $this->subject = $administration->subject;
         $this->classroom = $administration->classroom;
-        dd($this->classroom);
+        // dd($this->classroom);
         // $$administration->teacher;
         // dd($administration);
 

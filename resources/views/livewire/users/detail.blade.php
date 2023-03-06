@@ -87,8 +87,16 @@
                                                         Wali Kelas
                                                     </th>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                                        {{ $home_teacher_classroom->name}}
-                                                    </td>
+                                                            @if ($home_teacher_classroom)
+                                                                <p class="text-blue-900 font-bold">
+                                                                    {{ $home_teacher_classroom->name}}
+                                                                </p>
+                                                                @else
+                                                                <p class="text-yellow-900 font-bold">
+                                                                    {{ __('Bukan Wali Kelas..') }}
+                                                                </p>
+                                                            @endif
+                                                        </td>
                                                 </tr>
                                                 {{-- end home teacher classroom --}}
                                                 @endif

@@ -94,6 +94,8 @@
                         @error('role_id') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
                     {{-- end select teacher --}}
+                    {{-- grid --}}
+                <div class="grid md:grid-cols-2 md:gap-6">
                     {{-- select classroom --}}
                     @if ($role_id == 3)
                     <div class="mb-6" wire:ignore>
@@ -122,38 +124,27 @@
                     </div>
 
                     {{-- multi select subject classroom --}}
-                    <div class="mb-2 w-full inline space-x-4 space-x-reverse">
-                        <table class="w-full text-sm rounded text-left text-gray-400">
-                            <thead class="text-xs text-gray-700 camelcase bg-gray-50 text-gray-400">
-                                <tr>
-                                    <th scope="col" class="px-4 px-3 text-sm font-bold text-gray-900">
-                                       NISN
-                                    </th>
 
-                                    <th scope="col" class="px-4 px-3">
-
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white w-full">
-                                    <td class="px-4 py-4">
-                                        <input  type="text"
-                                        wire:model="nisn"
-                                        class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700
-                                        leading-tight focus:outline-none focus:shadow-outline"
-                                        id="exampleFormControlInput2"
-                                        placeholder="NISN User..">
-                                        @error('nisn') <span class="text-red-500">{{ $message }}</span>@enderror
-                                        </td>
-                                    </tr>
-                            </tbody>
-                        </table>
+                    <div class="mb-4">
+                        <label for="exampleFormControlInput2"
+                            class="block text-gray-700 text-sm font-bold mb-2">
+                            NISN:
+                        </label>
+                        <input  type="text"
+                            wire:model="nisn"
+                            class="shadow appearance-none border rounded w-auto py-2 px-3 text-gray-700
+                            leading-tight focus:outline-none focus:shadow-outline"
+                            id="exampleFormControlInput2"
+                            placeholder="NISN Murid..">
+                            @error('nisn') <span class="text-red-500">{{ $message }}</span>@enderror
+                        {{-- end addres --}}
+                    </div>
                 </div>
                     {{-- end multi select subject classroom --}}
                     @endif
                     {{-- end select classroom --}}
               </div>
+              {{-- end grid --}}
             </div>
 
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">

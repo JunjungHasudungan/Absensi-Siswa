@@ -95,7 +95,7 @@ class Subject extends Component
     // create properties rules
     protected $rules = [
         'code_subject'     =>  'required|string|max:30|min:3',
-        'name'             =>  'required|string|max:25|min:4',
+        'name'             =>  'required|string|max:25|min:3',
         'user_id'          =>  'required|integer',
         // 'classroom_id'     =>   'required',
     ];

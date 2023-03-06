@@ -50,6 +50,8 @@ class User extends Component
             $is_search = false,
             $is_detail = false;
 
+    public $subjectStudent = [];
+
     public function render()
     {
         $searchParam = '%' . $this->search . '%'; // var for search field
@@ -155,11 +157,22 @@ class User extends Component
 
     public function editUser(Users $user)
     {
+        $this->user = $user;
         $this->openModalEdit();
+        $this->name = $user->name;
+        $this->email = $user->email;
+        $this->password = '';
+        $this->address = $user->address;
+        $this->classroom = $user->classroom ?? ''; // classroom student
+        $this->home_teacher = $user->homeTeacher ?? '';
+        $this->subject_student = $user->subjectUser ?: 0;
+        $this->nisn = $user->nisn ?? '';
+        $this->roles = $user->role;
+        $this->id_role = $user->role_id = 3;
+        // dd($this->id_role);
+        // $this->role_id = $user->role_id;
+        // dd($this->role_id);
 
-        $this->user_classroom = Users::find($user);
-
-        dd($user);
     }
 
     public function closeModalEdit()
@@ -187,7 +200,7 @@ class User extends Component
             'password'              => 'required',
             'role_id'               => 'required',
             'address'               => 'nullable',
-            'nisn'                  => 'nullable',
+            'nisn'                  => 'nullable|unique',
             'classroom_id'          => 'nullable'
         ],[
             'name'                  => 'Nama Wajib di isi..',
@@ -195,7 +208,7 @@ class User extends Component
             'email.required'        => 'nama email sudah dipakai',
             'password'              => 'Password Wajib disi',
             'address.nullable'      => 'Alamat siswa wajib diisi..',
-            'nisn.nullable'         => 'NISN siswa wajib diisi..',
+            'nisn.unique'           => 'NISN siswa wajib diisi..',
             'classroom_id.required' => 'Kelas wajib dipilih..',
             'role_id.required'      => 'Jabatan wajib dipilih..',
         ]);

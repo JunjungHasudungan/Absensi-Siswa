@@ -42,6 +42,10 @@
                 @if (!$is_search)
                     @include('livewire.users.search-user')
                 @endif
+
+                @if ($is_edit)
+                    @include('livewire.users.edit')
+                @endif
             {{-- end search --}}
         </div>
     </div>
