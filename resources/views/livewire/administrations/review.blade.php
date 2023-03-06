@@ -116,7 +116,19 @@
                                                 Check Status
                                             </th>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                                @if ($status == 0)
+                                               {{-- <livewire:toggle-switch
+                                                            :model="$status"
+                                                            field= $administration.status /> --}}
+
+                                                    @livewire('toggle-switch',[
+                                                        'model' => $administration,
+                                                        'field' => 'status'
+                                                    ])
+
+
+
+                                                {{-- @livewire('toggle-switch', ['model' => $status], key($status)) --}}
+                                                {{-- @if ($status == 0)
                                                     <span class="text-xs font-bold inline-block py-1 px-2 rounded-full text-emerald-600 bg-yellow-200 capitalize last:mr-0 mr-1">
                                                         {{ __('Belum Di Check')}}
                                                     </span>
@@ -124,7 +136,7 @@
                                                     <span class="text-xs font-bold inline-block py-1 px-2 rounded-full text-emerald-600 bg-blue-200 capitalize last:mr-0 mr-1">
                                                         {{ __('Sudah Di Check')}}
                                                     </span>
-                                                @endif
+                                                @endif --}}
                                             </td>
                                         </tr>
                                         @livewire('administration-comment')

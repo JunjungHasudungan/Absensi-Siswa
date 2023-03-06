@@ -23,13 +23,11 @@ return new class extends Migration
             $table->string('title');
             $table->integer('method_learning')->default(0);
             $table->integer('status')->default(0);
-            // $table->string('comment')->nullable();
             $table->integer('completeness')->default(0);
             $table->foreignIdFor(Classroom::class);
             $table->foreignIdFor(Subject::class);
             $table->unsignedBigInteger('teacher_id');
             $table->foreign('teacher_id')->references('id')->on('users');
-            // $table->for
             $table->timestamps();
         });
     }

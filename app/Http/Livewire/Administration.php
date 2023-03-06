@@ -55,13 +55,13 @@ class Administration extends Component
     ];
 
     protected $rules = [
-        'title'             => 'required|string|max:20',
-        'method_learning'   => 'required',
-        'status'            => 'required',
-        'completeness'      => 'required',
-        'classroom_id'      => 'required',
-        'subject_id'        => 'required',
-        'teacher_id'           => 'required'
+        'title'                 => 'required|string|max:20',
+        'method_learning'       => 'required|integer',
+        'status'                => 'required|integer',
+        'completeness'          => 'required|integer',
+        'classroom_id'          => 'required|integer',
+        'subject_id'            => 'required|integer',
+        'teacher_id'            => 'required|integer'
     ];
 
     public function isOpenModalCreate()
@@ -80,7 +80,7 @@ class Administration extends Component
             $this->isOpenModalCreate();
 
                 $this->validate([
-                    'title'                         => 'required',
+                    'title'                         => 'required|string|max:25|min:5',
                     'subject_id'                    => 'required',
                     'classroom_id'                  => 'required',
                     'method_learning'               => 'required',
@@ -170,6 +170,9 @@ class Administration extends Component
         $this->subject = $administration->subject;
         $this->title = $administration->title;
         $this->completeness = $administration->completeness;
+        $this->subject = $administration->subject;
+        $this->classroom = $administration->classroom;
+        dd($this->classroom);
         // $$administration->teacher;
         // dd($administration);
 
