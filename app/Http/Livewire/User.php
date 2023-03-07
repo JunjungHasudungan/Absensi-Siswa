@@ -32,6 +32,7 @@ class User extends Component
             $amount_subject_student,
             $subject_teacher,
             $subject_student,
+            $classroom_subject,
             $nisn,
             $address,
             $password,
@@ -72,7 +73,7 @@ class User extends Component
         'email'             => 'required|unique',
         'password'          => 'required',
         'role_id'           => 'required',
-        'classroom_id'      => 'nullable',
+        // 'classroom_id'      => 'nullable|array',
         'nisn'              => 'nullable',
         'address'           => 'nullable'
     ];
@@ -155,8 +156,9 @@ class User extends Component
         return $this->is_edit = true;
     }
 
-    public function editUser(Users $user)
+    public function editUser($id_user)
     {
+        $user = Users::find($id_user);
         $this->user = $user;
         $this->openModalEdit();
         $this->name = $user->name;
@@ -167,12 +169,11 @@ class User extends Component
         $this->home_teacher = $user->homeTeacher ?? '';
         $this->subject_student = $user->subjectUser ?: 0;
         $this->nisn = $user->nisn ?? '';
-        $this->roles = $user->role;
-        $this->id_role = $user->role_id = 3;
-        // dd($this->id_role);
-        // $this->role_id = $user->role_id;
-        // dd($this->role_id);
-
+        $this->role = $user->role;
+         $id_role = $this->role->id;
+        $this->roles = Roles::where('id', $id_role)->get();
+        $this->classroom_subject = Subjects::with('classroomSubject')->get();
+        $this->id_user = $user->id;
     }
 
     public function closeModalEdit()
@@ -232,6 +233,37 @@ class User extends Component
 
         $this->dispatchBrowserEvent('toastr:info', [
             'message'   => 'Data Berhasil ditambahkan...'
+        ]);
+    }
+
+    public function updateUser($id_user)
+    {
+        $user = Users::find($id_user);
+
+        $this->validate([
+            'password'      => 'required',
+            'role_id'       => 'required'
+        ],[
+            'password.required'     => 'Password wajib diisi..',
+            'role_id.required'      => 'Jabatan Wajib diisi..'
+        ]);
+
+        $user->update([
+            'name'              => $this->name,
+            'address'           => $this->address,
+            'password'          => bcrypt($this->password),
+            'email'             => $this->email,
+            'nisn'              => $this->nisn ?? '',
+            'role_id'           => $this->role_id,
+            'classroom_id'      => $this->classroom_id ?:  null,
+        ]);
+
+        $this->closeModalEdit();
+
+        $this->resetField();
+
+        $this->dispatchBrowserEvent('toastr:info', [
+            'message'   => 'Data Berhasil diupdate...'
         ]);
     }
 
