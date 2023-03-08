@@ -11,6 +11,7 @@ use App\Models\{
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class User extends Component
 {
@@ -24,10 +25,13 @@ class User extends Component
             $id_user,
             $classroom,
             $classrooms,
+            $all_classroom,
             $home_teacher,
             $home_teacher_classroom,
+            $get_classroom = '',
             $classroom_id,
             $amount_student,
+            $selectGroup,
             $amount_subject_classroom,
             $amount_subject_student,
             $subject_teacher,
@@ -50,8 +54,15 @@ class User extends Component
             $is_edit = false,
             $is_search = false,
             $is_detail = false;
+        public $testing = 'testing';
 
-    public $subjectStudent = [];
+    public $selected = [];
+    public $clasroomSubject = [];
+
+    public function setClassroom($id_classroom){
+        $this->get_classroom = $id_classroom;
+        dd($this->get_classroom);
+    }
 
     public function render()
     {
@@ -60,10 +71,11 @@ class User extends Component
             $this->users = Users::all(),
             $this->roles = Roles::all(),
             $this->users = Users::with(['role', 'classroom', 'homeTeacher', 'subjectUser'])
-                            ->where('name', 'LIKE', $searchParam)
-                            ->orWhere('role_id', 'LIKE', $searchParam)->get(),
+            ->where('name', 'LIKE', $searchParam)
+            ->orWhere('role_id', 'LIKE', $searchParam)->get(),
             $this->classrooms = Classrooms::all(),
             $this->is_teacher = Users::where('role_id', 2)->get(),
+            // $this->getClassroom(),
 
         ]);
     }
@@ -73,7 +85,7 @@ class User extends Component
         'email'             => 'required|unique',
         'password'          => 'required',
         'role_id'           => 'required',
-        // 'classroom_id'      => 'nullable|array',
+        'classroom_id'      => 'nullable|array',
         'nisn'              => 'nullable',
         'address'           => 'nullable'
     ];
@@ -95,6 +107,16 @@ class User extends Component
     public function closeModalCreate()
     {
         return $this->is_create = false;
+    }
+
+    public function getClassroom()
+    {
+        $classrooms = Classrooms::all();
+        foreach($classrooms as $classroom){
+            $this->all_classroom = $classroom;
+
+        }
+        dd($classrooms);
     }
 
     public function resetField()
@@ -144,6 +166,8 @@ class User extends Component
         $this->nisn = $user->nisn ?? '';
         $this->role = $user->role->name;
         $this->home_teacher = Users::find($id_student_classroom);
+        $this->all_classroom = Classrooms::select('name')->get();
+        // $this->testing;
     }
 
     public function closeModalDetail()
@@ -154,6 +178,17 @@ class User extends Component
     public function openModalEdit()
     {
         return $this->is_edit = true;
+    }
+
+    public function updated($key, $value)
+    {
+        $explode = Str::of($key)->explode('.');
+       if($explode[0] === 'selectGroup' && is_numeric($value)){
+
+       }elseif ($explode[0] === 'selectGrop' && empty($value)) {
+        # code...
+       }
+
     }
 
     public function editUser($id_user)
@@ -170,11 +205,17 @@ class User extends Component
         $this->subject_student = $user->subjectUser ?: 0;
         $this->nisn = $user->nisn ?? '';
         $this->role = $user->role;
-         $id_role = $this->role->id;
+        $id_role = $this->role->id;
         $this->roles = Roles::where('id', $id_role)->get();
         $this->classroom_subject = Subjects::with('classroomSubject')->get();
+        $get_classroom = $user->classroom_id;
+        // dd($get_classroom);
+
+        $this->all_classroom = Classrooms::all();
         $this->id_user = $user->id;
+        // $this->setClassroom($get_classroom);
     }
+
 
     public function closeModalEdit()
     {
