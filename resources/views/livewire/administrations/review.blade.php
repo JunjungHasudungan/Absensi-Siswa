@@ -108,52 +108,31 @@
                                             </td>
                                         </tr>
                                         {{-- end completeness --}}
-
-
                                         {{-- status check --}}
                                         <tr class="border-b">
                                             <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
                                                 Check Status
                                             </th>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                               {{-- <livewire:toggle-switch
-                                                            :model="$status"
-                                                            field= $administration.status /> --}}
 
                                                     @livewire('toggle-switch',[
                                                         'model' => $administration,
                                                         'field' => 'status'
                                                     ])
-
-
-
-                                                {{-- @livewire('toggle-switch', ['model' => $status], key($status)) --}}
-                                                {{-- @if ($status == 0)
-                                                    <span class="text-xs font-bold inline-block py-1 px-2 rounded-full text-emerald-600 bg-yellow-200 capitalize last:mr-0 mr-1">
-                                                        {{ __('Belum Di Check')}}
-                                                    </span>
-                                                @else
-                                                    <span class="text-xs font-bold inline-block py-1 px-2 rounded-full text-emerald-600 bg-blue-200 capitalize last:mr-0 mr-1">
-                                                        {{ __('Sudah Di Check')}}
-                                                    </span>
-                                                @endif --}}
                                             </td>
                                         </tr>
                                         @livewire('administration-comment')
 
-
-                                        {{-- <tr class="border-b">
-                                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">
-                                                Status
+                                        {{-- created_at --}}
+                                        <tr class="border-b">
+                                            <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                               Waktu Pembuatan
                                             </th>
-                                            <td class="px-6 py-4 whitespace-nowrap mt-2 text-sm text-gray-900 bg-white divide-y divide-gray-200">
-
-                                                @livewire('toggle-switch',[
-                                                    'model'     => $teacherAdministration,
-                                                    'field'     => 'statusCheck',
-                                                ])
+                                            <td class="px-6 py-4 whitespace-nowrap bg-gray-400 text-sm text-gray-700 divide-y divide-gray-200">
+                                                {{ $created_at }}
                                             </td>
-                                        </tr> --}}
+                                        </tr>
+                                        {{-- end created_at --}}
                                     </table>
                                 </div>
                             </div>

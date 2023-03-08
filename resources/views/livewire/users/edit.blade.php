@@ -111,7 +111,11 @@
                             <div class=" flex flex-col">
                                 @foreach ($all_classroom as $classroom)
                                     <div class="flex items-center pl-3">
-                                        <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> {{ $classroom->name }} </label>
+                                        <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Kelas:
+                                            <span class="font-bold">
+                                                {{ $classroom->name }}
+                                                </span>
+                                            </label>
                                     </div>
                                     @forelse ($classroom->subjectClassroom as $subject)
                                         <div class="flex items-center pl-8">

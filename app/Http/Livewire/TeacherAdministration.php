@@ -69,6 +69,7 @@ class TeacherAdministration extends Component
         $this->completeness = $this->administration->completeness;
         $this->status = $this->administration->status;
         $this->comment = $this->administration->comment;
+        $this->created_at = $this->administration->created_at->diffForHumans();
     }
 
     public function sendComment($comment)

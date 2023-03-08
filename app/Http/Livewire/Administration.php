@@ -8,6 +8,7 @@ use App\Models\{
     Classroom as Classrooms,
     Subject as Subjects,
 };
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 // use App\Models\Subject;
@@ -35,6 +36,7 @@ class Administration extends Component
             $classroom_id,
             $subject_id,
             $user_id,
+            $created_at,
             $teacher_id;
 
 
@@ -172,6 +174,12 @@ class Administration extends Component
         $this->completeness = $administration->completeness;
         $this->subject = $administration->subject;
         $this->classroom = $administration->classroom;
+        $this->status = $administration->status;
+        $this->method_learning = $administration->method_learning;
+        $this->comment = $administration->comment ?: 0;
+        $this->created_at = $administration->created_at->diffForHumans();
+        // dd($this->comment);;
+        // $this->comment = $administration->
         // dd($this->classroom);
         // $$administration->teacher;
         // dd($administration);
