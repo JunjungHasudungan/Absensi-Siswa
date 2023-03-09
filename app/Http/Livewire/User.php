@@ -51,6 +51,7 @@ class User extends Component
             $search,
             $page = 1,
             $is_create = false,
+            $showModal = false,
             $is_edit = false,
             $is_search = false,
             $is_detail = false;
@@ -102,6 +103,7 @@ class User extends Component
 
     protected $listeners = [
         'deleteClassroom',
+        'openModal'
     ];
 
     public function closeModalCreate()
@@ -190,6 +192,15 @@ class User extends Component
        }
 
     }
+    public function openModal()
+    {
+        $this->showModal = true;
+    }
+
+    public function closeModal()
+    {
+        $this->showModal = false;
+    }
 
     public function editUser($id_user)
     {
@@ -209,11 +220,14 @@ class User extends Component
         $this->roles = Roles::where('id', $id_role)->get();
         $this->classroom_subject = Subjects::with('classroomSubject')->get();
         $get_classroom = $user->classroom_id;
-        // dd($get_classroom);
-
         $this->all_classroom = Classrooms::all();
-        $this->id_user = $user->id;
-        // $this->setClassroom($get_classroom);
+    }
+
+    public function showClassroomSubject($id_classroom)
+    {
+        $this->openModal();
+        $this->classrooms = Classrooms::with('subjectClassroom')->where('id', $id_classroom)->get();
+
     }
 
 

@@ -15,6 +15,7 @@ class ClassroomSubject extends Component
             $classroom,
             $classrooms,
             $classroom_id,
+            $all_classroom,
             $select_subject = '',
             $subject_id;
     public $all_subject = [];
@@ -31,6 +32,12 @@ class ClassroomSubject extends Component
     {
         return view('livewire.classroom-subject', [
             $this->subjects = Subjects::with('classroomSubject')->get(),
+            $this->all_classroom = Classrooms::with('subjectClassroom')->get(),
         ]);
+    }
+
+    public function closeClassroomSubject($id_classroom)
+    {
+        dd($id_classroom);
     }
 }
