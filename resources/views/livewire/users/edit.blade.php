@@ -105,21 +105,46 @@
                     @if ($role_id == 3)
                     <div class="mb-6">
                         <label for="role_id" class="block mb-2 text-sm font-bold text-gray-900">
-                            Pilih Kelas:
+                            Pilih Kelas :
                         </label>
-                        <div class="w-full">
-
-                            <ul class="space-y-4 text-gray-500 mt-2 px-2 divide-y divide-blue-200 border-slate-300 hover:border-slate-400  py-2 border rounded-lg list-disc list-inside dark:text-gray-400">
+                        <div class="w-full border border-slate-400 rounded-lg" x-data="{ open: false }">
                                 @forelse ($all_classroom as $classroom)
-                                    <li class="text-gray-900 text-sm font-bold">
-                                    Kelas - {{ $classroom->name }}
-                                    </li>
+                                    <button type="button" @click="open = !open" class="flex inline-flex px-3 py-3 mt-2 ml-3 text-blue-700
+                                                hover:text-white border border-slate-700 hover:bg-gray-300 focus:ring-4
+                                                focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm
+                                                px-5 py-2.5 text-center mr-2 mb-2 dark:border-slate-500 dark:text-blue-500
+                                                dark:hover:text-white dark:hover:bg-slate-600 dark:focus:ring-slate-200">
+                                                Kelas - <span class="text-gray-400 font-bold">
+                                                        {{ $classroom->name }}
+                                                        </span>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-3">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                                          </svg>
+
+                                    </button>
+                                    <div x-show="open" @click.away="open = false" class="w-56 justify-center px-2 py-2 ml-2 border rounded-lg border-slate-400">
+                                        @forelse ($classroom->subjectClassroom as $subject)
+                                            <ul class="w-full py-1 px-2 mb-2 text-sm font-medium text-gray-900 bg-white dark:text-white">
+                                                <li class="w-full border-b dark:border-gray-600">
+                                                    <div class="flex items-center pl-3">
+                                                        <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 dark:border-gray-500">
+                                                        <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">
+                                                            {{ $subject->name }}
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        @empty
+                                            <p class="text-yellow-900 font-bold">
+                                                {{ __('Mata Pelajaran Belum ada..') }}
+                                            </p>
+                                        @endforelse
+                                    </div>
                                 @empty
                                     <p class="text-yellow-900 font-bold">
                                         {{ __('Belum ada Kelas..') }}
                                     </p>
                                 @endforelse
-                            </ul>
                         </div>
                     </div>
                     @endif
