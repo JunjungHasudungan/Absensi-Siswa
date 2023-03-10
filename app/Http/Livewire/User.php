@@ -236,9 +236,10 @@ class User extends Component
             'role_id'               => 'required',
             'address'               => 'nullable',
             'nisn'                  => 'nullable|unique:users,nisn',
-            'classroom_id'          => 'nullable'
+            'classroom_id'          => 'nullable|required'
         ],[
-            'name'                  => 'Nama Wajib di isi..',
+            'name.required'         => 'Nama Wajib di isi..',
+            'name.required|max'     =>  'Nama minimal 3 karakter',
             'email.unique'          => 'Email Wajib di isi..',
             'email.required'        => 'nama email sudah dipakai',
             'password'              => 'Password Wajib disi',
@@ -253,7 +254,7 @@ class User extends Component
             $id_classroom = $user->classroom_id;
             $this->classroom_id = $this->classroom_id ?: '';
 
-            $classroom_subject = DB::table('classroom_subject')->where('classroom_id', $this->classroom_id)->get();
+            $subjects = Subjects::with('classroomSubject')->get();
 
             $user  = Users::create([
                 'name'          => $this->name,

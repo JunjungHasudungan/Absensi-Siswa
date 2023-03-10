@@ -93,12 +93,13 @@
                         </select>
                         @error('role_id') <span class="text-red-500">{{ $message }}</span>@enderror
                     </div>
-                    {{-- end select teacher --}}
+                    {{-- end select role --}}
+
                     {{-- grid --}}
                 <div class="grid md:grid-cols-2 md:gap-6">
                     {{-- select classroom --}}
                     @if ($role_id == 3)
-                    <div class="mb-6" wire:ignore>
+                    <div class="mb-6" x-data="{ show: false }">
                         <label for="classroom_id" class="block mb-2 text-sm font-bold text-gray-900">
                             Kelas:
                         </label>
@@ -110,10 +111,12 @@
                                 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option value="">-- Pilih Kelas --</option>
                                 @forelse ($classrooms as $classroom)
-                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
+                                <button class="bg-blue-900" type="button" x-on:click="show = !show">
+                                    <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
                                         value="{{ $classroom->id }}">
-                                        {{ $classroom->name }}
-                                </option>
+                                            {{ $classroom->name }}
+                                    </option>
+                                </button>
                             @empty
                                 <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
                                     Data Kelas Tersedia..
@@ -145,6 +148,45 @@
                     {{-- end select classroom --}}
               </div>
               {{-- end grid --}}
+
+              {{-- select option --}}
+              @if ($role_id == 3)
+                <div class="mb-4">
+                    <label for="exampleFormControlInput2"
+                            class="block text-gray-700 text-sm font-bold mb-2">
+                            Mata Pelajaran:
+                    </label>
+                    <div class="w-full border border-slate-900 rounded-lg" x-show="show" x-on:click.away="show = false">
+                        <ul class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
+                            <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                <div class="flex items-center pl-3">
+                                    <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Vue JS</label>
+                                </div>
+                            </li>
+                            <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                <div class="flex items-center pl-3">
+                                    <input id="react-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="react-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">React</label>
+                                </div>
+                            </li>
+                            <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                <div class="flex items-center pl-3">
+                                    <input id="angular-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="angular-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Angular</label>
+                                </div>
+                            </li>
+                            <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                <div class="flex items-center pl-3">
+                                    <input id="laravel-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                    <label for="laravel-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Laravel</label>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              @endif
+              {{-- end select --}}
             </div>
 
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
