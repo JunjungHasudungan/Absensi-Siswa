@@ -158,8 +158,8 @@
                     </label>
                     <div class="w-full border border-slate-900 rounded-lg" x-show="show" x-on:click.away="show = false">
                         <ul class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-                            @forelse ($classrooms as $subjects)
-                               @foreach ($subjects->subjectClassroom as $index => $subject)
+                            @forelse ($classrooms as $index =>  $classroom)
+                               @foreach ($classroom->subjectClassroom as $index => $subject)
                                <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
                                    <div class="flex items-center pl-3">
                                        <input   id="vue-checkbox"

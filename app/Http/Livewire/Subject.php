@@ -20,7 +20,7 @@ class Subject extends Component
 {
     use WithPagination;
 
-    public Classrooms $classroom;
+    // public Classrooms $classroom;
 
     public $id_subject,
             $subjects,
@@ -35,11 +35,13 @@ class Subject extends Component
             $start_time,
             $end_time,
             $search = '',
+            $classroom,
             $classrooms,
             $enum_weekdays,
             $classroom_id,
             $classroom_subject,
             $classroom_amount,
+            $weekday,
             $weekdays,
             $subject_weekday,
             $table_pivot;
@@ -250,14 +252,23 @@ class Subject extends Component
         ]);
     }
 
-    public function detailSubject(Subjects $subject)
+    public function detailSubject($id_subject)
     {
         $this->openDetailModal();
+        $subject = Subjects::find($id_subject);
         $this->name = $subject->name;
         $this->teacher_name = $subject->teacher->name ?: 0;
-        // $this->teacher_email = $subject->teacher->email;
-        $this->subject_weekday = $subject->subjectWeekday;
-        $this->classroom_amount = count($subject->classroomSubject);
+        $this->classroom_subject = $subject->classroomSubject;
+        foreach ($this->classroom_subject as $key => $value) {
+            $this->classroom = $value->name;
+        }
+        $this->subject_weekday = $subject->classroomSubject;
+
+        foreach($this->subject_weekday as $subject){
+            $this->weekday = $subject->pivot->day;
+        }
+
+        // $this->classroom_amount = count($subject->classroomSubject);
         $this->classroom_subject = $subject->classroomSubject;
     }
 

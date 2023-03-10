@@ -26,7 +26,8 @@ class Subject extends Model
 
     public function classroomSubject()
     {
-        return $this->belongsToMany(Classroom::class);
+        return $this->belongsToMany(Classroom::class, 'classroom_subject')
+                            ->withPivot('day', 'start_time', 'end_time');
     }
 
 }

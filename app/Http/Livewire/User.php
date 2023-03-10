@@ -121,6 +121,7 @@ class User extends Component
         $this->classroom_id = '';
         $this->nisn = '';
         $this->address = '';
+        $this->studentSubject = [];
 
     }
 
@@ -236,7 +237,7 @@ class User extends Component
             'password'              => 'required',
             'role_id'               => 'required',
             'address'               => 'nullable',
-            'nisn'                  => 'nullable|unique:users,nisn',
+            'nisn'                  => 'nullable|unique:users,nisn|integer|min:7',
             'classroom_id'          => 'nullable|required'
         ],[
             'name.required'         => 'Nama Wajib di isi..',
@@ -246,6 +247,8 @@ class User extends Component
             'password'              => 'Password Wajib disi',
             'address.nullable'      => 'Alamat siswa wajib diisi..',
             'nisn.unique'           => 'NISN siswa wajib diisi..',
+            'nisn.integer'          => 'NISN siswa harus angka..',
+            'nisn.max'              => 'nomor NISN harus 7 angka',
             'classroom_id.required' => 'Kelas wajib dipilih..',
             'role_id.required'      => 'Jabatan wajib dipilih..',
         ]);
@@ -254,13 +257,11 @@ class User extends Component
 
             $id_classroom = $user->classroom_id;
             $this->classroom_id = $this->classroom_id ?: '';
+            // dd($this->classroom_id);
+            // $this->subjects = Subjects::with('classroomSubject')->get();
+            // dd($table);
+            $this->classroom_subject = DB::table('classroom_subject')->where('classroom_id', $this->classroom_id)->get();
 
-            $this->subjects = Subjects::with('classroomSubject')->get();
-            // $role = $this->role_id;
-            // dd($role);
-            // foreach($this->studentSubject as $subjects){
-
-            // }
             $user  = Users::create([
                 'name'          => $this->name,
                 'email'         => $this->email,
@@ -274,6 +275,7 @@ class User extends Component
             foreach($this->studentSubject as $student){
                 $user->subjectUser()->attach($student['subject_id']);
             }
+            $user->save();
 
         $this->resetField();
 

@@ -14,6 +14,9 @@ return new class extends Migration
     {
         Schema::create('classroom_subject', function (Blueprint $table) {
             $table->id();
+            $table->string('day')->default('Senin');
+            $table->time('start_time')->default('08:00');
+            $table->time('end_time')->default('09:00');
             $table->unsignedBigInteger('classroom_id');
             $table->foreign('classroom_id')->references('id')->on('classrooms')->onDelete('cascade');
             $table->unsignedBigInteger('subject_id');
