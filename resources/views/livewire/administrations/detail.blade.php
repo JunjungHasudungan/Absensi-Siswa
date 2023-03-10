@@ -157,10 +157,10 @@
                                         {{-- created_at --}}
                                         <tr class="border-b">
                                             <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                                                Waktu Pembuatan
+                                                Waktu Pengecekan
                                             </th>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                                {{ $created_at }}
+                                                {{ $updated_at }}
                                             </td>
                                         </tr>
                                         {{-- end created_at --}}

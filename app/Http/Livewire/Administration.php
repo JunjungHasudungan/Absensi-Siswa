@@ -37,6 +37,7 @@ class Administration extends Component
             $subject_id,
             $user_id,
             $created_at,
+            $updated_at,
             $teacher_id;
 
 
@@ -177,12 +178,7 @@ class Administration extends Component
         $this->status = $administration->status;
         $this->method_learning = $administration->method_learning;
         $this->comment = $administration->comment ?: 0;
-        $this->created_at = $administration->created_at->diffForHumans();
-        // dd($this->comment);;
-        // $this->comment = $administration->
-        // dd($this->classroom);
-        // $$administration->teacher;
-        // dd($administration);
+        $this->updated_at = $administration->updated_at->diffForHumans();
 
     }
 

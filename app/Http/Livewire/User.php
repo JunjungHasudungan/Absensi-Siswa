@@ -231,15 +231,15 @@ class User extends Component
     {
         $this->validate([
             'name'                  => 'required|string|max:25|min:3',
-            'email'                 => 'required',
+            'email'                 => 'required|unique:users,email',
             'password'              => 'required',
             'role_id'               => 'required',
             'address'               => 'nullable',
-            'nisn'                  => 'nullable|unique',
+            'nisn'                  => 'nullable|unique:users,nisn',
             'classroom_id'          => 'nullable'
         ],[
             'name'                  => 'Nama Wajib di isi..',
-            'email'                 => 'Email Wajib di isi..',
+            'email.unique'          => 'Email Wajib di isi..',
             'email.required'        => 'nama email sudah dipakai',
             'password'              => 'Password Wajib disi',
             'address.nullable'      => 'Alamat siswa wajib diisi..',
@@ -251,9 +251,11 @@ class User extends Component
             $user = new Users();
 
             $id_classroom = $user->classroom_id;
-            $id_class = $this->classroom_id ?: '';
+            $this->classroom_id = $this->classroom_id ?: '';
 
-            Users::create([
+            $classroom_subject = DB::table('classroom_subject')->where('classroom_id', $this->classroom_id)->get();
+
+            $user  = Users::create([
                 'name'          => $this->name,
                 'email'         => $this->email,
                 'password'      => Hash::make($this->password),
@@ -262,6 +264,12 @@ class User extends Component
                 'address'       => $user->address ?: $this->address,
                 'nisn'          => $user->nisn ?: $this->nisn,
             ]);
+
+            foreach($this->studentSubject as $student){
+                $user->subjectUser()->attach($student['subject_id']);
+            }
+            // foreach()
+
 
         $this->resetField();
 
