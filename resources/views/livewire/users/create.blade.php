@@ -158,30 +158,22 @@
                     </label>
                     <div class="w-full border border-slate-900 rounded-lg" x-show="show" x-on:click.away="show = false">
                         <ul class="text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
-                            <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                <div class="flex items-center pl-3">
-                                    <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Vue JS</label>
-                                </div>
-                            </li>
-                            <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                <div class="flex items-center pl-3">
-                                    <input id="react-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="react-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">React</label>
-                                </div>
-                            </li>
-                            <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                <div class="flex items-center pl-3">
-                                    <input id="angular-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="angular-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Angular</label>
-                                </div>
-                            </li>
-                            <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
-                                <div class="flex items-center pl-3">
-                                    <input id="laravel-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                    <label for="laravel-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">Laravel</label>
-                                </div>
-                            </li>
+                            @forelse ($classrooms as $subjects)
+                               @foreach ($subjects->subjectClassroom as $item)
+                               <li class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                   <div class="flex items-center pl-3">
+                                       <input id="vue-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                       <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">
+                                           {{ $item->name }}
+                                       </label>
+                                   </div>
+                               </li>
+                               @endforeach
+                            @empty
+                                <p class="text-yellow-900">
+                                    Data Pelajaran Belum tersedia...
+                                </p>
+                            @endforelse
                         </ul>
                     </div>
                 </div>

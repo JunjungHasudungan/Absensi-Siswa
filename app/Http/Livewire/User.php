@@ -26,6 +26,7 @@ class User extends Component
             $classroom,
             $classrooms,
             $all_classroom,
+            $subjects,
             $home_teacher,
             $home_teacher_classroom,
             $get_classroom = '',
@@ -74,7 +75,7 @@ class User extends Component
             $this->users = Users::with(['role', 'classroom', 'homeTeacher', 'subjectUser'])
             ->where('name', 'LIKE', $searchParam)
             ->orWhere('role_id', 'LIKE', $searchParam)->get(),
-            $this->classrooms = Classrooms::all(),
+            $this->classrooms = Classrooms::with('subjectClassroom')->get(),
             $this->is_teacher = Users::where('role_id', 2)->get(),
             // $this->getClassroom(),
 
@@ -254,8 +255,9 @@ class User extends Component
             $id_classroom = $user->classroom_id;
             $this->classroom_id = $this->classroom_id ?: '';
 
-            $subjects = Subjects::with('classroomSubject')->get();
-
+            $this->subjects = Subjects::with('classroomSubject')->get();
+            // $role = $this->role_id;
+            // dd($role);
             $user  = Users::create([
                 'name'          => $this->name,
                 'email'         => $this->email,
