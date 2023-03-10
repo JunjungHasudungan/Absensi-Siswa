@@ -194,11 +194,10 @@ class Subject extends Component
         foreach ($this->subject_classrooms as $classroom) {
             $subject->classroomSubject()->attach($classroom['classroom_id']);
         }
-        // $subject->
+        $this->resetField();
 
         $this->closeCreateModal();
 
-        $this->resetField();
 
         $this->dispatchBrowserEvent('toastr:info', [
             'message'   => 'Data Berhasil ditambahkan...'

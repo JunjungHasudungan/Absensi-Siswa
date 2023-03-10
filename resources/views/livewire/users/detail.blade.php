@@ -110,7 +110,15 @@
                                                         Kelas
                                                     </th>
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                                        {{ $classroom}}
+                                                        @if ($classroom)
+                                                            <p class="text-Blue-900 font-bold">
+                                                                {{ $classroom }}
+                                                            </p>
+                                                        @else
+                                                            <p class="text-yellow-900 font-bold">
+                                                                {{ __('Belum Terdaftar dalam Kelas..') }}
+                                                            </p>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                                 {{-- end classroom name --}}
@@ -141,11 +149,13 @@
                                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
                                                             {{ $home_teacher->name}}
                                                             @empty
-                                                                <p class="text-yellow-900 font-bold">
-                                                                    {{ __('Belum ada wali kelas.') }}
-                                                                </p>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200"">
+                                                                    <p class="text-yellow-900 font-bold">
+                                                                        {{ __('Belum ada wali kelas.') }}
+                                                                    </p>
+                                                                </td>
+                                                            </td>
                                                     @endforelse
-                                                        </td>
                                                 </tr>
                                                 {{-- end home teacher student --}}
 
@@ -166,7 +176,7 @@
                                                                 {{ __('Mata Pelajaran Belum ada.') }}
                                                             </p>
                                                             @endforelse
-                                                        </td>
+                                                    </td>
                                                 </tr>
                                                 {{-- end subject name for student --}}
 

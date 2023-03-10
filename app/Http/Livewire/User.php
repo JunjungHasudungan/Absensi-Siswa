@@ -58,7 +58,7 @@ class User extends Component
         public $testing = 'testing';
 
     public $selected = [];
-    public $clasroomSubject = [];
+    public $studentSubject = [];
 
     public function setClassroom($id_classroom){
         $this->get_classroom = $id_classroom;
@@ -111,16 +111,6 @@ class User extends Component
         return $this->is_create = false;
     }
 
-    public function getClassroom()
-    {
-        $classrooms = Classrooms::all();
-        foreach($classrooms as $classroom){
-            $this->all_classroom = $classroom;
-
-        }
-        dd($classrooms);
-    }
-
     public function resetField()
     {
         $this->name = '';
@@ -156,7 +146,6 @@ class User extends Component
         $id_student_classroom = $user->classroom->user_id ?? '' ;
         $id_classroom = $user->homeTeacher->id ?? ''; // id classroom teacher
         $this->subject_student = $user->subjectUser ?? ''; // mata pelajaran siswa
-        // dd($this->subject_student);
         $this->subject_teacher = $user->subjectTeacher ?? ''; // mata pelajaran untuk guru
         $this->home_teacher_classroom = $user->homeTeacher ?? ''; // nama kelas wali
         $this->amount_subject_classroom = DB::table('classroom_subject')->where('classroom_id', $id_classroom)->count();
@@ -169,7 +158,6 @@ class User extends Component
         $this->role = $user->role->name;
         $this->home_teacher = Users::find($id_student_classroom);
         $this->all_classroom = Classrooms::select('name')->get();
-        // $this->testing;
     }
 
     public function closeModalDetail()
@@ -182,16 +170,6 @@ class User extends Component
         return $this->is_edit = true;
     }
 
-    public function updated($key, $value)
-    {
-        $explode = Str::of($key)->explode('.');
-       if($explode[0] === 'selectGroup' && is_numeric($value)){
-
-       }elseif ($explode[0] === 'selectGrop' && empty($value)) {
-        # code...
-       }
-
-    }
     public function openModal()
     {
         $this->showModal = true;
@@ -205,6 +183,7 @@ class User extends Component
     public function editUser($id_user)
     {
         $user = Users::find($id_user);
+        $this->id_user = $id_user;
         $this->user = $user;
         $this->openModalEdit();
         $this->name = $user->name;
@@ -270,7 +249,9 @@ class User extends Component
         ]);
 
             $user = new Users();
+
             $id_classroom = $user->classroom_id;
+            $id_class = $this->classroom_id ?: '';
 
             Users::create([
                 'name'          => $this->name,
@@ -282,9 +263,10 @@ class User extends Component
                 'nisn'          => $user->nisn ?: $this->nisn,
             ]);
 
+        $this->resetField();
+
         $this->closeModalCreate();
 
-        $this->resetField();
 
         $this->dispatchBrowserEvent('toastr:info', [
             'message'   => 'Data Berhasil ditambahkan...'
@@ -294,6 +276,7 @@ class User extends Component
     public function updateUser($id_user)
     {
         $user = Users::find($id_user);
+        $this->id_user = $id_user;
 
         $this->validate([
             'password'      => 'required',
@@ -312,6 +295,10 @@ class User extends Component
             'role_id'           => $this->role_id,
             'classroom_id'      => $this->classroom_id ?:  null,
         ]);
+
+        foreach ($this->studentSubject as $student) {
+            $user->subjectUser()->attach($student['subject_id']);
+        }
 
         $this->closeModalEdit();
 
