@@ -254,8 +254,8 @@ class Subject extends Component
     {
         $this->openDetailModal();
         $this->name = $subject->name;
-        $this->teacher_name = $subject->teacher->name;
-        $this->teacher_email = $subject->teacher->email;
+        $this->teacher_name = $subject->teacher->name ?: 0;
+        // $this->teacher_email = $subject->teacher->email;
         $this->subject_weekday = $subject->subjectWeekday;
         $this->classroom_amount = count($subject->classroomSubject);
         $this->classroom_subject = $subject->classroomSubject;

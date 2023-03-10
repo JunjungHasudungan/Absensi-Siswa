@@ -70,9 +70,9 @@
                                                 </th>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400">
                                                     @forelse ($subject_teacher as $subject)
-                                                        <ul class="list-disc list-inside max-w-md space-y-1 text-gray-900">
-                                                            <li> {{$subject->name}} </li>
-                                                        </ul>
+                                                        <p class="text-gray-900 text-sm">
+                                                            {{$subject->name}},
+                                                        </p>
                                                         @empty
                                                             <p class="text-yellow-900 font-bold">
                                                                 {{ __('Mata Pelajaran Belum ada..') }}

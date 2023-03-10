@@ -258,6 +258,9 @@ class User extends Component
             $this->subjects = Subjects::with('classroomSubject')->get();
             // $role = $this->role_id;
             // dd($role);
+            // foreach($this->studentSubject as $subjects){
+
+            // }
             $user  = Users::create([
                 'name'          => $this->name,
                 'email'         => $this->email,
@@ -271,8 +274,6 @@ class User extends Component
             foreach($this->studentSubject as $student){
                 $user->subjectUser()->attach($student['subject_id']);
             }
-            // foreach()
-
 
         $this->resetField();
 
