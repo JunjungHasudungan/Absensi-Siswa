@@ -66,6 +66,10 @@
                         <x-nav-link :href="route('student.subjects.index')" :active="request()->routeIs('student.subjects.index')">
                             {{ __('Mata Pelajaran') }}
                         </x-nav-link>
+
+                        <x-nav-link :href="route('student.attendances.index')" :active="request()->routeIs('student.attendances.index')">
+                            {{ __('Absensi') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>

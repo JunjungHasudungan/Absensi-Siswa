@@ -21,6 +21,7 @@ use App\Http\Controllers\Teacher\{
 
 use App\Http\Controllers\Student\{
     SubjectController as StudentSubjectController,
+    AttendanceController as StudentAttendanceController,
 };
 
 use Illuminate\Support\Facades\Route;
@@ -70,6 +71,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware'  => 'role:student', 'prefix' => 'student', 'as'  => 'student.'], function(){
         Route::resources([
             'subjects'              => StudentSubjectController::class,
+            'attendances'           => StudentAttendanceController::class,
         ]);
     });
 });
