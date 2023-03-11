@@ -230,8 +230,6 @@ class Subject extends Component
             'user_id'        => $this->user_id
         ]);
 
-        // dd($subject);
-
         $this->closeEditModal();
 
         $this->resetField();
@@ -258,17 +256,10 @@ class Subject extends Component
         $subject = Subjects::find($id_subject);
         $this->name = $subject->name;
         $this->teacher_name = $subject->teacher->name ?: 0;
-        $this->classroom_subject = $subject->classroomSubject;
-        foreach ($this->classroom_subject as $key => $value) {
-            $this->classroom = $value->name;
-        }
         $this->subject_weekday = $subject->classroomSubject;
-
         foreach($this->subject_weekday as $subject){
             $this->weekday = $subject->pivot->day;
         }
-
-        // $this->classroom_amount = count($subject->classroomSubject);
         $this->classroom_subject = $subject->classroomSubject;
     }
 
