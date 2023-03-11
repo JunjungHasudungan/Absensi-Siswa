@@ -18,6 +18,11 @@ use App\Http\Controllers\Teacher\{
     AdministrationController as TeacherAdministrationController,
     AttendanceController
 };
+
+use App\Http\Controllers\Student\{
+    SubjectController as StudentSubjectController,
+};
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -62,6 +67,11 @@ Route::group(['middleware' => 'auth'], function(){
         ]);
     });
 
+    Route::group(['middleware'  => 'role:student', 'prefix' => 'student', 'as'  => 'student.'], function(){
+        Route::resources([
+            'subjects'              => StudentSubjectController::class,
+        ]);
+    });
 });
 
 require __DIR__.'/auth.php';

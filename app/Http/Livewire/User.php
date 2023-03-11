@@ -238,7 +238,7 @@ class User extends Component
             'role_id'               => 'required',
             'address'               => 'nullable',
             'nisn'                  => 'nullable|unique:users,nisn|integer|min:7',
-            'classroom_id'          => 'nullable|required'
+            'classroom_id'          => 'nullable'
         ],[
             'name.required'         => 'Nama Wajib di isi..',
             'name.required|max'     =>  'Nama minimal 3 karakter',
@@ -249,7 +249,7 @@ class User extends Component
             'nisn.unique'           => 'NISN siswa wajib diisi..',
             'nisn.integer'          => 'NISN siswa harus angka..',
             'nisn.max'              => 'nomor NISN harus 7 angka',
-            'classroom_id.required' => 'Kelas wajib dipilih..',
+            'classroom_id'          => 'Kelas wajib dipilih..',
             'role_id.required'      => 'Jabatan wajib dipilih..',
         ]);
 
@@ -257,9 +257,6 @@ class User extends Component
 
             $id_classroom = $user->classroom_id;
             $this->classroom_id = $this->classroom_id ?: '';
-            // dd($this->classroom_id);
-            // $this->subjects = Subjects::with('classroomSubject')->get();
-            // dd($table);
             $this->classroom_subject = DB::table('classroom_subject')->where('classroom_id', $this->classroom_id)->get();
 
             $user  = Users::create([

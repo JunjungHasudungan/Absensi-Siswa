@@ -56,6 +56,17 @@
                         {{ __('Absensi') }}
                     </x-nav-link>
                     @endif
+
+                    @if (auth()->user()->role_id === 3)
+
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+
+                        <x-nav-link :href="route('student.subjects.index')" :active="request()->routeIs('student.subjects.index')">
+                            {{ __('Mata Pelajaran') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
