@@ -85,7 +85,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($subject_classrooms as $index => $classroom)
+                            @foreach ($subject_classrooms as $index => $subject_classroom)
                                 <tr class="bg-white w-full">
                                     <td class="px-4 py-4">
                                         <select name="subject_classrooms[{{$index}}][classroom_id]"
@@ -106,25 +106,21 @@
                                                     </option>
                                                 @endforelse
                                         </select>
-                                        {{-- @error('classroom_id')
-                                            <span class="text-red-500">{{ $message }}</span>
-                                        @enderror --}}
                                     </td>
-                                    {{-- <td class="px-4 py-4">
-
+                                    <td class="px-4 py-4">
                                         <select
                                         id="weekday"
-                                        name="subject_classrooms.[{{$index}}].['weekday']"
-                                        wire="subject_classrooms.{{$index}}.weekday"
+                                        name="subject_classrooms[{{$index}}]['day']"
+                                        wire:model="subject_classrooms.{{ $index }}.day"
                                         class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block
                                         w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold
                                         dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                         <option value="">-- Pilih Hari --</option>
-                                        @forelse (\App\Helpers\Weekday::WEEK_DAYS as $key => $value)
+                                        @forelse (\App\Helpers\Weekday::WEEK_DAYS as $key => $day)
                                             <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
-                                                    value="{{ $key }}">
-                                                    {{ $value }}
+                                                    value="{{ $day }}">
+                                                    {{ $day }}
                                             </option>
                                         @empty
                                             <option class="font-normal bg-yellow-400 hover:font-bold capitalize">
@@ -132,8 +128,7 @@
                                             </option>
                                         @endforelse
                                     </select>
-
-                                    </td> --}}
+                                    </td>
                                     <td class="item-right">
                                         <button href="#" wire:click.prevent="removeClassroom({{$index}})"
                                                     class=" w-full inline-flex items-center mr-4 text-sm font-bold m-auto px-8

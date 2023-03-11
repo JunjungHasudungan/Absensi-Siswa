@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Requests\UpdateSubjectRequest;
 use Illuminate\Http\Request;
+use App\Helpers\Weekday as WEEK_DAY;
 use App\Models\{
             Subject as Subjects,
             User,
@@ -52,7 +53,7 @@ class Subject extends Component
             $page = 1,
             $is_detail = false;
 
-    public $allClassroom = [];
+    public $allClassroom = []; // all classroom data
     public $subject_classrooms = []; // data array
 
     protected $paginationTheme = 'bootstrap';
@@ -70,7 +71,9 @@ class Subject extends Component
     public function mount()
     {
         $this->allClassroom = Classrooms::all();
-        $this->subject_classrooms = ['classroom_id'  => ''];
+        $this->subject_classrooms = [
+            ['classroom_id'  => '', 'day'  => '']
+        ];
         $this->user_id = User::where('role_id', 2)->get();
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
     }
@@ -85,8 +88,8 @@ class Subject extends Component
             $this->teachers = User::where('role_id', 2)->get(),
             'subject_paginate'=> Subjects::paginate(5),
             $this->classrooms = Classrooms::all(),
+            $this->weekdays = WEEK_DAY::WEEK_DAYS,
         ]);
-        info($this->subject_classrooms);
     }
 
     // cretate emit listener
@@ -150,6 +153,7 @@ class Subject extends Component
         $this->name = '';
         $this->id_subject = '';
         $this->user_id = '';
+
     }
 
     // function for create new data subject
@@ -162,7 +166,8 @@ class Subject extends Component
 
     public function addClassroom()
     {
-        $this->subject_classrooms[] = ['classroom_id' => ''];
+        $this->subject_classrooms[] =
+        ['classroom_id' => '', 'day'    => ''];
     }
 
     public function removeClassroom($index)
@@ -177,15 +182,13 @@ class Subject extends Component
         $this->validate([
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
-            'user_id'        => 'required',
-            // 'classroom_id'      => 'required'
+            'user_id'           => 'required',
         ],[
             'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
             'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
             'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
             'name.required'         => 'Nama Mata Pelajaran Wajib terisi..',
             'user_id.required'      => 'Guru Mata Pelajaran Wajib dipilih..',
-            // 'classroom_id.required' => 'Kelas Wajib dipilih..'
         ]);
 
         $subject = Subjects::create([
@@ -194,7 +197,8 @@ class Subject extends Component
             'user_id'           => $this->user_id,
         ]);
         foreach ($this->subject_classrooms as $classroom) {
-            $subject->classroomSubject()->attach($classroom['classroom_id']);
+            $subject->classroomSubject()->attach($classroom['classroom_id'],
+            ['day' => $classroom['day']]);
         }
         $this->resetField();
 
@@ -211,7 +215,8 @@ class Subject extends Component
         $this->openEditModal();
 
         $subject = Subjects::find($id_subject);
-
+        // dd($subject->classroomSubject);
+        $this->subject_classrooms = $subject->classroomSubject;
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
         $this->user_id = $subject->user_id;
