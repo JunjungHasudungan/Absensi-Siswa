@@ -41,7 +41,7 @@
                                                             Mulai
                                                         </th>
                                                         <th scope="col" class="px-3 py-3">
-                                                            Mulai
+                                                            Selesai
                                                         </th>
                                                     </tr>
                                                 </thead>

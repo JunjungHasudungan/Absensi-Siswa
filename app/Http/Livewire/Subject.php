@@ -153,6 +153,7 @@ class Subject extends Component
         $this->name = '';
         $this->id_subject = '';
         $this->user_id = '';
+        $this->subject_classrooms = [];
 
     }
 
@@ -200,6 +201,7 @@ class Subject extends Component
             $subject->classroomSubject()->attach($classroom['classroom_id'],
             ['day' => $classroom['day']]);
         }
+
         $this->resetField();
 
         $this->closeCreateModal();
@@ -215,8 +217,6 @@ class Subject extends Component
         $this->openEditModal();
 
         $subject = Subjects::find($id_subject);
-        // dd($subject->classroomSubject);
-        $this->subject_classrooms = $subject->classroomSubject;
         $this->code_subject = $subject->code_subject;
         $this->name = $subject->name;
         $this->user_id = $subject->user_id;
@@ -226,14 +226,27 @@ class Subject extends Component
     public function updateSubject($id_subject)
     {
         $subject = Subjects::find($id_subject);
-
         $this->validate();
 
         $subject->update([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
-            'user_id'        => $this->user_id
+            'user_id'           => $this->user_id
         ]);
+
+        foreach ($this->subject_classrooms as  $classroom) {
+            $subject->classroomSubject()->detach($classroom['classroom_id'],
+            ['day'  => $classroom['day']]
+            );
+        }
+        // // dd('data Berhasil dihapus');
+        foreach ($this->subject_classrooms as $classroom) {
+                $subject->classroomSubject()->attach($classroom['classroom_id'],
+                ['day'   => $classroom['day']]
+            );
+        }
+
+
 
         $this->closeEditModal();
 
