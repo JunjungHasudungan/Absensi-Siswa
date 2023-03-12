@@ -114,10 +114,6 @@ class Administration extends Component
                         'message'   => 'Data Berhasil ditambahkan...'
                     ]);
         }
-
-
-
-
     }
 
     public function showEmpySubject()
