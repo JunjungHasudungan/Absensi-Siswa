@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\{
 
 use App\Http\Controllers\Teacher\{
     AdministrationController as TeacherAdministrationController,
-    AttendanceController
+    AttendanceController as TeacherAttendanceController
 };
 
 use App\Http\Controllers\Student\{
@@ -64,7 +64,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'role:teacher', 'prefix'  => 'teacher', 'as' => 'teacher.'], function(){
         Route::resources([
             'administrations'      =>  TeacherAdministrationController::class,
-            'attendances'          =>  AttendanceController::class,
+            'attendances'          =>  TeacherAttendanceController::class,
         ]);
     });
 

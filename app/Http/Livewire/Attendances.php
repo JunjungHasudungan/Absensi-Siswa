@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Teacher;
 
-use App\Models\Attendance;
+// use App\Models\Attendance;
 use Livewire\Component;
 
 class Attendances extends Component

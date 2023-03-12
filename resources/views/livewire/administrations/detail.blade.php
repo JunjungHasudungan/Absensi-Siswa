@@ -136,34 +136,37 @@
                                         {{-- end status check --}}
 
                                         {{-- comment --}}
-                                        <tr class="border-b">
-                                            <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                                                Komentar:
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                                @if ($comment == 0)
-                                                    <p class="text-sm font-bold text-blue-900 font-bold truncate">
-                                                        {{ __('Tingkatkan Teknik Mengajar') }}
-                                                    </p>
-                                                @else
-                                                    <span class="text-xs font-bold inline-block py-1 px-2 rounded-full text-emerald-600 bg-yellow-200 capitalize last:mr-0 mr-1">
-                                                        {{ __('Sudah diperiksa')}}
-                                                    </span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                        {{-- end comment --}}
+                                        @if ($status == 1)
+                                            <tr class="border-b">
+                                                <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                    Komentar:
+                                                </th>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                    @if ($comment == 0)
+                                                        <p class="text-sm font-bold text-blue-900 font-bold truncate">
+                                                            {{ __('Tingkatkan Teknik Mengajar') }}
+                                                        </p>
+                                                    @else
+                                                        <span class="text-xs font-bold inline-block py-1 px-2 rounded-full text-emerald-600 bg-yellow-200 capitalize last:mr-0 mr-1">
+                                                            {{ __('Sudah diperiksa')}}
+                                                        </span>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            {{-- end comment --}}
 
-                                        {{-- created_at --}}
-                                        <tr class="border-b">
-                                            <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                                                Waktu Pengecekan
-                                            </th>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                                {{ $updated_at }}
-                                            </td>
-                                        </tr>
-                                        {{-- end created_at --}}
+                                            {{-- created_at --}}
+                                            <tr class="border-b">
+                                                <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
+                                                    Waktu Pengecekan
+                                                </th>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
+                                                    {{ $updated_at }}
+                                                </td>
+                                            </tr>
+                                            {{-- end created_at --}}
+                                        @endif
+
                                     </table>
                                 </div>
                             </div>

@@ -167,7 +167,7 @@
                                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400">
                                                             @forelse ($subject_student as $subject)
                                                                 <ul class="list-disc list-inside text-gray-900">
-                                                                    <li>
+                                                                    <li class="flex items-center space-x-3">
                                                                         {{ $subject->name ?? 'Belum ada'}}
                                                                     </li>
                                                                 </ul>
