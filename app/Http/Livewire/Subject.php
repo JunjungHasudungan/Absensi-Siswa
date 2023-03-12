@@ -6,7 +6,10 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Requests\UpdateSubjectRequest;
 use Illuminate\Http\Request;
-use App\Helpers\Weekday as WEEK_DAY;
+use App\Helpers\{Weekday as WEEK_DAY,
+    TimeProvide as TimeProvides,
+    EndTimeProvide as EndTimeProvides,
+    };
 use App\Models\{
             Subject as Subjects,
             User,
@@ -34,7 +37,7 @@ class Subject extends Component
             $teacher_name,
             $teacher_email,
             $start_time,
-            $end_time,
+            $end_times,
             $search = '',
             $classroom,
             $classrooms,
@@ -44,6 +47,7 @@ class Subject extends Component
             $classroom_amount,
             $weekday,
             $weekdays,
+            $start,
             $subject_weekday,
             $table_pivot;
 
@@ -72,7 +76,12 @@ class Subject extends Component
     {
         $this->allClassroom = Classrooms::all();
         $this->subject_classrooms = [
-            ['classroom_id'  => '', 'day'  => '']
+            [
+                'classroom_id'  => '',
+                'day'           => '',
+                'start_time'    => '',
+                'end_time'      => ''
+            ]
         ];
         $this->user_id = User::where('role_id', 2)->get();
         $this->subject_weekday = Subjects::with('subjectWeekday')->get();
@@ -89,6 +98,8 @@ class Subject extends Component
             'subject_paginate'=> Subjects::paginate(5),
             $this->classrooms = Classrooms::all(),
             $this->weekdays = WEEK_DAY::WEEK_DAYS,
+            $this->start = TimeProvides::TIME_PROVIDE,
+            $this->end_times = EndTimeProvides::END_TIME_PROVIDE,
         ]);
     }
 
@@ -168,7 +179,12 @@ class Subject extends Component
     public function addClassroom()
     {
         $this->subject_classrooms[] =
-        ['classroom_id' => '', 'day'    => ''];
+        [
+            'classroom_id'  => '',
+            'day'           => '',
+            'start_time'    => '',
+            'end_time'      => ''
+        ];
     }
 
     public function removeClassroom($index)
@@ -180,6 +196,7 @@ class Subject extends Component
 
     public function storeSubject()
     {
+        // dd($this->start);
         $this->validate([
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
@@ -197,9 +214,14 @@ class Subject extends Component
             'name'              => $this->name,
             'user_id'           => $this->user_id,
         ]);
+
         foreach ($this->subject_classrooms as $classroom) {
             $subject->classroomSubject()->attach($classroom['classroom_id'],
-            ['day' => $classroom['day']]);
+            [   'day'           => $classroom['day'],
+                'start_time'    => $classroom['start_time'],
+                'end_time'      => $classroom['end_time']
+            ],
+        );
         }
 
         $this->resetField();
