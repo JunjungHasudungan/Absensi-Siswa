@@ -258,15 +258,24 @@ class Subject extends Component
 
         foreach ($this->subject_classrooms as  $classroom) {
             $subject->classroomSubject()->detach($classroom['classroom_id'],
-            ['day'  => $classroom['day']]
+                [
+                    'day'           => $classroom['day'],
+                    'start_time'    => $classroom['start_time'],
+                    'end_time'      => $classroom['end_time']
+                ]
             );
         }
-        // // dd('data Berhasil dihapus');
+
         foreach ($this->subject_classrooms as $classroom) {
-                $subject->classroomSubject()->attach($classroom['classroom_id'],
-                ['day'   => $classroom['day']]
-            );
-        }
+            $subject->classroomSubject()->attach($classroom['classroom_id'],
+            [
+                'day'           => $classroom['day'],
+                'start_time'    => $classroom['start_time'],
+                'end_time'      => $classroom['end_time']
+            ]
+        );
+
+    }
 
 
 
