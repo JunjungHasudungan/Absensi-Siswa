@@ -29,7 +29,7 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-6 py-3 justify-center">
                             No
                         </th>
                         <th class="col" class="px-6 py-3">
@@ -40,9 +40,6 @@
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Nama Kelas
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
                         </th>
                     </tr>
                 </thead>
@@ -61,36 +58,41 @@
 
                             <td class="px-6 py-4">
                                 @forelse ($subject->classroomSubject as $classroom)
-                                    <button wire:click="addAttendance( {{ $classroom->id }} )"
+                                <ul class="max-w-md border rounded-lg border-gray-400 mb-2 justify-center item-center  w-full space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
+                                    <li class="px-2 py-2 item-center">
+                                        <label for="" class="px-2 py-2 mr-2 m-2 flex-inline">
+                                            {{ $classroom->name }}
+                                        </label>
+
+                                        <button wire:click="addAttendance( {{ $classroom->id }} )"
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                            Tambah
+                                        </button>
+
+                                        <button
+                                                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                            Detail
+                                        </button>
+
+                                        <button
+                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                            Hapus
+                                        </button>
+
+                                    </li>
+                                </ul>
+                                    {{-- <button wire:click="addAttendance( {{ $classroom->id }} )"
                                             class="bg-blue-500 hover:bg-blue-700 w-24
                                             text-white font-bold rounded-md my-3 inline-flex py-2 px-5">
                                         <p class="text-center item-center font-semibold">
                                             {{ $classroom->name }}
                                         </p>
-                                    </button>
+                                    </button> --}}
 
                                 @empty
 
                                 @endforelse
                                 {{-- {{ $classroom['name'] }} --}}
-                            </td>
-
-                            <td class="px-6 py-4 item-center justify-center">
-                                {{-- add button for edit and delete data classroom --}}
-                                <button
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                    Edit
-                                </button>
-
-                                <button
-                                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                                    Detail
-                                </button>
-
-                                <button
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                    Hapus
-                                </button>
                             </td>
                         </tr>
                     @empty
