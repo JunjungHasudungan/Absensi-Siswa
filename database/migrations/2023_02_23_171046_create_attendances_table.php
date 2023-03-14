@@ -19,6 +19,8 @@ return new class extends Migration
             $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('subject_id');
             $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            $table->string('attendance')->default('masuk');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

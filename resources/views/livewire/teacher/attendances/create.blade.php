@@ -12,31 +12,42 @@
 
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full" role="dialog" aria-modal="true" aria-labelledby="modal-headline">
             <form>
-            <div class="bg-white px-4 pt-5 pb-2 sm:p-6 sm:pb-4">
-              <div class="border">
-
+            <div class="bg-white px-4 pt-5 pb-2 sm:p-6 sm:pb-4 border">
                     {{-- student name--}}
-                    @forelse ($students as $student)
-                    <ul class="max-w-md border rounded-lg border-gray-400 mb-2 justify-center item-center  w-full space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
-                        <li class="px-2 py-2 item-center w-full flex flex-inline">
-                            <label for="" class="px-2 py-2 ml-20 m-2 font-semibold flex-inline ">
-                                {{ $student->name }}
-                            </label>
-
-                            <select
-
-                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option value="" class="item-center justify-center">-- Pilih Absensi --</option>
-                                @forelse ($attendances as $key => $attendance)
-                                    <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $key }}"> {{ $attendance }} </option>
-                                @empty
-                                    <option class="font-normal bg-yellow-400 hover:font-bold capitalize">Data Guru Belum Tersedia..</option>
-                                @endforelse
-                            </select>
-                            @if ($attendances === 'izin')
-                                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your message</label>
-                                <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
-                            @endif
+                    @forelse ($students as $index => $student)
+                    <ul class="max-w-md border rounded-lg border-gray-400 justify-center item-center  w-full space-y-2 mb-2 text-gray-500 list-none list-inside dark:text-gray-400">
+                        <li class="px-2 py-2 item-center w-full mb-1">
+                            <div class="w-full text-center justify-center mb-2 flex flex-inline" x-data="{open: false}">
+                                <input  type="text"
+                                        id="disabled-input"
+                                        aria-label="disabled input"
+                                        name="student_id"
+                                        wire:model="student_id"
+                                        class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="Disabled input" disabled>
+                                {{-- <label for="" class="px-2 py-2 text-center font-semibold">
+                                    {{ $student->name }}
+                                </label> --}}
+                            </div>
+                            <div class="border border-gray-900 rounded-lg space-x-1 flex flex-inline mb-4 px-2 py-2">
+                                @foreach ($attendances as $index =>  $attendance)
+                                    <div class=" w-full flex items-center px-2 border border-gray-200 rounded dark:border-gray-700">
+                                        <button wire:click="openAttendance">
+                                        <input id="bordered-radio-1" type="radio" value="{{$index}}" name="bordered-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <label for="bordered-radio-1" class="w-full py-4 ml-2 text-sm font-bold text-gray-900">
+                                                {{ $attendance }}
+                                            </label>
+                                        </button>
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="w-full">
+                                <button wire:click="storeAttendance()"
+                                        class="w-full bg-green-600 hover:bg-green-300 rounded-lg px-2 py-2 text-base border border-gray-900 text-white leading-6 font-medium">
+                                    <label for="" class="text-gray-300">
+                                        Simpan
+                                    </label>
+                                </button>
+                            </div>
                         </li>
                     </ul>
                     @empty

@@ -69,7 +69,7 @@
                                             Tambah
                                         </button>
 
-                                        <button
+                                        <button wire:click="detailAttendance( {{ $subject->id }} )"
                                                 class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                             Detail
                                         </button>
@@ -81,14 +81,6 @@
 
                                     </li>
                                 </ul>
-                                    {{-- <button wire:click="addAttendance( {{ $classroom->id }} )"
-                                            class="bg-blue-500 hover:bg-blue-700 w-24
-                                            text-white font-bold rounded-md my-3 inline-flex py-2 px-5">
-                                        <p class="text-center item-center font-semibold">
-                                            {{ $classroom->name }}
-                                        </p>
-                                    </button> --}}
-
                                 @empty
 
                                 @endforelse
