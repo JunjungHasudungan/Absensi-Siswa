@@ -8,19 +8,11 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     <div class="W-full px-1 py-1 gap-2 flex">
-                        @foreach ($subjects as $item)
-                            <p class="text-gray-500">
-                                Mapel:  {{ $item->name }} |
-                            </p>
-                            @foreach ($item->classroomSubject as $classroom)
-                                <p class="text-gray-500">
-                                    Kelas: {{ $classroom->name }}
-                                </p>
-
-                            @endforeach
-                        @endforeach
+                        <p class="text-gray-500">
+                            Mapel:  {{ $subject->name }} | Kelas: {{ $subject->classroom->name }}
+                        </p>
                     </div>
-                    <div class="container mx-auto mt-5 mb-10">
+                    <div class="container mx-auto mt-5 mb-5">
                         <div class="bg-gray-500 p-5 rounded shadow-sm">
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
                             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -35,50 +27,41 @@
                                         <th scope="col" class="px-6 py-3">
                                             Keterangan Kehadiran
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
-                                            <span class="sr-only">Edit</span>
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <form action="">
                                         @csrf
-                                        @forelse ($subjects as $subject)
+                                        @forelse ($students as $student)
                                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                <td class="px-6 py-4">{{ $loop->iteration }}</td>
+
+                                                <td class="px-6 py-4" >{{ $student->name }} </td>
                                                 <td class="px-6 py-4">
-                                                    {{ $loop->iteration }}
-                                                </td>
-                                                    @forelse ($subject->subjectStudent as $student)
-                                                        <td class="px-6 py-4">
-                                                            {{ $student->name }}
-                                                        </td>
+                                                    <select class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                        <option value="2"> H - Hadir</option>
+                                                        @foreach ($attendances as $attendance)
+                                                        <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $attendance->id }}"> {{ $attendance->code }} - {{ $attendance->description }} </option>
+                                                        @endforeach
+                                                    </select>
                                                     @empty
-                                                        <p class="bg-yellow-900">
-                                                            data Siswa Belum tersedia..
-                                                        </p>
-                                                    @endforelse
-
-                                                <td class="px-6 py-4">
-                                                    Laptop
+                                                    <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-2">
+                                                        Data Siswa Belum tersedia..
+                                                    </div>
                                                 </td>
-                                            <td class="px-6 py-4 text-right">
-                                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                            </td>
-                                        </tr>
-                                        @empty
-                                        <tr>
-
-                                        </tr>
+                                            </tr>
                                         @endforelse
+                                    </form>
                                 </tbody>
-                            </form>
                             </table>
                         </div>
-
-
+                        </div>
+                        <div class="w-full mt-2 justify-right">
+                            <button class="px-2 py-2 rounded-lg text-white border-gray-900 bg-green-900 hover:bg-green-500" type="submit" value="submit">
+                                Simpan
+                            </button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

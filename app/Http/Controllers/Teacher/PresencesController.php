@@ -39,21 +39,15 @@ class PresencesController extends Controller
      */
     public function create(Subject $subject)
     {
-        $subjects = Subject::with(['classroomSubject', 'subjectStudent'])->where('user_id', auth()->user()->id)->get();
-        $this->id_classroom = DB::table('classroom_subject')->where('subject_id', $this->id_subject)->get();
-        $presences = Presence::all();
+        $students = User::where('classroom_id', $subject->classroom_id)
+                        ->where('role_id', 3)->orderBy('name', 'asc')->get();
+
         $attendances = Attendance::all();
-        $id_classroom = $subject->classroom_id;
-        dd($id_classroom);
-        $students = User::where('role_id', 3)->where('clasroom_id', $subject->classroom_id)->orderBy('name', 'asc')->get();
-        dd($students);
-
-
 
         return view('teacher.presences.create', [
+            'subject'       => $subject,
+            'students'      => $students,
             'attendances'   => $attendances,
-            'subject'   => $subject,
-            'presences' => $presences
         ]);
     }
 

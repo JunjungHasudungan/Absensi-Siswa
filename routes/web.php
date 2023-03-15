@@ -49,6 +49,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/presences', [PresenceController::class, 'index'])->prefix('teacher')->name('teacher.presences.index');
+    Route::get('/presences/{subject}/create', [PresenceController::class, 'create'])->name('teacher.presences.create');
 
     // Route admin
     Route::group(['middleware'  => 'role:admin', 'prefix' => 'admin',  'as' => 'admin.'], function(){
@@ -64,11 +66,13 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::group(['middleware' => 'role:teacher', 'prefix'  => 'teacher', 'as' => 'teacher.'], function(){
 
-        Route::get('presences/{mapel}/create', [PresenceController::class, 'create']);
+        // Route::get('/presences', [PresenceController::class, 'index'])->name('presences.index');
+        // Route::get('/presences/{subject}/create', [PresenceController::class, 'create'])->name('presences.create');
+
         Route::resources([
             'administrations'      =>  TeacherAdministrationController::class,
             'attendances'          =>  TeacherAttendanceController::class,
-            'presences'            =>   PresenceController::class,
+            // 'presences'            =>   PresenceController::class,
         ]);
     });
 
