@@ -63,7 +63,6 @@
                                         <label for="" class="px-2 py-2 mr-2 m-2 flex-inline">
                                             {{ $classroom->name }}
                                         </label>
-
                                         <button wire:click="addAttendance( {{ $classroom->id }} )"
                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                             Tambah
@@ -82,7 +81,11 @@
                                     </li>
                                 </ul>
                                 @empty
-
+                                <div class="w-full px-2 py-2">
+                                    <p>
+                                        Data Siswa Belum ada...
+                                    </p>
+                                </div>
                                 @endforelse
                                 {{-- {{ $classroom['name'] }} --}}
                             </td>

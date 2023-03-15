@@ -40,9 +40,7 @@
                                     <td class="px-6 py-4">
                                         {{ $subject->name }}
                                     </td>
-                                        <ul>
-                                            <li></li>
-                                        </ul>
+
                                     <td class="px-6 py-4">
                                         @forelse ($subject->classroomSubject as $classroom)
                                     <ul class="max-w-md border rounded-lg border-gray-400 mb-2 justify-center item-center  w-full space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
@@ -52,7 +50,7 @@
                                             </label>
 
                                             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                <a href="{{ route('teacher.attendances.create', $classroom->id) }}">
+                                                <a href="/presations/{{ $subject->id }}">
                                                     Tambah
                                                 </a>
                                             </button>

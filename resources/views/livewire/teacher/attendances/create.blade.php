@@ -18,15 +18,9 @@
                     <ul class="max-w-md border rounded-lg border-gray-400 justify-center item-center  w-full space-y-2 mb-2 text-gray-500 list-none list-inside dark:text-gray-400">
                         <li class="px-2 py-2 item-center w-full mb-1">
                             <div class="w-full text-center justify-center mb-2 flex flex-inline" x-data="{open: false}">
-                                <input  type="text"
-                                        id="disabled-input"
-                                        aria-label="disabled input"
-                                        name="student_id"
-                                        wire:model="student_id"
-                                        class="mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="Disabled input" disabled>
-                                {{-- <label for="" class="px-2 py-2 text-center font-semibold">
+                                <label for="" class="px-2 py-2 text-center font-semibold" wire:model="student_id">
                                     {{ $student->name }}
-                                </label> --}}
+                                </label>
                             </div>
                             <div class="border border-gray-900 rounded-lg space-x-1 flex flex-inline mb-4 px-2 py-2">
                                 @foreach ($attendances as $index =>  $attendance)
@@ -42,10 +36,8 @@
                             </div>
                             <div class="w-full">
                                 <button wire:click="storeAttendance()"
-                                        class="w-full bg-green-600 hover:bg-green-300 rounded-lg px-2 py-2 text-base border border-gray-900 text-white leading-6 font-medium">
-                                    <label for="" class="text-gray-300">
-                                        Simpan
-                                    </label>
+                                        class="bg-green-900 rounded-lg w-full px-2 py-2 hover:bg-green-500 text-white font-medium">
+                                    Simpan
                                 </button>
                             </div>
                         </li>

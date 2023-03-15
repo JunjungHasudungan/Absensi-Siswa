@@ -23,11 +23,12 @@ class AttendanceStudent extends Component
             $subject_name,
             $student_id,
             $students,
+            $student_name,
             $id_attendance,
             $attendance,
             $attendances,
             $attendance_student,
-            $classroom_name,
+            $classroom,
             $subjects;
 
     public function render()
@@ -69,9 +70,18 @@ class AttendanceStudent extends Component
 
         // dd($this->attendances);
         $classroom = Classrooms::find($id_classroom);
-        $this->classroom_name = $classroom->name;
+        $this->classroom = $classroom->name;
         $this->students = Users::where('classroom_id', $id_classroom)
                                 ->where('role_id', 3)->get() ?? null;
+
+    }
+
+    public function saveAttendance()
+    {
+        $this->openModalCreateAttendance();
+
+        // dd($this->student_id);
+        dd('testing save');
     }
 
     public function detailAttendance($id_subject)
@@ -83,11 +93,8 @@ class AttendanceStudent extends Component
 
     public function storeAttendance()
     {
-        // dd($)
-        // Attendances::insert([
-        //     'student_id'    =>,
-        //     'subject_id'    =>,
-        //     'attendance'    => ,
-        // ]);
+        $this->openModalCreateAttendance();
+
+        dd($this->student_id);
     }
 }

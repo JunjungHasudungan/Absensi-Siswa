@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
-use App\Models\Attendance;
+use App\Models\{Attendance, Subject};
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
     public function index()
     {
-        return view('teacher.attendances.index');
+        $subjects = Subject::where('user_id', auth()->user()->id)->get();
+
+        return view('teacher.attendances.index', [
+            'subjects'  => $subjects
+        ]);
     }
 
     public function create()
     {
-        //
+
+        return view('teacher.attendances.create');
     }
 
     public function store(Request $request)

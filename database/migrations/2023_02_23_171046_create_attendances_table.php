@@ -15,12 +15,14 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('student_id');
-            $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('subject_id');
-            $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
-            $table->string('attendance')->default('masuk');
-            $table->string('description')->nullable();
+            $table->char('code');
+            $table->string('description');
+            // $table->unsignedBigInteger('student_id');
+            // $table->foreign('student_id')->references('id')->on('users')->onDelete('cascade');
+            // $table->unsignedBigInteger('subject_id');
+            // $table->foreign('subject_id')->references('id')->on('subjects')->onDelete('cascade');
+            // $table->string('attendance')->default('masuk');
+            // $table->string('description')->nullable();
             $table->timestamps();
         });
     }

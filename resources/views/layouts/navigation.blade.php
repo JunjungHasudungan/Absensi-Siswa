@@ -55,6 +55,10 @@
                     <x-nav-link :href="route('teacher.attendances.index')" :active="request()->routeIs('teacher.attendances.index')">
                         {{ __('Absensi') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('teacher.presations.index')" :active="request()->routeIs('teacher.presations.index')">
+                        {{ __('Presensi') }}
+                    </x-nav-link>
                     @endif
 
                     @if (auth()->user()->role_id === 3)
@@ -70,6 +74,7 @@
                         <x-nav-link :href="route('student.attendances.index')" :active="request()->routeIs('student.attendances.index')">
                             {{ __('Absensi') }}
                         </x-nav-link>
+
                     @endif
                 </div>
             </div>

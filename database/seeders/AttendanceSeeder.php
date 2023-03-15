@@ -17,9 +17,38 @@ class AttendanceSeeder extends Seeder
     {
         $attendances = [
             [
-                'student_id'    => 5,
-                'subject_id'    => 1,
-            ]
+                'code'              => 'A',
+                'description'       => 'Tanpa Keterangan',
+            ],
+            [
+                'code'              => 'H',
+                'description'       => 'Hadir',
+            ],
+            [
+                'code'              => 'S1',
+                'description'       => 'Sakit dengan Surat Keterangan Dokter',
+            ],
+            [
+                'code'              => 'S2',
+                'description'       => 'Sakit Tanpa Surat Keterangan Dokter',
+            ],
+            [
+                'code'              => 'I',
+                'description'       => 'Izin dengan surat izin',
+            ],            [
+                'code'              => 'D1',
+                'description'       => 'Dispensasi acara didalam sekolah',
+            ],
+            [
+                'code'              => 'D2',
+                'description'       => 'Dispensasi acara diluar sekolah',
+            ],
+            [
+                'code'              => 'H',
+                'description'       => 'Hadir',
+            ],
+
+
         ];
 
         Attendance::insert($attendances);

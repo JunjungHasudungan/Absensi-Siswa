@@ -16,7 +16,8 @@ use App\Http\Controllers\Admin\{
 
 use App\Http\Controllers\Teacher\{
     AdministrationController as TeacherAdministrationController,
-    AttendanceController as TeacherAttendanceController
+    AttendanceController as TeacherAttendanceController,
+    PresationController
 };
 
 use App\Http\Controllers\Student\{
@@ -62,9 +63,12 @@ Route::group(['middleware' => 'auth'], function(){
     });
 
     Route::group(['middleware' => 'role:teacher', 'prefix'  => 'teacher', 'as' => 'teacher.'], function(){
+        Route::get('presantions/coreIndex', [PresationController::class, 'coreIndex']);
+
         Route::resources([
             'administrations'      =>  TeacherAdministrationController::class,
             'attendances'          =>  TeacherAttendanceController::class,
+            'presations'            => PresationController::class,
         ]);
     });
 
@@ -76,4 +80,5 @@ Route::group(['middleware' => 'auth'], function(){
     });
 });
 
+// Route::get('/presations', [ PresationController::class, 'coreIndex' ])->middleware('role:teacher');
 require __DIR__.'/auth.php';
