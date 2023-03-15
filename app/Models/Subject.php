@@ -12,7 +12,7 @@ class Subject extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function teacher()
     {
@@ -24,10 +24,22 @@ class Subject extends Model
         return $this->belongsToMany(Weekday::class);
     }
 
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class);
+    }
+
     public function classroomSubject()
     {
         return $this->belongsToMany(Classroom::class, 'classroom_subject')
                             ->withPivot('day', 'start_time', 'end_time');
     }
+
+    public function subjectStudent()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+
 
 }

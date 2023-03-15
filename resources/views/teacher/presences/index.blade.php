@@ -26,6 +26,9 @@
                                 <th scope="col" class="px-6 py-3">
                                     Nama Kelas
                                 </th>
+                                <th scope="col" class="px-6 py-3">
+                                   Lanjut
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,36 +45,14 @@
                                     </td>
 
                                     <td class="px-6 py-4">
-                                        @forelse ($subject->classroomSubject as $classroom)
-                                    <ul class="max-w-md border rounded-lg border-gray-400 mb-2 justify-center item-center  w-full space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
-                                        <li class="px-2 py-2 item-center">
-                                            <label for="" class="px-2 py-2 mr-2 m-2 flex-inline">
-                                                {{ $classroom->name }}
-                                            </label>
-
-                                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                <a href="/presations/{{ $subject->id }}">
-                                                    Tambah
-                                                </a>
-                                            </button>
-
-                                            <button wire:click="detailAttendance( {{ $subject->id }} )"
-                                                    class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                                                Detail
-                                            </button>
-
-                                            <button
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                Hapus
-                                            </button>
-
-                                        </li>
-                                    </ul>
-                                        @empty
-
-                                        @endforelse
-                                            </td>
-                                        </tr>
+                                        {{ $subject->classroom->name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <a href="/teacher/presences/{{ $subject->id }}/create" class="px-2 py-2 border-gray-600 bg-green-500 w-full rounded-lg text-gray-900 hover:bg-green-300">
+                                            Pilih
+                                        </a>
+                                    </td>
+                                </tr>
                                     @empty
 
                                 @endforelse

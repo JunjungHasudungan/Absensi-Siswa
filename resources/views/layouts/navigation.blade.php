@@ -52,11 +52,11 @@
                         {{ __('Administrasi') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('teacher.attendances.index')" :active="request()->routeIs('teacher.attendances.index')">
+                    {{-- <x-nav-link :href="route('teacher.attendances.index')" :active="request()->routeIs('teacher.attendances.index')">
                         {{ __('Absensi') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
 
-                    <x-nav-link :href="route('teacher.presations.index')" :active="request()->routeIs('teacher.presations.index')">
+                    <x-nav-link :href="route('teacher.presences.index')" :active="request()->routeIs('teacher.presences.index')">
                         {{ __('Presensi') }}
                     </x-nav-link>
                     @endif

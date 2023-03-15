@@ -12,7 +12,8 @@ class AdministrationController extends Controller
     {
         $administrations = Administration::with('subject')->get();
         return view('teacher.administrations.index', [
-            'administrations' => $administrations
+            'title'             => 'Administrasi',
+            'administrations'   => $administrations,
         ]);
     }
 }
