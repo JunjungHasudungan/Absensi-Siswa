@@ -85,12 +85,20 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{-- @foreach ($allClassroom as $classroom)
+                                <input id="status_id_input" value="{{$classroom->id}}" type="hidden">
+                            @endforeach --}}
+
                             @foreach ($subject_classrooms as $index => $subject_classroom)
                                 <tr class="bg-white w-full">
                                     <td class="px-1 py-4">
-                                        <select name="subject_classrooms[{{$index}}][classroom_id]"
+                                        {{-- <input type="hidden" name="classroom_id" wire:model="classroom_id" value="{{ $index }}"> --}}
+                                        <select
+                                                name="subject_classrooms[{{$index}}][classroom_id]"
                                                 wire:model="subject_classrooms.{{$index}}.classroom_id"
                                                 id="classroomSubject"
+                                                name="classroom_id"
+                                                wire:model="classroom_id"
                                                 class="border border-gray-300 text-gray-900 text-sm rounded-lg ring-blue-500 border-blue-500 block
                                                 w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 font-semibold
                                                 ">
@@ -100,12 +108,16 @@
                                                             value="{{ $classroom->id }}">
                                                             {{ $classroom->name }}
                                                     </option>
+                                                    {{-- <input type="hidden" value="{{ $classroom->id }}"> --}}
                                                 @empty
                                                     <option class="bg-yellow-400 font-bold capitalize">
                                                         Data Kelas Belum Tersedia..
                                                     </option>
                                                 @endforelse
                                         </select>
+                                        {{-- @error('classroom_id')
+                                        <span class="text-red-500">{{ $message }}</span>
+                                    @enderror --}}
                                     </td>
                                     {{-- day --}}
                                     <td class="px-1 py-4">

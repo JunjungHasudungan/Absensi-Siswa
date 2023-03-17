@@ -201,28 +201,39 @@ class Subject extends Component
             'code_subject'      => 'required|unique:subjects|string|max:25|min:3',
             'name'              => 'required|string|max:25|min:3',
             'user_id'           => 'required',
+            // 'classroom_id'      => 'required'
         ],[
             'code_subject.required' => 'Kode Mata Pelajaran Wajib di isi...',
             'code_subject.min'      => 'Kode Mata Pelajaran minimal 3 karakter',
             'code_subject.unique'   => 'Kode Mata Pelajaran Sudah Digunakan',
             'name.required'         => 'Nama Mata Pelajaran Wajib terisi..',
             'user_id.required'      => 'Guru Mata Pelajaran Wajib dipilih..',
+            // 'classroom_id.required' => 'Kelas Wajib dipilih..',
         ]);
+        $subject = new Subjects();
 
         $subject = Subjects::create([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
             'user_id'           => $this->user_id,
+            'classroom_id'      => $this->classroom_id
         ]);
 
         foreach ($this->subject_classrooms as $classroom) {
-            $subject->classroomSubject()->attach($classroom['classroom_id'],
-            [   'day'           => $classroom['day'],
-                'start_time'    => $classroom['start_time'],
-                'end_time'      => $classroom['end_time']
-            ],
-        );
+                $subject->classroomSubject()->attach($classroom['classroom_id'],
+                [   'day'           => $classroom['day'],
+                    'start_time'    => $classroom['start_time'],
+                    'end_time'      => $classroom['end_time']
+                ],
+            );
+            $this->classroom_id = $classroom['classroom_id'];
         }
+            $subject->update([
+                $subject->classroom_id = $this->classroom_id
+            ]
+        );
+
+
 
         $this->resetField();
 

@@ -9,7 +9,7 @@
 
                     <div class="W-full px-1 py-1 gap-2 flex">
                         <p class="text-gray-500">
-                            Mapel:  {{ $subject->name }} | Kelas: {{ $subject->classroom->name }}
+                            Mapel:  {{ $subject->name }} | Kelas: {{ $subject->classroom->name ?? ''}}
                         </p>
                     </div>
                     <div class="container mx-auto mt-5 mb-5">
@@ -56,11 +56,13 @@
                             </table>
                         </div>
                         </div>
-                        <div class="w-full mt-2 justify-right">
-                            <button class="px-2 py-2 rounded-lg text-white border-gray-900 bg-green-900 hover:bg-green-500" type="submit" value="submit">
-                                Simpan
-                            </button>
-                        </div>
+                        @if (count($students) > 0)
+                            <div class="w-full mt-2 justify-right">
+                                <button class="px-2 py-2 rounded-lg text-white border-gray-900 bg-green-900 hover:bg-green-500" type="submit" value="submit">
+                                    Simpan
+                                </button>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

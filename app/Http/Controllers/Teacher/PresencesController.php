@@ -18,7 +18,7 @@ class PresencesController extends Controller
 
     public function index()
     {
-        $subjects = Subject::where('user_id', auth()->user()->id)->get();
+        $subjects = Subject::with('classroomSubject')->where('user_id', auth()->user()->id)->get();
         // dd($subjects);
         return view('teacher.presences.index',[
             'subjects'  => $subjects

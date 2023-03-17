@@ -45,7 +45,7 @@
                                     </td>
 
                                     <td class="px-6 py-4">
-                                        {{ $subject->classroom->name }}
+                                        {{ $subject->classroom->name ?? ''}}
                                     </td>
                                     <td class="px-6 py-4">
                                         <a href="/presences/{{ $subject->id }}/create " class="px-2 py-2 border-gray-600 bg-green-500 w-full rounded-lg text-gray-900 hover:bg-green-300">
