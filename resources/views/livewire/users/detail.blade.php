@@ -158,28 +158,6 @@
                                                     @endforelse
                                                 </tr>
                                                 {{-- end home teacher student --}}
-
-                                                {{-- subject name for student --}}
-                                                <tr class="border-b">
-                                                    <th scope="col" class="px-6 py-3 bg-gray-400 text-left text-xs font-bold text-gray-700 uppercase tracking-wider">
-                                                       Mata Pelajaran
-                                                    </th>
-                                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400">
-                                                            @forelse ($subject_student as $subject)
-                                                                <ul class="list-disc list-inside text-gray-900">
-                                                                    <li class="flex items-center space-x-3">
-                                                                        {{ $subject->name ?? 'Belum ada'}}
-                                                                    </li>
-                                                                </ul>
-                                                            @empty
-                                                            <p class="text-yellow-900 font-bold">
-                                                                {{ __('Mata Pelajaran Belum ada.') }}
-                                                            </p>
-                                                            @endforelse
-                                                    </td>
-                                                </tr>
-                                                {{-- end subject name for student --}}
-
                                                 @endif
                                                 {{-- end if role student --}}
                                         </table>

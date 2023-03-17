@@ -307,10 +307,6 @@ class User extends Component
             'classroom_id'      => $this->classroom_id ?:  null,
         ]);
 
-        foreach ($this->studentSubject as $student) {
-            $user->subjectUser()->attach($student['subject_id']);
-        }
-
         $this->closeModalEdit();
 
         $this->resetField();

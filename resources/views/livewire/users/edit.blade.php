@@ -106,94 +106,42 @@
                     @if ($role_id == 3)
                     {{-- classroom --}}
                     <div class="grid md:grid-cols-2 md:gap-6">
-                    <div class="mb-6">
-                        <label for="classroom_id" class="block mb-2 text-sm font-bold text-gray-900">
-                            Pilih Kelas:
-                        </label>
-                        <select name="classroom_id"
-                                wire:model="classroom_id"
-                                class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option value="">-- Kelas --</option>
-                                @forelse ($classrooms as $classroom)
-                                <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
-                                        value="{{ $classroom->id }}" > {{ $classroom->name }}
-                                    </option>
-                            @empty
-                                <option class="bg-yellow-300 font-normal text-yellow-500 hover:font-bold capitalize">Data Mata Pelajaran Belum Tersedia..</option>
-                            @endforelse
-                        </select>
-                        @error('classroom_id') <span class="text-red-500">{{ $message }}</span>@enderror
-                    </div>
-
-                    {{-- user name --}}
-                    <div class="mb-4">
-                        <label for="exampleFormControlInput1"
-                                class="block text-gray-700 text-sm font-bold mb-2">
-                            NISN:
-                        </label>
-                        <input  type="text"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                id="exampleFormControlInput1"
-                                placeholder="NISN Baru.."
-                                wire:model="nisn">
-                        @error('nisn') <span class="text-red-500">{{ $message }}</span>@enderror
-                    </div>
-                    {{--  end user name --}}
-                </div>
-                    {{-- end classroom --}}
-
-                    {{-- clasroom subject --}}
-                    <div class="mb-6">
-                        <label for="role_id" class="block mb-2 text-sm font-bold text-gray-900">
-                            Pilih Kelas :
-                        </label>
-                        <div class="w-full border border-slate-400 rounded-lg" x-data="{ open: false }">
-                                @forelse ($all_classroom as $classroom)
-                                    <button type="button" @click="open = !open" class="flex inline-flex px-3 py-3 mt-2 ml-3 text-blue-700
-                                                hover:text-white border border-slate-700 hover:bg-gray-300 focus:ring-4
-                                                focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm
-                                                px-5 py-2.5 text-center mr-2 mb-2 dark:border-slate-500 dark:text-blue-500
-                                                dark:hover:text-white dark:hover:bg-slate-600 dark:focus:ring-slate-200">
-                                                Kelas - <span class="text-gray-400 font-bold">
-                                                        {{ $classroom->name }}
-                                                        </span>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-3">
-                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                                          </svg>
-
-                                    </button>
-                                    <div x-show="open" class="w-56 justify-center px-2 py-2 ml-2 border rounded-lg border-slate-400">
-                                        @forelse ($classroom->subjectClassroom as $index => $subject)
-                                            <ul class="w-full py-1 px-2 mb-2 text-sm font-medium text-gray-900 bg-white dark:text-white">
-                                                <li class="w-full border-b dark:border-gray-600">
-                                                    <div class="flex items-center pl-3">
-                                                        <input  id="vue-checkbox"
-                                                                type="checkbox"
-                                                                wire:model="studentSubject.{{$index}}.subject_id"
-                                                                name="studentSubject.[{{$index}}][subject_id]"
-                                                                value="{{ $subject->id }}"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 bg-gray-600 dark:border-gray-500">
-                                                        <label for="vue-checkbox" class="w-full py-3 ml-2 text-sm font-medium text-gray-900">
-                                                            {{ $subject->name }}
-                                                        </label>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        @empty
-                                            <p class="text-yellow-900 font-bold">
-                                                {{ __('Mata Pelajaran Belum ada..') }}
-                                            </p>
-                                        @endforelse
-                                    </div>
+                        <div class="mb-6">
+                            <label for="classroom_id" class="block mb-2 text-sm font-bold text-gray-900">
+                                Pilih Kelas:
+                            </label>
+                            <select name="classroom_id"
+                                    wire:model="classroom_id"
+                                    class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="">-- Kelas --</option>
+                                    @forelse ($classrooms as $classroom)
+                                    <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize"
+                                            value="{{ $classroom->id }}" > {{ $classroom->name }}
+                                        </option>
                                 @empty
-                                    <p class="text-yellow-900 font-bold">
-                                        {{ __('Belum ada Kelas..') }}
-                                    </p>
+                                    <option class="bg-yellow-300 font-normal text-yellow-500 hover:font-bold capitalize">Data Mata Pelajaran Belum Tersedia..</option>
                                 @endforelse
+                            </select>
+                            @error('classroom_id') <span class="text-red-500">{{ $message }}</span>@enderror
                         </div>
+
+                        {{-- NISN --}}
+                        <div class="mb-4">
+                            <label for="exampleFormControlInput1"
+                                    class="block text-gray-700 text-sm font-bold mb-2">
+                                NISN:
+                            </label>
+                            <input  type="text"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="exampleFormControlInput1"
+                                    placeholder="NISN Baru.."
+                                    wire:model="nisn">
+                            @error('nisn') <span class="text-red-500">{{ $message }}</span>@enderror
+                        </div>
+                    {{--  end NISN --}}
                     </div>
+                    {{-- end classroom --}}
                     @endif
-                {{-- classroom subject --}}
               </div>
             </div>
 
