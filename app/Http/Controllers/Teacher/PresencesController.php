@@ -58,7 +58,13 @@ class PresencesController extends Controller
      */
     public function store(Request $request, Subject $subject)
     {
-        // dd($request->presences);
+        // presences = request from blade
+        foreach($request->presences as $person)
+        {
+            Presence::create($person);
+        }
+        // dd('data berhasil ditambahkan');
+        return redirect()->route('teacher.presences.index')->with('message', 'Data Berhasil ditambahkan..');
     }
 
     /**

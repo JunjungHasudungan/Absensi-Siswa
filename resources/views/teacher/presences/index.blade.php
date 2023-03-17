@@ -58,9 +58,10 @@
                                 @endforelse
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
     </div>
+    {{-- script --}}
+    {{-- end script --}}
 </x-app-layout>

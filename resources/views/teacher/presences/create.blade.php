@@ -8,6 +8,7 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
                     {{-- livewire('presence') --}}
+
                     <div class="W-full px-1 py-1 gap-2 flex">
                         <p class="text-gray-500">
                             Mapel:  {{ $subject->name }} | Kelas: {{ $subject->classroom->name ?? ''}}
@@ -36,13 +37,14 @@
                                         @forelse ($students as $index => $student)
                                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-                                                <input type="hidden" name="presences[{{ $index }}][teacher_id]" value="{{ auth()->user()->id }}">
-                                                <input type="hidden" name="presences[ {{ $index }} ] ['student_id']" value="{{ $student->id }}">
-                                                <input type="hidden" name="presences[ {{ $index }} ] [ 'classroom_id' ]" value=" {{ $student->classroom->id }} ">
-                                                <input type="hidden" name="presences[ {{ $index }} ] [ 'subject_id' ]" value="{{ $subject->id }}">
+                                                <input type="hidden" name="presences[{{$index }}][teacher_id]" value="{{ auth()->user()->id }}">
+                                                <input type="hidden" name="presences[{{$index }}][student_id]" value="{{ $student->id }}">
+                                                <input type="hidden" name="presences[{{$index }}][classroom_id]" value="{{ $student->classroom->id }}">
+                                                <input type="hidden" name="presences[{{$index }}][subject_id]" value="{{ $subject->id }}">
                                                 <td class="px-6 py-4" >{{ $student->name }} </td>
                                                 <td class="px-6 py-4">
-                                                    <select class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    <select name="presences[{{$loop->index}}][attendance_id]"
+                                                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                         <option value="2"> H - Hadir</option>
                                                         @foreach ($attendances as $attendance)
                                                         <option class="font-normal hover:font-bold border-gray-300 rounded-lg capitalize" value="{{ $attendance->id }}"> {{ $attendance->code }} - {{ $attendance->description }} </option>
@@ -55,19 +57,22 @@
                                                 </td>
                                             </tr>
                                         @endforelse
+
+                                        {{-- button --}}
+                                        @if (count($students) > 0)
+                                            <div class="w-full mt-2 item-center">
+                                                <button class="px-2 py-2 rounded-lg text-white border-gray-900 bg-green-900 hover:bg-green-500"
+                                                        type="submit"
+                                                        value="Submit">
+                                                    Simpan
+                                                </button>
+                                            </div>
+                                        @endif
+                                        {{-- end button --}}
                                     </form>
                                 </tbody>
                             </table>
                         </div>
-                        @if (count($students) > 0)
-                            <div class="w-full mt-2 justify-right">
-                                <button class="px-2 py-2 rounded-lg text-white border-gray-900 bg-green-900 hover:bg-green-500"
-                                        type="submit"
-                                        value="Submit">
-                                    Simpan
-                                </button>
-                            </div>
-                        @endif
                         </div>
                     </div>
                 </div>
@@ -75,5 +80,3 @@
         </div>
     </div>
 </x-app-layout>
-
-{{-- password --}}
