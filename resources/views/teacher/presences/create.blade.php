@@ -7,6 +7,7 @@
             <div class="bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
 
+                    {{-- livewire('presence') --}}
                     <div class="W-full px-1 py-1 gap-2 flex">
                         <p class="text-gray-500">
                             Mapel:  {{ $subject->name }} | Kelas: {{ $subject->classroom->name ?? ''}}
@@ -30,12 +31,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <form action="">
+                                    <form  action="{{ route('teacher.presences.store') }}" method="post" id="form1">
                                         @csrf
-                                        @forelse ($students as $student)
+                                        @forelse ($students as $index => $student)
                                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                                 <td class="px-6 py-4">{{ $loop->iteration }}</td>
-
+                                                <input type="hidden" name="presences[{{ $index }}][teacher_id]" value="{{ auth()->user()->id }}">
+                                                <input type="hidden" name="presences[ {{ $index }} ] ['student_id']" value="{{ $student->id }}">
+                                                <input type="hidden" name="presences[ {{ $index }} ] [ 'classroom_id' ]" value=" {{ $student->classroom->id }} ">
+                                                <input type="hidden" name="presences[ {{ $index }} ] [ 'subject_id' ]" value="{{ $subject->id }}">
                                                 <td class="px-6 py-4" >{{ $student->name }} </td>
                                                 <td class="px-6 py-4">
                                                     <select class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white dark:border-gray-600 dark:placeholder-gray-400 font-semibold dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -55,17 +59,21 @@
                                 </tbody>
                             </table>
                         </div>
-                        </div>
                         @if (count($students) > 0)
                             <div class="w-full mt-2 justify-right">
-                                <button class="px-2 py-2 rounded-lg text-white border-gray-900 bg-green-900 hover:bg-green-500" type="submit" value="submit">
+                                <button class="px-2 py-2 rounded-lg text-white border-gray-900 bg-green-900 hover:bg-green-500"
+                                        type="submit"
+                                        value="Submit">
                                     Simpan
                                 </button>
                             </div>
                         @endif
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </x-app-layout>
+
+{{-- password --}}

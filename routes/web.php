@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/presences', [PresenceController::class, 'index'])->prefix('teacher')->name('teacher.presences.index');
+    Route::post('presences', [PresenceController::class, 'store'])->prefix('teacher')->name('teacher.presences.store');
     Route::get('/presences/{subject}/create', [PresenceController::class, 'create'])->name('teacher.presences.create');
 
     // Route admin
