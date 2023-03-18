@@ -22,7 +22,11 @@
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{-- @livewire('attendance-student') --}}
-
+                        @empty(count($presences))
+                        <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-2">
+                            Belum Ada Persensi Mata Pelajaran..
+                        </div>
+                        @endempty
 
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -64,9 +68,11 @@
                                         <a href="/presences/{{ $subject->id }}/create " class="px-2 py-2 border-gray-600 bg-green-500 w-full rounded-lg text-gray-900 hover:bg-green-300">
                                             Pilih
                                         </a>
-                                        <a href="/teacher/historiesPresences" class="px-2 py-2 border-gray-600 bg-gray-500 w-full rounded-lg text-gray-900 hover:bg-gray-300">
-                                            Detail
-                                        </a>
+                                        @if (count($presences) > 0)
+                                            <a href="/teacher/historiesPresences" class="px-2 py-2 border-gray-600 bg-gray-500 w-full rounded-lg text-gray-900 hover:bg-gray-300">
+                                                Detail
+                                            </a>
+                                        @endif
                                     </td>
                                 </tr>
                                     @empty

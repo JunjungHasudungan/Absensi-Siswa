@@ -29,10 +29,14 @@ class PresencesController extends Controller
 
     public function index()
     {
+        $presences = Presence::where('teacher_id', auth()->user()->id)->get();
         $subjects = Subject::with('classroomSubject')->where('user_id', auth()->user()->id)->get();
         return view('teacher.presences.index',[
-            'subjects'  => $subjects
+            'subjects'  => $subjects,
+            'presences' => $presences,
         ]);
+
+        // dd($presences);
     }
 
     public function CoreIndex(Subject $subject)
