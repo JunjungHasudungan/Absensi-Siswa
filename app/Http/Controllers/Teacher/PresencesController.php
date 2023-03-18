@@ -16,6 +16,14 @@ class PresencesController extends Controller
 {
     public $id_subject, $id_classroom;
 
+
+    public function historiesIndex()
+    {
+        return view('teacher.presences.historiesIndex',[
+            'presences'     => Presence::where('teacher_id', auth()->user()->id)->groupBy('classroom_id')->get()
+        ]);
+    }
+
     public function index()
     {
         $subjects = Subject::with('classroomSubject')->where('user_id', auth()->user()->id)->get();
@@ -26,9 +34,10 @@ class PresencesController extends Controller
 
     public function CoreIndex(Subject $subject)
     {
-        return view('teacher.presences.index',[
-            'subjects'  => $subject::where('user_id', auth()->user()->id)->get()
-        ]);
+        dd('core Index');
+        // return view('teacher.presences.historiesIndex',[
+        //     'subjects'  => $subject::where('user_id', auth()->user()->id)->get()
+        // ]);
     }
 
     /**
@@ -64,7 +73,7 @@ class PresencesController extends Controller
             Presence::create($person);
         }
         // dd('data berhasil ditambahkan');
-        return redirect()->route('teacher.presences.index')->with('message', 'Data Berhasil ditambahkan..');
+        return redirect('teacher/historiesPresences');
     }
 
     /**
@@ -73,9 +82,14 @@ class PresencesController extends Controller
      * @param  \App\Models\Presence  $Presence
      * @return \Illuminate\Http\Response
      */
-    public function show(Presence $presence)
+    public function show(Presence $presence, Subject $subject)
     {
-        //
+        // dd($subject);
+
+
+        return view('teacher.presences.show', [
+            'presences'     => $presence->where('teacher_id', auth()->user()->id)->get(),
+        ]);
     }
 
     /**

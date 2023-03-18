@@ -1,1 +1,0 @@
-<p>TEST DETAIL</p>

@@ -35,11 +35,6 @@ class Subject extends Model
                             ->withPivot('day', 'start_time', 'end_time');
     }
 
-    public function weekdaySubject()
-    {
-
-    }
-
     public function subjectStudent()
     {
         return $this->belongsToMany(User::class);

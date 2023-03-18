@@ -50,9 +50,11 @@ Route::group(['middleware' => 'auth'], function(){
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/presences', [PresenceController::class, 'index'])->prefix('teacher')->name('teacher.presences.index');
+    // Route::get('/presences', [PresenceController::class, 'coreIndex'])->prefix('teacher')->name('teacher.presences.coreIndex');
     Route::post('presences', [PresenceController::class, 'store'])->prefix('teacher')->name('teacher.presences.store');
     Route::get('/presences/{subject}/create', [PresenceController::class, 'create'])->name('teacher.presences.create');
-
+    Route::get('/presences/{subject}/show', [PresenceController::class, 'show'])->name('teacher.presences.show');
+    // Route::resource('histortiesPresence', PresenceController::class)->prefix('teacher')->only(['index', 'historiesPresences'])->name('teacher.presences.historiesPresences');
     // Route admin
     Route::group(['middleware'  => 'role:admin', 'prefix' => 'admin',  'as' => 'admin.'], function(){
         Route::resources([
@@ -67,13 +69,13 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::group(['middleware' => 'role:teacher', 'prefix'  => 'teacher', 'as' => 'teacher.'], function(){
 
-        // Route::get('/presences', [PresenceController::class, 'index'])->name('presences.index');
+        Route::get('historiesPresences', [PresenceController::class, 'historiesIndex'])->name('teacher.presences.historiesIndex');
         // Route::get('/presences/{subject}/create', [PresenceController::class, 'create'])->name('presences.create');
 
         Route::resources([
             'administrations'      =>  TeacherAdministrationController::class,
             'attendances'          =>  TeacherAttendanceController::class,
-            // 'presences'            =>   PresenceController::class,
+            'presences'             =>   PresenceController::class,
         ]);
     });
 
