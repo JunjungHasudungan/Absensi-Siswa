@@ -33,6 +33,9 @@
                                     Nama Siswa
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Tanggal
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Keterangan Presensi
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -49,6 +52,10 @@
                                     <td class="px-6 py-4">
                                        {{ $presence->student->name }}
                                     </td>
+                                    <td class="px-6 py-4">
+                                        {{ \Carbon\Carbon::parse($presence->created_at)->translatedFormat('d F Y') }}
+                                        - {{ \Carbon\Carbon::parse($presence->create_at)->format('H:i') }}
+                                     </td>
                                     <td class="px-6 py-4">
                                        {{ $presence->attendance->description  }}
                                     </td>

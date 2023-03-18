@@ -48,7 +48,8 @@
                                             {{$presence->classroom->name ?? ''}}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ $presence->created_at->toDayDateTimeString() }}
+                                            {{ Carbon\Carbon::parse($presence->created_at)->translatedFormat('d F Y') }}
+                                            - {{ Carbon\Carbon::parse($presence->created_at)->format('H:i') }}
                                         </td>
                                         <td class="px-6 py-4">
                                             {{ $presence->subject->code_subject }} - {{ $presence->subject->name ?? '' }}

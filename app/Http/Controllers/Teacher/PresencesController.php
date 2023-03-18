@@ -42,9 +42,6 @@ class PresencesController extends Controller
     public function CoreIndex(Subject $subject)
     {
         dd('core Index');
-        // return view('teacher.presences.historiesIndex',[
-        //     'subjects'  => $subject::where('user_id', auth()->user()->id)->get()
-        // ]);
     }
 
     /**
@@ -91,8 +88,7 @@ class PresencesController extends Controller
      */
     public function show(Presence $presence, Subject $subject)
     {
-        dd('Testing Halaman Show');
-
+        // dd('Testing Halaman Show');
 
         return view('teacher.presences.show', [
             'presences'     => $presence->where('teacher_id', auth()->user()->id)->get(),
