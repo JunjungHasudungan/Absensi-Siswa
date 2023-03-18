@@ -17,7 +17,8 @@ use App\Http\Controllers\Admin\{
 use App\Http\Controllers\Teacher\{
     AdministrationController as TeacherAdministrationController,
     AttendanceController as TeacherAttendanceController,
-    PresencesController as PresenceController
+    PresencesController as PresenceController,
+    SheduleSubjectController,
 };
 
 use App\Http\Controllers\Student\{
@@ -73,9 +74,10 @@ Route::group(['middleware' => 'auth'], function(){
         Route::get('histortiesPresences/{subject}', [PresenceController::class, 'historyPresenceSubject'])->name('historyPresenceSubject');
         Route::resource('presences', PresenceController::class)->only('show');
         Route::resources([
-            'administrations'      =>  TeacherAdministrationController::class,
-            'attendances'          =>  TeacherAttendanceController::class,
-            'presences'             =>   PresenceController::class,
+            'administrations'       =>  TeacherAdministrationController::class,
+            'attendances'           =>  TeacherAttendanceController::class,
+            'presences'             =>  PresenceController::class,
+            'sheduleSubject'        =>  SheduleSubjectController::class,
         ]);
     });
 

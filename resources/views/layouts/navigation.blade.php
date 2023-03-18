@@ -52,9 +52,9 @@
                         {{ __('Administrasi') }}
                     </x-nav-link>
 
-                    {{-- <x-nav-link :href="route('teacher.attendances.index')" :active="request()->routeIs('teacher.attendances.index')">
-                        {{ __('Absensi') }}
-                    </x-nav-link> --}}
+                    <x-nav-link :href="route('teacher.sheduleSubject.index')" :active="request()->routeIs('teacher.sheduleSubject.index')">
+                        {{ __('Jadwal Mata Pelajaran') }}
+                    </x-nav-link>
 
                     <x-nav-link :href="route('teacher.presences.index')" :active="request()->routeIs('teacher.presences.index')">
                         {{ __('Presensi') }}
