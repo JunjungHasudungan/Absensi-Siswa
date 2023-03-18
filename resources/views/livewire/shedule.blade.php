@@ -15,15 +15,8 @@
             @endif
 
     <div class=" inline-flex col-span-7 p-3 w-full">
-        {{-- @if (!$is_search)
-            @include('livewire.classrooms.search')
-        @endif --}}
-    </div>
-    {{-- create some check condition --}}
-
-
         @if ($is_detail)
-            @include('livewire.teacher.shedule_subject.detail')
+            @include('livewire.classrooms.detail')
         @endif
 
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -33,13 +26,10 @@
                             No
                         </th>
                         <th class="col" class="px-6 py-3">
-                            Kode Kelas
+                           Nama Mata Pelajaran
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Nama Kelas
-                        </th>
-                        <th class="px-6 py-3">
-                            Wali Kelas
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Action
@@ -47,33 +37,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @forelse ($classrooms as $classroom) --}}
+                    @forelse ($subjects as $subject)
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                {{-- {{$loop->iteration}} --}}
+                                {{$loop->iteration}}
                             </th>
                             <td class="px-6 py-4">
-                                {{-- {{ $classroom['code_classroom'] }} --}}
+                                {{ $subject['name'] }}
                             </td>
 
                             <td class="px-6 py-4">
-                                {{-- {{ $classroom['name'] }} --}}
+                                @forelse ($subject->classroomSubject as $classroom)
+                                <ul class="max-w-md space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
+                                    <li>
+                                       {{ $classroom->name }}
+                                    </li>
+                                </ul>
+                                @empty
+
+                                @endforelse
                             </td>
 
                             <td class="px-6 py-4 item-center justify-center">
-
                                 <button
-                                        {{-- wire:click="detailSheduleSubject( {{ $classroom->id }} )" --}}
+                                        wire:click="detailSheduleSubject( {{ $subject->id }} )"
                                         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                     Detail
                                 </button>
                             </td>
                         </tr>
-                    {{-- @empty --}}
+                    @empty
                         <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-3">
                             Data Belum Tersedia.
                         </div>
-                    {{-- @endforelse --}}
+                    @endforelse
                 </tbody>
             </table>
             <div class="text-gray-600 bg-secondary-50 mt-2">

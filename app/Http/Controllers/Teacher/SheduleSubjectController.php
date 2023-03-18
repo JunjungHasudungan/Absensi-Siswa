@@ -15,7 +15,7 @@ class SheduleSubjectController extends Controller
      */
     public function index()
     {
-        return view('teacher.sheduleSUbject.index');
+        return view('teacher.sheduleSubject.index');
     }
 
     /**
