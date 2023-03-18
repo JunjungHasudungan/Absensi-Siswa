@@ -70,8 +70,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::group(['middleware' => 'role:teacher', 'prefix'  => 'teacher', 'as' => 'teacher.'], function(){
 
         Route::get('historiesPresences', [PresenceController::class, 'historiesIndex'])->name('teacher.presences.historiesIndex');
-        // Route::get('/presences/{subject}/create', [PresenceController::class, 'create'])->name('presences.create');
-
+        Route::get('histortiesPresences/{subject}', [PresenceController::class, 'historyPresenceSubject'])->name('historyPresenceSubject');
+        Route::resource('presences', PresenceController::class)->only('show');
         Route::resources([
             'administrations'      =>  TeacherAdministrationController::class,
             'attendances'          =>  TeacherAttendanceController::class,

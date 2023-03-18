@@ -16,8 +16,18 @@ class Presence extends Model
         return $this->belongsTo(Subject::class);
     }
 
+    public function student()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function classroom()
     {
         return $this->belongsTo(Classroom::class);
+    }
+
+    public function attendance()
+    {
+        return $this->belongsTo(Attendance::class);
     }
 }

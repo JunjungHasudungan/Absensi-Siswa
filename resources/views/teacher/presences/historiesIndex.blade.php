@@ -57,7 +57,7 @@
                                             <a href="{{ route('teacher.presences.index') }}" class="px-2 py-2 border-gray-600 bg-blue-500 w-full rounded-lg text-gray-900 hover:bg-blue-300">
                                                 Kembali
                                             </a>
-                                            <a href="#" class="px-2 py-2 border-gray-600 bg-gray-500 w-full rounded-lg text-gray-900 hover:bg-gray-300">
+                                            <a href="{{route('teacher.historyPresenceSubject', $presence->subject->id)}}" class="px-2 py-2 border-gray-600 bg-gray-500 w-full rounded-lg text-gray-900 hover:bg-gray-300">
                                                 Detail
                                             </a>
                                         </td>

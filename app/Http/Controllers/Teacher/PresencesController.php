@@ -14,13 +14,16 @@ use Illuminate\Support\Facades\DB;
 
 class PresencesController extends Controller
 {
-    public $id_subject, $id_classroom;
-
+    public  $id_subject,
+            $id_classroom,
+            $subject_id,
+            $subject,
+            $classroom;
 
     public function historiesIndex()
     {
         return view('teacher.presences.historiesIndex',[
-            'presences'     => Presence::where('teacher_id', auth()->user()->id)->groupBy('classroom_id')->get()
+            'presences'     => Presence::where('teacher_id', auth()->user()->id)->groupBy('created_at')->get()
         ]);
     }
 
@@ -84,7 +87,7 @@ class PresencesController extends Controller
      */
     public function show(Presence $presence, Subject $subject)
     {
-        // dd($subject);
+        dd('Testing Halaman Show');
 
 
         return view('teacher.presences.show', [
@@ -92,6 +95,24 @@ class PresencesController extends Controller
         ]);
     }
 
+    public function historyPresenceSubject(Presence $presence, Subject $subject)
+    {
+            $this->subject_id = $subject->id;
+            $presences = Presence::with(['subject', 'classroom', 'student', 'attendance'], function($query){
+                $query->where('subject_id', $this->subject_id)->get();
+            })->where('subject_id', $this->subject_id)->get();
+
+            foreach($presences as $presence){
+                $this->classroom = $presence->classroom;
+                $this->subject = $presence->subject;
+            }
+
+            return view('teacher.presences.show', [
+                'presences' => $presences,
+                'classroom' => $this->classroom,
+                'subject'   => $subject
+            ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

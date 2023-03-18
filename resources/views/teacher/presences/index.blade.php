@@ -64,7 +64,7 @@
                                         <a href="/presences/{{ $subject->id }}/create " class="px-2 py-2 border-gray-600 bg-green-500 w-full rounded-lg text-gray-900 hover:bg-green-300">
                                             Pilih
                                         </a>
-                                        <a href="#" class="px-2 py-2 border-gray-600 bg-gray-500 w-full rounded-lg text-gray-900 hover:bg-gray-300">
+                                        <a href="/teacher/historiesPresences" class="px-2 py-2 border-gray-600 bg-gray-500 w-full rounded-lg text-gray-900 hover:bg-gray-300">
                                             Detail
                                         </a>
                                     </td>

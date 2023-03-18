@@ -40,9 +40,9 @@ class Subject extends Model
         return $this->belongsToMany(User::class);
     }
 
-    public function presences()
+    public function presence()
     {
-        return $this->hasMany(Subject::class);
+        return $this->belongsTo(Subject::class, 'id');
     }
 
 }
