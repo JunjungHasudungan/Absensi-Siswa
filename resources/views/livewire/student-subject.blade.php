@@ -45,47 +45,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($classroom as $kelas)
+                    @forelse ($subjects as $subject)
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{$loop->iteration}}
                             </th>
                             <td class="px-6 py-4">
-                               @forelse ($kelas->subjectClassroom as $mata_pelajaran)
-                               <ul class="max-w-md space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
-                                <li>
-                                    At least 10 characters (and up to 100 characters)
-                                </li>
-                                <li>
-                                    At least one lowercase character
-                                </li>
-                                <li>
-                                    Inclusion of at least one special character, e.g., ! @ # ?
-                                </li>
-                            </ul>
-                               @empty
-
-                               @endforelse
+                                {{ $subject->code_subject }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $subject->name }}
                             </td>
 
                             <td class="px-6 py-4">
-                                {{ $kelas['name'] }}
+                                {{ $subject->teacher->name ?? '' }}
                             </td>
 
-                            @if ($kelas->user_id == 0)
-                                <td class="px-6 py-4">
-                                    <p class="text-yellow-700 font-extrabold">
-                                        Wali kelas Belum Tersedia..
-                                    </p>
-                                </td>
-                            @else
-                                <td class="px-6 py-4">
-                                    {{ $kelas->homeTeacher->name }}
-                                </td>
-                            @endif
                             <td class="px-6 py-4 item-center justify-center">
 
-                                <button wire:click="detailClassroom( {{ $kelas->id }} )"
+                                <button wire:click="detailClassroom( {{ $subject->id }} )"
                                         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                     Detail
                                 </button>
