@@ -14,17 +14,11 @@
                 </div>
             @endif
 
-            @if ($is_create)
-                @include('livewire.teacher.attendances.create')
-            @endif
-
-            @if ($is_edit)
-                @include('livewire.teacher.attendances.edit')
-            @endif
-
-            @if ($is_detail)
-                @include('livewire.teacher.attendances.detail')
-            @endif
+                <div class="W-full px-2 py-1 gap-2 flex mb-2">
+                    <p class="text-gray-500">
+                        Kelas: {{ $classroom }}
+                    </p>
+                </div>
 
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -38,56 +32,32 @@
                         <th class="col" class="px-6 py-3">
                             Nama Pelajaran
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nama Kelas
+                        <th class="col" class="px-6 py-3">
+                            Tanggal
+                        </th>
+                        <th class="col" class="px-6 py-3">
+                            Keterangan
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($subjects as $index => $subject)
+                    @forelse ($presences as $index => $presence)
                         <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{$loop->iteration}}
                             </th>
                             <td class="px-6 py-4">
-                                {{ $subject->code_subject }}
+                                {{ $presence->subject->code_subject }}
                             </td>
-                            <td class="px-6 py-4">
-                                {{ $subject->name }}
+                            <td class="px-4 py-4">
+                                {{ $presence->subject->name }}
                             </td>
-
-                            <td class="px-6 py-4">
-                                @forelse ($subject->classroomSubject as $classroom)
-                                <ul class="max-w-md border rounded-lg border-gray-400 mb-2 justify-center item-center  w-full space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
-                                    <li class="px-2 py-2 item-center">
-                                        <label for="" class="px-2 py-2 mr-2 m-2 flex-inline">
-                                            {{ $classroom->name }}
-                                        </label>
-                                        <button wire:click="addAttendance( {{ $classroom->id }} )"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                            Tambah
-                                        </button>
-
-                                        <button wire:click="detailAttendance( {{ $subject->id }} )"
-                                                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                                            Detail
-                                        </button>
-
-                                        <button
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                            Hapus
-                                        </button>
-
-                                    </li>
-                                </ul>
-                                @empty
-                                <div class="w-full px-2 py-2">
-                                    <p>
-                                        Data Siswa Belum ada...
-                                    </p>
-                                </div>
-                                @endforelse
-                                {{-- {{ $classroom['name'] }} --}}
+                            <td class="px-4 py-4 flex-inline">
+                                {{ \Carbon\Carbon::parse($presence->created_at)->translatedFormat('d F Y') }}
+                                - {{ \Carbon\Carbon::parse($presence->created_at)->format('H:i') }}
+                            </td>
+                            <td class="px-4 py-4">
+                                {{ $presence->attendance->description }}
                             </td>
                         </tr>
                     @empty
