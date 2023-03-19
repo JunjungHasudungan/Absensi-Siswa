@@ -33,6 +33,9 @@
                             Nama Pelajaran
                         </th>
                         <th class="col" class="px-6 py-3">
+                            Nama Guru Pelajaran
+                        </th>
+                        <th class="col" class="px-6 py-3">
                             Tanggal
                         </th>
                         <th class="col" class="px-6 py-3">
@@ -51,6 +54,9 @@
                             </td>
                             <td class="px-4 py-4">
                                 {{ $presence->subject->name }}
+                            </td>
+                            <td class="px-4 py-4">
+                                {{ $presence->teacher->name }}
                             </td>
                             <td class="px-4 py-4 flex-inline">
                                 {{ \Carbon\Carbon::parse($presence->created_at)->translatedFormat('d F Y') }}

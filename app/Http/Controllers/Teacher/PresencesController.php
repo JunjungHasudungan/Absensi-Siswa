@@ -9,6 +9,7 @@ use App\Models\{
         Presence,
         Subject,
     };
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

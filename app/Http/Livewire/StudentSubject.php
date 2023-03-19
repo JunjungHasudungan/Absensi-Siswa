@@ -37,7 +37,7 @@ class StudentSubject extends Component
 
         return view('livewire.student-subject', [
             $this->subjects = Subject::with(['classroomSubject'], function($query){
-                                        $query->where('classroom_id', auth()->user()->classroom_id)->get();
+                                    $query->where('classroom_id', auth()->user()->classroom_id)->latest()->get();
                     })->get(),
         ]);
     }

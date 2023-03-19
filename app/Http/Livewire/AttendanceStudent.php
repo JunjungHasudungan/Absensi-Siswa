@@ -41,7 +41,7 @@ class AttendanceStudent extends Component
             }
 
         return view('livewire.attendance-student', [
-            $this->presences = Presence::where('student_id', auth()->user()->id)->get(),
+            $this->presences = Presence::where('student_id', auth()->user()->id)->latest()->get(),
         ]);
     }
 
