@@ -18,12 +18,14 @@ class PresencesController extends Controller
             $id_classroom,
             $subject_id,
             $subject,
-            $classroom;
+            $classroom,
+            $created_at,
+            $presence;
 
     public function historiesIndex()
     {
         return view('teacher.presences.historiesIndex',[
-            'presences'     => Presence::where('teacher_id', auth()->user()->id)->groupBy('created_at')->get()
+            'presences'     => Presence::where('teacher_id', auth()->user()->id)->groupBy('created_at')->latest()->get()
         ]);
     }
 
@@ -76,7 +78,7 @@ class PresencesController extends Controller
         {
             Presence::create($person);
         }
-        // dd('data berhasil ditambahkan');
+
         return redirect('teacher/historiesPresences');
     }
 
@@ -97,20 +99,28 @@ class PresencesController extends Controller
 
     public function historyPresenceSubject(Presence $presence, Subject $subject)
     {
-            $this->subject_id = $subject->id;
-            $presences = Presence::with(['subject', 'classroom', 'student', 'attendance'], function($query){
-                $query->where('subject_id', $this->subject_id)->get();
-            })->where('subject_id', $this->subject_id)->get();
 
-            foreach($presences as $presence){
-                $this->classroom = $presence->classroom;
-                $this->subject = $presence->subject;
+        $this->subject_id = $subject->id;
+        // $presence = Presence::select('created_at')->where('subject_id', $this->subject_id)->get('created_at');
+        // foreach ($presence as $key => $value) {
+        //     $created_at = $value->created_at;
+        // }
+        $presences = Presence::with(['subject', 'classroom', 'student', 'attendance'], function($query){
+            $query->where('subject_id', $this->subject_id)->get();
+        })->where('subject_id', $this->subject_id)->latest()->get();
+
+        foreach($presences as $presence){
+            $this->classroom = $presence->classroom;
+            $this->subject = $presence->subject;
+            $this->presence = $presence;
             }
 
             return view('teacher.presences.show', [
-                'presences' => $presences,
-                'classroom' => $this->classroom,
-                'subject'   => $subject
+                'created_at'    => $this->created_at,
+                'presence'      => $this->presence,
+                'presences'     => $presences,
+                'classroom'     => $this->classroom,
+                'subject'       => $subject
             ]);
     }
     /**

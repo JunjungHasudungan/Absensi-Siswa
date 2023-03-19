@@ -54,7 +54,7 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ \Carbon\Carbon::parse($presence->created_at)->translatedFormat('d F Y') }}
-                                        - {{ \Carbon\Carbon::parse($presence->create_at)->format('H:i') }}
+                                        - {{ \Carbon\Carbon::parse($presence->created_at)->format('H:i') }}
                                      </td>
                                     <td class="px-6 py-4">
                                        {{ $presence->attendance->description  }}

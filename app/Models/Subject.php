@@ -42,7 +42,7 @@ class Subject extends Model
 
     public function presence()
     {
-        return $this->belongsTo(Subject::class, 'id');
+        return $this->hasMany(Subject::class);
     }
 
 }

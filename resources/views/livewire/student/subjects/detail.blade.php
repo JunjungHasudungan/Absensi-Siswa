@@ -11,9 +11,9 @@
           <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                 role="dialog" aria-modal="true"
                 aria-labelledby="modal-headline">
-                 {{-- card --}}
+                <!-- card -->
                  <div class="w-full p-4 bg-white  border border-gray-200 rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
-                    {{-- mata pelajaran --}}
+                    <!-- subject name -->
                     <div class="divide-y mb-2">
                         <div class="flex items-left mb-2 ">
                             <h6 class="text-medium font-semibold leading-none text-left text-gray-900 dark:text-white">
@@ -21,8 +21,8 @@
                             </h6>
                         </div>
                     </div>
-                     {{-- table --}}
-                     {{-- subjects --}}
+                    <!-- end subject name -->
+                     <!-- table -->
                       <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-4">
                          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -43,41 +43,40 @@
                              </thead>
                              <tbody>
                                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                     {{-- classroom name --}}
+                                     <!-- subject name -->
                                     <td scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                          <p class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
                                              {{ $subject_name }}
                                          </p>
                                     </td>
-                                     {{-- end classroom name --}}
-                                     {{-- teaching day --}}
+                                     <!-- end subject name -->
+                                     <!-- teaching day -->
                                     <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                          <p class="max-w-md space-y-1 text-center tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
                                              {{ $day }}
                                          </p>
                                     </td>
-                                     {{-- end teaching day --}}
-                                     {{-- start_time --}}
+                                     <!-- end teaching day -->
+                                     <!-- start time -->
                                     <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <p class="max-w-md space-y-1 text-center tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
                                             {{ \Carbon\Carbon::parse($start_time)->format('H:i') }}
                                         </p>
                                     </td>
-                                     {{-- end start_time --}}
-                                     {{-- student name --}}
+                                     <!-- end start time -->
+                                     <!-- end time -->
                                     <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         <p class="max-w-md space-y-1 text-center tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
                                             {{ \Carbon\Carbon::parse($end_time)->format('H:i') }}
                                         </p>
                                     </td>
-                                    {{-- end student name --}}
+                                    <!-- end time  -->
                                  </tr>
                              </tbody>
                          </table>
                      </div>
-                     {{-- end subject --}}
-                     {{-- end table --}}
-                    {{-- button --}}
+                     <!-- end table -->
+                    <!-- end button -->
                      <div class="divide-y">
                         <div class=" px-4 py-3 item-center justify-center w-full sm:px-6 sm:flex sm:flex-row-reverse">
                             <span class="mt-3 flex w-full item-center rounded-md shadow-sm sm:mt-0 sm:w-auto">
@@ -88,9 +87,9 @@
                              </span>
                          </div>
                      </div>
-                    {{-- / button --}}
+                    <!-- end button -->
                  </div>
-                 {{-- end card --}}
+                 <!-- end card -->
             </div>
           </div>
         </div>

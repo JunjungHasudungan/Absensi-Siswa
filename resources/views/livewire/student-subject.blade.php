@@ -14,10 +14,6 @@
                 </div>
             @endif
 
-        @if ($is_detail)
-            @include('livewire.student.subjects.detail')
-        @endif
-
             <div class="W-full px-2 py-1 gap-2 flex mb-2">
                 <p class="text-gray-500">
                     Kelas: {{ $classroom_name }} |  Wali Kelas:  {{ $home_teacher }}
@@ -67,6 +63,13 @@
                                         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                                     Detail
                                 </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                @if ($is_detail)
+                                    @include('livewire.student.subjects.detail')
+                                @endif
                             </td>
                         </tr>
                     @empty

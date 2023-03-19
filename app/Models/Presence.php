@@ -9,7 +9,7 @@ class Presence extends Model
 {
     use HasFactory;
 
-    public $guarded = [];
+    public $guarded = ['created_at'];
 
     public function subject()
     {
