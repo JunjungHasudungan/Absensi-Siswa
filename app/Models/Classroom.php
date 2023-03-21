@@ -30,4 +30,9 @@ class Classroom extends Model
     {
         return $this->belongsToMany(Subject::class)->withPivot(['subject_id', 'classroom_id']);
     }
+
+    public function presences()
+    {
+        return $this->hasMany(Presence::class);
+    }
 }

@@ -16,7 +16,6 @@ return new class extends Migration
     {
         Schema::table('classrooms', function (Blueprint $table) {
             $table->foreignIdFor(User::class)->after('name');
-            $table->foreignId('student_id')->nullable();
             $table->string('code_classroom')->after('user_id')->unique();
         });
     }
