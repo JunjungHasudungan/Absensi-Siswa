@@ -14,19 +14,22 @@
                 <!-- card -->
                  <div class="w-full p-4 bg-white  border border-gray-200 rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
                     <!-- subject name -->
-                    <div class="divide-y mb-2">
+                    {{-- <div class="divide-y mb-2">
                         <div class="flex items-left mb-2 ">
                             <h6 class="text-medium font-semibold leading-none text-left text-gray-900 dark:text-white">
                                 {{ $subject_name }}
                             </h6>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- end subject name -->
                      <!-- table -->
                       <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-4">
                          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                  <tr>
+                                    <th scope="col" class="px-2 py-3">
+                                        Mapel
+                                    </th>
                                      <th scope="col" class="px-2 py-3">
                                          Hari
                                      </th>
@@ -36,37 +39,34 @@
                                      <th scope="col" class="px-4 py-3">
                                          Selesai
                                      </th>
-                                     <th scope="col" class="px-6 py-3">
-                                        Siswa
-                                    </th>
                                  </tr>
                              </thead>
                              <tbody>
                                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                      <!-- subject name -->
                                     <td scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         <p class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                         <p class="max-w-md tracking-tight text-gray-500 dark:text-gray-400">
                                              {{ $subject_name }}
                                          </p>
                                     </td>
                                      <!-- end subject name -->
                                      <!-- teaching day -->
                                     <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         <p class="max-w-md space-y-1 text-center tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
-                                             {{ $day }}
+                                         <p class="max-w-md tracking-tight text-gray-500 dark:text-gray-400">
+                                            {{ $day }}
                                          </p>
                                     </td>
                                      <!-- end teaching day -->
                                      <!-- start time -->
                                     <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <p class="max-w-md space-y-1 text-center tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                        <p class="max-w-md tracking-tight text-gray-500 dark:text-gray-400">
                                             {{ \Carbon\Carbon::parse($start_time)->format('H:i') }}
                                         </p>
                                     </td>
                                      <!-- end start time -->
                                      <!-- end time -->
                                     <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        <p class="max-w-md space-y-1 text-center tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                        <p class="max-w-md tracking-tight text-gray-500 dark:text-gray-400">
                                             {{ \Carbon\Carbon::parse($end_time)->format('H:i') }}
                                         </p>
                                     </td>
