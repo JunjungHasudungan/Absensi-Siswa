@@ -18,7 +18,7 @@ return new class extends Migration
     {
         Schema::table('subjects', function (Blueprint $table) {
             $table->foreignIdFor(User::class);
-            $table->foreignId('classroom_id');
+            $table->foreignId('classroom_id')->nullable();
         });
     }
 

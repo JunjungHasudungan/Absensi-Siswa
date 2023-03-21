@@ -74,7 +74,7 @@ class Classroom extends Component
 
         return view('livewire.classroom', [
 
-            $this->classrooms = Classrooms::with(['students', 'homeTeacher'])
+            $this->classrooms = Classrooms::with(['students', 'homeTeacher', 'subjects'])
                                 ->where('name', 'LIKE', $searchParam)
                                 ->orWhere('code_classroom', 'LIKE', $searchParam)->get(),
 
@@ -136,6 +136,7 @@ class Classroom extends Component
         $this->student_name = $classroom->students; // nama siswa
         $this->student_amount = count($classroom->students); // jumlah siswa
         $this->subject_classroom = $classroom->subjectClassroom; // mata pelajaran kelas
+        $subjects = $classroom->subjects ?? '';
         $this->subject_amount = count($classroom->subjectClassroom); // jumlah mata pelajaran
     }
 

@@ -113,7 +113,7 @@ class Subject extends Component
         'code_subject'     =>  'required|string|max:30|min:3',
         'name'             =>  'required|string|max:25|min:3',
         'user_id'          =>  'required|integer',
-        // 'classroom_id'     =>   'required',
+        'classroom_id'     =>   'required',
     ];
 
 
@@ -285,6 +285,12 @@ class Subject extends Component
                 'end_time'      => $classroom['end_time']
             ]
         );
+        $this->classroom_id = $classroom['classroom_id'];
+
+        $subject->update([
+            $subject->classroom_id = $this->classroom_id
+        ]
+    );
 
     }
 

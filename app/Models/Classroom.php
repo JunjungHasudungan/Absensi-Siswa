@@ -21,6 +21,11 @@ class Classroom extends Model
         return $this->hasMany(User::class, 'classroom_id')->where('role_id', 3);
     }
 
+    public function subjects()
+    {
+        return $this->hasMany(Subject::class, 'id');
+    }
+
     public function subjectClassroom()
     {
         return $this->belongsToMany(Subject::class)->withPivot(['subject_id', 'classroom_id']);
