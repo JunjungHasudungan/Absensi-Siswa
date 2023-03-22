@@ -38,7 +38,7 @@ class StudentSubject extends Component
             $this->subjects = Subject::with(['classroomSubject'], function($query){
                                     $query->where('classroom_id', auth()->user()->classroom_id)
                                     ->orderByPivot('day')->latest()->get();
-                    })->get(),
+                    })->where('classroom_id', auth()->user()->classroom_id ?? '')->get(),
             $this->schedules_subject = $schedules_subject,
                 ]);
 
