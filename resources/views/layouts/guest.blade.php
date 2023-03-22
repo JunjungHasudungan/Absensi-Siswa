@@ -18,7 +18,7 @@
             <div class="justify-center text-center ">
                 <a href="/">
                     <h1 class="text-center font-extrabold">
-                        <span class="font-extrabold text-green-700 mt-1">Administrasi Guru</span>
+                        <span class="font-extrabold text-green-700 mt-1"> {{ config('app.name') }} </span>
                     </h1>
                     {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
                 </a>

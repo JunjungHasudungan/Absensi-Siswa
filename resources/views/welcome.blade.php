@@ -47,7 +47,7 @@
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 <div class="flex justify-center text-gray-600 dark:text-gray-400 pt-8 sm:justify-start sm:pt-0">
                     <h1 class="text-center font-extrabold">
-                        Administrasi Guru
+                        {{ config('app.name') }}
                     </h1>
                 </div>
 
