@@ -41,11 +41,6 @@
                 @if ($is_detail)
                     @include('livewire.administrations.detail')
                 @endif
-            {{-- search --}}
-                {{-- @if (!$is_search)
-                    @include('livewire.users.search-user')
-                @endif --}}
-            {{-- end search --}}
         </div>
     </div>
 

@@ -19,7 +19,6 @@ class Administration extends Component
             $id_administration,
             $is_create = false,
             $is_review = false,
-            $is_edit = false,
             $is_detail = false,
             $teacher_name,
             $title,
@@ -46,7 +45,7 @@ class Administration extends Component
         return view('livewire.administration', [
 
             $this->administrations = Administrations::with(['teacher', 'subject', 'classroom', 'comment'])
-                                    ->where('teacher_id', auth()->user()->id)->get(),
+                                    ->where('teacher_id', auth()->user()->id)->latest()->get(),
             $this->subjects = Subjects::with(['classroomSubject'])->where('user_id', Auth::id())->get() ?: 0,
         ]);
     }
@@ -145,15 +144,6 @@ class Administration extends Component
 
     }
 
-    public function isOpenModalEdit()
-    {
-        return $this->is_edit = true;
-    }
-
-    public function isCloseModalEdit()
-    {
-        return $this->is_edit = false;
-    }
 
     public function isOpenModalDetail()
     {
@@ -208,6 +198,5 @@ class Administration extends Component
         Administrations::where('id', $id)->delete();
 
         $this->dispatchBrowserEvent('classroomDeleted');
-        // dd($administration);
     }
 }

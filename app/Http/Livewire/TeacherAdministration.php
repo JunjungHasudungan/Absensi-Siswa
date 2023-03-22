@@ -6,35 +6,35 @@ use Livewire\Component;
 use App\Models\{
     Administration as Administrations,
     User as Users,
+    Comment as Comments,
 };
 
 class TeacherAdministration extends Component
 {
-    // public User $user;
     public  $is_review = false,
-            $is_search = false,
+            $is_comment = false,
             $name,
             $title,
             $method_learning,
             $status,
             $comment,
+            $description,
             $completeness,
             $administration,
             $classroom,
             $subject,
             $teacher,
-            $teachers,
             $teacher_id,
             $created_at,
+            $id_administration,
             $administrations;
-
 
 
             public function render()
             {
                 return view('livewire.teacher-administration',[
 
-                    $this->administrations = Administrations::with('teacher')->get(),
+                    $this->administrations = Administrations::with('teacher')->latest()->get(),
         ]);
     }
 
@@ -45,19 +45,23 @@ class TeacherAdministration extends Component
 
     public function closeModalReview()
     {
-        $administration  = Administrations::all();
-        $status = 1;
-
-        $ad = Administrations::find($administration);
-        $ad->status = 1;
+        $this->resetField();
 
         return $this->is_review = false;
 
+
+    }
+
+    public function openCreateComment()
+    {
+        return $this->is_comment = true;
     }
 
     public function reviewAdministration($id_administration)
     {
         $this->isModalReviewOpen();
+
+        $this->id_administration = $id_administration;
 
         $this->administration = Administrations::find($id_administration);
         $this->teacher = $this->administration->teacher ?: null;
@@ -72,12 +76,28 @@ class TeacherAdministration extends Component
         $this->created_at = $this->administration->created_at->diffForHumans();
     }
 
-    public function sendComment($comment)
+    public function resetField()
     {
-        dd($comment);
+        $this->description = '';
     }
-    public function updateAdministration($id_administration)
+
+    public function comment($id_administration)
     {
-        dd($id_administration);
+        $this->id_administration = $id_administration;
+
+         $administration = Administrations::with('comment')->where('id', $id_administration)->get();
+
+         foreach ($administration as $administrasi) {
+                Comments::create([
+                    'administration_id' => $administrasi->id,
+                    'description'       => $this->description,
+                ]);
+         }
+
+         $this->resetField();
+
+         $this->closeModalReview();
+
     }
+
 }
