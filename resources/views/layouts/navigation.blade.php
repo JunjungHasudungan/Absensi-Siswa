@@ -19,10 +19,6 @@
                             {{ __('Dashboard') }}
                         </x-nav-link>
 
-                        <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                            {{ __('Home') }}
-                        </x-nav-link>
-
                         <x-nav-link :href="route('admin.subjects.index')" :active="request()->routeIs('admin.subjects.index')">
                             {{ __('Mata Pelajaran') }}
                         </x-nav-link>
