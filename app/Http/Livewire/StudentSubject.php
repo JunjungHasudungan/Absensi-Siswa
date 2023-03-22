@@ -11,24 +11,23 @@ use App\Models\{
 
 class StudentSubject extends Component
 {
-    public  $is_detail,
-            $subjects,
+    public  $subjects,
             $student,
             $subject_name,
             $subject,
             $classrooms,
-            $day,
-            $start_time,
-            $end_time,
             $classroom,
             $classroom_name,
             $home_teacher,
             $classroom_id,
-            $subject_id;
+            $schedules_subject;
 
     public function render()
     {
         $classroom = Classroom::where('id', auth()->user()->classroom_id ?? '')->get();
+        $schedules_subject = Subject::with(['classroomSubject'], function($query){
+            $query->orderByPivot('day');
+        })->get();
 
         foreach ($classroom as $kelas) {
             $this->classroom_name = $kelas->name ?? '';
@@ -37,37 +36,41 @@ class StudentSubject extends Component
 
         return view('livewire.student-subject', [
             $this->subjects = Subject::with(['classroomSubject'], function($query){
-                                    $query->where('classroom_id', auth()->user()->classroom_id)->latest()->get();
+                                    $query->where('classroom_id', auth()->user()->classroom_id)
+                                    ->orderByPivot('day')->latest()->get();
                     })->get(),
-        ]);
+            $this->schedules_subject = $schedules_subject,
+                ]);
+
     }
 
-    public function detailClassroom($subject_id)
-    {
-        $this->openModalDetail();
+    // public function detailClassroom($subject_id)
+    // {
+    //     $this->openModalDetail();
 
-        $subject = Subject::find($subject_id);
+    //     // dd($this->schedules_subject);
+    //     $subject = Subject::find($subject_id);
 
-        foreach ($subject->classroomSubject as $mata_pelajaran) {
-           $day = $mata_pelajaran->pivot->day;
-           $start_time = $mata_pelajaran->pivot->start_time;
-           $end_time = $mata_pelajaran->pivot->end_time;
-        }
-        $this->subject_name = $subject->name;
-        $this->day = $day;
-        $this->start_time = $start_time;
-        $this->end_time = $end_time;
-    }
+    //     foreach ($subject->classroomSubject as $mata_pelajaran) {
+    //        $day = $mata_pelajaran->pivot->day;
+    //        $start_time = $mata_pelajaran->pivot->start_time;
+    //        $end_time = $mata_pelajaran->pivot->end_time;
+    //     }
+    //     $this->subject_name = $subject->name;
+    //     $this->day = $day;
+    //     $this->start_time = $start_time;
+    //     $this->end_time = $end_time;
+    // }
 
-    public function openModalDetail()
-    {
-        return $this->is_detail = true;
-    }
+    // public function openModalDetail()
+    // {
+    //     return $this->is_detail = true;
+    // }
 
-    public function closeModalDetail()
-    {
-        return $this->is_detail = false;
-    }
+    // public function closeModalDetail()
+    // {
+    //     return $this->is_detail = false;
+    // }
 
 
 }

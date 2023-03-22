@@ -43,12 +43,6 @@ class AttendanceSeeder extends Seeder
                 'code'              => 'D2',
                 'description'       => 'Dispensasi acara diluar sekolah',
             ],
-            [
-                'code'              => 'H',
-                'description'       => 'Hadir',
-            ],
-
-
         ];
 
         Attendance::insert($attendances);

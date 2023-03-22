@@ -26,17 +26,17 @@
                         <th scope="col" class="px-6 py-3">
                             No
                         </th>
-                        <th class="col" class="px-6 py-3">
-                            Kode Mata Pelajaran
+                        <th scope="col" class="px-6 py-3">
+                            Hari
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Mulai - Selesai
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Nama Mata Pelajaran
                         </th>
                         <th class="px-6 py-3">
                             Guru
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
                         </th>
                     </tr>
                 </thead>
@@ -46,30 +46,22 @@
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{$loop->iteration}}
                             </th>
-                            <td class="px-6 py-4">
-                                {{ $subject->code_subject }}
-                            </td>
+                            @foreach ($subject->classroomSubject as $mata_pelajaran)
+                                <td class="px-6 py-4">
+                                    {{ $mata_pelajaran->pivot->day }}
+                                </td>
+                                <td class="px-6 py-4">
+                                    {{ \Carbon\Carbon::parse($mata_pelajaran->pivot->start_time)->format('H:i') }}
+                                -   {{ \Carbon\Carbon::parse($mata_pelajaran->pivot->end_time)->format('H:i') }}
+                                </td>
+                            @endforeach
+
                             <td class="px-6 py-4">
                                 {{ $subject->name }}
                             </td>
 
                             <td class="px-6 py-4">
                                 {{ $subject->teacher->name ?? '' }}
-                            </td>
-
-                            <td class="px-6 py-4 item-center justify-center">
-
-                                <button wire:click="detailClassroom( {{ $subject->id }} )"
-                                        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                                    Detail
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                @if ($is_detail)
-                                    @include('livewire.student.subjects.detail')
-                                @endif
                             </td>
                         </tr>
                     @empty
