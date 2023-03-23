@@ -142,15 +142,9 @@
                                                     Komentar:
                                                 </th>
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-gray-400 divide-y divide-gray-200">
-                                                   @if ($comment->description == 0)
-                                                        <p class="text-sm font-bold text-blue-900 font-bold truncate">
-                                                            {{ __('Tingkatkan Teknik Mengajar') }}
-                                                        </p>
-                                                   @else
-                                                        <p class="text-sm font-bold text-green-900 font-bold truncate">
-                                                            {{ $comment->description }}
-                                                        </p>
-                                                   @endif
+                                                    <p class="text-sm font-bold text-green-900 font-bold truncate">
+                                                        {{ $comment->description ?? 'Tingkatkan Teknik Mengajar'}}
+                                                    </p>
                                                 </td>
                                             </tr>
                                             {{-- end comment --}}

@@ -13,6 +13,6 @@ class Comment extends Model
 
     public function administration()
     {
-        return $this->belongsTo(Administration::class);
+        return $this->belongsTo(Administration::class, 'id');
     }
 }
