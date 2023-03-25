@@ -45,4 +45,9 @@ class Subject extends Model
         return $this->hasMany(Subject::class);
     }
 
+    public function administrations()
+    {
+        return $this->hasMany(Administration::class);
+    }
+
 }

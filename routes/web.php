@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\{
 
 use App\Http\Controllers\Teacher\{
     AdministrationController as TeacherAdministrationController,
+    AssignmentController,
     AttendanceController as TeacherAttendanceController,
     PresencesController as PresenceController,
     SheduleSubjectController,
@@ -78,6 +79,7 @@ Route::group(['middleware' => 'auth'], function(){
             'attendances'           =>  TeacherAttendanceController::class,
             'presences'             =>  PresenceController::class,
             'sheduleSubject'        =>  SheduleSubjectController::class,
+            'assignments'           =>  AssignmentController::class,
         ]);
     });
 
