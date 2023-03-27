@@ -56,9 +56,9 @@
                         {{ __('Presensi') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('teacher.assignments.index')" :active="request()->routeIs('teacher.assignments.index')">
+                    {{-- <x-nav-link :href="route('teacher.assignments.index')" :active="request()->routeIs('teacher.assignments.index')">
                         {{ __('Penugasan') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                     @endif
 
                     @if (auth()->user()->role_id === 3)
