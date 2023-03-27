@@ -47,7 +47,9 @@ class Administration extends Component
 
             $this->administrations = Administrations::with(['teacher', 'subject', 'classroom', 'comment'])
                                     ->where('teacher_id', auth()->user()->id)->latest()->get(),
-            $this->subjects = Subjects::with(['classroomSubject'])->where('user_id', Auth::id())->get() ?: 0,
+            $this->subjects = Subjects::with(['classroomSubject', 'classroom'], function($query){
+                $query->orderBy('classroom_id', 'asc')->groupBy('classroom_id')->get();
+            })->where('user_id', Auth::id())->get() ?: 0,
         ]);
     }
 
