@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use App\Models\{
-        Assignment,
+    Administration,
+    Assignment,
         Subject,
     };
 use Illuminate\Http\Request;
@@ -18,12 +19,17 @@ class AssignmentController extends Controller
      */
     public function index()
     {
+        $administrations = Administration::where('teacher_id', auth()->user()->id)->with(['teacher', 'classroom', 'subject'])->get();
+
+        dd($administrations);
+
         return view('teacher.assignments.index',[
             'subjects' => Subject::with(['teacher', 'administrations'], function($query){
                 $query->where('method_learning', '>', 0)->get();
 
             })->where('user_id', auth()->user()->id)->get(),
         ]);
+
     }
 
     /**

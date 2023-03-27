@@ -34,19 +34,4 @@ class Administration extends Model
     {
         return $this->belongsTo(Subject::class);
     }
-
-    // public function getIsPraktekAttribute()
-    // {
-    //     return $this->method = MethodLearning::METHOD_LEARING['Praktek'];
-    // }
-
-    // public function getIsTuntasAttribute()
-    // {
-    //     return $this->completeness = Completeness::COMPLETENESS['Tuntas'];
-    // }
-
-    // public function getIsBersambungAttribute()
-    // {
-    //     return $this->completeness = Completeness::COMPLETENESS['Bersambung'];
-    // }
 }
