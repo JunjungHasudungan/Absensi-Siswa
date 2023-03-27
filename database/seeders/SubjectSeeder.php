@@ -20,55 +20,55 @@ class SubjectSeeder extends Seeder
             [
                 'code_subject'      => 'Agama04',
                 'name'              => 'Pendidikan Agama dan Budi Pekerti',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
             [
                 'code_subject'      => 'PKN 04',
                 'name'              => 'PKN',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
             [
                 'code_subject'      => 'Bind04',
                 'name'              => 'Bahasa Indonesia',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
             [
                 'code_subject'      => 'MTK04',
                 'name'              => 'Matematika',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
             [
                 'code_subject'      => 'IPA04',
                 'name'              => 'Ilmu Pengetahuan Alam',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
             [
                 'code_subject'      => 'IPS04',
                 'name'              => 'Ilmu Pengetahuan Sosial',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
             [
                 'code_subject'      => 'SBP04',
                 'name'              => 'Seni Budaya dan Prakarya',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
             [
                 'code_subject'      => 'PJOK04',
                 'name'              => 'Pendidikan Jasmani Olahraga dan Kesehatan',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
             [
                 'code_subject'      => 'Bing04',
                 'name'              => 'Bahasa Inggris',
-                'user_id'           => 4,
+                'user_id'           => 7,
                 'classroom_id'      => 5
             ],
         ];

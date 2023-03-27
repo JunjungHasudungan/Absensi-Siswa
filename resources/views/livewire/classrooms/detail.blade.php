@@ -8,17 +8,17 @@
           <!-- This element is to trick the browser into centering the modal contents. -->
           <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>​
 
-          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+          <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle w-8/12"
                 role="dialog" aria-modal="true"
                 aria-labelledby="modal-headline">
                  {{-- card --}}
                  <div class="w-full p-4 bg-white  border border-gray-200 rounded-lg shadow sm:p-8 bg-gray-800 border-gray-700">
                     {{-- mata pelajaran --}}
                     <div class="divide-y">
-                        <div class="flex items-center  justify-center mb-2 ">
-                            <h5 class="text-xl font-bold leading-none text-center text-gray-900 dark:text-white">
-                                {{__('Data Kelas')}}
-                            </h5>
+                        <div class="W-full px-1 py-1 gap-2 flex boder border-gray-900">
+                            <p class="text-gray-500 font-semibold">
+                                Kelas :  {{ $classroom }} | Wali Kelas: {{ $teacher->name }}
+                            </p>
                         </div>
                     </div>
                      {{-- table --}}
@@ -27,14 +27,8 @@
                          <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                              <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                                  <tr>
-                                     <th scope="col" class="px-2 py-3">
-                                         Nama
-                                     </th>
-                                     <th scope="col" class="px-1 py-3">
-                                         Guru
-                                     </th>
                                      <th scope="col" class="px-4 py-3">
-                                         Mapel
+                                         Mata Pelajaran
                                      </th>
                                      <th scope="col" class="px-6 py-3">
                                         Siswa
@@ -43,24 +37,9 @@
                              </thead>
                              <tbody>
                                  <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                     {{-- classroom name --}}
-                                     <td scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         <p class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
-                                             {{ $classroom }}
-                                         </p>
-                                     </td>
-                                     {{-- end classroom name --}}
-                                     {{-- teacher name --}}
-                                     <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         <p class="max-w-md space-y-1 text-left tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
-                                             {{ $teacher->name }}
-                                         </p>
-                                     </td>
-                                     {{-- end teacher name --}}
-                                     {{-- subject name --}}
-                                     <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                     <td scope="row" class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                          @forelse ($subject_classroom as $subject)
-                                         <ul class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                         <ul class="px-2 max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
                                             <li>
                                                  {{ $subject->name }}
                                              </li>
