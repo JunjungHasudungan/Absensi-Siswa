@@ -38,9 +38,6 @@
                                 <th scope="col" class="px-6 py-3">
                                     Keterangan Presensi
                                 </th>
-                                <th scope="col" class="px-6 py-3">
-                                    <span class="sr-only">Edit</span>
-                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,19 +56,16 @@
                                     <td class="px-6 py-4">
                                        {{ $presence->attendance->description  }}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <a href="{{ route('teacher.presences.index') }}" class="w-full bg-blue-900 hover:bg-blue-500 border-lg rounded-lg px-2 py-2 font-medium text-white">
-                                            Kembali
-                                        </a>
-                                    </td>
                                 </tr>
-
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-
-
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="px-2 py-2 mt-2">
+                        <a href="{{ route('teacher.presences.index') }}" class="w-full bg-blue-900 hover:bg-blue-500 border-lg rounded-lg px-2 py-2 font-medium text-white">
+                            Kembali
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
