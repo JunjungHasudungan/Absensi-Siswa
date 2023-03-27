@@ -34,7 +34,7 @@ class ClassroomSeeder extends Seeder
             [
                 'name'                  => '4',
                 'code_classroom'        => '4a',
-                'user_id'               => 1
+                'user_id'               => 7
             ],
             [
                 'name'                  => '5',

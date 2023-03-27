@@ -63,7 +63,7 @@ class UserSeeder extends Seeder
                 'name'              => 'Maslan Munthe',
                 'email'             => 'maslan@gmail.com',
                 'password'          => bcrypt('password'),
-                'role_id'           => 3, // siswa
+                'role_id'           => 2, // teacher
                 'address'           => 'bekasi',
                 'classroom_id'      => null
             ],
