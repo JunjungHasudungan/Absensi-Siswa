@@ -79,9 +79,8 @@ class Administration extends Component
 
         $this->subjects = Subjects::where('user_id', Auth::id())->get() ?: 0;
 
-        if(count($this->subjects) == 0){
-            $this->showEmpySubject();
-        }else{
+        if(count($this->subjects) > 0){
+
             $this->isOpenModalCreate();
 
                 $this->validate([
@@ -99,22 +98,24 @@ class Administration extends Component
 
                 ]);
 
-                    Administrations::create([
-                        'title'             => $this->title,
-                        'completeness'      => $this->completeness,
-                        'method_learning'   => $this->method_learning,
-                        'subject_id'        => $this->subject_id,
-                        'classroom_id'      => $this->classroom_id,
-                        'teacher_id'           => auth()->user()->id,
-                    ]);
+                Administrations::create([
+                    'title'             => $this->title,
+                    'completeness'      => $this->completeness,
+                    'method_learning'   => $this->method_learning,
+                    'subject_id'        => $this->subject_id,
+                    'classroom_id'      => $this->classroom_id,
+                    'teacher_id'           => auth()->user()->id,
+                ]);
 
-                    $this->resetField();
+                $this->resetField();
 
-                    $this->isCloseModalCreate();
+                $this->isCloseModalCreate();
 
-                    $this->dispatchBrowserEvent('toastr:info', [
-                        'message'   => 'Data Berhasil ditambahkan...'
-                    ]);
+                $this->dispatchBrowserEvent('toastr:info', [
+                    'message'   => 'Data Berhasil ditambahkan...'
+                ]);
+            }else{
+            $this->showEmpySubject();
         }
     }
 
