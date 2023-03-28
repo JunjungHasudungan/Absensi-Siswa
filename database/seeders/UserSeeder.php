@@ -60,8 +60,8 @@ class UserSeeder extends Seeder
                 'classroom_id'      => 1
             ],
             [
-                'name'              => 'Maslan Munthe',
-                'email'             => 'maslan@gmail.com',
+                'name'              => 'Menti Hasibuan',
+                'email'             => 'menti@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 2, // teacher
                 'address'           => 'bekasi',
