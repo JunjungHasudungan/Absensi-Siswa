@@ -12,24 +12,19 @@ class ClassroomSeeder extends Seeder
     {
         $classrooms = [
             [
-                'name'                  => '1 A',
+                'name'                  => '1',
                 'code_classroom'        => '1a',
-                'user_id'               => 1
+                'user_id'               => 11
             ],
             [
-                'name'                  => '1 B',
-                'code_classroom'        => '1b',
-                'user_id'               => 2
-            ],
-            [
-                'name'                  => '2 A',
+                'name'                  => '2',
                 'code_classroom'        => '2a',
-                'user_id'               => 1
+                'user_id'               => 9
             ],
             [
-                'name'                  => '2 B',
-                'code_classroom'        => '2b',
-                'user_id'               => 1
+                'name'                  => '3',
+                'code_classroom'        => '3a',
+                'user_id'               => 10
             ],
             [
                 'name'                  => '4',
@@ -39,12 +34,12 @@ class ClassroomSeeder extends Seeder
             [
                 'name'                  => '5',
                 'code_classroom'        => '5a',
-                'user_id'               => 1
+                'user_id'               => 12
             ],
             [
                 'name'                  => '6',
                 'code_classroom'        => '6a',
-                'user_id'               => 1
+                'user_id'               => 8
             ],
         ];
 

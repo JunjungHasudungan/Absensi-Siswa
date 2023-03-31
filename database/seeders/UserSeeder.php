@@ -63,7 +63,79 @@ class UserSeeder extends Seeder
                 'name'              => 'Menti Hasibuan',
                 'email'             => 'menti@gmail.com',
                 'password'          => bcrypt('password'),
+                'role_id'           => 2, // teacher, Wali Kelas IV
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Riris Suryani Simbolon',
+                'email'             => 'riris@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 2, // teacher, Wali kelas VI
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Rebka Nababan',
+                'email'             => 'rebka@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 2, // teacher, Wali Kelas II
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Wina Natalia Gea',
+                'email'             => 'wina@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 2, // teacher, Wali Kelas III
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Lasma Malau',
+                'email'             => 'lasma@gmail.com',
+                'password'          => bcrypt('password'),
                 'role_id'           => 2, // teacher
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Medi Warni Marbun',
+                'email'             => 'medi@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 2, // teacher
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Rosda Nababan',
+                'email'             => 'rosda@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 2, // teacher
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Merry Noveline Souisa',
+                'email'             => 'merry@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 2, // teacher
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Juliet',
+                'email'             => 'juliet@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 2, // teacher
+                'address'           => 'bekasi',
+                'classroom_id'      => null
+            ],
+            [
+                'name'              => 'Vivi Ellen',
+                'email'             => 'vivi@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 1, // TU
                 'address'           => 'bekasi',
                 'classroom_id'      => null
             ],

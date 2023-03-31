@@ -45,7 +45,7 @@
                                              </li>
                                          </ul>
                                          @empty
-                                             <span class="font-bold text-yellow-400">
+                                             <span class="font-bold px-2 py-2 text-yellow-400">
                                                 {{ __('Data Belum ada..')}}
                                             </span>
                                          @endforelse
