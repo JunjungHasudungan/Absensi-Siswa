@@ -70,7 +70,7 @@ class User extends Component
     {
         $searchParam = '%' . $this->search . '%'; // var for search field
         return view('livewire.user', [
-            $this->users = Users::all(),
+            $this->users = Users::paginate(5),
             $this->roles = Roles::all(),
             $this->users = Users::with(['role', 'classroom', 'homeTeacher', 'subjectUser'])
             ->where('name', 'LIKE', $searchParam)

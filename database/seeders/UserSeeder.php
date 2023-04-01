@@ -140,16 +140,40 @@ class UserSeeder extends Seeder
                 'classroom_id'      => null
             ],
             [
-                'name'              => 'Adam Grady Sinaga',
-                'email'             => 'adam@gmail.com',
+                'name'              => 'Adniel Abia Paulus',
+                'email'             => 'adniel@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
-                'address'           => 'Jakarta',
+                'address'           => 'Bekasi',
                 'classroom_id'      => 5
             ],
             [
-                'name'              => 'Alvino Putra Dien',
-                'email'             => 'alvino@gmail.com',
+                'name'              => 'Eira Gladys Ramoti',
+                'email'             => 'eira@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 5
+            ],
+            [
+                'name'              => 'Franky Lionel Pratama',
+                'email'             => 'franky@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 5
+            ],
+            [
+                'name'              => 'Jeslin Kristabel',
+                'email'             => 'jeslin@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 5
+            ],
+            [
+                'name'              => 'Johanes Lumban',
+                'email'             => 'johanes@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
                 'address'           => 'Bekasi',
@@ -161,15 +185,7 @@ class UserSeeder extends Seeder
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
                 'address'           => 'Jakarta',
-                'classroom_id'      => 5
-            ],
-            [
-                'name'              => 'Ignatius Maio Tyas Manuel',
-                'email'             => 'ignatius@gmail.com',
-                'password'          => bcrypt('password'),
-                'role_id'           => 3, // siswa
-                'address'           => 'Bekasi',
-                'classroom_id'      => 5
+                'classroom_id'      => 4
             ],
             [
                 'name'              => 'Keyko Joycelyn. P',
@@ -177,48 +193,200 @@ class UserSeeder extends Seeder
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
                 'address'           => 'Bekasi',
-                'classroom_id'      => 5
+                'classroom_id'      => 4
             ],
             [
-                'name'              => 'Mikha Permata Sari Marbun',
+                'name'              => 'Abelia  Grace Maira',
+                'email'             => 'abelia@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Jakarta',
+                'classroom_id'      => 3
+            ],
+            [
+                'name'              => 'Alicia Gytha Silalahi',
+                'email'             => 'alicia@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 3
+            ],
+            [
+                'name'              => 'Asael March Oravalla',
+                'email'             => 'asael@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 3
+            ],
+            [
+                'name'              => 'Breanna Kaitlyn',
+                'email'             => 'breanna@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 3
+            ],
+            [
+                'name'              => 'George Chaleb',
+                'email'             => 'george@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Jakarta',
+                'classroom_id'      => 3
+            ],
+            [
+                'name'              => 'Adam Grady Sinaga',
+                'email'             => 'adam@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 4
+            ],
+            [
+                'name'              => 'Clairine Aurel',
+                'email'             => 'clarine@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 4
+            ],
+            [
+                'name'              => 'Ignatius Maio Tyas',
+                'email'             => 'ignatius@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 4
+            ],
+            [
+                'name'              => 'Mikha Permata',
                 'email'             => 'mikha@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
                 'address'           => 'Bekasi',
-                'classroom_id'      => 5
+                'classroom_id'      => 4
             ],
             [
-                'name'              => 'Naptali Yosia Trinita Lumban Raja',
-                'email'             => 'naptali@gmail.com',
-                'password'          => bcrypt('password'),
-                'role_id'           => 3, // siswa
-                'address'           => 'Jakarta',
-                'classroom_id'      => 5
-            ],
-            [
-                'name'              => 'Rehan Brama Putra',
-                'email'             => 'rehan@gmail.com',
-                'password'          => bcrypt('password'),
-                'role_id'           => 3, // siswa
-                'address'           => 'batam',
-                'classroom_id'      => 5
-            ],
-            [
-                'name'              => 'Ribka Sondang',
-                'email'             => 'ribka@gmail.com',
+                'name'              => 'Gabrielle Emilian',
+                'email'             => 'gabrielle@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
                 'address'           => 'Bekasi',
-                'classroom_id'      => 5
+                'classroom_id'      => 1
             ],
             [
-                'name'              => 'Winona Sabathini Hasibuan',
-                'email'             => 'winona@gmail.com',
+                'name'              => 'Emmanuella Bellavania',
+                'email'             => 'emmanuella@gmail.com',
                 'password'          => bcrypt('password'),
                 'role_id'           => 3, // siswa
                 'address'           => 'Bekasi',
-                'classroom_id'      => 5
-            ]
+                'classroom_id'      => 1
+            ],
+            [
+                'name'              => 'Joe Andrew Malau',
+                'email'             => 'joe@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 1
+            ],
+            [
+                'name'              => 'Kanza Vionetta Yaviera',
+                'email'             => 'kanza@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 1
+            ],
+            [
+                'name'              => 'Rhafael Aurello Siregar',
+                'email'             => 'rhafael@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 1
+            ],
+            [
+                'name'              => 'Aldrich Nataguel',
+                'email'             => 'aldrich@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 2
+            ],
+            [
+                'name'              => 'Aurelia Ivana',
+                'email'             => 'aurelia@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 2
+            ],
+            [
+                'name'              => 'Cristella Tania',
+                'email'             => 'crustella@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 2
+            ],
+            [
+                'name'              => 'Daniel Mahadi Sinaga',
+                'email'             => 'daniel@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 2
+            ],
+            [
+                'name'              => 'Graeyciano Immanuel',
+                'email'             => 'graeyciano@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 2
+            ],
+            [
+                'name'              => 'Emily Ernatha Uli Sirait',
+                'email'             => 'emily@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 6
+            ],
+            [
+                'name'              => 'Alika Maddy Sinaga',
+                'email'             => 'alika@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 6
+            ],
+            [
+                'name'              => 'Alvina Natama Sillahi',
+                'email'             => 'alvina@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 6
+            ],
+            [
+                'name'              => 'Jessica Amanda Simbolon',
+                'email'             => 'jesica@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 6
+            ],
+            [
+                'name'              => 'Jonathan Gustitomo',
+                'email'             => 'jonathan@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => 6
+            ],
         ];
 
         User::insert($users);
