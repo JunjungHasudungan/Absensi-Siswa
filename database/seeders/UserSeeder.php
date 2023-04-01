@@ -387,6 +387,14 @@ class UserSeeder extends Seeder
                 'address'           => 'Bekasi',
                 'classroom_id'      => 6
             ],
+            [
+                'name'              => 'Sabat',
+                'email'             => 'sabat@gmail.com',
+                'password'          => bcrypt('password'),
+                'role_id'           => 3, // siswa
+                'address'           => 'Bekasi',
+                'classroom_id'      => null
+            ],
         ];
 
         User::insert($users);
