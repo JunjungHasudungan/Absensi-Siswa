@@ -17,7 +17,7 @@
                     <div class="divide-y">
                         <div class="W-full px-1 py-1 gap-2 flex boder border-gray-900">
                             <p class="text-gray-500 font-semibold">
-                                Kelas :  {{ $classroom }} | Wali Kelas: {{ $teacher->name }}
+                                Kelas :  {{ $classroom_name }} | Wali Kelas: {{ $teacher }}
                             </p>
                         </div>
                     </div>
@@ -36,11 +36,11 @@
                                  </tr>
                              </thead>
                              <tbody>
-                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                      <td scope="row" class=" font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                         @forelse ($subject_classroom as $subject)
-                                         <ul class="px-2 max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
-                                            <li>
+                                         @forelse ($classroom->subjects as $subject)
+                                         <ul class="w-full px-6 hover:bg-gray-400 py-2 hover:text-white list-none max-w-md space-y-1 tracking-tight text-gray-500 list-inside dark:text-gray-400">
+                                            <li class="">
                                                  {{ $subject->name }}
                                              </li>
                                          </ul>
@@ -53,8 +53,8 @@
                                      {{-- end subject name --}}
                                      {{-- student name --}}
                                      <td scope="row" class="font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        @forelse ($student_name as $student)
-                                        <ul class="max-w-md space-y-1 tracking-tight text-gray-500 list-disc list-inside dark:text-gray-400">
+                                        @forelse ($classroom->students as $student)
+                                        <ul class="w-full hover:bg-gray-400 hover:text-white px-6 py-2 list-none max-w-md space-y-1 tracking-tight text-gray-500 list-inside dark:text-gray-400">
                                            <li>
                                                 {{ $student->name }}
                                             </li>

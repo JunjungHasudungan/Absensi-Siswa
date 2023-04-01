@@ -28,9 +28,11 @@ class Classroom extends Component
             $user_id,
             $classroom,
             $classrooms,
+            $subjects,
             $subject_classroom,
             $subject_amount,
             $name,
+            $classroom_name,
             $teacher,
             $teachers,
             $home_teacher,
@@ -131,13 +133,15 @@ class Classroom extends Component
     {
         $this->openModalDetail();
 
-        $this->classroom = $classroom->name;
-        $this->teacher = $classroom->homeTeacher;
-        $this->student_name = $classroom->students; // nama siswa
-        $this->student_amount = count($classroom->students); // jumlah siswa
-        $this->subject_classroom = $classroom->subjectClassroom; // mata pelajaran kelas
-        $subjects = $classroom->subjects ?? '';
-        $this->subject_amount = count($classroom->subjectClassroom); // jumlah mata pelajaran
+        $classroom = Classrooms::with(['subjects', 'homeTeacher', 'students', 'subjectClassroom'])->find($classroom);
+
+        $this->classroom = $classroom;
+
+        foreach ($this->classroom as $kelas) {
+            $this->classroom = $kelas;
+            $this->classroom_name = $kelas->name;
+            $this->teacher = $kelas->homeTeacher->name;
+        }
     }
 
     public function closeDetailModal()
