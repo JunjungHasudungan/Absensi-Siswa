@@ -320,13 +320,10 @@ class Subject extends Component
     {
         $this->openDetailModal();
         $subject = Subjects::find($id_subject);
+        $this->subject = $subject;
         $this->name = $subject->name;
         $this->teacher_name = $subject->teacher->name ?: 0;
         $this->subject_weekday = $subject->classroomSubject;
-        foreach($this->subject_weekday as $subject){
-            $this->weekday = $subject->pivot->day;
-        }
-        $this->classroom_subject = $subject->classroomSubject;
     }
 
     public function deleteClassroom(Subjects $subject)
