@@ -25,7 +25,7 @@ class SubjectSeeder extends Seeder
             ],
             [
                 'code_subject'      => 'PJOK 01',
-                'name'              => 'Pendidikan Jasmani dan Kesehatan',
+                'name'              => 'Pendidikan Jasmani',
                 'user_id'           => 48,
                 'classroom_id'      => 1
             ],
@@ -73,7 +73,7 @@ class SubjectSeeder extends Seeder
             ],
             [
                 'code_subject'      => 'PJOK 02',
-                'name'              => 'Pendidikan Jasmani dan Kesehatan',
+                'name'              => 'Pendidikan Jasmani',
                 'user_id'           => 48,
                 'classroom_id'      => 2
             ],
