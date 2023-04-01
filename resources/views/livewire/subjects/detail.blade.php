@@ -83,7 +83,7 @@
                                                             @forelse ($subject_weekday as $end_time)
                                                                 <ul class="w-full px-2 py-2 hover:text-white list-none max-w-md tracking-tight text-gray-500 list-inside dark:text-gray-400">
                                                                     <li class="">
-                                                                        {{ date('H:i',  strtotime( $start_time->pivot->end_tim )) }}
+                                                                        {{ date('H:i',  strtotime( $start_time->pivot->end_time )) }}
                                                                     </li>
                                                                 </ul>
                                                             @empty

@@ -62,8 +62,11 @@
                                 @foreach ($subject_classrooms as $index => $subject_classroom)
                                     <tr class="bg-white w-full">
                                         <td class="px-1 py-4">
-                                            <select name="subject_classrooms[{{$index}}][classroom_id]"
+                                            <select
+                                                    name="subject_classrooms[{{$index}}][classroom_id]"
                                                     wire:model="subject_classrooms.{{$index}}.classroom_id"
+                                                    wire:model="classroom_id"
+                                                    name="classroom_id"
                                                     id="classroomSubject"
                                                     class="border border-gray-300 text-gray-900 text-sm rounded-lg ring-blue-500 border-blue-500 block
                                                     w-full p-2.5 bg-white border-gray-600 placeholder-gray-400 font-semibold

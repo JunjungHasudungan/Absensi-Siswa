@@ -216,7 +216,7 @@ class Subject extends Component
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
             'user_id'           => $this->user_id,
-            'classroom_id'      => $this->classroom_id
+            'classroom_id'      => $this->classroom_id ?? null,
         ]);
 
         foreach ($this->subject_classrooms as $classroom) {
@@ -226,6 +226,7 @@ class Subject extends Component
                     'end_time'      => $classroom['end_time']
                 ],
             );
+            // dd($classroom['end_time']);
             $this->classroom_id = $classroom['classroom_id'];
         }
             $subject->update([
@@ -254,17 +255,20 @@ class Subject extends Component
         $this->name = $subject->name;
         $this->user_id = $subject->user_id;
         $this->id_subject = $subject->id;
+        $this->classroom_id = $subject->classroom_id;
     }
 
     public function updateSubject($id_subject)
     {
         $subject = Subjects::find($id_subject);
+        // dd('Testing update');
         $this->validate();
 
         $subject->update([
             'code_subject'      => $this->code_subject,
             'name'              => $this->name,
-            'user_id'           => $this->user_id
+            'user_id'           => $this->user_id,
+            'classroom_id'      => $this->classroom_id ?? null,
         ]);
 
         foreach ($this->subject_classrooms as  $classroom) {

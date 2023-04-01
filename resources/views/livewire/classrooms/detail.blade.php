@@ -56,7 +56,9 @@
                                         @forelse ($classroom->students as $student)
                                         <ul class="w-full hover:bg-gray-400 hover:text-white px-6 py-2 list-none max-w-md space-y-1 tracking-tight text-gray-500 list-inside dark:text-gray-400">
                                            <li>
-                                                {{ $student->name }}
+                                                <a href="{{ route('admin.users.index') }}">
+                                                    {{ $student->name }}
+                                                </a>
                                             </li>
                                         </ul>
                                         @empty
