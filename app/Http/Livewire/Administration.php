@@ -40,11 +40,6 @@ class Administration extends Component
             $empty_comment,
             $teacher_id;
 
-    public function mount()
-    {
-
-    }
-
     public function render()
     {
         return view('livewire.administration', [
@@ -65,12 +60,12 @@ class Administration extends Component
 
     protected $rules = [
         'title'                 => 'required|string|max:20',
-        'method_learning'       => 'required|integer',
-        'status'                => 'required|integer',
-        'completeness'          => 'required|integer',
-        'classroom_id'          => 'required|integer',
-        'subject_id'            => 'required|integer',
-        'teacher_id'            => 'required|integer'
+        'method_learning'       => 'required',
+        'status'                => 'required',
+        'completeness'          => 'required',
+        'classroom_id'          => 'required',
+        'subject_id'            => 'required',
+        'teacher_id'            => 'required'
     ];
 
     public function isOpenModalCreate()

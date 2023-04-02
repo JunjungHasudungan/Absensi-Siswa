@@ -70,35 +70,37 @@
         </thead>
         <tbody>
             @forelse ($users as $user)
-                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{$loop->iteration}}
-                    </th>
-                    <td class="px-6 py-4">
-                        {{ $user['name'] }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $user->role->name }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{-- add button for edit and delete data classroom --}}
-                        <button  wire:click="editUser( {{ $user->id }} )" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Edit
-                        </button>
+                @if ($user->role_id > 1)
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{$loop->iteration}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{ $user['name'] }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{ $user->role->name }}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{-- add button for edit and delete data classroom --}}
+                            <button  wire:click="editUser( {{ $user->id }} )" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                Edit
+                            </button>
 
-                        <button  wire:click="detailUser( {{ $user->id }} )" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                            Detail
-                        </button>
+                            <button  wire:click="detailUser( {{ $user->id }} )" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                                Detail
+                            </button>
 
-                        <button wire:click.prevent="deleteConfirmation( {{ $user->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
-            @empty
-                <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-3">
-                    Data Belum Tersedia.
-                </div>
+                            <button wire:click.prevent="deleteConfirmation( {{ $user->id }} )" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                @endif
+                    @empty
+                    <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-3">
+                        Data Belum Tersedia.
+                    </div>
             @endforelse
         </tbody>
     </table>
