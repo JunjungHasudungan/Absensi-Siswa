@@ -40,6 +40,10 @@ class Administration extends Component
             $empty_comment,
             $teacher_id;
 
+    public function mount()
+    {
+
+    }
 
     public function render()
     {
@@ -76,8 +80,31 @@ class Administration extends Component
 
     public function storeAdministration()
     {
+        $this->classrooms = Classrooms::with(['subjects'], function($query){
 
-        $this->subjects = Subjects::where('user_id', Auth::id())->get() ?: 0;
+            $query->where('user_id', Auth::id())->get();
+
+        })->where('user_id', Auth::id())->get();
+
+
+        foreach ($this->classrooms as $classroom) {
+            $this->user_id = $classroom->user_id;
+        }
+
+        if ($this->user_id > 0) {
+
+            $this->classrooms;
+
+        } else {
+            $this->classrooms = Classrooms::with(['subjects'], function($query){
+
+                $query->where('user_id', auth()->user()->id)->get();
+
+            })->get();
+        }
+
+            $this->subjects = Subjects::with(['classroom', 'classroomSubject'])
+                            ->where('user_id', Auth::id())->get() ?: 0;
 
         if(count($this->subjects) > 0){
 

@@ -127,7 +127,7 @@ class SubjectSeeder extends Seeder
             ],
             [
                 'code_subject'      => 'PJOK 03',
-                'name'              => 'PKN',
+                'name'              => 'Pendidikan Jasmani',
                 'user_id'           => 48,
                 'classroom_id'      => 3
             ],

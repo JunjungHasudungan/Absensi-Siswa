@@ -95,7 +95,7 @@ class UserSeeder extends Seeder
                 'name'              => 'Lasma Malau',
                 'email'             => 'lasma@gmail.com',
                 'password'          => bcrypt('password'),
-                'role_id'           => 2, // teacher
+                'role_id'           => 2, // teacher, Wali kelas I
                 'address'           => 'bekasi',
                 'classroom_id'      => null
             ],
@@ -103,7 +103,7 @@ class UserSeeder extends Seeder
                 'name'              => 'Medi Warni Marbun',
                 'email'             => 'medi@gmail.com',
                 'password'          => bcrypt('password'),
-                'role_id'           => 2, // teacher
+                'role_id'           => 2, // teacher, Wali Kelas V
                 'address'           => 'bekasi',
                 'classroom_id'      => null
             ],
@@ -391,7 +391,7 @@ class UserSeeder extends Seeder
                 'name'              => 'Sabat',
                 'email'             => 'sabat@gmail.com',
                 'password'          => bcrypt('password'),
-                'role_id'           => 3, // siswa
+                'role_id'           => 2, // teacher
                 'address'           => 'Bekasi',
                 'classroom_id'      => null
             ],
