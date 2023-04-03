@@ -90,7 +90,7 @@ class SubjectSeeder extends Seeder
                 'classroom_id'      => 2
             ],
             [
-                'code_subject'      => 'SBdP 03',
+                'code_subject'      => 'SBdP 02',
                 'name'              => 'Seni Budaya',
                 'user_id'           => 9,
                 'classroom_id'      => 2
