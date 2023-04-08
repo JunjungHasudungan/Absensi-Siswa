@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserResourceCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,12 @@ class UserController extends Controller
     public function __invoke(Request $request)
     {
 
-        $user = User::with(['role', 'classroom'])->first();
+        $user = User::with(['role:id,name', 'classroom:id,name'])->get();
 
-        return new UserResource($user);
+        // mengembalikan melalui UserResource class
+        // return new UserResource($user);
+
+        return new UserResourceCollection($user);
     }
 
 
