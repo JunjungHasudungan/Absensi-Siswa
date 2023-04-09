@@ -29,7 +29,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $user = User::with(['role:id,name', 'classroom:id,name'])->get();
+
+        // mengembalikan melalui UserResource class
+        // return new UserResource($user);
+
+        return new UserResourceCollection($user);
     }
 
     /**
