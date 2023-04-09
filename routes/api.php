@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\Api\UserController as ApiUserController;
+use App\Http\Controllers\Admin\Api\{
+        UserController as ApiUserController,
+        ClassroomController as ApiClassroomController,
+    };
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +30,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('users', ApiUserController::class);
+Route::get('classrooms', ApiClassroomController::class);
