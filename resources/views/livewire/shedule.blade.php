@@ -13,11 +13,19 @@
             @endif
             {{-- end validation --}}
 
-            <div class=" inline-flex col-span-7 p-3 w-full">
+            <div class=" inline-flex col-span-7 p-3 w-full px-2 py-2 gap-2 mb-2 border-lg border-gray-900 bg-gray-900 mb-2 rounded-lg">
                     @if ($is_detail)
                         @include('livewire.teacher.schedule.detail')
                     @endif
+
+
+                    @if ($homeTeacher)
+                        <p class="text-gray-500 px-2">
+                           Kelas: <span class="font-semibold"> {{ $classroom_name }} </span>
+                        </p>
+                    @endif
             </div>
+
         </div>
         {{-- table --}}
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -29,9 +37,12 @@
                     <th scope="col" class="px-6 py-3">
                         Nama Pelajaran
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Nama Kelas
-                    </th>
+                    @if (!$homeTeacher)
+                        <th scope="col" class="px-6 py-3">
+                            Nama Kelas
+                        </th>
+
+                    @endif
                     <th scope="col" class="px-6 py-3">
                     </th>
                 </tr>
@@ -43,17 +54,19 @@
                             {{ $loop->iteration }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $subject->name }}
+                             {{ $subject->code_subject }} - {{ $subject->name }}
                         </td>
-                        <td class="px-6 py-4">
-                           @foreach ($subject->classroomSubject as $classroom)
-                            <ul class="max-w-md space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
-                                <li>
-                                    {{ $classroom->name }}
-                                </li>
-                            </ul>
-                           @endforeach
-                        </td>
+                        @if (!$homeTeacher)
+                            <td class="px-6 py-4">
+                            @foreach ($subject->classroomSubject as $classroom)
+                                <ul class="max-w-md space-y-1 text-gray-500 list-none list-inside dark:text-gray-400">
+                                    <li>
+                                        {{ $classroom->name }}
+                                    </li>
+                                </ul>
+                            @endforeach
+                            </td>
+                        @endif
                         <td class="px-6 py-4 item-center justify-center">
                             <button
                                     wire:click="detailSheduleSubject( {{ $subject->id }} )"

@@ -14,14 +14,14 @@ class ClassroomSubjectSeeder extends Seeder
         $classroom_subjects = [
             [
                 'subject_id'        => 2,
-                'classroom_id'      => 5,
+                'classroom_id'      => 1,
                 'day'               => 'Senin',
                 'start_time'        => '08:00',
                 'end_time'          => '09:00'
             ],
             [
                 'subject_id'        => 3,
-                'classroom_id'      => 5,
+                'classroom_id'      => 1,
                 'day'               => 'Senin',
                 'start_time'        => '09:30',
                 'end_time'          => '10:30'

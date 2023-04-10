@@ -31,7 +31,7 @@ class SubjectSeeder extends Seeder
             ],
             [
                 'code_subject'      => 'Bindo 01',
-                'name'              => 'Bahasa Indonesi',
+                'name'              => 'Bahasa Indonesia',
                 'user_id'           => 11,
                 'classroom_id'      => 1
             ],
