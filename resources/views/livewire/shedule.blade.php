@@ -13,18 +13,18 @@
             @endif
             {{-- end validation --}}
 
-            <div class=" inline-flex col-span-7 p-3 w-full px-2 py-2 gap-2 mb-2 border-lg border-gray-900 bg-gray-900 mb-2 rounded-lg">
-                    @if ($is_detail)
-                        @include('livewire.teacher.schedule.detail')
-                    @endif
+            @if ($is_detail)
+                @include('livewire.teacher.schedule.detail')
+            @endif
 
-
-                    @if ($homeTeacher)
-                        <p class="text-gray-500 px-2">
-                           Kelas: <span class="font-semibold"> {{ $classroom_name }} </span>
-                        </p>
-                    @endif
-            </div>
+            @if ($homeTeacher_id == auth()->user()->id)
+                <div class=" inline-flex col-span-7 p-3 w-full px-2 py-2 gap-2 mb-2 border-lg border-gray-900 bg-gray-900 mb-2 rounded-lg">
+                    <p class="text-gray-500 px-2">
+                       Kelas: <span class="font-bold"> {{ $classroom_name }} </span> |
+                       Wali Kelas: <span class="font-bold"> {{ auth()->user()->name }} </span>
+                    </p>
+                </div>
+            @endif
 
         </div>
         {{-- table --}}

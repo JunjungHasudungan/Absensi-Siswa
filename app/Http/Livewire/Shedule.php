@@ -16,22 +16,26 @@ class Shedule extends Component
             $start_time,
             $end_time,
             $subject_name,
-            $homeTeacher;
+            $homeTeacher,
+            $homeTeacher_id;
     public function render()
     {
+
         $this->homeTeacher = Subjects::with(['classroom'], function($query){
             $query->where('user_id', auth()->user()->id);
         })->where('user_id', auth()->user()->id)->get();
 
         foreach($this->homeTeacher as $home_teacher){
-            $classroom = $home_teacher->classroom->name;
+            $homeTeacher_id = $home_teacher->classroom->user_id;
+            $classroom_name = $home_teacher->classroom->name;
         }
 
         return view('livewire.shedule', [
             $this->subjects = Subjects::with(['teacher', 'classroomSubject'])
             ->where('user_id', auth()->user()->id)->get(),
-            $this->classroom_name = $classroom,
-            // dd($homeTeacher),
+            $this->homeTeacher_id = $homeTeacher_id,
+            $this->classroom_name = $classroom_name,
+            // dd($this->homeTeacher),
         ]);
     }
 
