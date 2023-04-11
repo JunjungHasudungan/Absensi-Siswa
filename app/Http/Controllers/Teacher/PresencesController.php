@@ -17,6 +17,8 @@ class PresencesController extends Controller
 {
     public  $id_subject,
             $id_classroom,
+            $homeTeacher_id,
+            $homeTeacher,
             $subject_id,
             $subject,
             $classroom,
@@ -33,10 +35,22 @@ class PresencesController extends Controller
     public function index()
     {
         $presences = Presence::where('teacher_id', auth()->user()->id)->get();
-        $subjects = Subject::with('classroomSubject')->where('user_id', auth()->user()->id)->get();
+
+        $subjects = Subject::with(['classroom', 'classroomSubject'], function($query){
+
+            $query->where('user_id', auth()->user()->id);
+
+        })->where('user_id', auth()->user()->id)->get();
+
+        foreach ($subjects as $subject) {
+           $this->homeTeacher_id = $subject->classroom->user_id;
+           $this->classroom = $subject->classroom->name;
+        }
         return view('teacher.presences.index',[
-            'subjects'  => $subjects,
-            'presences' => $presences,
+            'subjects'          => $subjects,
+            'presences'         => $presences,
+            'homeTeacher_id'    => $this->homeTeacher_id,
+            'classroom'         => $this->classroom,
         ]);
 
         // dd($presences);

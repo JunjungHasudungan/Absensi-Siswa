@@ -22,7 +22,16 @@
                 </div>
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{-- @livewire('attendance-student') --}}
-                        @empty(count($presences))
+                        @if ($homeTeacher_id == auth()->user()->id)
+                        <div class=" inline-flex col-span-7 p-3 w-full px-2 py-2 gap-2 mb-2 border-lg border-gray-900 bg-gray-900 mb-2 rounded-lg">
+                            <p class="text-gray-500 px-2">
+                               Kelas: <span class="font-bold"> {{ $classroom }} </span> |
+                               Wali Kelas: <span class="font-bold"> {{ auth()->user()->name }} </span>
+                            </p>
+                        </div>
+                        @endif
+
+                        @empty(count($presences) > 0 )
                         <div class="bg-yellow-500 text-white p-3 rounded shadow-sm mb-2">
                             Belum Ada Persensi Mata Pelajaran..
                         </div>
@@ -35,14 +44,13 @@
                                     No
                                 </th>
                                 <th class="col" class="px-6 py-3">
-                                    Kode Pelajaran
-                                </th>
-                                <th class="col" class="px-6 py-3">
                                     Nama Pelajaran
                                 </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Nama Kelas
-                                </th>
+                                @if ($homeTeacher_id != auth()->user()->id)
+                                    <th scope="col" class="px-6 py-3">
+                                        Nama Kelas
+                                    </th>
+                                @endif
                                 <th scope="col" class="px-6 py-3">
                                    Lanjut
                                 </th>
@@ -55,15 +63,14 @@
                                         {{ $loop->iteration }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{ $subject->code_subject }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ $subject->name }}
+                                        {{ $subject->code_subject }} - {{ $subject->name }}
                                     </td>
 
-                                    <td class="px-6 py-4">
-                                        {{ $subject->classroom->name ?? ''}}
-                                    </td>
+                                    @if ($homeTeacher_id != auth()->user()->id)
+                                        <td class="px-6 py-4">
+                                            {{ $subject->classroom->name ?? ''}}
+                                        </td>
+                                    @endif
                                     <td class="px-6 py-4 space-x-2 justify-center item-center mx-2">
                                         <a href="/presences/{{ $subject->id }}/create " class="px-2 py-2 border-gray-600 bg-green-500 w-full rounded-lg text-gray-900 hover:bg-green-300">
                                             Pilih
