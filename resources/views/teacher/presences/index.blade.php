@@ -57,13 +57,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($subjects as $subject)
+                            @forelse ($subjects as $index => $subject)
                                 <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                         {{ $loop->iteration }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        {{ $subject->code_subject }} - {{ $subject->name }}
+                                        {{ $subject->code_subject }} -
+
+                                        <a href="/teacher/historiesPresences" class="px-2 py-2 dark:text-gray-400  w-full text-gray-900 hover:text-gray-300">
+                                            {{ $subject->name }}
+                                        </a>
+
                                     </td>
 
                                     @if ($homeTeacher_id != auth()->user()->id)
@@ -75,11 +80,6 @@
                                         <a href="/presences/{{ $subject->id }}/create " class="px-2 py-2 border-gray-600 bg-green-500 w-full rounded-lg text-gray-900 hover:bg-green-300">
                                             Pilih
                                         </a>
-                                        @if (count($presences) > 0)
-                                            <a href="/teacher/historiesPresences" class="px-2 py-2 border-gray-600 bg-gray-500 w-full rounded-lg text-gray-900 hover:bg-gray-300">
-                                                Detail
-                                            </a>
-                                        @endif
                                     </td>
                                 </tr>
                                     @empty

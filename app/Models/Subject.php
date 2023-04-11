@@ -42,7 +42,7 @@ class Subject extends Model
 
     public function presence()
     {
-        return $this->hasMany(Subject::class);
+        return $this->hasMany(Subject::class, 'id');
     }
 
     public function administrations()

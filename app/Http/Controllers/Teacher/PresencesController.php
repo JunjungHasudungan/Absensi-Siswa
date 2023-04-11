@@ -28,15 +28,16 @@ class PresencesController extends Controller
     public function historiesIndex()
     {
         return view('teacher.presences.historiesIndex',[
-            'presences'     => Presence::where('teacher_id', auth()->user()->id)->groupBy('created_at')->latest()->get()
+
+            'presences'     => Presence::with(['subject', 'teacher', 'student'])
+
+            ->where('teacher_id', auth()->user()->id)->groupBy('created_at')->latest()->get()
         ]);
     }
 
     public function index()
     {
-        $presences = Presence::where('teacher_id', auth()->user()->id)->get();
-
-        $subjects = Subject::with(['classroom', 'classroomSubject'], function($query){
+        $subjects = Subject::with(['classroom', 'classroomSubject', 'presence'], function($query){
 
             $query->where('user_id', auth()->user()->id);
 
@@ -46,14 +47,19 @@ class PresencesController extends Controller
            $this->homeTeacher_id = $subject->classroom->user_id;
            $this->classroom = $subject->classroom->name;
         }
+
+        $presences = Presence::with(['subject'], function($query){
+
+            $query->where('subject_id', $this->subject_id)->get();
+
+        })->get();
+
         return view('teacher.presences.index',[
             'subjects'          => $subjects,
             'presences'         => $presences,
             'homeTeacher_id'    => $this->homeTeacher_id,
             'classroom'         => $this->classroom,
         ]);
-
-        // dd($presences);
     }
 
     public function CoreIndex(Subject $subject)
@@ -61,14 +67,10 @@ class PresencesController extends Controller
         dd('core Index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create(Subject $subject)
     {
         $students = User::where('classroom_id', $subject->classroom_id)
+
                         ->where('role_id', 3)->orderBy('name', 'asc')->get();
 
         $attendances = Attendance::all();
@@ -80,15 +82,8 @@ class PresencesController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request, Subject $subject)
     {
-        // presences = request from blade
         foreach($request->presences as $person)
         {
             Presence::create($person);
@@ -97,16 +92,8 @@ class PresencesController extends Controller
         return redirect('teacher/historiesPresences');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Presence  $Presence
-     * @return \Illuminate\Http\Response
-     */
     public function show(Presence $presence, Subject $subject)
     {
-        // dd('Testing Halaman Show');
-
         return view('teacher.presences.show', [
             'presences'     => $presence->where('teacher_id', auth()->user()->id)->get(),
         ]);
@@ -116,12 +103,11 @@ class PresencesController extends Controller
     {
 
         $this->subject_id = $subject->id;
-        // $presence = Presence::select('created_at')->where('subject_id', $this->subject_id)->get('created_at');
-        // foreach ($presence as $key => $value) {
-        //     $created_at = $value->created_at;
-        // }
+
         $presences = Presence::with(['subject', 'classroom', 'student', 'attendance'], function($query){
+
             $query->where('subject_id', $this->subject_id)->get();
+
         })->where('subject_id', $this->subject_id)->latest()->get();
 
         foreach($presences as $presence){
