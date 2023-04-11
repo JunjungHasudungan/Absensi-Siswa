@@ -13,6 +13,7 @@ class Shedule extends Component
             $is_detail,
             $classroom_name,
             $day,
+            $days,
             $start_time,
             $end_time,
             $subject_name,
@@ -21,7 +22,7 @@ class Shedule extends Component
     public function render()
     {
 
-        $this->homeTeacher = Subjects::with(['classroom'], function($query){
+        $this->homeTeacher = Subjects::with(['classroom', 'classroomSubject'], function($query){
             $query->where('user_id', auth()->user()->id);
         })->where('user_id', auth()->user()->id)->get();
 
@@ -35,7 +36,6 @@ class Shedule extends Component
             ->where('user_id', auth()->user()->id)->get(),
             $this->homeTeacher_id = $homeTeacher_id,
             $this->classroom_name = $classroom_name,
-            // dd($this->homeTeacher),
         ]);
     }
 
