@@ -80,7 +80,10 @@
                         <td class="px-6 py-4">
                            @forelse ($subject->classroomSubject as $classroom)
                             <ul class="w-full px-2 py-2 hover:text-white list-none max-w-md tracking-tight text-gray-500 list-inside dark:text-gray-400">
-                                <li>{{ date('H:i', strtotime( $classroom->pivot->start_time )) }}  </li>
+                                <li>
+                                    {{ date('H:i', strtotime( $classroom->pivot->start_time )) }} -
+                                    {{ date('H:i', strtotime( $classroom->pivot->end_time )) }}
+                                </li>
                             </ul>
                             @empty
                             <p class="text-yellow-900 font-bold">
