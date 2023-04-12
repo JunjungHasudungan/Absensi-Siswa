@@ -27,16 +27,16 @@
                             No
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Mata Pelajaran
+                        </th>
+                        <th class="px-6 py-3">
+                            Guru
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Hari
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Mulai - Selesai
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Nama Mata Pelajaran
-                        </th>
-                        <th class="px-6 py-3">
-                            Guru
                         </th>
                     </tr>
                 </thead>
@@ -46,22 +46,42 @@
                             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                 {{$loop->iteration}}
                             </th>
-                            @foreach ($subject->classroomSubject as $mata_pelajaran)
-                                <td class="px-6 py-4">
-                                    {{ $mata_pelajaran->pivot->day }}
-                                </td>
-                                <td class="px-6 py-4">
-                                    {{ \Carbon\Carbon::parse($mata_pelajaran->pivot->start_time)->format('H:i') }}
-                                -   {{ \Carbon\Carbon::parse($mata_pelajaran->pivot->end_time)->format('H:i') }}
-                                </td>
-                            @endforeach
 
                             <td class="px-6 py-4">
                                 {{ $subject->name }}
                             </td>
 
                             <td class="px-6 py-4">
-                                {{ $subject->teacher->name ?? '' }}
+                                {{ $subject->teacher->name ?? 'Guru Belum ada..' }}
+                            </td>
+
+                            <td class="px-6 py-4">
+                                @forelse ($subject->classroomSubject as $mata_pelajaran)
+                                <ul class="w-full px-2 py-2 divide-y divide-gray-100 hover:text-white list-none max-w-md tracking-tight text-gray-500 list-inside dark:text-gray-400">
+                                    <li>
+                                        {{ $mata_pelajaran->pivot->day }}
+                                    </li>
+                                </ul>
+                                @empty
+                                    <p class="text-yellow-900 font-bold">
+                                        {{ __('Hari Belum tersedia..') }}
+                                    </p>
+                                @endforelse
+                            </td>
+
+                            <td class="px-6 py-4">
+                                @forelse ($subject->classroomSubject as $mata_pelajaran)
+                                    <ul class="w-full px-2 py-2 hover:text-white list-none max-w-md tracking-tight text-gray-500 list-inside dark:text-gray-400">
+                                        <li>
+                                            {{ \Carbon\Carbon::parse($mata_pelajaran->pivot->start_time)->format('H:i') }}
+                                        -   {{ \Carbon\Carbon::parse($mata_pelajaran->pivot->end_time)->format('H:i') }}
+                                        </li>
+                                    </ul>
+                                    @empty
+                                        <p class="text-yellow-900 font-bold">
+                                            {{ __('Jam Pelajaran Belum tersedia..') }}
+                                        </p>
+                                @endforelse
                             </td>
                         </tr>
                     @empty
