@@ -10,7 +10,10 @@ class TeacherAdministrationController extends Controller
 {
     public function index()
     {
-        return view('admin.teacherAdministrations.index');
+        $pageTitle = 'Administrasi';
+        return view('admin.teacherAdministrations.index', [
+            'pageTitle' => $pageTitle
+        ]);
     }
 
     /**

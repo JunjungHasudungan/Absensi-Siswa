@@ -10,9 +10,12 @@ class ClassroomController extends Controller
 {
     public function index()
     {
+        $pageTitle = 'Kelas';
         $classrooms = Classroom::with('homeTeacher')->get();
-        // dd($classrooms);
-        return view('admin.classrooms.index', ['classrooms' => $classrooms]);
+        return view('admin.classrooms.index', [
+            'classrooms'    => $classrooms,
+            'pageTitle'     => $pageTitle
+        ]);
     }
 
     /**

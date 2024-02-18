@@ -16,7 +16,7 @@
 
                 <div class="W-full px-2 py-1 gap-2 flex mb-2">
                     <p class="text-gray-500">
-                        Kelas: {{ $classroom }}
+                        Kelas: {{ $classroom_name }} | Wali Kelas: {{ $home_teacher }}
                     </p>
                 </div>
 

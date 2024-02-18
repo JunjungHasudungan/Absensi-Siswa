@@ -14,7 +14,10 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        return view('student.subjects.index');
+        $pageTitle = 'Mata Pelajaran';
+        return view('student.subjects.index', [
+            'pageTitle' => $pageTitle
+        ]);
     }
 
     /**

@@ -28,6 +28,7 @@ class StudentSubject extends Component
         $schedules_subject = Subject::with(['classroomSubject'], function($query){
             $query->orderByPivot('day');
         })->get();
+        // dd($classroom);
 
         foreach ($classroom as $kelas) {
             $this->classroom_name = $kelas->name ?? '';

@@ -26,11 +26,18 @@ class AttendanceStudent extends Component
             $presences,
             $presence,
             $description,
+            $home_teacher,
+            $classroom_name,
             $classroom;
 
     public function render()
     {
             $presences = Presence::where('student_id', auth()->user()->id)->get();
+            $classroom = Classroom::where('id', auth()->user()->classroom_id ?? '')->get();
+            foreach ($classroom as $kelas) {
+                $this->classroom_name = $kelas->name ?? '';
+                $this->home_teacher = $kelas->homeTeacher->name ?? '';
+            }
 
             foreach ($presences as $presence) {
                 $this->classroom = $presence->classroom->name;
@@ -39,6 +46,7 @@ class AttendanceStudent extends Component
                 $this->description = $presence->attendance->description;
 
             }
+            // dd($this->classroom);
 
         return view('livewire.attendance-student', [
             $this->presences = Presence::where('student_id', auth()->user()->id)->latest()->get(),

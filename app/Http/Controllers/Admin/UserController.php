@@ -10,7 +10,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('admin.users.index');
+
+        return view('admin.users.index', [
+            'pageTitle' => 'User'
+        ]);
     }
     public function create()
     {

@@ -13,9 +13,10 @@ class SubjectController extends Controller
 
     public function index()
     {
+        $pageTitle = 'Mata Pelajaran';
         $subjects = Subject::with(['teacher', 'subjectWeekday'])->get();
         // dd($subjects);
-        return view('admin.subjects.index', ['subjects' => $subjects]);
+        return view('admin.subjects.index', ['subjects' => $subjects, 'pageTitle'=> $pageTitle]);
     }
 
     public function create()

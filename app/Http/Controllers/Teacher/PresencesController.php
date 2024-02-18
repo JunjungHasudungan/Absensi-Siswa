@@ -37,6 +37,7 @@ class PresencesController extends Controller
 
     public function index()
     {
+        $pageTitle = 'Absensi';
         $subjects = Subject::with(['classroom', 'classroomSubject', 'presence'], function($query){
 
             $query->where('user_id', auth()->user()->id);
@@ -55,6 +56,7 @@ class PresencesController extends Controller
         })->get();
 
         return view('teacher.presences.index',[
+            'pageTitle'         => $pageTitle,
             'subjects'          => $subjects,
             'presences'         => $presences,
             'homeTeacher_id'    => $this->homeTeacher_id,

@@ -14,7 +14,11 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        return view('student.attendances.index');
+        $pageTitle = 'Absensi';
+        
+        return view('student.attendances.index', [
+            'pageTitle'     => $pageTitle
+        ]);
     }
 
     /**
